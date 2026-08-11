@@ -334,9 +334,9 @@ function App(){
                 </span>
               </td>
               <td data-label="Dirección">
-                {p.direccion
+                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
                   ? <span className="dir">{p.direccion}</span>
-                  : <span className="dir vacio">Por confirmar</span>}
+                  : <span className="dir vacio">—</span>}
               </td>
               <td data-label="Necesidades">
                 {p.necesidades.length
