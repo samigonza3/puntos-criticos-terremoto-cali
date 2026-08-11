@@ -371,6 +371,10 @@ const ACTUALIZADO = "11 de agosto de 2026";
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Carrera 56 #3-88: ayuda urgente para rescatar personas bajo los escombros." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio Elvira (Cra. 4 #58-18): aún hay personas atrapadas. Se necesitan herramientas (pulidoras, picas, cinceles) y muchas manos." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio de Colores: se necesitan porras, martillo neumático y herramientas de bajo impacto para el rescate." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Nuevos puntos que necesitan manos: Calle 72 #10B-21, OXXO Calle 44 con Novena, Corporación Educativa Adventista (Cra. 44 #9-25) y Carrera 39A #5D-09." },
   { fecha:"11 de agosto de 2026, 1:05 p. m.", texto:"Centro de Refugio Animal: se necesita personal veterinario con urgencia." },
   { fecha:"11 de agosto de 2026, 12:40 p. m.", texto:"Santa Isabel (Calle 5B con Carrera 39, cerca de Telepacífico / Clínica Imbanaco): acaba de colapsar un edificio. Se necesitan personas con urgencia en el sector." },
   { fecha:"11 de agosto de 2026, 12:37 p. m.", texto:"Cuarto de Legua: se requieren cascos con urgencia. Si tienes este recurso, por favor dirígelo a este sector." },
@@ -408,15 +412,15 @@ const PUNTOS = [
   { lugar:"Centro de Refugio Animal", direccion:"",               prioridad:true,  importante:true, nota:"Se necesita personal veterinario con urgencia", necesidades:["Personal veterinario"] },
   { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
 
-  { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
-  { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  necesidades:[] },
+  { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:["Manos para ayudar"] },
+  { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  importante:true, nota:"Aún hay personas atrapadas. Se necesitan muchas manos y herramientas", necesidades:["Herramientas","Pulidoras","Picas","Cinceles","Manos para ayudar"] },
   { lugar:"Notaría 20 (Poblado)",direccion:"Carrera 28D # 72W-14",prioridad:true,  nota:"Olla vegana · Se necesita transporte para movilizar los alimentos preparados desde la Casa de Luz (San Antonio) hasta Notaría 20 y Edificio de Colores", necesidades:["Platos","Cubiertos","Colaboradores"] },
-  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Importante: comida práctica que no requiera cubiertos · porras urgentes · aquí también se hará olla vegana", necesidades:[] },
-  { lugar:"Plaza de toros",     direccion:"Carrera 56 con 3A",    prioridad:true,  necesidades:[] },
+  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Se necesitan herramientas para el rescate, priorizando equipos de bajo impacto sobre la estructura", necesidades:["Porras","Martillo neumático","Herramientas de rescate"] },
+  { lugar:"Plaza de toros",     direccion:"Carrera 56 con Calle Tercera A", prioridad:true, necesidades:["Manos para ayudar"] },
   { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
   { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:false, cubierto:true, nota:"Ya hay suficiente donación y suficientes manos", necesidades:[] },
 
-  { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:[] },
+  { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:["Manos para ayudar"] },
   { lugar:"Sector la luna",     direccion:"Calle 13 con Autopista", prioridad:false, necesidades:[] },
   { lugar:"Calle 42 con 38",    direccion:"Calle 42 con 38",     prioridad:false, necesidades:[] },
   { lugar:"Calle 44",           direccion:"Calle 44",            prioridad:false, necesidades:[] },
@@ -428,14 +432,18 @@ const PUNTOS = [
   { lugar:"Calle 9 con 24",     direccion:"Calle 9 con 24",      prioridad:false, necesidades:[] },
   { lugar:"Calle 9 con 44",     direccion:"Calle 9 con 44",      prioridad:false, cubierto:true, nota:"No acudir más, ya hay suficientes manos", necesidades:[] },
   { lugar:"Carrera 46 con Calle 8B", direccion:"Carrera 46 con Calle 8B", prioridad:false, cubierto:true, nota:"Ya tienen todo lo necesario", necesidades:[] },
-  { lugar:"Carrera 56 # 3-88",  direccion:"Carrera 56 # 3-88",    prioridad:true,  nota:"Ya hay suficientes manos; faltan insumos", necesidades:["Cascos","Guantes","Agua","Plantas eléctricas"] },
+  { lugar:"Carrera 56 # 3-88",  direccion:"Carrera 56 # 3-88",    prioridad:true,  importante:true, nota:"Se necesita ayuda urgente para rescatar a personas bajo los escombros", necesidades:["Cascos","Guantes","Agua","Plantas eléctricas"] },
   { lugar:"Cuarto de Legua",    direccion:"",                     prioridad:true,  nota:"Se requieren cascos con urgencia. Si tienes este recurso, dirígelo a este sector", necesidades:["Cascos"] },
   { lugar:"Unidad Pío XII",     direccion:"Calle 4b con Cra 40",  prioridad:false, necesidades:[] },
   { lugar:"Edificio Marisol",   direccion:"",                    prioridad:false, necesidades:[] },
   { lugar:"Carrera 9 con 53",   direccion:"Carrera 9 con 53",    prioridad:false, necesidades:[] },
   { lugar:"Calle 5 con 44",     direccion:"Calle 5 con 44",      prioridad:false, necesidades:[] },
   { lugar:"Calle 5 con 57",     direccion:"Calle 5 con 57",      prioridad:false, necesidades:[] },
-  { lugar:"Calle 4 # 66b-52",   direccion:"Calle 4 # 66b-52",    prioridad:false, necesidades:[] }
+  { lugar:"Calle 4 # 66B-52",   direccion:"Calle 4 # 66B-52",    prioridad:false, necesidades:["Manos para ayudar"] },
+  { lugar:"Calle 72 #10B-21",   direccion:"Calle 72 #10B-21",    prioridad:false, necesidades:["Manos para ayudar"] },
+  { lugar:"OXXO — Calle 44 con Novena", direccion:"Calle 44 con Novena (Cra 9)", prioridad:false, necesidades:["Manos para ayudar"] },
+  { lugar:"Corporación Educativa Adventista", direccion:"Cra. 44 #9-25", prioridad:false, necesidades:["Manos para ayudar"] },
+  { lugar:"Carrera 39A #5D-09", direccion:"Carrera 39A #5D-09",   prioridad:false, necesidades:["Manos para ayudar"] }
 ];
 
 /* ============================================================
