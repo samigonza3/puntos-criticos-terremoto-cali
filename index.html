@@ -145,6 +145,31 @@
   }
   .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
 
+  /* Clínicas que requieren evacuación */
+  .clinicas{
+    margin-top:20px;
+    background:var(--alert-soft);
+    border:1px solid rgba(255,92,107,.4);
+    border-radius:20px;padding:24px 26px;
+  }
+  .clinicas h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:6px;display:flex;align-items:center;gap:9px;
+  }
+  .clinicas .cl-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
+  .cl-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .cl-item{
+    display:flex;align-items:center;gap:10px;
+    background:var(--space-900);border:1px solid rgba(255,92,107,.25);
+    border-radius:12px;padding:12px 15px;font-size:14.5px;font-weight:600;color:var(--white);
+  }
+  .cl-item::before{
+    content:"";flex:none;width:8px;height:8px;border-radius:999px;background:var(--alert);
+  }
+  @media (max-width:680px){
+    .cl-list{grid-template-columns:1fr}
+  }
+
   /* Formulario de actualización */
   .form-card{
     margin-top:20px;
@@ -349,6 +374,16 @@ const NECESIDADES_GENERALES = [
 
 const ALERTA = "No descuidemos los hospitales y clínicas";
 
+/* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
+const CLINICAS = [
+  "Clínica Alba",
+  "Clínica Rey David",
+  "Clínica Nuestra Señora del Rosario",
+  "Clínica Sanitas Tequendama",
+  "Clínica Cali",
+  "Hospital Carlos Holmes Trujillo",
+];
+
 const PUNTOS = [
   { lugar:"Edificio colapsado — Santa Isabel", direccion:"Calle 5B con Carrera 39 (cerca de Telepacífico y Clínica Imbanaco)", prioridad:true, importante:true, nota:"Acaba de colapsar un edificio. Se necesitan personas con urgencia", necesidades:["Personas / manos"] },
   { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
@@ -364,6 +399,8 @@ const PUNTOS = [
   { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:[] },
   { lugar:"Sector la luna",     direccion:"Calle 13 con Autopista", prioridad:false, necesidades:[] },
   { lugar:"Calle 42 con 38",    direccion:"Calle 42 con 38",     prioridad:false, necesidades:[] },
+  { lugar:"Calle 44",           direccion:"Calle 44",            prioridad:false, necesidades:[] },
+  { lugar:"Carrera 44 con 9",   direccion:"Carrera 44 con 9",    prioridad:false, necesidades:[] },
   { lugar:"Calle 3 D con 67",   direccion:"Calle 3 D con 67",    prioridad:false, necesidades:[] },
   { lugar:"Calle 10 con 71",    direccion:"Calle 10 con 71",     prioridad:false, necesidades:[] },
   { lugar:"Carrera 41 con 7",   direccion:"Carrera 41 con 7",    prioridad:false, necesidades:[] },
@@ -433,6 +470,16 @@ function App(){
           ) : null}
         </div>
       </header>
+
+      {CLINICAS.length ? (
+        <div className="clinicas">
+          <h2>Clínicas afectadas que requieren evacuación</h2>
+          <p className="cl-sub">Se necesita apoyo para evacuar estos centros de salud. No los descuidemos.</p>
+          <div className="cl-list">
+            {CLINICAS.map((c,i) => <div className="cl-item" key={i}>{c}</div>)}
+          </div>
+        </div>
+      ) : null}
 
       <form
         className="form-card"
