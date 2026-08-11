@@ -430,11 +430,29 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 2:19 p. m.";
+const ACTUALIZADO = "11 de agosto de 2026, 3:53 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Alguien ofrece guantes y gafas; necesita que le indiquen a qué punto llevarlos." },
+  { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"56 con 3 (reportado como Cuarto de Legua): el sitio está muy lleno, con ambulancias, bomberos y cerca de 2000 personas. (Reporta Juan Trejos)" },
+  { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"Notaría 20 (Cra. 28D con Calle 72W): se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente." },
+  { fecha:"11 de agosto de 2026, 3:46 p. m.", texto:"Cuarto de Legua (Calle 4 #61-28): se necesitan personas para levantar escombros, y agua e hielo para proteger del sol a lxs voluntarixs." },
+  { fecha:"11 de agosto de 2026, 3:44 p. m.", texto:"Chiminangos: se necesita un baño portátil y manos para armar kits. Ya no más alimentos." },
+  { fecha:"11 de agosto de 2026, 3:36 p. m.", texto:"Disponibles almuerzos para 50 personas. Contacto: Stefania Rodríguez 316 3075395." },
+  { fecha:"11 de agosto de 2026, 3:24 p. m.", texto:"46 con 8va (atrás de Palmetto): se necesitan reflectores, linternas, pilas AA, hielo y neveras." },
+  { fecha:"11 de agosto de 2026, 3:12 p. m.", texto:"Clínica de Colores: ya no necesitan más comida, tienen suficiente." },
+  { fecha:"11 de agosto de 2026, 3:11 p. m.", texto:"Chiminango (Calle 62B #1A-9): no falta agua ni manos. Se necesita comida no perecedera, cobijas y colchonetas." },
+  { fecha:"11 de agosto de 2026, 3:07 p. m.", texto:"Capri: suficiente agua, manos, comida y bebidas. Requieren cinceles y porras." },
+  { fecha:"11 de agosto de 2026, 3:00 p. m.", texto:"Notaría 20: se necesitan personas para relevar, cascos y herramientas. No se necesita más comida." },
+  { fecha:"11 de agosto de 2026, 2:52 p. m.", texto:"Edificio de Colores: al lado hay comida, agua y palas suficientes. Se necesitan guantes, cascos y, para la noche, más linternas." },
+  { fecha:"11 de agosto de 2026, 2:48 p. m.", texto:"Veterinaria Mi Cachorrito (San Luis, Cra. 1D #71C-17): jeringas, gasas, agua oxigenada e implementos veterinarios." },
+  { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Chiminangos (norte, comuna 5): se necesita agua, cobijas, comida y medicina para las familias que alojaron personas en el barrio." },
+  { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Barrio Meléndez (Calle 2A bis #94B1-70): se necesitan organismos de emergencia y toda la ayuda posible." },
+  { fecha:"11 de agosto de 2026, 2:41 p. m.", texto:"Ofrecen almuerzos (Iglesia Tierra Nueva); buscan a qué punto llevarlos con urgencia." },
+  { fecha:"11 de agosto de 2026, 2:30 p. m.", texto:"Pampalinda: ya no están dejando entrar, hay suficientes manos y comida. (Reporta Isabella Acosta)" },
+  { fecha:"11 de agosto de 2026, 2:22 p. m.", texto:"Clínica Cali: ya revisaron la estructura y opera con normalidad. Contacto: Dra. Collazos 320 8964337." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"La Cruz Roja también está colapsada. Confirma antes de desplazarte si siguen recibiendo personas, donaciones o insumos." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Pampalinda y Cuarto de Legua: ya NO están dejando entrar." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres de Capri: están sacando gente porque hay demasiada. No te desplaces hasta confirmar que aún necesitan apoyo." },
@@ -444,6 +462,13 @@ const ACTUALIZACIONES = [
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres del Limonar: se necesita ayuda. Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"56 con 3: se necesita ayuda urgente, especialmente comida y agua." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"HUV: ya no reciben donaciones de sangre ni insumos, están full." },
+  { fecha:"11 de agosto de 2026, 2:15 p. m.", texto:"Disponible maquinaria pesada. Contacto: Leidy 324 4339670." },
+  { fecha:"11 de agosto de 2026, 1:54 p. m.", texto:"Capri: se necesita comida." },
+  { fecha:"11 de agosto de 2026, 1:53 p. m.", texto:"Edificio de Colores: hay suficiente comida; se necesita hidratación." },
+  { fecha:"11 de agosto de 2026, 1:29 p. m.", texto:"Colegio Normal Superior (sede bachillerato, Pasoancho con 34): se necesita comida hecha." },
+  { fecha:"11 de agosto de 2026, 1:25 p. m.", texto:"Cra. 44: reportan exceso de gente en los puntos; piden que se acepte la mano de obra que llega." },
+  { fecha:"11 de agosto de 2026, 1:20 p. m.", texto:"Calle 9 con Cra. 72: insumos médicos: tubos orotraqueales (4 a 5.5), máscara para BVM, dispositivo BVM pediátrico y hoja de laringoscopio pediátrico. (Reporta Sandra Gómez)" },
+  { fecha:"11 de agosto de 2026, 12:00 m.", texto:"Edificio de Colores: se necesita nevera de icopor y hielo." },
   { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Cra. 56 #3-88 (Pampa Linda), Calle 5 con 44 (Panadería Quinta Pan), Cuarto de Legua (Cra. 58 #3-138 y Cra. 57 con 4ta) y Refugio – Unidad Ariguaní (Cra. 67 #3C-15)." },
   { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar." },
   { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Carrera 56 #3-88: ayuda urgente para rescatar personas bajo los escombros." },
@@ -492,7 +517,6 @@ const CLINICAS = [
   "Clínica Rey David",
   "Clínica Nuestra Señora del Rosario",
   "Clínica Sanitas Tequendama",
-  "Clínica Cali",
   "Hospital Carlos Holmes Trujillo",
 ];
 
