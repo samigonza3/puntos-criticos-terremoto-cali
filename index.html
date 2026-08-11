@@ -153,6 +153,12 @@
     padding:3px 8px;border-radius:999px;flex:none;
     background:var(--alert);color:#fff;
   }
+  .badge.ok{background:var(--ok);color:#04240F}
+  .nota-ok{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;font-weight:600;color:var(--ok);
+  }
+  .nota-ok::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--ok);flex:none}
   .dir{color:var(--ice);font-weight:500}
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
@@ -221,7 +227,7 @@ const PUNTOS = [
   { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Carrera 56 con 3A",    prioridad:true,  necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
-  { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:true,  necesidades:[] },
+  { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:false, cubierto:true, nota:"Ya hay suficiente donación y suficientes manos", necesidades:[] },
 
   { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:[] },
   { lugar:"Sector la luna",     direccion:"Calle 13 con Autopista", prioridad:false, necesidades:[] },
@@ -331,6 +337,7 @@ function App(){
                 <span className="lugar">
                   {p.lugar}
                   {p.prioridad ? <span className="badge">Urgente</span> : null}
+                  {p.cubierto ? <span className="badge ok">Cubierto</span> : null}
                 </span>
               </td>
               <td data-label="Dirección">
@@ -339,9 +346,11 @@ function App(){
                   : <span className="dir vacio">—</span>}
               </td>
               <td data-label="Necesidades">
-                {p.necesidades.length
-                  ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : <span className="sinnead">Ver insumos generales</span>}
+                {p.nota
+                  ? <span className="nota-ok">{p.nota}</span>
+                  : p.necesidades.length
+                    ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
+                    : <span className="sinnead">Ver insumos generales</span>}
               </td>
             </tr>
           ))}
