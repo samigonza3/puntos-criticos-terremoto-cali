@@ -185,6 +185,13 @@
     text-transform:uppercase;margin-bottom:3px;
   }
   .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
+  .up-toggle{
+    margin-top:16px;width:100%;cursor:pointer;font-family:inherit;
+    font-size:13.5px;font-weight:700;color:var(--star-light);
+    background:var(--space-900);border:1px solid rgba(127,168,255,.2);
+    border-radius:12px;padding:11px 16px;transition:.15s;
+  }
+  .up-toggle:hover{border-color:var(--star-blue);color:var(--white)}
 
   /* Ayuda disponible */
   .ayudas{
@@ -451,11 +458,12 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 3:53 p. m.";
+const ACTUALIZADO = "11 de agosto de 2026, 3:55 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 3:55 p. m.", texto:"Notaría 20: ya no hay criticidad. Suficiente agua y comida, no ir más gente. No están dejando entrar volquetas ni ambulancias por exceso de personas." },
   { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Alguien ofrece guantes y gafas; necesita que le indiquen a qué punto llevarlos." },
   { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"56 con 3 (reportado como Cuarto de Legua): el sitio está muy lleno, con ambulancias, bomberos y cerca de 2000 personas. (Reporta Juan Trejos)" },
   { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"Notaría 20 (Cra. 28D con Calle 72W): se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente." },
@@ -525,12 +533,12 @@ const NO_DESPLAZARSE = [
   { sector:"Torres de Capri", nota:"Sacando gente por exceso de personas; no desplazarse sin confirmar" },
   { sector:"Cruz Roja", nota:"Colapsada; confirmar si reciben personas, donaciones o insumos" },
   { sector:"HUV", nota:"Full; no reciben donaciones de sangre ni insumos" },
+  { sector:"Notaría 20", nota:"Suficiente agua y comida; no ir más gente. No están dejando entrar volquetas ni ambulancias por exceso de personas" },
 ];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 const ALTA_PRIORIDAD = [
-  { punto:"Notaría 20", nota:"Se necesitan personas para relevar, cascos y herramientas para remover escombros. Agua y comida hay suficiente." },
   { punto:"Chiminangos", nota:"Se necesita baño portátil, manos para armar kits, agua, cobijas, comida y medicina. Ya no más alimentos preparados." },
 ];
 
@@ -548,7 +556,6 @@ const HORA_ACT = "12:51 p. m.";
 const PUNTOS = [
   { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
   { lugar:"Torres de Limonar", direccion:"Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
-  { lugar:"Notaría 20 — Poblado", direccion:"Carrera 28D # 72W-14", coordinador:"Daniela Ibarra", contacto:"300 8130734", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Agua","Baldes","Picas","Palas","Gente para relevos","Comida"] },
   { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
   { lugar:"Olla comunitaria El Poblado", direccion:"", coordinador:"Pilar Rodríguez / Asociación Eco de Mujeres", contacto:"301 7124668", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Proteína (carne, pollo, res)","Desechables para 50 personas"] },
   { lugar:"Edificio Elvira", direccion:"Carrera 4 # 58-18", coordinador:"Camila Sánchez", contacto:"314 8875589", hora:HORA_ACT, prioridad:true, nota:"Voluntarios en el lugar: Juan Manuel Almario, Kevin Zárate · Más voluntarios llegan a las 2:00 p. m.", necesidades:[] },
@@ -644,7 +651,7 @@ function Mapa({ puntos }){
 function App(){
   const [q, setQ] = useState("");
   const [soloPrio, setSoloPrio] = useState(false);
-  const [showMapa, setShowMapa] = useState(false);
+  const [showUpdates, setShowUpdates] = useState(false);
 
   const filtrados = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -745,8 +752,8 @@ function App(){
 
       {ACTUALIZACIONES.length ? (
         <div className="updates">
-          <h2><span className="live"></span>Últimas actualizaciones</h2>
-          {ACTUALIZACIONES.map((u,i) => (
+          <h2><span className="live"></span>Últimas actualizaciones ({ACTUALIZACIONES.length})</h2>
+          {(showUpdates ? ACTUALIZACIONES : ACTUALIZACIONES.slice(0,3)).map((u,i) => (
             <div className="up-item" key={i}>
               <span className="up-dot"></span>
               <div className="up-body">
@@ -755,6 +762,13 @@ function App(){
               </div>
             </div>
           ))}
+          {ACTUALIZACIONES.length > 3 ? (
+            <button className="up-toggle" onClick={() => setShowUpdates(v => !v)}>
+              {showUpdates
+                ? "Ver menos"
+                : "Ver todas (" + (ACTUALIZACIONES.length - 3) + " más)"}
+            </button>
+          ) : null}
         </div>
       ) : null}
 
@@ -883,15 +897,6 @@ function App(){
           <button className="btn-enviar" type="submit">Enviar actualización</button>
         </div>
       </form>
-
-      <button
-        className="cta-reportar map-btn"
-        onClick={() => setShowMapa(v => !v)}
-      >
-        <span className="cta-ico">🗺</span>
-        {showMapa ? "Ocultar mapa" : "Ver mapa de los puntos"}
-      </button>
-      {showMapa ? <Mapa puntos={PUNTOS} /> : null}
 
       <footer>
         Directorio comunitario de donaciones. Verifica cada punto antes de desplazarte.
