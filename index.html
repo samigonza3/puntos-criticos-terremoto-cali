@@ -129,6 +129,27 @@
   }
   .overstock .desc{font-size:13.5px;line-height:1.55;color:var(--ice)}
 
+  /* Marco de alta prioridad */
+  .priority{
+    margin-top:20px;padding:22px 24px;border-radius:20px;
+    background:linear-gradient(180deg, rgba(255,92,107,.16), rgba(255,92,107,.07));
+    border:1px solid rgba(255,92,107,.55);
+    box-shadow:0 0 0 1px rgba(255,92,107,.15), 0 10px 30px rgba(255,92,107,.12);
+  }
+  .priority .tag{
+    font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:14px;display:flex;align-items:center;gap:9px;
+  }
+  .priority .tag svg{flex:none}
+  .priority .pr-item{
+    display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,92,107,.16);
+  }
+  .priority .pr-item:last-child{border-bottom:none;padding-bottom:0}
+  .priority .pr-item:first-of-type{padding-top:0}
+  .priority .pr-dot{flex:none;width:9px;height:9px;border-radius:999px;background:var(--alert);margin-top:6px}
+  .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
+  .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
+
   /* Últimas actualizaciones */
   .updates{
     margin-top:20px;
@@ -507,6 +528,12 @@ const NO_DESPLAZARSE = [
 ];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
+/* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
+const ALTA_PRIORIDAD = [
+  { punto:"Notaría 20", nota:"Se necesitan personas para relevar, cascos y herramientas para remover escombros. Agua y comida hay suficiente." },
+  { punto:"Chiminangos", nota:"Se necesita baño portátil, manos para armar kits, agua, cobijas, comida y medicina. Ya no más alimentos preparados." },
+];
+
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
 const CLINICAS = [
   "Clínica Alba",
@@ -661,6 +688,27 @@ function App(){
           ) : null}
         </div>
       </header>
+
+      {ALTA_PRIORIDAD.length ? (
+        <div className="priority">
+          <div className="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
+              <path d="M12 9v4M12 17h.01"></path>
+              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            Alta prioridad
+          </div>
+          {ALTA_PRIORIDAD.map((p,i) => (
+            <div className="pr-item" key={i}>
+              <span className="pr-dot"></span>
+              <div>
+                <div className="pr-name">{p.punto}</div>
+                {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       {NO_DESPLAZARSE.length ? (
         <div className="overstock">
