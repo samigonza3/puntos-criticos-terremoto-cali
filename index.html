@@ -19,6 +19,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -191,6 +194,14 @@
     font-size:18px;font-weight:400;line-height:1;
   }
   #reportar{scroll-margin-top:20px}
+  .map-btn{background:linear-gradient(180deg,#2E5FE0,#1E3FB0)}
+  .mapa-box{
+    margin-top:16px;border:1px solid rgba(127,168,255,.18);
+    border-radius:20px;overflow:hidden;background:var(--space-800);
+  }
+  .mapa{height:460px;width:100%}
+  .mapa .leaflet-popup-content{font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4}
+  .mapa-nota{padding:12px 18px;font-size:12px;color:var(--muted);line-height:1.5}
 
   /* Clínicas que requieren evacuación */
   .clinicas{
@@ -400,11 +411,13 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 12:51 p. m.";
+const ACTUALIZADO = "11 de agosto de 2026, 1:30 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Cra. 56 #3-88 (Pampa Linda), Calle 5 con 44 (Panadería Quinta Pan), Cuarto de Legua (Cra. 58 #3-138 y Cra. 57 con 4ta) y Refugio – Unidad Ariguaní (Cra. 67 #3C-15)." },
+  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar." },
   { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Carrera 56 #3-88: ayuda urgente para rescatar personas bajo los escombros." },
   { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio Elvira (Cra. 4 #58-18): aún hay personas atrapadas. Se necesitan herramientas (pulidoras, picas, cinceles) y muchas manos." },
   { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio de Colores: se necesitan porras, martillo neumático y herramientas de bajo impacto para el rescate." },
@@ -426,10 +439,11 @@ const ACTUALIZACIONES = [
 
 const NECESIDADES_GENERALES = [
   "Alimentos para la olla","Café","Agua","Suero","Cuerdas",
-  "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas"
+  "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas",
+  "Hidratación fría","Sombra / carpas","Protección solar","Elementos contra el calor"
 ];
 
-const ALERTA = "No descuidemos los hospitales y clínicas";
+const ALERTA = "En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar.";
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
 const CLINICAS = [
@@ -453,13 +467,16 @@ const PUNTOS = [
   { lugar:"Edificio Cantabria", direccion:"", coordinador:"Estefanía Galarza", contacto:"300 3119223", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"No hay nada en el momento; se necesita personal con urgencia", necesidades:["Personal","Cascos","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Guantes","Alimentación"] },
   { lugar:"Edificio Parques de la Fontana", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Linternas","Cascos","Guantes","Palas","Picos","Alimentos preparados","Cajas"] },
   { lugar:"Damnificados Chiminangos", direccion:"Cerca al Conjunto Kumanday", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Alimentación"] },
-  { lugar:"Cra. 56 #3-88", direccion:"Carrera 56 #3-88", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"Se necesita personal para rescatar personas", necesidades:["Personal / voluntarios"] },
+  { lugar:"Cra. 56 #3-88 — Pampa Linda", direccion:"Carrera 56 #3-88", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Se necesitan rescatistas y brigadistas sonoros", necesidades:["Rescatistas","Brigadistas sonoros","Guantes gruesos","Tapabocas","Gafas de seguridad","Snacks energéticos","Hidratación fría"] },
+  { lugar:"Calle 5 con 44 — Panadería Quinta Pan", direccion:"Calle 5 con 44", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"NO hay olla · Intentan salvar a una persona (reportado 11:37 a. m.)", necesidades:["Guantes","Tapabocas","Mesas para alimentos"] },
+  { lugar:"Carrera 58 # 3-138 — Cuarto de Legua", direccion:"Carrera 58 # 3-138", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Dos puntos cercanos con Carrera 57 con Calle 4ta", necesidades:["Herramientas para remover escombros","Hidratación","Cascos","Guantes","Porras","Palas","Gafas de seguridad"] },
+  { lugar:"Carrera 57 con Calle 4ta — Cuarto de Legua", direccion:"Carrera 57 con Calle 4ta", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Dos puntos cercanos con Carrera 58 #3-138", necesidades:["Herramientas para remover escombros","Hidratación","Cascos","Guantes","Porras","Palas","Gafas de seguridad"] },
 
   { lugar:"Edif. Vanessa", direccion:"Cra. 44 #9-35", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos","Guantes","Hielo","Carros de mercado","Zorras","Bisturís","Tijeras","Agujas para canalizar","Comida para animales","Medicamentos para animales"] },
-  { lugar:"Unidad Residencial Ariguani", direccion:"", coordinador:"Fabián Libreros", contacto:"311 2715635", hora:HORA_ACT, prioridad:false, necesidades:[] },
+  { lugar:"Refugio — Unidad Residencial Ariguaní", direccion:"Carrera 67 #3C-15", coordinador:"Fabián Libreros", contacto:"311 2715635", hora:"1:30 p. m.", prioridad:true, estado:"urgente", necesidades:["Medicamentos básicos","Gafas de protección","Tapabocas","Tarros grandes","Hielo","Hidratación","Cascos","Guantes","Porras","Palas"] },
   { lugar:"Edificio Pilar", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos"] },
   { lugar:"Colegio Adventista", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos","Hielo"] },
-  { lugar:"HUV", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Pañitos húmedos","Implementos para bebés"] },
+  { lugar:"HUV", direccion:"Hospital Universitario del Valle", mapq:"Hospital Universitario del Valle, Cali", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Pañitos húmedos","Implementos para bebés"] },
   { lugar:"Edificio Archinie", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Alimentación"] },
   { lugar:"Cuarto de Legua", direccion:"Calle 4 #57-58", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Guantes de carnaza","Baldes","Tarros grandes para basura"] },
   { lugar:"Autopista con 73", direccion:"", coordinador:"", contacto:"318 5026611", hora:HORA_ACT, prioridad:false, necesidades:["Megáfonos"] },
@@ -479,11 +496,72 @@ const AYUDAS = [
    De aquí para abajo no necesitas tocar nada.
    ============================================================ */
 
-const { useState, useMemo } = React;
+const { useState, useMemo, useRef, useEffect } = React;
+
+function Mapa({ puntos }){
+  const ref = useRef(null);
+  const mapRef = useRef(null);
+  const [estado, setEstado] = useState("Cargando mapa y ubicando puntos…");
+
+  useEffect(() => {
+    if (!ref.current || mapRef.current || typeof L === "undefined") return;
+    const map = L.map(ref.current).setView([3.4372, -76.5225], 13);
+    mapRef.current = map;
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: "© OpenStreetMap"
+    }).addTo(map);
+    setTimeout(() => map.invalidateSize(), 120);
+
+    let cancel = false;
+    (async () => {
+      const bounds = [];
+      let ok = 0;
+      for (const p of puntos) {
+        if (cancel) return;
+        let lat, lon;
+        if (p.coords) { lat = p.coords[0]; lon = p.coords[1]; }
+        else {
+          const q = (p.mapq || p.direccion || p.lugar) + ", Cali, Valle del Cauca, Colombia";
+          try {
+            const r = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=co&q=" + encodeURIComponent(q));
+            const d = await r.json();
+            if (d && d[0]) { lat = parseFloat(d[0].lat); lon = parseFloat(d[0].lon); }
+          } catch (e) {}
+          await new Promise(res => setTimeout(res, 1100));
+        }
+        if (cancel) return;
+        if (lat != null && lon != null && !isNaN(lat) && !isNaN(lon)) {
+          const color = p.estado === "urgente" ? "#FF5C6B" : p.cubierto ? "#3EE08E" : "#3E7BFF";
+          const mk = L.circleMarker([lat, lon], {
+            radius: 9, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1
+          }).addTo(map);
+          const needs = (p.necesidades && p.necesidades.length) ? "<br/>" + p.necesidades.join(", ") : "";
+          mk.bindPopup("<b>" + p.lugar + "</b>" + (p.direccion ? "<br/>" + p.direccion : "") + needs);
+          bounds.push([lat, lon]); ok++;
+          setEstado(ok + " puntos ubicados…");
+        }
+      }
+      if (!cancel) {
+        if (bounds.length) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+        setEstado(ok ? (ok + " de " + puntos.length + " puntos ubicados") : "No se pudieron ubicar los puntos automáticamente");
+      }
+    })();
+
+    return () => { cancel = true; };
+  }, []);
+
+  return (
+    <div className="mapa-box">
+      <div ref={ref} className="mapa"></div>
+      <div className="mapa-nota">{estado}. Ubicaciones aproximadas (geocodificadas automáticamente); verifica antes de desplazarte.</div>
+    </div>
+  );
+}
 
 function App(){
   const [q, setQ] = useState("");
   const [soloPrio, setSoloPrio] = useState(false);
+  const [showMapa, setShowMapa] = useState(false);
 
   const filtrados = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -683,6 +761,15 @@ function App(){
           <button className="btn-enviar" type="submit">Enviar actualización</button>
         </div>
       </form>
+
+      <button
+        className="cta-reportar map-btn"
+        onClick={() => setShowMapa(v => !v)}
+      >
+        <span className="cta-ico">🗺</span>
+        {showMapa ? "Ocultar mapa" : "Ver mapa de los puntos"}
+      </button>
+      {showMapa ? <Mapa puntos={PUNTOS} /> : null}
 
       <footer>
         Directorio comunitario de donaciones. Verifica cada punto antes de desplazarte.
