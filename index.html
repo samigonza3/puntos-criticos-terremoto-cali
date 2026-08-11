@@ -159,6 +159,11 @@
     font-size:13px;font-weight:600;color:var(--ok);
   }
   .nota-ok::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--ok);flex:none}
+  .nota-info{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;font-weight:600;color:var(--star-light);
+  }
+  .nota-info::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--star-blue);flex:none}
   .dir{color:var(--ice);font-weight:500}
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
@@ -221,6 +226,9 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "No descuidemos los hospitales y clínicas";
 
 const PUNTOS = [
+  { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
+  { lugar:"Poblado",            direccion:"",                     prioridad:false, nota:"Se hará una olla vegana", necesidades:[] },
+
   { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
   { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  necesidades:[] },
   { lugar:"Notaría 20",         direccion:"Carrera 28D # 72W-14", prioridad:true,  necesidades:[] },
@@ -347,7 +355,7 @@ function App(){
               </td>
               <td data-label="Necesidades">
                 {p.nota
-                  ? <span className="nota-ok">{p.nota}</span>
+                  ? <span className={p.cubierto ? "nota-ok" : "nota-info"}>{p.nota}</span>
                   : p.necesidades.length
                     ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
                     : <span className="sinnead">Ver insumos generales</span>}
