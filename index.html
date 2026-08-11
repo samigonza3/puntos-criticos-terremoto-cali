@@ -178,7 +178,7 @@
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
   .cel-need .need{font-size:12px;padding:5px 10px}
-  .sinnead{color:var(--muted);font-size:13px}
+  .sinnead{color:var(--muted);font-size:13px;display:block;margin-top:6px}
   .empty{padding:44px 20px;text-align:center;color:var(--muted);font-size:15px}
 
   footer{margin-top:34px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.7}
@@ -385,7 +385,10 @@ function App(){
               <td data-label="Necesidades">
                 {p.necesidades.length
                   ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : <span className="sinnead">Ver insumos generales</span>}
+                  : null}
+                <span className="sinnead">
+                  {p.necesidades.length ? "+ insumos generales" : "Ver insumos generales"}
+                </span>
                 {p.nota ? <span className="nota">{p.nota}</span> : null}
               </td>
             </tr>
