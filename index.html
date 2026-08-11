@@ -3,24 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Puntos críticos del Terremoto en Cali 2026</title>
-<meta name="description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
-
-<!-- Tarjeta al compartir el link (Open Graph / Twitter) -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Conoce aquí los puntos críticos del Terremoto en Cali 2026" />
-<meta property="og:description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
-<meta property="og:locale" content="es_CO" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Conoce aquí los puntos críticos del Terremoto en Cali 2026" />
-<meta name="twitter:description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
-
+<title>Puntos de donación</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -112,165 +98,25 @@
   }
   .alert-card p{font-size:16px;font-weight:700;line-height:1.35;color:var(--white)}
 
-  /* Últimas actualizaciones */
-  .updates{
-    margin-top:20px;
-    background:var(--space-800);
-    border:1px solid rgba(127,168,255,.14);
-    border-radius:18px;padding:22px 24px;
+  /* Banner sobreabastecidos */
+  .overstock{
+    margin-top:16px;padding:20px 24px;border-radius:18px;
+    background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.42);
   }
-  .updates h2{
-    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--star-light);margin-bottom:16px;display:flex;align-items:center;gap:9px;
+  .overstock .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:#FFB020;margin-bottom:12px;display:flex;align-items:center;gap:8px;
   }
-  .updates h2 .live{
-    width:8px;height:8px;border-radius:999px;background:var(--ok);
-    box-shadow:0 0 0 0 rgba(62,224,142,.6);animation:pulse 2s infinite;
+  .overstock .needs{margin-bottom:12px}
+  .overstock .need{
+    background:rgba(255,176,32,.14);border-color:rgba(255,176,32,.35);color:#FFE1A8;
   }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(62,224,142,.5)}
-    70%{box-shadow:0 0 0 8px rgba(62,224,142,0)}
-    100%{box-shadow:0 0 0 0 rgba(62,224,142,0)}
-  }
-  .up-item{
-    display:flex;gap:14px;padding:12px 0;
-    border-bottom:1px solid rgba(127,168,255,.08);
-  }
-  .up-item:last-child{border-bottom:none;padding-bottom:0}
-  .up-item:first-child{padding-top:0}
-  .up-dot{
-    flex:none;width:9px;height:9px;border-radius:999px;background:var(--star-blue);margin-top:6px;
-  }
-  .up-body{flex:1}
-  .up-time{
-    font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);
-    text-transform:uppercase;margin-bottom:3px;
-  }
-  .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
+  .overstock .desc{font-size:13.5px;line-height:1.55;color:var(--ice)}
 
-  /* Ayuda disponible */
-  .ayudas{
-    margin-top:20px;
-    background:var(--space-800);
-    border:1px solid rgba(62,224,142,.3);
-    border-radius:20px;padding:24px 26px;
-  }
-  .ayudas h2{
-    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ok);margin-bottom:6px;
-  }
-  .ayudas .ay-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
-  .ay-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .ay-item{
-    background:var(--space-900);border:1px solid rgba(62,224,142,.2);
-    border-radius:14px;padding:14px 16px;
-  }
-  .ay-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .ay-rec{font-size:14.5px;font-weight:700;color:var(--white)}
-  .ay-dest{
-    font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--ok);background:rgba(62,224,142,.12);padding:3px 9px;border-radius:999px;flex:none;
-  }
-  .ay-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:7px}
-  .ay-obs{color:var(--muted);font-size:12.5px;margin-top:4px;line-height:1.45}
-  @media (max-width:680px){
-    .ay-list{grid-template-columns:1fr}
-  }
-
-  /* Botón que lleva al formulario */
-  .cta-reportar{
-    display:flex;align-items:center;justify-content:center;gap:11px;
-    margin-top:20px;text-decoration:none;cursor:pointer;
-    font-size:15.5px;font-weight:700;color:#fff;
-    padding:16px 24px;border-radius:16px;
-    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
-    border:1px solid rgba(127,168,255,.4);
-    box-shadow:0 8px 22px rgba(62,123,255,.28);transition:.15s;
-  }
-  .cta-reportar:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(62,123,255,.42)}
-  .cta-reportar .cta-ico{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.2);
-    font-size:18px;font-weight:400;line-height:1;
-  }
-  #reportar{scroll-margin-top:20px}
-  .map-btn{background:linear-gradient(180deg,#2E5FE0,#1E3FB0)}
-  .mapa-box{
-    margin-top:16px;border:1px solid rgba(127,168,255,.18);
-    border-radius:20px;overflow:hidden;background:var(--space-800);
-  }
-  .mapa{height:460px;width:100%}
-  .mapa .leaflet-popup-content{font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4}
-  .mapa-nota{padding:12px 18px;font-size:12px;color:var(--muted);line-height:1.5}
-
-  /* Clínicas que requieren evacuación */
-  .clinicas{
-    margin-top:20px;
-    background:var(--alert-soft);
-    border:1px solid rgba(255,92,107,.4);
-    border-radius:20px;padding:24px 26px;
-  }
-  .clinicas h2{
-    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--alert);margin-bottom:6px;display:flex;align-items:center;gap:9px;
-  }
-  .clinicas .cl-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
-  .cl-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .cl-item{
-    display:flex;align-items:center;gap:10px;
-    background:var(--space-900);border:1px solid rgba(255,92,107,.25);
-    border-radius:12px;padding:12px 15px;font-size:14.5px;font-weight:600;color:var(--white);
-  }
-  .cl-item::before{
-    content:"";flex:none;width:8px;height:8px;border-radius:999px;background:var(--alert);
-  }
-  @media (max-width:680px){
-    .cl-list{grid-template-columns:1fr}
-  }
-
-  /* Formulario de actualización */
-  .form-card{
-    margin-top:20px;
-    background:
-      radial-gradient(120% 160% at 100% 0%, rgba(62,123,255,.14) 0%, rgba(62,123,255,0) 55%),
-      var(--space-800);
-    border:1px solid rgba(127,168,255,.22);
-    border-radius:20px;padding:26px 26px 28px;
-  }
-  .form-card .eyebrow{margin-bottom:6px}
-  .form-card h2{
-    font-size:clamp(20px,2.6vw,26px);font-weight:800;line-height:1.12;
-    color:var(--white);margin:0 0 6px;letter-spacing:-.01em;text-transform:none;
-  }
-  .form-card .form-sub{color:var(--ice);font-size:14px;line-height:1.5;margin-bottom:20px;max-width:560px}
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .field{display:flex;flex-direction:column;gap:6px}
-  .field.full{grid-column:1 / -1}
-  .field label{
-    font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light);
-  }
-  .field input,.field textarea{
-    width:100%;font-family:inherit;font-size:15px;color:var(--white);
-    background:var(--space-900);border:1px solid rgba(127,168,255,.18);
-    border-radius:12px;padding:12px 14px;outline:none;transition:.15s;
-  }
-  .field textarea{min-height:96px;resize:vertical;line-height:1.5}
-  .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
-  .field input:focus,.field textarea:focus{
-    border-color:var(--star-blue);box-shadow:0 0 0 3px rgba(62,123,255,.18);
-  }
-  .btn-enviar{
-    grid-column:1 / -1;justify-self:start;margin-top:4px;
-    display:inline-flex;align-items:center;gap:9px;cursor:pointer;
-    font-family:inherit;font-size:15px;font-weight:700;color:#fff;
-    padding:13px 26px;border:none;border-radius:999px;
-    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
-    box-shadow:0 8px 22px rgba(62,123,255,.28);transition:.15s;
-  }
-  .btn-enviar:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(62,123,255,.4)}
-  .hp{position:absolute;left:-9999px}
-  @media (max-width:680px){
-    .form-grid{grid-template-columns:1fr}
+  /* Nota de entrega dentro del punto */
+  .nota{
+    display:block;margin-top:8px;font-size:12.5px;line-height:1.4;
+    color:var(--star-light);font-weight:500;
   }
 
   /* Controles */
@@ -328,29 +174,8 @@
     padding:3px 8px;border-radius:999px;flex:none;
     background:var(--alert);color:#fff;
   }
-  .badge.ok{background:var(--ok);color:#04240F}
-  .nota-ok{
-    display:inline-flex;align-items:center;gap:7px;
-    font-size:13px;font-weight:600;color:var(--ok);
-  }
-  .nota-ok::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--ok);flex:none}
-  .nota-info{
-    display:inline-flex;align-items:center;gap:7px;
-    font-size:13px;font-weight:600;color:var(--star-light);
-  }
-  .nota-info::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--star-blue);flex:none}
-  .nota-alert{
-    display:inline-flex;align-items:flex-start;gap:7px;
-    font-size:13px;font-weight:700;color:var(--alert);line-height:1.4;
-  }
-  .nota-alert::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--alert);flex:none;margin-top:5px}
   .dir{color:var(--ice);font-weight:500}
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
-  .p-dir{color:var(--ice);font-size:13px;font-weight:500;margin-top:3px}
-  .p-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:5px}
-  .p-hora{color:var(--muted);font-size:11.5px;font-weight:500;margin-top:5px}
-  .cel-nota{color:var(--ice);font-size:13.5px;font-weight:500;line-height:1.45;margin-bottom:8px}
-  .badge.activo{background:rgba(127,168,255,.16);color:var(--star-light)}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
   .cel-need .need{font-size:12px;padding:5px 10px}
   .sinnead{color:var(--muted);font-size:13px}
@@ -384,16 +209,6 @@
 </style>
 </head>
 <body>
-
-<!-- Formulario oculto para que Netlify lo detecte en el build (la app se renderiza con JS) -->
-<form name="actualizaciones" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input type="text" name="fecha_hora" />
-  <input type="text" name="punto" />
-  <input type="text" name="direccion" />
-  <input type="text" name="persona" />
-  <textarea name="actualizacion"></textarea>
-</form>
-
 <div id="root"></div>
 
 <script type="text/babel">
@@ -403,172 +218,70 @@
    1. ACTUALIZADO      -> fecha que se muestra en el encabezado.
    2. NECESIDADES_GENERALES -> insumos base que se necesitan en los puntos.
    3. ALERTA           -> mensaje rojo destacado (deja "" para ocultarlo).
-   4. PUNTOS           -> agrega, edita o borra objetos.
+   4. SOBREABASTECIDOS -> sectores a donde NO llevar mas ayuda (banner amarillo).
+        NOTA_SOBREABASTECIDOS -> texto explicativo de ese banner.
+   5. PUNTOS           -> agrega, edita o borra objetos.
         lugar        : nombre o direccion del punto
         direccion    : direccion exacta (deja "" si no aplica)
         prioridad    : true = punto urgente (resaltado + etiqueta)
         necesidades  : lista de insumos de ESE punto (deja [] si no hay)
+        nota         : (opcional) instruccion de entrega. Bórrala si no aplica.
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 1:30 p. m.";
-
-/* ULTIMAS ACTUALIZACIONES
-   Agrega arriba la más reciente. Formato de fecha libre. */
-const ACTUALIZACIONES = [
-  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Cra. 56 #3-88 (Pampa Linda), Calle 5 con 44 (Panadería Quinta Pan), Cuarto de Legua (Cra. 58 #3-138 y Cra. 57 con 4ta) y Refugio – Unidad Ariguaní (Cra. 67 #3C-15)." },
-  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Carrera 56 #3-88: ayuda urgente para rescatar personas bajo los escombros." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio Elvira (Cra. 4 #58-18): aún hay personas atrapadas. Se necesitan herramientas (pulidoras, picas, cinceles) y muchas manos." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio de Colores: se necesitan porras, martillo neumático y herramientas de bajo impacto para el rescate." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Nuevos puntos que necesitan manos: Calle 72 #10B-21, OXXO Calle 44 con Novena, Corporación Educativa Adventista (Cra. 44 #9-25) y Carrera 39A #5D-09." },
-  { fecha:"11 de agosto de 2026, 1:05 p. m.", texto:"Centro de Refugio Animal: se necesita personal veterinario con urgencia." },
-  { fecha:"11 de agosto de 2026, 12:40 p. m.", texto:"Santa Isabel (Calle 5B con Carrera 39, cerca de Telepacífico / Clínica Imbanaco): acaba de colapsar un edificio. Se necesitan personas con urgencia en el sector." },
-  { fecha:"11 de agosto de 2026, 12:37 p. m.", texto:"Cuarto de Legua: se requieren cascos con urgencia. Si tienes este recurso, por favor dirígelo a este sector." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Carrera 56 # 3-88: ya hay suficientes manos, pero faltan cascos, guantes, agua y plantas eléctricas." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Carrera 46 con Calle 8B: ya tienen todo lo necesario." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Calle 9 con 44: NO acudir más, ya hay suficientes manos." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Olla vegana (Notaría 20): se necesitan platos, cubiertos, colaboradores y transporte para movilizar los alimentos desde la Casa de Luz en San Antonio hasta Notaría 20 y Edificio de Colores." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Edificio de Colores: aquí también se hará olla vegana." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Calle 9 con 44: se necesitan neveras, hielos y costales." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Edificio de Colores: comida práctica que no requiera cubiertos y porras urgentes." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Notaría 20 (Poblado): se hará una olla vegana." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Refugio: olla comunitaria en marcha, por favor traer insumos de olla." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Capri: cubierto, ya hay suficiente donación y manos." },
-];
+const ACTUALIZADO = "11 de agosto de 2026, 3:00 p. m.";
 
 const NECESIDADES_GENERALES = [
   "Alimentos para la olla","Café","Agua","Suero","Cuerdas",
-  "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas",
-  "Hidratación fría","Sombra / carpas","Protección solar","Elementos contra el calor"
+  "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas"
 ];
 
-const ALERTA = "En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar.";
+const ALERTA = "No descuidemos los hospitales y clínicas";
 
-/* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
-const CLINICAS = [
-  "Clínica Alba",
-  "Clínica Rey David",
-  "Clínica Nuestra Señora del Rosario",
-  "Clínica Sanitas Tequendama",
-  "Clínica Cali",
-  "Hospital Carlos Holmes Trujillo",
-];
-
-const HORA_ACT = "12:51 p. m.";
+// Sectores YA sobreabastecidos: no llevar más ayuda ni personas por ahora.
+const SOBREABASTECIDOS = ["Caldas","Pampalinda","Refugio","Limonar"];
+const NOTA_SOBREABASTECIDOS = "Estos sectores están sobreabastecidos y con muchos civiles que dificultan la labor de los profesionales. Por favor no difundir información falsa sobre estos puntos.";
 
 const PUNTOS = [
-  { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
-  { lugar:"Torres de Limonar", direccion:"", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
-  { lugar:"Notaría 20 — Poblado", direccion:"Carrera 28D # 72W-14", coordinador:"Daniela Ibarra", contacto:"300 8130734", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Agua","Baldes","Picas","Palas","Gente para relevos","Comida"] },
-  { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
-  { lugar:"Olla comunitaria El Poblado", direccion:"", coordinador:"Pilar Rodríguez / Asociación Eco de Mujeres", contacto:"301 7124668", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Proteína (carne, pollo, res)","Desechables para 50 personas"] },
-  { lugar:"Edificio Elvira", direccion:"Carrera 4 # 58-18", coordinador:"Camila Sánchez", contacto:"314 8875589", hora:HORA_ACT, prioridad:true, nota:"Voluntarios en el lugar: Juan Manuel Almario, Kevin Zárate · Más voluntarios llegan a las 2:00 p. m.", necesidades:[] },
-  { lugar:"Edificio Cantabria", direccion:"", coordinador:"Estefanía Galarza", contacto:"300 3119223", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"No hay nada en el momento; se necesita personal con urgencia", necesidades:["Personal","Cascos","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Guantes","Alimentación"] },
-  { lugar:"Edificio Parques de la Fontana", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Linternas","Cascos","Guantes","Palas","Picos","Alimentos preparados","Cajas"] },
-  { lugar:"Damnificados Chiminangos", direccion:"Cerca al Conjunto Kumanday", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Alimentación"] },
-  { lugar:"Cra. 56 #3-88 — Pampa Linda", direccion:"Carrera 56 #3-88", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Se necesitan rescatistas y brigadistas sonoros", necesidades:["Rescatistas","Brigadistas sonoros","Guantes gruesos","Tapabocas","Gafas de seguridad","Snacks energéticos","Hidratación fría"] },
-  { lugar:"Calle 5 con 44 — Panadería Quinta Pan", direccion:"Calle 5 con 44", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"NO hay olla · Intentan salvar a una persona (reportado 11:37 a. m.)", necesidades:["Guantes","Tapabocas","Mesas para alimentos"] },
-  { lugar:"Carrera 58 # 3-138 — Cuarto de Legua", direccion:"Carrera 58 # 3-138", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Dos puntos cercanos con Carrera 57 con Calle 4ta", necesidades:["Herramientas para remover escombros","Hidratación","Cascos","Guantes","Porras","Palas","Gafas de seguridad"] },
-  { lugar:"Carrera 57 con Calle 4ta — Cuarto de Legua", direccion:"Carrera 57 con Calle 4ta", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"Dos puntos cercanos con Carrera 58 #3-138", necesidades:["Herramientas para remover escombros","Hidratación","Cascos","Guantes","Porras","Palas","Gafas de seguridad"] },
+  { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
+  { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  necesidades:[] },
+  { lugar:"Notaría 20",         direccion:"Carrera 28D # 72W-14", prioridad:true,  necesidades:["Hielo","Cascos","Tapabocas","Guantes","Personas"] },
+  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  necesidades:[] },
+  { lugar:"Plaza de toros",     direccion:"Carrera 56 con 3A",    prioridad:true,  necesidades:["Baldes","Carretillas","Cascos de construcción"], nota:"Entregar al lado de la volqueta (Cr 56 entre 5ta y 3cera)." },
+  { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
+  { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:true,  necesidades:[] },
 
-  { lugar:"Edif. Vanessa", direccion:"Cra. 44 #9-35", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos","Guantes","Hielo","Carros de mercado","Zorras","Bisturís","Tijeras","Agujas para canalizar","Comida para animales","Medicamentos para animales"] },
-  { lugar:"Refugio — Unidad Residencial Ariguaní", direccion:"Carrera 67 #3C-15", coordinador:"Fabián Libreros", contacto:"311 2715635", hora:"1:30 p. m.", prioridad:true, estado:"urgente", necesidades:["Medicamentos básicos","Gafas de protección","Tapabocas","Tarros grandes","Hielo","Hidratación","Cascos","Guantes","Porras","Palas"] },
-  { lugar:"Edificio Pilar", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos"] },
-  { lugar:"Colegio Adventista", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos","Hielo"] },
-  { lugar:"HUV", direccion:"Hospital Universitario del Valle", mapq:"Hospital Universitario del Valle, Cali", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Pañitos húmedos","Implementos para bebés"] },
-  { lugar:"Edificio Archinie", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Alimentación"] },
-  { lugar:"Cuarto de Legua", direccion:"Calle 4 #57-58", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Guantes de carnaza","Baldes","Tarros grandes para basura"] },
-  { lugar:"Autopista con 73", direccion:"", coordinador:"", contacto:"318 5026611", hora:HORA_ACT, prioridad:false, necesidades:["Megáfonos"] },
-];
-
-/* AYUDA DISPONIBLE — PENDIENTE POR ASIGNAR */
-const AYUDAS = [
-  { recurso:"5 mujeres de Olla Comunitaria", destino:"Poblado", coordinador:"Daniela Orjuela", contacto:"", obs:"Tiene transporte, falta implementos" },
-  { recurso:"Dos equipos de sonido y personal", destino:"Poblado", coordinador:"Daniel Centenario", contacto:"305 3158708", obs:"Se dirigió a Brigadistas de Sonido" },
-  { recurso:"Planta de 6000 y EcoFlows", destino:"Casa Moisés Wells", coordinador:"Nathalia Varela", contacto:"314 7778914", obs:"Tienda de Modas Samara Wells — Calle 2 #10-16, Barrio San Antonio, Cali" },
-  { recurso:"Maquinaria pesada", destino:"Sin destino aún", coordinador:"Sarah Marín", contacto:"302 8525671", obs:"" },
-  { recurso:"Hielo (Kolbitos)", destino:"Sin destino aún", coordinador:"@hielokolbitos (Instagram)", contacto:"317 5154927", obs:"Transporte y hielo a disposición" },
-  { recurso:"Guantes · 500 almuerzos", destino:"Por asignar", coordinador:"María Paula", contacto:"314 7874022", obs:"Contacto de Edif. Cantabria enviado" },
+  { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:[] },
+  { lugar:"Sector la luna",     direccion:"Calle 13 con Autopista", prioridad:false, necesidades:[] },
+  { lugar:"Calle 42 con 38",    direccion:"Calle 42 con 38",     prioridad:false, necesidades:[] },
+  { lugar:"Calle 3 D con 67",   direccion:"Calle 3 D con 67",    prioridad:false, necesidades:[] },
+  { lugar:"Calle 10 con 71",    direccion:"Calle 10 con 71",     prioridad:false, necesidades:[] },
+  { lugar:"Carrera 41 con 7",   direccion:"Carrera 41 con 7",    prioridad:false, necesidades:[] },
+  { lugar:"Motel Molino Rojo",  direccion:"",                    prioridad:false, necesidades:[] },
+  { lugar:"Calle 9 con 24",     direccion:"Calle 9 con 24",      prioridad:false, necesidades:[] },
+  { lugar:"Edificio Marisol",   direccion:"",                    prioridad:false, necesidades:[] },
+  { lugar:"Carrera 9 con 53",   direccion:"Carrera 9 con 53",    prioridad:false, necesidades:[] },
+  { lugar:"Calle 5 con 44",     direccion:"Calle 5 con 44",      prioridad:false, necesidades:[] },
+  { lugar:"Calle 5 con 57",     direccion:"Calle 5 con 57",      prioridad:false, necesidades:[] },
+  { lugar:"Calle 4 # 66b-52",   direccion:"Calle 4 # 66b-52",    prioridad:false, necesidades:[] }
 ];
 
 /* ============================================================
    De aquí para abajo no necesitas tocar nada.
    ============================================================ */
 
-const { useState, useMemo, useRef, useEffect } = React;
-
-function Mapa({ puntos }){
-  const ref = useRef(null);
-  const mapRef = useRef(null);
-  const [estado, setEstado] = useState("Cargando mapa y ubicando puntos…");
-
-  useEffect(() => {
-    if (!ref.current || mapRef.current || typeof L === "undefined") return;
-    const map = L.map(ref.current).setView([3.4372, -76.5225], 13);
-    mapRef.current = map;
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19, attribution: "© OpenStreetMap"
-    }).addTo(map);
-    setTimeout(() => map.invalidateSize(), 120);
-
-    let cancel = false;
-    (async () => {
-      const bounds = [];
-      let ok = 0;
-      for (const p of puntos) {
-        if (cancel) return;
-        let lat, lon;
-        if (p.coords) { lat = p.coords[0]; lon = p.coords[1]; }
-        else {
-          const q = (p.mapq || p.direccion || p.lugar) + ", Cali, Valle del Cauca, Colombia";
-          try {
-            const r = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=co&q=" + encodeURIComponent(q));
-            const d = await r.json();
-            if (d && d[0]) { lat = parseFloat(d[0].lat); lon = parseFloat(d[0].lon); }
-          } catch (e) {}
-          await new Promise(res => setTimeout(res, 1100));
-        }
-        if (cancel) return;
-        if (lat != null && lon != null && !isNaN(lat) && !isNaN(lon)) {
-          const color = p.estado === "urgente" ? "#FF5C6B" : p.cubierto ? "#3EE08E" : "#3E7BFF";
-          const mk = L.circleMarker([lat, lon], {
-            radius: 9, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1
-          }).addTo(map);
-          const needs = (p.necesidades && p.necesidades.length) ? "<br/>" + p.necesidades.join(", ") : "";
-          mk.bindPopup("<b>" + p.lugar + "</b>" + (p.direccion ? "<br/>" + p.direccion : "") + needs);
-          bounds.push([lat, lon]); ok++;
-          setEstado(ok + " puntos ubicados…");
-        }
-      }
-      if (!cancel) {
-        if (bounds.length) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
-        setEstado(ok ? (ok + " de " + puntos.length + " puntos ubicados") : "No se pudieron ubicar los puntos automáticamente");
-      }
-    })();
-
-    return () => { cancel = true; };
-  }, []);
-
-  return (
-    <div className="mapa-box">
-      <div ref={ref} className="mapa"></div>
-      <div className="mapa-nota">{estado}. Ubicaciones aproximadas (geocodificadas automáticamente); verifica antes de desplazarte.</div>
-    </div>
-  );
-}
+const { useState, useMemo } = React;
 
 function App(){
   const [q, setQ] = useState("");
   const [soloPrio, setSoloPrio] = useState(false);
-  const [showMapa, setShowMapa] = useState(false);
 
   const filtrados = useMemo(() => {
     const t = q.trim().toLowerCase();
     return PUNTOS.filter(p => {
       if (soloPrio && !p.prioridad) return false;
       if (!t) return true;
-      const blob = (p.lugar + " " + (p.direccion||"") + " " + (p.coordinador||"") + " " + (p.nota||"") + " " + p.necesidades.join(" ")).toLowerCase();
+      const blob = (p.lugar + " " + p.direccion + " " + p.necesidades.join(" ")).toLowerCase();
       return blob.includes(t);
     });
   }, [q, soloPrio]);
@@ -582,7 +295,7 @@ function App(){
         <h1>Puntos de <span>edificios afectados</span></h1>
         <p className="sub">
           Directorio de los puntos reportados y los insumos que se necesitan en cada uno.
-          Comparte esta página con quien quiera aportar.
+          Comparte esta página con quien quiera aportar. Se actualiza en un solo archivo.
         </p>
         <div className="meta">
           <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
@@ -606,33 +319,19 @@ function App(){
         </div>
       </header>
 
-      {CLINICAS.length ? (
-        <div className="clinicas">
-          <h2>Clínicas afectadas que requieren evacuación</h2>
-          <p className="cl-sub">Se necesita apoyo para evacuar estos centros de salud. No los descuidemos.</p>
-          <div className="cl-list">
-            {CLINICAS.map((c,i) => <div className="cl-item" key={i}>{c}</div>)}
+      {SOBREABASTECIDOS.length ? (
+        <div className="overstock">
+          <div className="tag">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFB020" strokeWidth="2.2">
+              <path d="M12 9v4M12 17h.01"></path>
+              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            Sectores sobreabastecidos, no llevar más ayuda
           </div>
-        </div>
-      ) : null}
-
-      <a className="cta-reportar" href="#reportar">
-        <span className="cta-ico">＋</span>
-        Deja aquí tu actualización
-      </a>
-
-      {ACTUALIZACIONES.length ? (
-        <div className="updates">
-          <h2><span className="live"></span>Últimas actualizaciones</h2>
-          {ACTUALIZACIONES.map((u,i) => (
-            <div className="up-item" key={i}>
-              <span className="up-dot"></span>
-              <div className="up-body">
-                <div className="up-time">{u.fecha}</div>
-                <div className="up-text">{u.texto}</div>
-              </div>
-            </div>
-          ))}
+          <div className="needs">
+            {SOBREABASTECIDOS.map((s,i) => <span className="need" key={i}>{s}</span>)}
+          </div>
+          <p className="desc">{NOTA_SOBREABASTECIDOS}</p>
         </div>
       ) : null}
 
@@ -662,8 +361,8 @@ function App(){
       <table className="tabla">
         <thead>
           <tr>
-            <th style={{width:"30%"}}>Punto</th>
-            <th style={{width:"25%"}}>Dirección</th>
+            <th style={{width:"28%"}}>Punto</th>
+            <th style={{width:"27%"}}>Dirección</th>
             <th>Necesidades</th>
           </tr>
         </thead>
@@ -675,103 +374,27 @@ function App(){
               <td data-label="Punto">
                 <span className="lugar">
                   {p.lugar}
-                  {p.estado === "urgente" ? <span className="badge">Urgente</span> : null}
-                  {p.cubierto ? <span className="badge ok">Cubierto</span> : null}
+                  {p.prioridad ? <span className="badge">Urgente</span> : null}
                 </span>
-                {(p.coordinador || p.contacto)
-                  ? <div className="p-coord">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</div>
-                  : null}
-                {p.hora ? <div className="p-hora">Actualizado: {p.hora}</div> : null}
               </td>
               <td data-label="Dirección">
-                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
+                {p.direccion
                   ? <span className="dir">{p.direccion}</span>
-                  : <span className="dir vacio">—</span>}
+                  : <span className="dir vacio">Por confirmar</span>}
               </td>
               <td data-label="Necesidades">
-                {p.nota ? <div className="cel-nota">{p.nota}</div> : null}
                 {p.necesidades.length
                   ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : (!p.nota ? <span className="sinnead">Ver insumos generales</span> : null)}
+                  : <span className="sinnead">Ver insumos generales</span>}
+                {p.nota ? <span className="nota">{p.nota}</span> : null}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      {AYUDAS.length ? (
-        <div className="ayudas">
-          <h2>Ayuda disponible — pendiente por asignar</h2>
-          <p className="ay-sub">Recursos ofrecidos que aún buscan destino o coordinación. Notifica en el grupo si tu punto los necesita.</p>
-          <div className="ay-list">
-            {AYUDAS.map((a,i) => (
-              <div className="ay-item" key={i}>
-                <div className="ay-top">
-                  <span className="ay-rec">{a.recurso}</span>
-                  <span className="ay-dest">{a.destino}</span>
-                </div>
-                {(a.coordinador || a.contacto)
-                  ? <div className="ay-coord">{a.coordinador}{a.contacto ? " · " + a.contacto : ""}</div> : null}
-                {a.obs ? <div className="ay-obs">{a.obs}</div> : null}
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      <form
-        id="reportar"
-        className="form-card"
-        name="actualizaciones"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="actualizaciones" />
-        <p className="hp">
-          <label>No llenar: <input name="bot-field" /></label>
-        </p>
-        <div className="eyebrow">Reporta desde el terreno</div>
-        <h2>Deja aquí tu actualización</h2>
-        <p className="form-sub">
-          Si estás en uno de los puntos críticos, escribe tu actualización de necesidades de donación.
-        </p>
-        <div className="form-grid">
-          <div className="field full">
-            <label htmlFor="f-act">Tu actualización de necesidades</label>
-            <textarea id="f-act" name="actualizacion" required
-              placeholder="Ej: Se necesitan cascos, guantes y agua. Ya hay suficientes manos."></textarea>
-          </div>
-          <div className="field">
-            <label htmlFor="f-fh">Fecha y hora</label>
-            <input id="f-fh" type="datetime-local" name="fecha_hora" required />
-          </div>
-          <div className="field">
-            <label htmlFor="f-pt">Nombre del punto crítico</label>
-            <input id="f-pt" type="text" name="punto" required placeholder="Ej: Edificio de Colores" />
-          </div>
-          <div className="field">
-            <label htmlFor="f-dir">Dirección</label>
-            <input id="f-dir" type="text" name="direccion" placeholder="Ej: Calle 5D #38A-35" />
-          </div>
-          <div className="field">
-            <label htmlFor="f-per">Persona de referencia</label>
-            <input id="f-per" type="text" name="persona" placeholder="Nombre y contacto (opcional)" />
-          </div>
-          <button className="btn-enviar" type="submit">Enviar actualización</button>
-        </div>
-      </form>
-
-      <button
-        className="cta-reportar map-btn"
-        onClick={() => setShowMapa(v => !v)}
-      >
-        <span className="cta-ico">🗺</span>
-        {showMapa ? "Ocultar mapa" : "Ver mapa de los puntos"}
-      </button>
-      {showMapa ? <Mapa puntos={PUNTOS} /> : null}
-
       <footer>
+        <strong>Cómo actualizar:</strong> abre <strong>index.html</strong>, edita el bloque <strong>PUNTOS</strong> al inicio del código y vuelve a arrastrar el archivo a Netlify.<br/>
         Directorio comunitario de donaciones. Verifica cada punto antes de desplazarte.
       </footer>
     </div>
