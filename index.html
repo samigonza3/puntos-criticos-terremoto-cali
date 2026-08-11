@@ -145,6 +145,24 @@
   }
   .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
 
+  /* Botón que lleva al formulario */
+  .cta-reportar{
+    display:flex;align-items:center;justify-content:center;gap:11px;
+    margin-top:20px;text-decoration:none;cursor:pointer;
+    font-size:15.5px;font-weight:700;color:#fff;
+    padding:16px 24px;border-radius:16px;
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+    border:1px solid rgba(127,168,255,.4);
+    box-shadow:0 8px 22px rgba(62,123,255,.28);transition:.15s;
+  }
+  .cta-reportar:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(62,123,255,.42)}
+  .cta-reportar .cta-ico{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.2);
+    font-size:18px;font-weight:400;line-height:1;
+  }
+  #reportar{scroll-margin-top:20px}
+
   /* Clínicas que requieren evacuación */
   .clinicas{
     margin-top:20px;
@@ -353,6 +371,7 @@ const ACTUALIZADO = "11 de agosto de 2026";
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 1:05 p. m.", texto:"Centro de Refugio Animal: se necesita personal veterinario con urgencia." },
   { fecha:"11 de agosto de 2026, 12:40 p. m.", texto:"Santa Isabel (Calle 5B con Carrera 39, cerca de Telepacífico / Clínica Imbanaco): acaba de colapsar un edificio. Se necesitan personas con urgencia en el sector." },
   { fecha:"11 de agosto de 2026, 12:37 p. m.", texto:"Cuarto de Legua: se requieren cascos con urgencia. Si tienes este recurso, por favor dirígelo a este sector." },
   { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Carrera 56 # 3-88: ya hay suficientes manos, pero faltan cascos, guantes, agua y plantas eléctricas." },
@@ -386,6 +405,7 @@ const CLINICAS = [
 
 const PUNTOS = [
   { lugar:"Edificio colapsado — Santa Isabel", direccion:"Calle 5B con Carrera 39 (cerca de Telepacífico y Clínica Imbanaco)", prioridad:true, importante:true, nota:"Acaba de colapsar un edificio. Se necesitan personas con urgencia", necesidades:["Personas / manos"] },
+  { lugar:"Centro de Refugio Animal", direccion:"",               prioridad:true,  importante:true, nota:"Se necesita personal veterinario con urgencia", necesidades:["Personal veterinario"] },
   { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
 
   { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
@@ -481,47 +501,10 @@ function App(){
         </div>
       ) : null}
 
-      <form
-        className="form-card"
-        name="actualizaciones"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="actualizaciones" />
-        <p className="hp">
-          <label>No llenar: <input name="bot-field" /></label>
-        </p>
-        <div className="eyebrow">Reporta desde el terreno</div>
-        <h2>Deja aquí tu actualización</h2>
-        <p className="form-sub">
-          Si estás en uno de los puntos críticos, escribe tu actualización de necesidades de donación.
-        </p>
-        <div className="form-grid">
-          <div className="field full">
-            <label htmlFor="f-act">Tu actualización de necesidades</label>
-            <textarea id="f-act" name="actualizacion" required
-              placeholder="Ej: Se necesitan cascos, guantes y agua. Ya hay suficientes manos."></textarea>
-          </div>
-          <div className="field">
-            <label htmlFor="f-fh">Fecha y hora</label>
-            <input id="f-fh" type="datetime-local" name="fecha_hora" required />
-          </div>
-          <div className="field">
-            <label htmlFor="f-pt">Nombre del punto crítico</label>
-            <input id="f-pt" type="text" name="punto" required placeholder="Ej: Edificio de Colores" />
-          </div>
-          <div className="field">
-            <label htmlFor="f-dir">Dirección</label>
-            <input id="f-dir" type="text" name="direccion" placeholder="Ej: Calle 5D #38A-35" />
-          </div>
-          <div className="field">
-            <label htmlFor="f-per">Persona de referencia</label>
-            <input id="f-per" type="text" name="persona" placeholder="Nombre y contacto (opcional)" />
-          </div>
-          <button className="btn-enviar" type="submit">Enviar actualización</button>
-        </div>
-      </form>
+      <a className="cta-reportar" href="#reportar">
+        <span className="cta-ico">＋</span>
+        Deja aquí tu actualización
+      </a>
 
       {ACTUALIZACIONES.length ? (
         <div className="updates">
@@ -597,6 +580,49 @@ function App(){
           ))}
         </tbody>
       </table>
+
+      <form
+        id="reportar"
+        className="form-card"
+        name="actualizaciones"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="actualizaciones" />
+        <p className="hp">
+          <label>No llenar: <input name="bot-field" /></label>
+        </p>
+        <div className="eyebrow">Reporta desde el terreno</div>
+        <h2>Deja aquí tu actualización</h2>
+        <p className="form-sub">
+          Si estás en uno de los puntos críticos, escribe tu actualización de necesidades de donación.
+        </p>
+        <div className="form-grid">
+          <div className="field full">
+            <label htmlFor="f-act">Tu actualización de necesidades</label>
+            <textarea id="f-act" name="actualizacion" required
+              placeholder="Ej: Se necesitan cascos, guantes y agua. Ya hay suficientes manos."></textarea>
+          </div>
+          <div className="field">
+            <label htmlFor="f-fh">Fecha y hora</label>
+            <input id="f-fh" type="datetime-local" name="fecha_hora" required />
+          </div>
+          <div className="field">
+            <label htmlFor="f-pt">Nombre del punto crítico</label>
+            <input id="f-pt" type="text" name="punto" required placeholder="Ej: Edificio de Colores" />
+          </div>
+          <div className="field">
+            <label htmlFor="f-dir">Dirección</label>
+            <input id="f-dir" type="text" name="direccion" placeholder="Ej: Calle 5D #38A-35" />
+          </div>
+          <div className="field">
+            <label htmlFor="f-per">Persona de referencia</label>
+            <input id="f-per" type="text" name="persona" placeholder="Nombre y contacto (opcional)" />
+          </div>
+          <button className="btn-enviar" type="submit">Enviar actualización</button>
+        </div>
+      </form>
 
       <footer>
         <strong>Cómo actualizar:</strong> abre <strong>index.html</strong>, edita el bloque <strong>PUNTOS</strong> al inicio del código y vuelve a arrastrar el archivo a Netlify.<br/>
