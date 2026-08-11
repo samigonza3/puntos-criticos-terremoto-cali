@@ -585,8 +585,8 @@ function App(){
         <thead>
           <tr>
             <th style={{width:"30%"}}>Punto</th>
-            <th>Necesidad / donación</th>
-            <th style={{width:"14%"}}>Estado</th>
+            <th style={{width:"25%"}}>Dirección</th>
+            <th>Necesidades</th>
           </tr>
         </thead>
         <tbody>
@@ -595,26 +595,26 @@ function App(){
           ) : filtrados.map((p,i) => (
             <tr key={i} className={p.prioridad ? "prio" : ""}>
               <td data-label="Punto">
-                <span className="lugar">{p.lugar}</span>
-                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
-                  ? <div className="p-dir">{p.direccion}</div> : null}
-                {p.coordinador
-                  ? <div className="p-coord">{p.coordinador}{p.contacto ? " · " + p.contacto : ""}</div>
-                  : (p.contacto ? <div className="p-coord">{p.contacto}</div> : null)}
+                <span className="lugar">
+                  {p.lugar}
+                  {p.estado === "urgente" ? <span className="badge">Urgente</span> : null}
+                  {p.cubierto ? <span className="badge ok">Cubierto</span> : null}
+                </span>
+                {(p.coordinador || p.contacto)
+                  ? <div className="p-coord">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</div>
+                  : null}
                 {p.hora ? <div className="p-hora">Actualizado: {p.hora}</div> : null}
               </td>
-              <td data-label="Necesidad / donación">
+              <td data-label="Dirección">
+                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
+                  ? <span className="dir">{p.direccion}</span>
+                  : <span className="dir vacio">—</span>}
+              </td>
+              <td data-label="Necesidades">
                 {p.nota ? <div className="cel-nota">{p.nota}</div> : null}
                 {p.necesidades.length
                   ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : (!p.nota ? <span className="sinnead">Sin necesidad reportada</span> : null)}
-              </td>
-              <td data-label="Estado">
-                {p.estado === "urgente"
-                  ? <span className="badge">Urgente</span>
-                  : p.cubierto
-                    ? <span className="badge ok">Cubierto</span>
-                    : <span className="badge activo">Activo</span>}
+                  : (!p.nota ? <span className="sinnead">Ver insumos generales</span> : null)}
               </td>
             </tr>
           ))}
