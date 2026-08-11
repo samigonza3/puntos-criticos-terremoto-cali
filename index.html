@@ -98,6 +98,42 @@
   }
   .alert-card p{font-size:16px;font-weight:700;line-height:1.35;color:var(--white)}
 
+  /* Últimas actualizaciones */
+  .updates{
+    margin-top:20px;
+    background:var(--space-800);
+    border:1px solid rgba(127,168,255,.14);
+    border-radius:18px;padding:22px 24px;
+  }
+  .updates h2{
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--star-light);margin-bottom:16px;display:flex;align-items:center;gap:9px;
+  }
+  .updates h2 .live{
+    width:8px;height:8px;border-radius:999px;background:var(--ok);
+    box-shadow:0 0 0 0 rgba(62,224,142,.6);animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(62,224,142,.5)}
+    70%{box-shadow:0 0 0 8px rgba(62,224,142,0)}
+    100%{box-shadow:0 0 0 0 rgba(62,224,142,0)}
+  }
+  .up-item{
+    display:flex;gap:14px;padding:12px 0;
+    border-bottom:1px solid rgba(127,168,255,.08);
+  }
+  .up-item:last-child{border-bottom:none;padding-bottom:0}
+  .up-item:first-child{padding-top:0}
+  .up-dot{
+    flex:none;width:9px;height:9px;border-radius:999px;background:var(--star-blue);margin-top:6px;
+  }
+  .up-body{flex:1}
+  .up-time{
+    font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:3px;
+  }
+  .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
+
   /* Controles */
   .controls{
     display:flex;flex-wrap:wrap;gap:12px;align-items:center;
@@ -164,6 +200,11 @@
     font-size:13px;font-weight:600;color:var(--star-light);
   }
   .nota-info::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--star-blue);flex:none}
+  .nota-alert{
+    display:inline-flex;align-items:flex-start;gap:7px;
+    font-size:13px;font-weight:700;color:var(--alert);line-height:1.4;
+  }
+  .nota-alert::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--alert);flex:none;margin-top:5px}
   .dir{color:var(--ice);font-weight:500}
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
@@ -218,6 +259,16 @@
 
 const ACTUALIZADO = "11 de agosto de 2026";
 
+/* ULTIMAS ACTUALIZACIONES
+   Agrega arriba la más reciente. Formato de fecha libre. */
+const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Calle 9 con 44: se necesitan neveras, hielos y costales." },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Edificio de Colores: comida práctica que no requiera cubiertos y porras urgentes." },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Notaría 20 (Poblado): se hará una olla vegana." },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Refugio: olla comunitaria en marcha, por favor traer insumos de olla." },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Capri: cubierto, ya hay suficiente donación y manos." },
+];
+
 const NECESIDADES_GENERALES = [
   "Alimentos para la olla","Café","Agua","Suero","Cuerdas",
   "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas"
@@ -227,12 +278,11 @@ const ALERTA = "No descuidemos los hospitales y clínicas";
 
 const PUNTOS = [
   { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
-  { lugar:"Poblado",            direccion:"",                     prioridad:false, nota:"Se hará una olla vegana", necesidades:[] },
 
   { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
   { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  necesidades:[] },
-  { lugar:"Notaría 20",         direccion:"Carrera 28D # 72W-14", prioridad:true,  necesidades:[] },
-  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  necesidades:[] },
+  { lugar:"Notaría 20 (Poblado)",direccion:"Carrera 28D # 72W-14",prioridad:true,  nota:"Se hará una olla vegana", necesidades:[] },
+  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Importante: comida práctica que no requiera cubiertos · porras urgentes", necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Carrera 56 con 3A",    prioridad:true,  necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
   { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:false, cubierto:true, nota:"Ya hay suficiente donación y suficientes manos", necesidades:[] },
@@ -245,6 +295,7 @@ const PUNTOS = [
   { lugar:"Carrera 41 con 7",   direccion:"Carrera 41 con 7",    prioridad:false, necesidades:[] },
   { lugar:"Motel Molino Rojo",  direccion:"",                    prioridad:false, necesidades:[] },
   { lugar:"Calle 9 con 24",     direccion:"Calle 9 con 24",      prioridad:false, necesidades:[] },
+  { lugar:"Calle 9 con 44",     direccion:"Calle 9 con 44",      prioridad:false, necesidades:["Neveras","Hielos","Costales"] },
   { lugar:"Edificio Marisol",   direccion:"",                    prioridad:false, necesidades:[] },
   { lugar:"Carrera 9 con 53",   direccion:"Carrera 9 con 53",    prioridad:false, necesidades:[] },
   { lugar:"Calle 5 con 44",     direccion:"Calle 5 con 44",      prioridad:false, necesidades:[] },
@@ -305,6 +356,21 @@ function App(){
         </div>
       </header>
 
+      {ACTUALIZACIONES.length ? (
+        <div className="updates">
+          <h2><span className="live"></span>Últimas actualizaciones</h2>
+          {ACTUALIZACIONES.map((u,i) => (
+            <div className="up-item" key={i}>
+              <span className="up-dot"></span>
+              <div className="up-body">
+                <div className="up-time">{u.fecha}</div>
+                <div className="up-text">{u.texto}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
       <div className="controls">
         <label className="search">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7FA8FF" strokeWidth="2">
@@ -355,7 +421,7 @@ function App(){
               </td>
               <td data-label="Necesidades">
                 {p.nota
-                  ? <span className={p.cubierto ? "nota-ok" : "nota-info"}>{p.nota}</span>
+                  ? <span className={p.cubierto ? "nota-ok" : p.importante ? "nota-alert" : "nota-info"}>{p.nota}</span>
                   : p.necesidades.length
                     ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
                     : <span className="sinnead">Ver insumos generales</span>}
