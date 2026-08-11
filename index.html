@@ -420,8 +420,8 @@
    1. ACTUALIZADO      -> fecha que se muestra en el encabezado.
    2. NECESIDADES_GENERALES -> insumos base que se necesitan en los puntos.
    3. ALERTA           -> mensaje rojo destacado (deja "" para ocultarlo).
-   4. SOBREABASTECIDOS -> sectores con suficiente ayuda general (banner amarillo).
-        NOTA_SOBREABASTECIDOS -> texto explicativo de ese banner.
+   4. NO_DESPLAZARSE -> puntos cerrados o llenos (banner amarillo). Cada uno: {sector, nota}.
+        NOTA_NO_DESPLAZARSE -> texto explicativo de ese banner.
    5. PUNTOS           -> agrega, edita o borra objetos.
         lugar        : nombre o direccion del punto
         direccion    : direccion exacta (deja "" si no aplica)
@@ -647,19 +647,21 @@ function App(){
         </div>
       </header>
 
-      {SOBREABASTECIDOS.length ? (
+      {NO_DESPLAZARSE.length ? (
         <div className="overstock">
           <div className="tag">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB020" strokeWidth="2.2">
               <path d="M12 9v4M12 17h.01"></path>
               <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
             </svg>
-            Sectores sobreabastecidos, evita llevar más ayuda general
+            Puntos cerrados o llenos, no te desplaces sin confirmar
           </div>
           <div className="needs">
-            {SOBREABASTECIDOS.map((s,i) => <span className="need" key={i}>{s}</span>)}
+            {NO_DESPLAZARSE.map((s,i) => (
+              <span className="need" key={i}>{s.sector}{s.nota ? ": " + s.nota : ""}</span>
+            ))}
           </div>
-          <p className="desc">{NOTA_SOBREABASTECIDOS}</p>
+          <p className="desc">{NOTA_NO_DESPLAZARSE}</p>
         </div>
       ) : null}
 
