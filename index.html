@@ -273,6 +273,9 @@ const ACTUALIZADO = "11 de agosto de 2026";
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Calle 9 con 44: NO acudir más, ya hay suficientes manos." },
+  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Olla vegana (Notaría 20): se necesitan platos, cubiertos, colaboradores y transporte para movilizar los alimentos desde la Casa de Luz en San Antonio hasta Notaría 20 y Edificio de Colores." },
+  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Edificio de Colores: aquí también se hará olla vegana." },
   { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Calle 9 con 44: se necesitan neveras, hielos y costales." },
   { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Edificio de Colores: comida práctica que no requiera cubiertos y porras urgentes." },
   { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Notaría 20 (Poblado): se hará una olla vegana." },
@@ -292,8 +295,8 @@ const PUNTOS = [
 
   { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:[] },
   { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  necesidades:[] },
-  { lugar:"Notaría 20 (Poblado)",direccion:"Carrera 28D # 72W-14",prioridad:true,  nota:"Se hará una olla vegana", necesidades:[] },
-  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Importante: comida práctica que no requiera cubiertos · porras urgentes", necesidades:[] },
+  { lugar:"Notaría 20 (Poblado)",direccion:"Carrera 28D # 72W-14",prioridad:true,  nota:"Olla vegana · Se necesita transporte para movilizar los alimentos preparados desde la Casa de Luz (San Antonio) hasta Notaría 20 y Edificio de Colores", necesidades:["Platos","Cubiertos","Colaboradores"] },
+  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Importante: comida práctica que no requiera cubiertos · porras urgentes · aquí también se hará olla vegana", necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Carrera 56 con 3A",    prioridad:true,  necesidades:[] },
   { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
   { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:false, cubierto:true, nota:"Ya hay suficiente donación y suficientes manos", necesidades:[] },
@@ -306,7 +309,8 @@ const PUNTOS = [
   { lugar:"Carrera 41 con 7",   direccion:"Carrera 41 con 7",    prioridad:false, necesidades:[] },
   { lugar:"Motel Molino Rojo",  direccion:"",                    prioridad:false, necesidades:[] },
   { lugar:"Calle 9 con 24",     direccion:"Calle 9 con 24",      prioridad:false, necesidades:[] },
-  { lugar:"Calle 9 con 44",     direccion:"Calle 9 con 44",      prioridad:false, necesidades:["Neveras","Hielos","Costales"] },
+  { lugar:"Calle 9 con 44",     direccion:"Calle 9 con 44",      prioridad:false, cubierto:true, nota:"No acudir más, ya hay suficientes manos", necesidades:[] },
+  { lugar:"Unidad Pío XII",     direccion:"Calle 4b con Cra 40",  prioridad:false, necesidades:[] },
   { lugar:"Edificio Marisol",   direccion:"",                    prioridad:false, necesidades:[] },
   { lugar:"Carrera 9 con 53",   direccion:"Carrera 9 con 53",    prioridad:false, necesidades:[] },
   { lugar:"Calle 5 con 44",     direccion:"Calle 5 con 44",      prioridad:false, necesidades:[] },
@@ -343,7 +347,7 @@ function App(){
         <h1>Puntos de <span>edificios afectados</span></h1>
         <p className="sub">
           Directorio de los puntos reportados y los insumos que se necesitan en cada uno.
-          Comparte esta página con quien quiera aportar. Se actualiza en un solo archivo.
+          Comparte esta página con quien quiera aportar.
         </p>
         <div className="meta">
           <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
