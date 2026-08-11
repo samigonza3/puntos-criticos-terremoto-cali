@@ -145,6 +145,35 @@
   }
   .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
 
+  /* Ayuda disponible */
+  .ayudas{
+    margin-top:20px;
+    background:var(--space-800);
+    border:1px solid rgba(62,224,142,.3);
+    border-radius:20px;padding:24px 26px;
+  }
+  .ayudas h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ok);margin-bottom:6px;
+  }
+  .ayudas .ay-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
+  .ay-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ay-item{
+    background:var(--space-900);border:1px solid rgba(62,224,142,.2);
+    border-radius:14px;padding:14px 16px;
+  }
+  .ay-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ay-rec{font-size:14.5px;font-weight:700;color:var(--white)}
+  .ay-dest{
+    font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ok);background:rgba(62,224,142,.12);padding:3px 9px;border-radius:999px;flex:none;
+  }
+  .ay-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:7px}
+  .ay-obs{color:var(--muted);font-size:12.5px;margin-top:4px;line-height:1.45}
+  @media (max-width:680px){
+    .ay-list{grid-template-columns:1fr}
+  }
+
   /* Botón que lleva al formulario */
   .cta-reportar{
     display:flex;align-items:center;justify-content:center;gap:11px;
@@ -306,6 +335,11 @@
   .nota-alert::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--alert);flex:none;margin-top:5px}
   .dir{color:var(--ice);font-weight:500}
   .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
+  .p-dir{color:var(--ice);font-size:13px;font-weight:500;margin-top:3px}
+  .p-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:5px}
+  .p-hora{color:var(--muted);font-size:11.5px;font-weight:500;margin-top:5px}
+  .cel-nota{color:var(--ice);font-size:13.5px;font-weight:500;line-height:1.45;margin-bottom:8px}
+  .badge.activo{background:rgba(127,168,255,.16);color:var(--star-light)}
   .cel-need{display:flex;flex-wrap:wrap;gap:6px}
   .cel-need .need{font-size:12px;padding:5px 10px}
   .sinnead{color:var(--muted);font-size:13px}
@@ -366,7 +400,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026";
+const ACTUALIZADO = "11 de agosto de 2026, 12:51 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -407,43 +441,38 @@ const CLINICAS = [
   "Hospital Carlos Holmes Trujillo",
 ];
 
+const HORA_ACT = "12:51 p. m.";
+
 const PUNTOS = [
-  { lugar:"Edificio colapsado — Santa Isabel", direccion:"Calle 5B con Carrera 39 (cerca de Telepacífico y Clínica Imbanaco)", prioridad:true, importante:true, nota:"Acaba de colapsar un edificio. Se necesitan personas con urgencia", necesidades:["Personas / manos"] },
-  { lugar:"Centro de Refugio Animal", direccion:"",               prioridad:true,  importante:true, nota:"Se necesita personal veterinario con urgencia", necesidades:["Personal veterinario"] },
-  { lugar:"Refugio",            direccion:"",                     prioridad:true,  nota:"Olla comunitaria — por favor traer insumos de olla", necesidades:[] },
+  { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
+  { lugar:"Torres de Limonar", direccion:"", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
+  { lugar:"Notaría 20 — Poblado", direccion:"Carrera 28D # 72W-14", coordinador:"Daniela Ibarra", contacto:"300 8130734", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Agua","Baldes","Picas","Palas","Gente para relevos","Comida"] },
+  { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
+  { lugar:"Olla comunitaria El Poblado", direccion:"", coordinador:"Pilar Rodríguez / Asociación Eco de Mujeres", contacto:"301 7124668", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Proteína (carne, pollo, res)","Desechables para 50 personas"] },
+  { lugar:"Edificio Elvira", direccion:"Carrera 4 # 58-18", coordinador:"Camila Sánchez", contacto:"314 8875589", hora:HORA_ACT, prioridad:true, nota:"Voluntarios en el lugar: Juan Manuel Almario, Kevin Zárate · Más voluntarios llegan a las 2:00 p. m.", necesidades:[] },
+  { lugar:"Edificio Cantabria", direccion:"", coordinador:"Estefanía Galarza", contacto:"300 3119223", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"No hay nada en el momento; se necesita personal con urgencia", necesidades:["Personal","Cascos","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Guantes","Alimentación"] },
+  { lugar:"Edificio Parques de la Fontana", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Linternas","Cascos","Guantes","Palas","Picos","Alimentos preparados","Cajas"] },
+  { lugar:"Damnificados Chiminangos", direccion:"Cerca al Conjunto Kumanday", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Alimentación"] },
+  { lugar:"Cra. 56 #3-88", direccion:"Carrera 56 #3-88", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"Se necesita personal para rescatar personas", necesidades:["Personal / voluntarios"] },
 
-  { lugar:"Edificio Vanessa",   direccion:"Cra. 44 #9-35",        prioridad:true,  necesidades:["Manos para ayudar"] },
-  { lugar:"Edificio Elvira",    direccion:"Carrera 4 # 58-18",    prioridad:true,  importante:true, nota:"Aún hay personas atrapadas. Se necesitan muchas manos y herramientas", necesidades:["Herramientas","Pulidoras","Picas","Cinceles","Manos para ayudar"] },
-  { lugar:"Notaría 20 (Poblado)",direccion:"Carrera 28D # 72W-14",prioridad:true,  nota:"Olla vegana · Se necesita transporte para movilizar los alimentos preparados desde la Casa de Luz (San Antonio) hasta Notaría 20 y Edificio de Colores", necesidades:["Platos","Cubiertos","Colaboradores"] },
-  { lugar:"Edificio de Colores",direccion:"Calle 5D #38A-35",     prioridad:true,  importante:true, nota:"Se necesitan herramientas para el rescate, priorizando equipos de bajo impacto sobre la estructura", necesidades:["Porras","Martillo neumático","Herramientas de rescate"] },
-  { lugar:"Plaza de toros",     direccion:"Carrera 56 con Calle Tercera A", prioridad:true, necesidades:["Manos para ayudar"] },
-  { lugar:"Plaza de toros",     direccion:"Calle 5 #56-16",       prioridad:true,  necesidades:[] },
-  { lugar:"Capri",              direccion:"Calle 10bis # 70-34",  prioridad:false, cubierto:true, nota:"Ya hay suficiente donación y suficientes manos", necesidades:[] },
+  { lugar:"Edif. Vanessa", direccion:"Cra. 44 #9-35", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos","Guantes","Hielo","Carros de mercado","Zorras","Bisturís","Tijeras","Agujas para canalizar","Comida para animales","Medicamentos para animales"] },
+  { lugar:"Unidad Residencial Ariguani", direccion:"", coordinador:"Fabián Libreros", contacto:"311 2715635", hora:HORA_ACT, prioridad:false, necesidades:[] },
+  { lugar:"Edificio Pilar", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos"] },
+  { lugar:"Colegio Adventista", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos","Hielo"] },
+  { lugar:"HUV", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Pañitos húmedos","Implementos para bebés"] },
+  { lugar:"Edificio Archinie", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Alimentación"] },
+  { lugar:"Cuarto de Legua", direccion:"Calle 4 #57-58", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Guantes de carnaza","Baldes","Tarros grandes para basura"] },
+  { lugar:"Autopista con 73", direccion:"", coordinador:"", contacto:"318 5026611", hora:HORA_ACT, prioridad:false, necesidades:["Megáfonos"] },
+];
 
-  { lugar:"Carrera 58 # 3-138", direccion:"Carrera 58 # 3-138",  prioridad:false, necesidades:["Manos para ayudar"] },
-  { lugar:"Sector la luna",     direccion:"Calle 13 con Autopista", prioridad:false, necesidades:[] },
-  { lugar:"Calle 42 con 38",    direccion:"Calle 42 con 38",     prioridad:false, necesidades:[] },
-  { lugar:"Calle 44",           direccion:"Calle 44",            prioridad:false, necesidades:[] },
-  { lugar:"Carrera 44 con 9",   direccion:"Carrera 44 con 9",    prioridad:false, necesidades:[] },
-  { lugar:"Calle 3 D con 67",   direccion:"Calle 3 D con 67",    prioridad:false, necesidades:[] },
-  { lugar:"Calle 10 con 71",    direccion:"Calle 10 con 71",     prioridad:false, necesidades:[] },
-  { lugar:"Carrera 41 con 7",   direccion:"Carrera 41 con 7",    prioridad:false, necesidades:[] },
-  { lugar:"Motel Molino Rojo",  direccion:"",                    prioridad:false, necesidades:[] },
-  { lugar:"Calle 9 con 24",     direccion:"Calle 9 con 24",      prioridad:false, necesidades:[] },
-  { lugar:"Calle 9 con 44",     direccion:"Calle 9 con 44",      prioridad:false, cubierto:true, nota:"No acudir más, ya hay suficientes manos", necesidades:[] },
-  { lugar:"Carrera 46 con Calle 8B", direccion:"Carrera 46 con Calle 8B", prioridad:false, cubierto:true, nota:"Ya tienen todo lo necesario", necesidades:[] },
-  { lugar:"Carrera 56 # 3-88",  direccion:"Carrera 56 # 3-88",    prioridad:true,  importante:true, nota:"Se necesita ayuda urgente para rescatar a personas bajo los escombros", necesidades:["Cascos","Guantes","Agua","Plantas eléctricas"] },
-  { lugar:"Cuarto de Legua",    direccion:"",                     prioridad:true,  nota:"Se requieren cascos con urgencia. Si tienes este recurso, dirígelo a este sector", necesidades:["Cascos"] },
-  { lugar:"Unidad Pío XII",     direccion:"Calle 4b con Cra 40",  prioridad:false, necesidades:[] },
-  { lugar:"Edificio Marisol",   direccion:"",                    prioridad:false, necesidades:[] },
-  { lugar:"Carrera 9 con 53",   direccion:"Carrera 9 con 53",    prioridad:false, necesidades:[] },
-  { lugar:"Calle 5 con 44",     direccion:"Calle 5 con 44",      prioridad:false, necesidades:[] },
-  { lugar:"Calle 5 con 57",     direccion:"Calle 5 con 57",      prioridad:false, necesidades:[] },
-  { lugar:"Calle 4 # 66B-52",   direccion:"Calle 4 # 66B-52",    prioridad:false, necesidades:["Manos para ayudar"] },
-  { lugar:"Calle 72 #10B-21",   direccion:"Calle 72 #10B-21",    prioridad:false, necesidades:["Manos para ayudar"] },
-  { lugar:"OXXO — Calle 44 con Novena", direccion:"Calle 44 con Novena (Cra 9)", prioridad:false, necesidades:["Manos para ayudar"] },
-  { lugar:"Corporación Educativa Adventista", direccion:"Cra. 44 #9-25", prioridad:false, necesidades:["Manos para ayudar"] },
-  { lugar:"Carrera 39A #5D-09", direccion:"Carrera 39A #5D-09",   prioridad:false, necesidades:["Manos para ayudar"] }
+/* AYUDA DISPONIBLE — PENDIENTE POR ASIGNAR */
+const AYUDAS = [
+  { recurso:"5 mujeres de Olla Comunitaria", destino:"Poblado", coordinador:"Daniela Orjuela", contacto:"", obs:"Tiene transporte, falta implementos" },
+  { recurso:"Dos equipos de sonido y personal", destino:"Poblado", coordinador:"Daniel Centenario", contacto:"305 3158708", obs:"Se dirigió a Brigadistas de Sonido" },
+  { recurso:"Planta de 6000 y EcoFlows", destino:"Casa Moisés Wells", coordinador:"Nathalia Varela", contacto:"314 7778914", obs:"Tienda de Modas Samara Wells — Calle 2 #10-16, Barrio San Antonio, Cali" },
+  { recurso:"Maquinaria pesada", destino:"Sin destino aún", coordinador:"Sarah Marín", contacto:"302 8525671", obs:"" },
+  { recurso:"Hielo (Kolbitos)", destino:"Sin destino aún", coordinador:"@hielokolbitos (Instagram)", contacto:"317 5154927", obs:"Transporte y hielo a disposición" },
+  { recurso:"Guantes · 500 almuerzos", destino:"Por asignar", coordinador:"María Paula", contacto:"314 7874022", obs:"Contacto de Edif. Cantabria enviado" },
 ];
 
 /* ============================================================
@@ -461,7 +490,7 @@ function App(){
     return PUNTOS.filter(p => {
       if (soloPrio && !p.prioridad) return false;
       if (!t) return true;
-      const blob = (p.lugar + " " + p.direccion + " " + p.necesidades.join(" ")).toLowerCase();
+      const blob = (p.lugar + " " + (p.direccion||"") + " " + (p.coordinador||"") + " " + (p.nota||"") + " " + p.necesidades.join(" ")).toLowerCase();
       return blob.includes(t);
     });
   }, [q, soloPrio]);
@@ -555,9 +584,9 @@ function App(){
       <table className="tabla">
         <thead>
           <tr>
-            <th style={{width:"28%"}}>Punto</th>
-            <th style={{width:"27%"}}>Dirección</th>
-            <th>Necesidades</th>
+            <th style={{width:"30%"}}>Punto</th>
+            <th>Necesidad / donación</th>
+            <th style={{width:"14%"}}>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -566,28 +595,51 @@ function App(){
           ) : filtrados.map((p,i) => (
             <tr key={i} className={p.prioridad ? "prio" : ""}>
               <td data-label="Punto">
-                <span className="lugar">
-                  {p.lugar}
-                  {p.prioridad ? <span className="badge">Urgente</span> : null}
-                  {p.cubierto ? <span className="badge ok">Cubierto</span> : null}
-                </span>
-              </td>
-              <td data-label="Dirección">
+                <span className="lugar">{p.lugar}</span>
                 {(p.direccion && p.direccion.trim() !== p.lugar.trim())
-                  ? <span className="dir">{p.direccion}</span>
-                  : <span className="dir vacio">—</span>}
+                  ? <div className="p-dir">{p.direccion}</div> : null}
+                {p.coordinador
+                  ? <div className="p-coord">{p.coordinador}{p.contacto ? " · " + p.contacto : ""}</div>
+                  : (p.contacto ? <div className="p-coord">{p.contacto}</div> : null)}
+                {p.hora ? <div className="p-hora">Actualizado: {p.hora}</div> : null}
               </td>
-              <td data-label="Necesidades">
-                {p.nota
-                  ? <span className={p.cubierto ? "nota-ok" : p.importante ? "nota-alert" : "nota-info"}>{p.nota}</span>
-                  : p.necesidades.length
-                    ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                    : <span className="sinnead">Ver insumos generales</span>}
+              <td data-label="Necesidad / donación">
+                {p.nota ? <div className="cel-nota">{p.nota}</div> : null}
+                {p.necesidades.length
+                  ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
+                  : (!p.nota ? <span className="sinnead">Sin necesidad reportada</span> : null)}
+              </td>
+              <td data-label="Estado">
+                {p.estado === "urgente"
+                  ? <span className="badge">Urgente</span>
+                  : p.cubierto
+                    ? <span className="badge ok">Cubierto</span>
+                    : <span className="badge activo">Activo</span>}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {AYUDAS.length ? (
+        <div className="ayudas">
+          <h2>Ayuda disponible — pendiente por asignar</h2>
+          <p className="ay-sub">Recursos ofrecidos que aún buscan destino o coordinación. Notifica en el grupo si tu punto los necesita.</p>
+          <div className="ay-list">
+            {AYUDAS.map((a,i) => (
+              <div className="ay-item" key={i}>
+                <div className="ay-top">
+                  <span className="ay-rec">{a.recurso}</span>
+                  <span className="ay-dest">{a.destino}</span>
+                </div>
+                {(a.coordinador || a.contacto)
+                  ? <div className="ay-coord">{a.coordinador}{a.contacto ? " · " + a.contacto : ""}</div> : null}
+                {a.obs ? <div className="ay-obs">{a.obs}</div> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <form
         id="reportar"
