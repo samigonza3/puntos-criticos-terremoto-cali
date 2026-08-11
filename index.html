@@ -430,11 +430,20 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 1:30 p. m.";
+const ACTUALIZADO = "11 de agosto de 2026, 2:19 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"La Cruz Roja también está colapsada. Confirma antes de desplazarte si siguen recibiendo personas, donaciones o insumos." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Pampalinda y Cuarto de Legua: ya NO están dejando entrar." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres de Capri: están sacando gente porque hay demasiada. No te desplaces hasta confirmar que aún necesitan apoyo." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian muy rápido: confirma antes de movilizarte." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"El Poblado: ya hay suficiente comida y la olla funciona. Por ahora no se necesitan alimentos; sí personas para levantar escombros y motorizados para llevar insumos a otros puntos." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"44 con Novena: hay mucha comida. Se necesitan herramientas, guantes, cascos, hielo, neveras de icopor, bolsas, costales y tarros de pintura para escombros." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres del Limonar: se necesita ayuda. Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"56 con 3: se necesita ayuda urgente, especialmente comida y agua." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"HUV: ya no reciben donaciones de sangre ni insumos, están full." },
   { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Cra. 56 #3-88 (Pampa Linda), Calle 5 con 44 (Panadería Quinta Pan), Cuarto de Legua (Cra. 58 #3-138 y Cra. 57 con 4ta) y Refugio – Unidad Ariguaní (Cra. 67 #3C-15)." },
   { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar." },
   { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Carrera 56 #3-88: ayuda urgente para rescatar personas bajo los escombros." },
@@ -457,20 +466,25 @@ const ACTUALIZACIONES = [
 ];
 
 const NECESIDADES_GENERALES = [
-  "Alimentos para la olla","Café","Agua","Suero","Cuerdas",
-  "Porras de mango largo","Porras de mango corto","Linternas","Baldes","Gafas",
-  "Hidratación fría","Sombra / carpas","Protección solar","Elementos contra el calor"
+  "Porras","Barras de demolición","Percutores","Discos de pulidora para varilla de acero",
+  "Picas","Palas","Cinceles","Seguetas","Compresor hidráulico","Guantes de construcción",
+  "Gafas de seguridad","Tapabocas","Costales o bolsas de basura","Agua",
+  "Pedialyte o electrolitos","Gotas para hidratar los ojos"
 ];
 
-const ALERTA = "En todos los puntos se necesitan elementos contra el calor: sombra, hidratación fría y protección solar.";
+const ALERTA = "Antes de desplazarte a cualquier punto, confirma si están dejando entrar y qué elementos de seguridad exigen. En algunos solo entran con casco. Las condiciones cambian muy rápido.";
 
-/* SECTORES REPORTADOS COMO SOBREABASTECIDOS
-   Por ahora no llevar más ayuda general ni personas sin experiencia.
-   OJO: un sector puede estar sobreabastecido de ayuda general mientras un punto
-   de colapso puntual dentro de él sigue necesitando personal especializado
-   (ver la tabla de puntos). Deja [] para ocultar este banner. */
-const SOBREABASTECIDOS = ["Caldas","Pampa Linda","Refugio","Limonar"];
-const NOTA_SOBREABASTECIDOS = "Estos sectores están sobreabastecidos de ayuda general y con muchos civiles que dificultan la labor de los profesionales. Evita llevar donaciones o personas sin experiencia. Los puntos de rescate específicos abajo pueden seguir necesitando personal especializado. Por favor no difundas información falsa sobre estos puntos.";
+/* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
+   Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
+   Las condiciones cambian rápido; deja [] para ocultar este banner. */
+const NO_DESPLAZARSE = [
+  { sector:"Pampalinda", nota:"Ya no están dejando entrar" },
+  { sector:"Cuarto de Legua", nota:"Ya no están dejando entrar" },
+  { sector:"Torres de Capri", nota:"Sacando gente por exceso de personas; no desplazarse sin confirmar" },
+  { sector:"Cruz Roja", nota:"Colapsada; confirmar si reciben personas, donaciones o insumos" },
+  { sector:"HUV", nota:"Full; no reciben donaciones de sangre ni insumos" },
+];
+const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
 const CLINICAS = [
@@ -486,7 +500,7 @@ const HORA_ACT = "12:51 p. m.";
 
 const PUNTOS = [
   { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
-  { lugar:"Torres de Limonar", direccion:"", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
+  { lugar:"Torres de Limonar", direccion:"Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
   { lugar:"Notaría 20 — Poblado", direccion:"Carrera 28D # 72W-14", coordinador:"Daniela Ibarra", contacto:"300 8130734", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Agua","Baldes","Picas","Palas","Gente para relevos","Comida"] },
   { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
   { lugar:"Olla comunitaria El Poblado", direccion:"", coordinador:"Pilar Rodríguez / Asociación Eco de Mujeres", contacto:"301 7124668", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Proteína (carne, pollo, res)","Desechables para 50 personas"] },
