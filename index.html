@@ -86,6 +86,24 @@
   .chip .dot{width:7px;height:7px;border-radius:999px;background:var(--star-blue)}
   .chip.urgente .dot{background:var(--alert)}
 
+  /* Última actualización en grande */
+  .lastupdate{
+    display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;
+    margin-bottom:20px;padding:26px 22px;border-radius:22px;
+    background:linear-gradient(180deg, rgba(62,123,255,.20), rgba(62,123,255,.05));
+    border:1px solid rgba(127,168,255,.4);
+    box-shadow:0 10px 34px rgba(62,123,255,.16);
+  }
+  .lastupdate .lu-label{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--star-light);
+  }
+  .lastupdate .lu-label .live{
+    width:9px;height:9px;border-radius:999px;background:var(--ok);
+    box-shadow:0 0 0 0 rgba(62,224,142,.6);animation:pulse 2s infinite;
+  }
+  .lastupdate .lu-time{font-size:clamp(26px,6vw,44px);font-weight:900;color:var(--white);line-height:1.02;letter-spacing:-.01em}
+
   /* Bloques informativos */
   .grid-info{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-top:20px}
   .card{
@@ -458,168 +476,161 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "11 de agosto de 2026, 6:00 p. m.";
+const ACTUALIZADO = "11 de agosto de 2026, 7:00 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
-  { fecha:"11 de agosto de 2026, 6:00 p. m.", texto:"Hola, tenemos comida preparada, dónde podemos llevarla?" },
-  { fecha:"11 de agosto de 2026, 6:00 p. m.", texto:"Desde la fundación Emilia’s Christiana’s y el barrio Santo Domingo, hemos realizado una cena para los rescatistas y voluntarios. Estoy buscando punto para llevarlo ahora a las 6pm" },
+  { fecha:"11 de agosto de 2026, 7:00 p. m.", texto:"Lista oficial del jefe de bomberos: oxicorte, 500 pitos, 50 arneses, 300 porras grandes, 100 pulidoras inalámbricas, 100 reflectores, 1000 tapabocas N95, 100 rotomartillos inalámbricos, 50 gatos hidráulicos, 50 cámaras sensores, 50 scanner para búsqueda en estructuras colapsadas (leader scan), equipos de búsqueda canina para personas vivas, 50 cámaras de búsqueda y 400 gafas." },
+  { fecha:"11 de agosto de 2026, 6:49 p. m.", texto:"URGENTE grúa pluma en Edificio Ana Pilar (Carrera 56 #3-88). Se requiere con carácter urgente para continuar las labores de rescate. Estas horas son cruciales." },
+  { fecha:"11 de agosto de 2026, 6:45 p. m.", texto:"La 56 (Guadalupe) con 3ra, al lado del D1: se requieren puntales o andamios metálicos para sostener la estructura por dentro y seguir sacando escombros mientras se remueve." },
+  { fecha:"11 de agosto de 2026, 6:40 p. m.", texto:"Puntos que necesitan manos (lleguen con tapabocas, guantes, gafas y casco): Calle 72 #10 Bis-21, OXXO 44 con Novena, Corporación Educativa Adventista (Cra. 44 #9-25), Edificio Elvira (Cra. 4 #58-18), Edificio Vanesa (Cra. 44 #9-35), Carrera 56 con Calle 3A, Calle 4 #66b-52, Carrera 39A #5D-09 y Carrera 58 #3-138." },
+  { fecha:"11 de agosto de 2026, 6:00 p. m.", texto:"Desde la fundaciÃ³n Emiliaâs Christianaâs y el barrio Santo Domingo, hemos realizado una cena para los rescatistas y voluntarios. Estoy buscando punto para llevarlo ahora a las 6pm" },
   { fecha:"11 de agosto de 2026, 5:46 p. m.", texto:"Edificio CANTABRIA: Se necesitan voluntarios, maquinaria pesada, ayuda en general no se ha recibido casi nada de ayuda el dia de hoy" },
-  { fecha:"11 de agosto de 2026, 5:45 p. m.", texto:"notaría 20: Tienen suficiente equipos de rescate e insumos, no entra más gente" },
+  { fecha:"11 de agosto de 2026, 5:45 p. m.", texto:"notarÃ­a 20: Tienen suficiente equipos de rescate e insumos, no entra mÃ¡s gente" },
   { fecha:"11 de agosto de 2026, 5:42 p. m.", texto:"Jairo Varela: Pidieron evacuar a los voluntarios. Mucha gente" },
-  { fecha:"11 de agosto de 2026, 5:40 p. m.", texto:"Taller nasa: Cualquier donacion ya se de alimentos no perecederos. . Se quedaron sin nada... No pueden trabajar.... Por que se cayó el taller y la casa... Así que cualquier aporte es bienvenido" },
-  { fecha:"11 de agosto de 2026, 5:36 p. m.", texto:"En el sur de Cali, dónde se requieren apoyo en esta noche? Favor dejar datos de contacto para verificar la información." },
-  { fecha:"11 de agosto de 2026, 5:35 p. m.", texto:"n Meléndez ya no necesitan más comida preparada. Gracias a Dios y a todas las personas que han aportado, en este momento hay bastante comida. 🙏❤️, , Ahora mismo, lo que más se necesita es:, , Colchonetas, gafas de protección, cascos, aceite, cepillos de dientes, cremas dentales, granos, sábanas, almohadas y pañales etapa 5., , Si pueden aportar alguno de estos elementos, pueden llevarlos a la caseta comunal de Meléndez., , Gracias a todos los que han respondido al llamado. Dios les multiplique cada ayuda. ❤️, , Carrera 92 # 2A-65 📍" },
-  { fecha:"11 de agosto de 2026, 5:34 p. m.", texto:"Se tienen donaciones de alimentos dónde están recibiendo?" },
+  { fecha:"11 de agosto de 2026, 5:36 p. m.", texto:"En el sur de Cali, dÃ³nde se requieren apoyo en esta noche? Favor dejar datos de contacto para verificar la informaciÃ³n." },
+  { fecha:"11 de agosto de 2026, 5:35 p. m.", texto:"n MelÃ©ndez ya no necesitan mÃ¡s comida preparada. Gracias a Dios y a todas las personas que han aportado, en este momento hay bastante comida. ðâ¤ï¸, , Ahora mismo, lo que mÃ¡s se necesita es:, , Colchonetas, gafas de protecciÃ³n, cascos, aceite, cepillos de dientes, cremas dentales, granos, sÃ¡banas, almohadas y paÃ±ales etapa 5., , Si pueden aportar alguno de estos elementos, pueden llevarlos a la caseta comunal de MelÃ©ndez., , Gracias a todos los que han respondido al llamado. Dios les multiplique cada ayuda. â¤ï¸, , Carrera 92 # 2A-65 ð" },
   { fecha:"11 de agosto de 2026, 5:28 p. m.", texto:"Escuela normal superior Full abasto de suministros y comida, redirigir a otro punto la ayuda" },
-  { fecha:"11 de agosto de 2026, 5:27 p. m.", texto:"Chiminangos Necesita comida!!" },
-  { fecha:"11 de agosto de 2026, 5:26 p. m.", texto:"Bajo Meléndez: Se necesitan alimentos, agua, cascos, guantes, tapabocas, personas y herramientas para remover escombros, insumos médicos." },
-  { fecha:"11 de agosto de 2026, 5:24 p. m.", texto:"Ya no necesitan alimentos ni hidratación en la clínica nuestra señora" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Se requiere evacuación, favor informar a secretaría de salud donde se pueden trasladar a los pacientes, la clínica Colombia por dentro está súper afectada ,, Podría colapsar" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Reserva de Meléndez: Las personas de reservas de Meléndez necesitan albergues y dónde guardar sus cosas" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Viva al máximo: Tenemos disponibilidad de palas, gafas, guantes, linternas, tapabocas. Comida y refrigerios. Punto de acopio oeste. # de teléfono 3186592719, 3116166169" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Universidad Santiago de Cali: En la 66 con tercera por la universidad Santiago no se necesitan más alimentos, solo porras y linternas" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Edificio ana del pilar no están dejando pasar, calle 5ta a la altura de la plaza de toros cerrada por wl ejército" },
-  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Clínica valle de lili: Ya no se aceptan donaciones de sangre en valle de Lili" },
-  { fecha:"11 de agosto de 2026, 5:20 p. m.", texto:"Notaria 20: No se necesita más ayuda en este lugar" },
+  { fecha:"11 de agosto de 2026, 5:26 p. m.", texto:"Bajo MelÃ©ndez: Se necesitan alimentos, agua, cascos, guantes, tapabocas, personas y herramientas para remover escombros, insumos mÃ©dicos." },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Se requiere evacuaciÃ³n, favor informar a secretarÃ­a de salud donde se pueden trasladar a los pacientes, la clÃ­nica Colombia por dentro estÃ¡ sÃºper afectada ,, PodrÃ­a colapsar" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Reserva de MelÃ©ndez: Las personas de reservas de MelÃ©ndez necesitan albergues y dÃ³nde guardar sus cosas" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Viva al mÃ¡ximo: Tenemos disponibilidad de palas, gafas, guantes, linternas, tapabocas. Comida y refrigerios. Punto de acopio oeste. # de telÃ©fono 3186592719, 3116166169" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Universidad Santiago de Cali: En la 66 con tercera por la universidad Santiago no se necesitan mÃ¡s alimentos, solo porras y linternas" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"Edificio ana del pilar no estÃ¡n dejando pasar, calle 5ta a la altura de la plaza de toros cerrada por wl ejÃ©rcito" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", texto:"ClÃ­nica valle de lili: Ya no se aceptan donaciones de sangre en valle de Lili" },
+  { fecha:"11 de agosto de 2026, 5:20 p. m.", texto:"Notaria 20: No se necesita mÃ¡s ayuda en este lugar" },
   { fecha:"11 de agosto de 2026, 5:19 p. m.", texto:"Chiminangos: Hay mucho desorden" },
-  { fecha:"11 de agosto de 2026, 5:18 p. m.", texto:"Se tiene para donar catéter y medicamentos a donde se pueden llevar que los estén necesitando realmente" },
-  { fecha:"11 de agosto de 2026, 5:15 p. m.", texto:"Vendas elásticas x 8 rollos , Gasas estériles x 5 paquetes" },
+  { fecha:"11 de agosto de 2026, 5:18 p. m.", texto:"Se tiene para donar catÃ©ter y medicamentos a donde se pueden llevar que los estÃ©n necesitando realmente" },
+  { fecha:"11 de agosto de 2026, 5:15 p. m.", texto:"Vendas elÃ¡sticas x 8 rollos , Gasas estÃ©riles x 5 paquetes" },
   { fecha:"11 de agosto de 2026, 5:12 p. m.", texto:"Se necesita presencia de bomberos en 5ta con 42 (Panaderia quinta pan) presencia de persona con vida atrapada" },
-  { fecha:"11 de agosto de 2026, 5:07 p. m.", texto:"Tenemos picas, palas, gafas, gorros dónde lo podemos dejar" },
-  { fecha:"11 de agosto de 2026, 5:05 p. m.", texto:"Meléndez y ladera: Se necesitan pañales etapa 2 y 5, elementos de aseo, alimentos no perecederos, agua, cobijas y colchonetas en sector de Meléndez, alto Jordan y Santa Elena" },
-  { fecha:"11 de agosto de 2026, 5:04 p. m.", texto:"NO MÁS PERSONAL EN LA 56 CON 3RA NI EN LA 5TA CON 44!!" },
-  { fecha:"11 de agosto de 2026, 4:57 p. m.", texto:"@danielasan.a ofrece guantes, gafas, vendas, comida preparada, electrolitos, bocadillo etc. Requiere saber dónde llevar?" },
-  { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"Chiminangos torre 4 D.: Punto de Chiminangos no más comida preparada, la gente sigue llegando con agua y alimentos ." },
+  { fecha:"11 de agosto de 2026, 5:07 p. m.", texto:"Tenemos picas, palas, gafas, gorros dÃ³nde lo podemos dejar" },
+  { fecha:"11 de agosto de 2026, 5:05 p. m.", texto:"MelÃ©ndez y ladera: Se necesitan paÃ±ales etapa 2 y 5, elementos de aseo, alimentos no perecederos, agua, cobijas y colchonetas en sector de MelÃ©ndez, alto Jordan y Santa Elena" },
+  { fecha:"11 de agosto de 2026, 5:04 p. m.", texto:"NO MÃS PERSONAL EN LA 56 CON 3RA NI EN LA 5TA CON 44!!" },
+  { fecha:"11 de agosto de 2026, 4:57 p. m.", texto:"@danielasan.a ofrece guantes, gafas, vendas, comida preparada, electrolitos, bocadillo etc. Requiere saber dÃ³nde llevar?" },
   { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"Chiminangos: Se necesitan carpas, colchonetas y cobijas" },
-  { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"Dónde puedo llevar 68 sporades y unas botellas con agua?" },
-  { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"Panadería peter pan: Necesitamos ayuda para sacar escombros, insumos, herramientas, baldes" },
-  { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"Tengo comida preparada y no perecedera para donar, por favor información de a dónde la puedo llevar." },
-  { fecha:"11 de agosto de 2026, 4:55 p. m.", texto:"Altos de jordan melendez: Guantes linternas hidratación, personal para ayudar" },
-  { fecha:"11 de agosto de 2026, 4:50 p. m.", texto:"Chiminangos 2: Cobijas, pañales para bebe, papel higiénico, productos de aseo" },
-  { fecha:"11 de agosto de 2026, 4:49 p. m.", texto:"Centro de acopio - Acuaparque de la Caña: Se necesitan alimentos, productos de aseo y materiales en el Acuaparque de la Caña hasta las 8pm" },
-  { fecha:"11 de agosto de 2026, 4:48 p. m.", texto:"En chiminangos está demasiado abastecido, de todo y no hay heridos, solo gente que no quiere entrar a sus casas por temor de las mismas edificaciones." },
+  { fecha:"11 de agosto de 2026, 4:56 p. m.", texto:"PanaderÃ­a peter pan: Necesitamos ayuda para sacar escombros, insumos, herramientas, baldes" },
+  { fecha:"11 de agosto de 2026, 4:55 p. m.", texto:"Altos de jordan melendez: Guantes linternas hidrataciÃ³n, personal para ayudar" },
+  { fecha:"11 de agosto de 2026, 4:50 p. m.", texto:"Chiminangos 2: Cobijas, paÃ±ales para bebe, papel higiÃ©nico, productos de aseo" },
+  { fecha:"11 de agosto de 2026, 4:49 p. m.", texto:"Centro de acopio - Acuaparque de la CaÃ±a: Se necesitan alimentos, productos de aseo y materiales en el Acuaparque de la CaÃ±a hasta las 8pm" },
+  { fecha:"11 de agosto de 2026, 4:48 p. m.", texto:"En chiminangos estÃ¡ demasiado abastecido, de todo y no hay heridos, solo gente que no quiere entrar a sus casas por temor de las mismas edificaciones." },
   { fecha:"11 de agosto de 2026, 4:45 p. m.", texto:"Hospital Carlos Holmes Trujillo: Se necesita de todo no hay nada de insumos, se necesitan con urgencia" },
-  { fecha:"11 de agosto de 2026, 4:44 p. m.", texto:"Tengo almuerzos disponibles, comida preparada, agua y jugo para los rescatistas o víctimas que lo requieran." },
+  { fecha:"11 de agosto de 2026, 4:44 p. m.", texto:"Tengo almuerzos disponibles, comida preparada, agua y jugo para los rescatistas o vÃ­ctimas que lo requieran." },
   { fecha:"11 de agosto de 2026, 4:42 p. m.", texto:"Tengo gafas, guantes y agua para entregar necesito saber donde 311 6577005" },
-  { fecha:"11 de agosto de 2026, 4:39 p. m.", texto:"En algún punto necesitan comida?" },
-  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"Panadería quinta pan: Se necesitan hidratación, guantes de construcción, palas, herramientas para poder sacar escombros, extensiones de energía, tapabocas, taladros, discos de corte" },
-  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"Se requiere atención de emergencias familia macroproyecto Santa Helena comuna 18." },
-  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"Tenemos voluntarios dispuestos ayudar, indiquen a qué sondas pueden ir. Ya sea armar kits, estar pendiente de las víctimas o demás." },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"PanaderÃ­a quinta pan: Se necesitan hidrataciÃ³n, guantes de construcciÃ³n, palas, herramientas para poder sacar escombros, extensiones de energÃ­a, tapabocas, taladros, discos de corte" },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"Se requiere atenciÃ³n de emergencias familia macroproyecto Santa Helena comuna 18." },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", texto:"Tenemos voluntarios dispuestos ayudar, indiquen a quÃ© sondas pueden ir. Ya sea armar kits, estar pendiente de las vÃ­ctimas o demÃ¡s." },
   { fecha:"11 de agosto de 2026, 4:35 p. m.", texto:"Edificio de colores: Se necesita un megafono" },
   { fecha:"11 de agosto de 2026, 4:33 p. m.", texto:"Punto de acopio: Antigua Licorera del valle llegada factible a la escuela nacional del deporte." },
   { fecha:"11 de agosto de 2026, 4:31 p. m.", texto:"Tengo tapabocas jugos croasantts ropa porfavor a donde puedo llevarlos" },
-  { fecha:"11 de agosto de 2026, 4:31 p. m.", texto:"Cra 56 con Cl 13: No están dejando pasar, ni siquiera a pie, muchas personas." },
+  { fecha:"11 de agosto de 2026, 4:31 p. m.", texto:"Cra 56 con Cl 13: No estÃ¡n dejando pasar, ni siquiera a pie, muchas personas." },
   { fecha:"11 de agosto de 2026, 4:30 p. m.", texto:"Se necesita saber a donde necesitan comida y gatorade para voluntarios, por favor!" },
   { fecha:"11 de agosto de 2026, 4:28 p. m.", texto:"Tenemos insumos de comida y aseo donde se requieren?" },
   { fecha:"11 de agosto de 2026, 4:27 p. m.", texto:"Buenas tardes., Tengo guantes, tapabocas, linternas, extensiones, discos de corte y seguetas., Me pueden decir donde necesitan!!!!!" },
-  { fecha:"11 de agosto de 2026, 4:27 p. m.", texto:"Notaria 20: No se necesita más comida. Se necesitan implementos como Casco, tapabocas, herramientas para poder sacar escombros." },
-  { fecha:"11 de agosto de 2026, 4:26 p. m.", texto:"Edificio colores: Tengo bastantes discos de corte ¿A qué punto los llevo? 3158273443" },
-  { fecha:"11 de agosto de 2026, 4:24 p. m.", texto:"Tenemos 600 sandwiches para las 6 pm, donde los necesitan?" },
+  { fecha:"11 de agosto de 2026, 4:27 p. m.", texto:"Notaria 20: No se necesita mÃ¡s comida. Se necesitan implementos como Casco, tapabocas, herramientas para poder sacar escombros." },
+  { fecha:"11 de agosto de 2026, 4:26 p. m.", texto:"Edificio colores: Tengo bastantes discos de corte Â¿A quÃ© punto los llevo? 3158273443" },
   { fecha:"11 de agosto de 2026, 4:23 p. m.", texto:"Necesitamos andamios de suma urgencia! Es para una empresa que necesita construir unas paredes que se cayeron en unas casas., 3176935866" },
-  { fecha:"11 de agosto de 2026, 4:22 p. m.", texto:"Clínica Uribe Cali necesita donantes O-" },
+  { fecha:"11 de agosto de 2026, 4:22 p. m.", texto:"ClÃ­nica Uribe Cali necesita donantes O-" },
   { fecha:"11 de agosto de 2026, 4:20 p. m.", texto:"Edificio gurumuani: Se necesita alambre 2*2, cinta aislante, destornilladores, herramientas, tijeras industriales" },
-  { fecha:"11 de agosto de 2026, 4:19 p. m.", texto:"44 con 9: La gente no está devolviendo los cascos, guantes y demás elementos que se les entregan. Se van con ellos y, cuando llegan nuevas personas a ayudar, se quedan sin herramientas ni elementos de protección para poder realizar su labor." },
+  { fecha:"11 de agosto de 2026, 4:19 p. m.", texto:"44 con 9: La gente no estÃ¡ devolviendo los cascos, guantes y demÃ¡s elementos que se les entregan. Se van con ellos y, cuando llegan nuevas personas a ayudar, se quedan sin herramientas ni elementos de protecciÃ³n para poder realizar su labor." },
   { fecha:"11 de agosto de 2026, 4:15 p. m.", texto:"Calle 5: Volqueta para escombros" },
-  { fecha:"11 de agosto de 2026, 4:14 p. m.", texto:"Chiminangos necesita personal de apoyo, está solo con las mismas personas, necesitan relevo, personal médico, cobijas, colchonetas" },
-  { fecha:"11 de agosto de 2026, 4:14 p. m.", texto:"Tenemos: picas, palas, tapabocas, guantes de carnaza, sándwiches, electrolitos, linternas. Donde necesitan?" },
-  { fecha:"11 de agosto de 2026, 4:13 p. m.", texto:"Chiminangos: Cobijas, Almohadas, Colchonetas, Agua, Pañales, Toallas higiénicas, Hielo, Hielera, Alimentos para perros y gatos" },
-  { fecha:"11 de agosto de 2026, 4:12 p. m.", texto:"Cra 56 con 3ra: Se necesita únicamente Electrolit" },
-  { fecha:"11 de agosto de 2026, 4:11 p. m.", texto:"Torres de limonar: ¿Qué se necesita en Torres de Limona? Voy con un grupo de vecinos." },
-  { fecha:"11 de agosto de 2026, 4:11 p. m.", texto:"De que medida se necesita los discos de corte y en dónde? 3158273443" },
-  { fecha:"11 de agosto de 2026, 4:10 p. m.", texto:"Hacienda alférez real 1: Se necesita alimentos, ensures y aseo personal" },
-  { fecha:"11 de agosto de 2026, 4:09 p. m.", texto:"Tengo refrigerios preparados agua y jugos donde puedo ir a llevarla que la necesiten de verdad" },
-  { fecha:"11 de agosto de 2026, 4:08 p. m.", texto:"Edificio Vanesa: Equipo de protección: cascos, guantes, gafas, tapabocas" },
-  { fecha:"11 de agosto de 2026, 4:08 p. m.", texto:"CERCA A SAN ANTONIO: TENEMOS ELEMENTOS DE PROTECCIÓN: CASCOS, GUANTES, GAFAS. LINTERNAS Y BATERIAS. , , EL PUNTO QUE LOS NECESITE POR FAVOR COMUNICARSE CON 3002571324" },
-  { fecha:"11 de agosto de 2026, 4:07 p. m.", texto:"Tenemos comida preparada, pañales y pañitos, comida para preparar y algun recurso para comprar algo especifico y urgente. , Indicarnos cual es el punto ideal" },
-  { fecha:"11 de agosto de 2026, 4:07 p. m.", texto:"Edificio colores: Alguien sabe donde puedo ir a dejar más suministros" },
+  { fecha:"11 de agosto de 2026, 4:14 p. m.", texto:"Chiminangos necesita personal de apoyo, estÃ¡ solo con las mismas personas, necesitan relevo, personal mÃ©dico, cobijas, colchonetas" },
+  { fecha:"11 de agosto de 2026, 4:14 p. m.", texto:"Tenemos: picas, palas, tapabocas, guantes de carnaza, sÃ¡ndwiches, electrolitos, linternas. Donde necesitan?" },
+  { fecha:"11 de agosto de 2026, 4:13 p. m.", texto:"Chiminangos: Cobijas, Almohadas, Colchonetas, Agua, PaÃ±ales, Toallas higiÃ©nicas, Hielo, Hielera, Alimentos para perros y gatos" },
+  { fecha:"11 de agosto de 2026, 4:12 p. m.", texto:"Cra 56 con 3ra: Se necesita Ãºnicamente Electrolit" },
+  { fecha:"11 de agosto de 2026, 4:11 p. m.", texto:"Torres de limonar: Â¿QuÃ© se necesita en Torres de Limona? Voy con un grupo de vecinos." },
+  { fecha:"11 de agosto de 2026, 4:11 p. m.", texto:"De que medida se necesita los discos de corte y en dÃ³nde? 3158273443" },
+  { fecha:"11 de agosto de 2026, 4:10 p. m.", texto:"Hacienda alfÃ©rez real 1: Se necesita alimentos, ensures y aseo personal" },
+  { fecha:"11 de agosto de 2026, 4:08 p. m.", texto:"Edificio Vanesa: Equipo de protecciÃ³n: cascos, guantes, gafas, tapabocas" },
+  { fecha:"11 de agosto de 2026, 4:08 p. m.", texto:"CERCA A SAN ANTONIO: TENEMOS ELEMENTOS DE PROTECCIÃN: CASCOS, GUANTES, GAFAS. LINTERNAS Y BATERIAS. , , EL PUNTO QUE LOS NECESITE POR FAVOR COMUNICARSE CON 3002571324" },
+  { fecha:"11 de agosto de 2026, 4:07 p. m.", texto:"Edificio colores: Alguien sabe donde puedo ir a dejar mÃ¡s suministros" },
   { fecha:"11 de agosto de 2026, 4:02 p. m.", texto:"Notaria 20 de cali, totalmente destruida: Se necesitan personas para mover escombros. Agua, comida. Profesionales rescatistas." },
-  { fecha:"11 de agosto de 2026, 3:55 p. m.", texto:"NotarÃ­a 20: ya no hay criticidad. Suficiente agua y comida, no ir mÃ¡s gente. No estÃ¡n dejando entrar volquetas ni ambulancias por exceso de personas." },
-  { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Alguien ofrece guantes y gafas; necesita que le indiquen a quÃ© punto llevarlos." },
-  { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Necesito actualización. Tengo guantes, gafas y lo que requieran pero necesito información para llevar eso" },
-  { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"56 con 3 (reportado como Cuarto de Legua): el sitio estÃ¡ muy lleno, con ambulancias, bomberos y cerca de 2000 personas. (Reporta Juan Trejos)" },
-  { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"Cuarto de Legua: Ya está muy lleno de gente, ambulancias, bomberos, de todo. Hay como 2000 personas en el sitio" },
-  { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"NotarÃ­a 20 (Cra. 28D con Calle 72W): se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente." },
-  { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"Notaría 20: Se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente" },
-  { fecha:"11 de agosto de 2026, 3:46 p. m.", texto:"Cuarto de Legua: Se necesita ayuda de personas para levantar escombros. Además, se necesita agua y hielo para la protección solar de lxs voluntarixs." },
-  { fecha:"11 de agosto de 2026, 3:44 p. m.", texto:"Chiminangos: se necesita un baÃ±o portÃ¡til y manos para armar kits. Ya no mÃ¡s alimentos." },
-  { fecha:"11 de agosto de 2026, 3:44 p. m.", texto:"Se necesita un baño portátil en Chiminangos ( se necesitas manos para formar kits ) ya no más alimentos" },
-  { fecha:"11 de agosto de 2026, 3:36 p. m.", texto:"Disponibles almuerzos para 50 personas. Contacto: Stefania RodrÃ­guez 316 3075395." },
-  { fecha:"11 de agosto de 2026, 3:36 p. m.", texto:"Tenemos disponibles almuerzos para 50 personas si saben dónde se necesitan estamos atentos" },
-  { fecha:"11 de agosto de 2026, 3:24 p. m.", texto:"46 con 8va (atrÃ¡s de Palmetto): se necesitan reflectores, linternas, pilas AA, hielo y neveras." },
+  { fecha:"11 de agosto de 2026, 3:55 p. m.", texto:"NotarÃÂ­a 20: ya no hay criticidad. Suficiente agua y comida, no ir mÃÂ¡s gente. No estÃÂ¡n dejando entrar volquetas ni ambulancias por exceso de personas." },
+  { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Alguien ofrece guantes y gafas; necesita que le indiquen a quÃÂ© punto llevarlos." },
+  { fecha:"11 de agosto de 2026, 3:53 p. m.", texto:"Necesito actualizaciÃ³n. Tengo guantes, gafas y lo que requieran pero necesito informaciÃ³n para llevar eso" },
+  { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"56 con 3 (reportado como Cuarto de Legua): el sitio estÃÂ¡ muy lleno, con ambulancias, bomberos y cerca de 2000 personas. (Reporta Juan Trejos)" },
+  { fecha:"11 de agosto de 2026, 3:50 p. m.", texto:"Cuarto de Legua: Ya estÃ¡ muy lleno de gente, ambulancias, bomberos, de todo. Hay como 2000 personas en el sitio" },
+  { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"NotarÃÂ­a 20 (Cra. 28D con Calle 72W): se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente." },
+  { fecha:"11 de agosto de 2026, 3:48 p. m.", texto:"NotarÃ­a 20: Se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente" },
+  { fecha:"11 de agosto de 2026, 3:46 p. m.", texto:"Cuarto de Legua: Se necesita ayuda de personas para levantar escombros. AdemÃ¡s, se necesita agua y hielo para la protecciÃ³n solar de lxs voluntarixs." },
+  { fecha:"11 de agosto de 2026, 3:44 p. m.", texto:"Chiminangos: se necesita un baÃÂ±o portÃÂ¡til y manos para armar kits. Ya no mÃÂ¡s alimentos." },
+  { fecha:"11 de agosto de 2026, 3:44 p. m.", texto:"Se necesita un baÃ±o portÃ¡til en Chiminangos ( se necesitas manos para formar kits ) ya no mÃ¡s alimentos" },
+  { fecha:"11 de agosto de 2026, 3:36 p. m.", texto:"Disponibles almuerzos para 50 personas. Contacto: Stefania RodrÃÂ­guez 316 3075395." },
+  { fecha:"11 de agosto de 2026, 3:36 p. m.", texto:"Tenemos disponibles almuerzos para 50 personas si saben dÃ³nde se necesitan estamos atentos" },
+  { fecha:"11 de agosto de 2026, 3:24 p. m.", texto:"46 con 8va (atrÃÂ¡s de Palmetto): se necesitan reflectores, linternas, pilas AA, hielo y neveras." },
   { fecha:"11 de agosto de 2026, 3:24 p. m.", texto:"46 con 8va atras de palmetto: Se quiere apoyo con refelctores, linternas, pilas AA, hielo y neveras" },
-  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"El Poblado, la Notaría 20: Notaría 20 está llena" },
-  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"En la clínica de colores está la defensa civil y está lleno" },
-  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"HUV lleno: Hospital Universitario del Valle está lleno HUV" },
-  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"9na con 44 está llena" },
-  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"La Clínica Nuestra está llena" },
-  { fecha:"11 de agosto de 2026, 3:12 p. m.", texto:"ClÃ­nica de Colores: ya no necesitan mÃ¡s comida, tienen suficiente." },
-  { fecha:"11 de agosto de 2026, 3:12 p. m.", texto:"Clínica de colores: Ya NO necesitan más comida. Ya tienen la suficiente." },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"El Poblado, la NotarÃ­a 20: NotarÃ­a 20 estÃ¡ llena" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"En la clÃ­nica de colores estÃ¡ la defensa civil y estÃ¡ lleno" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"HUV lleno: Hospital Universitario del Valle estÃ¡ lleno HUV" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"9na con 44 estÃ¡ llena" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", texto:"La ClÃ­nica Nuestra estÃ¡ llena" },
   { fecha:"11 de agosto de 2026, 3:11 p. m.", texto:"Chiminango (Calle 62B #1A-9): no falta agua ni manos. Se necesita comida no perecedera, cobijas y colchonetas." },
   { fecha:"11 de agosto de 2026, 3:11 p. m.", texto:"Chiminango: No agua, no manos., , Se necesita comida no perecedera , , cobijas, colchonetas." },
   { fecha:"11 de agosto de 2026, 3:07 p. m.", texto:"Capri: suficiente agua, manos, comida y bebidas. Requieren cinceles y porras." },
   { fecha:"11 de agosto de 2026, 3:07 p. m.", texto:"Capri, suficiente agua, manos, comidas y bebidas. , Requieren cinceles y porras." },
-  { fecha:"11 de agosto de 2026, 3:00 p. m.", texto:"NotarÃ­a 20: se necesitan personas para relevar, cascos y herramientas. No se necesita mÃ¡s comida." },
+  { fecha:"11 de agosto de 2026, 3:00 p. m.", texto:"NotarÃÂ­a 20: se necesitan personas para relevar, cascos y herramientas. No se necesita mÃÂ¡s comida." },
   { fecha:"11 de agosto de 2026, 3:00 p. m.", texto:"Notaria 20: Se necesitan personas para relevar, cascos, herramientas, NO se necesita mas comida." },
-  { fecha:"11 de agosto de 2026, 2:52 p. m.", texto:"Edificio de Colores: al lado hay comida, agua y palas suficientes. Se necesitan guantes, cascos y, para la noche, mÃ¡s linternas." },
-  { fecha:"11 de agosto de 2026, 2:52 p. m.", texto:"Al lado del edificio de colores hay comida, agua y palas suficientes. Se necesitan guantes, cascos y seguramente en la noche más linternas" },
+  { fecha:"11 de agosto de 2026, 2:52 p. m.", texto:"Edificio de Colores: al lado hay comida, agua y palas suficientes. Se necesitan guantes, cascos y, para la noche, mÃÂ¡s linternas." },
+  { fecha:"11 de agosto de 2026, 2:52 p. m.", texto:"Al lado del edificio de colores hay comida, agua y palas suficientes. Se necesitan guantes, cascos y seguramente en la noche mÃ¡s linternas" },
   { fecha:"11 de agosto de 2026, 2:48 p. m.", texto:"Veterinaria Mi Cachorrito (San Luis, Cra. 1D #71C-17): jeringas, gasas, agua oxigenada e implementos veterinarios." },
   { fecha:"11 de agosto de 2026, 2:48 p. m.", texto:"Veterinaria Mi Cachorrito Barrio San Luis: Jeringas, gasas, agua oxigenada. Implementos de veterinaria" },
   { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Chiminangos (norte, comuna 5): se necesita agua, cobijas, comida y medicina para las familias que alojaron personas en el barrio." },
-  { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Barrio MelÃ©ndez (Calle 2A bis #94B1-70): se necesitan organismos de emergencia y toda la ayuda posible." },
+  { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Barrio MelÃÂ©ndez (Calle 2A bis #94B1-70): se necesitan organismos de emergencia y toda la ayuda posible." },
   { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"Se necesita agua cobijas comida medicina para las personas que alojaron sus viviendas en el barrio chiminangos" },
   { fecha:"11 de agosto de 2026, 2:47 p. m.", texto:"barrio melendez: organismos de emergencia y toda la ayuda posible" },
-  { fecha:"11 de agosto de 2026, 2:41 p. m.", texto:"Ofrecen almuerzos (Iglesia Tierra Nueva); buscan a quÃ© punto llevarlos con urgencia." },
-  { fecha:"11 de agosto de 2026, 2:41 p. m.", texto:"Tengo unos almuerzos, donde puedo dejarlos? Que se requiera urgentemente!!" },
-  { fecha:"11 de agosto de 2026, 2:30 p. m.", texto:"Pampalinda: ya no estÃ¡n dejando entrar, hay suficientes manos y comida. (Reporta Isabella Acosta)" },
-  { fecha:"11 de agosto de 2026, 2:22 p. m.", texto:"ClÃ­nica Cali: ya revisaron la estructura y opera con normalidad. Contacto: Dra. Collazos 320 8964337." },
-  { fecha:"11 de agosto de 2026, 2:22 p. m.", texto:"Clínica Cali: Ya revisaron la estructura y está operando con normalidad." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"La Cruz Roja tambiÃ©n estÃ¡ colapsada. Confirma antes de desplazarte si siguen recibiendo personas, donaciones o insumos." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Pampalinda y Cuarto de Legua: ya NO estÃ¡n dejando entrar." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres de Capri: estÃ¡n sacando gente porque hay demasiada. No te desplaces hasta confirmar que aÃºn necesitan apoyo." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian muy rÃ¡pido: confirma antes de movilizarte." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"El Poblado: ya hay suficiente comida y la olla funciona. Por ahora no se necesitan alimentos; sÃ­ personas para levantar escombros y motorizados para llevar insumos a otros puntos." },
+  { fecha:"11 de agosto de 2026, 2:30 p. m.", texto:"Pampalinda: ya no estÃÂ¡n dejando entrar, hay suficientes manos y comida. (Reporta Isabella Acosta)" },
+  { fecha:"11 de agosto de 2026, 2:22 p. m.", texto:"ClÃ­nica Cali: Ya revisaron la estructura y estÃ¡ operando con normalidad." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"La Cruz Roja tambiÃÂ©n estÃÂ¡ colapsada. Confirma antes de desplazarte si siguen recibiendo personas, donaciones o insumos." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Pampalinda y Cuarto de Legua: ya NO estÃÂ¡n dejando entrar." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres de Capri: estÃÂ¡n sacando gente porque hay demasiada. No te desplaces hasta confirmar que aÃÂºn necesitan apoyo." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian muy rÃÂ¡pido: confirma antes de movilizarte." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"El Poblado: ya hay suficiente comida y la olla funciona. Por ahora no se necesitan alimentos; sÃÂ­ personas para levantar escombros y motorizados para llevar insumos a otros puntos." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"44 con Novena: hay mucha comida. Se necesitan herramientas, guantes, cascos, hielo, neveras de icopor, bolsas, costales y tarros de pintura para escombros." },
   { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"Torres del Limonar: se necesita ayuda. Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"56 con 3: se necesita ayuda urgente, especialmente comida y agua." },
-  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"HUV: ya no reciben donaciones de sangre ni insumos, estÃ¡n full." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", texto:"HUV: ya no reciben donaciones de sangre ni insumos, estÃÂ¡n full." },
   { fecha:"11 de agosto de 2026, 2:15 p. m.", texto:"Disponible maquinaria pesada. Contacto: Leidy 324 4339670." },
   { fecha:"11 de agosto de 2026, 2:15 p. m.", texto:"Disponible maquinaria pesada tel: 3244339670" },
-  { fecha:"11 de agosto de 2026, 1:54 p. m.", texto:"Capri: se necesita comida." },
-  { fecha:"11 de agosto de 2026, 1:53 p. m.", texto:"Edificio de Colores: hay suficiente comida; se necesita hidrataciÃ³n." },
-  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Calle 5 con 44 (PanaderÃ­a Quinta Pan) y Refugio â Unidad AriguanÃ­ (Cra. 67 #3C-15)." },
-  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidrataciÃ³n frÃ­a y protecciÃ³n solar." },
-  { fecha:"11 de agosto de 2026, 1:29 p. m.", texto:"Colegio Normal Superior (sede bachillerato, Pasoancho con 34): se necesita comida hecha." },
-  { fecha:"11 de agosto de 2026, 1:29 p. m.", texto:"Colegio Normal Superior sede bachillerato: Se necesita comida hecha" },
+  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"Puntos de prioridad alta: Calle 5 con 44 (PanaderÃÂ­a Quinta Pan) y Refugio Ã¢ÂÂ Unidad AriguanÃÂ­ (Cra. 67 #3C-15)." },
+  { fecha:"11 de agosto de 2026, 1:30 p. m.", texto:"En todos los puntos se necesitan elementos contra el calor: sombra, hidrataciÃÂ³n frÃÂ­a y protecciÃÂ³n solar." },
   { fecha:"11 de agosto de 2026, 1:25 p. m.", texto:"Cra. 44: reportan exceso de gente en los puntos; piden que se acepte la mano de obra que llega." },
-  { fecha:"11 de agosto de 2026, 1:25 p. m.", texto:"Cra 44: Se está llegando a los puntos críticos ayudar y dicen que ya hay mucha gente, entonces que es lo que pasa ? Acepten la mano de obra ..." },
-  { fecha:"11 de agosto de 2026, 1:23 p. m.", texto:"Colegio Normal Superior sede bachillerato barrio colseguros: Se necesita comida hecha" },
-  { fecha:"11 de agosto de 2026, 1:20 p. m.", texto:"Calle 9 con Cra. 72: insumos mÃ©dicos: tubos orotraqueales (4 a 5.5), mÃ¡scara para BVM, dispositivo BVM pediÃ¡trico y hoja de laringoscopio pediÃ¡trico. (Reporta Sandra GÃ³mez)" },
+  { fecha:"11 de agosto de 2026, 1:25 p. m.", texto:"Cra 44: Se estÃ¡ llegando a los puntos crÃ­ticos ayudar y dicen que ya hay mucha gente, entonces que es lo que pasa ? Acepten la mano de obra ..." },
+  { fecha:"11 de agosto de 2026, 1:20 p. m.", texto:"Calle 9 con Cra. 72: insumos mÃÂ©dicos: tubos orotraqueales (4 a 5.5), mÃÂ¡scara para BVM, dispositivo BVM pediÃÂ¡trico y hoja de laringoscopio pediÃÂ¡trico. (Reporta Sandra GÃÂ³mez)" },
   { fecha:"11 de agosto de 2026, 1:20 p. m.", texto:"calle 9 con Cra 72: Tubos orotraqueales 4-4.5-5.0-5.5, Mascara para dispositivo BVM, Dispositivo BV pediatrico , Hoja de laringo pediatrico" },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio Elvira (Cra. 4 #58-18): aÃºn hay personas atrapadas. Se necesitan herramientas (pulidoras, picas, cinceles) y muchas manos." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio de Colores: se necesitan porras, martillo neumÃ¡tico y herramientas de bajo impacto para el rescate." },
-  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Nuevos puntos que necesitan manos: Calle 72 #10B-21, OXXO Calle 44 con Novena, CorporaciÃ³n Educativa Adventista (Cra. 44 #9-25) y Carrera 39A #5D-09." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio Elvira (Cra. 4 #58-18): aÃÂºn hay personas atrapadas. Se necesitan herramientas (pulidoras, picas, cinceles) y muchas manos." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Edificio de Colores: se necesitan porras, martillo neumÃÂ¡tico y herramientas de bajo impacto para el rescate." },
+  { fecha:"11 de agosto de 2026, 1:15 p. m.", texto:"Nuevos puntos que necesitan manos: Calle 72 #10B-21, OXXO Calle 44 con Novena, CorporaciÃÂ³n Educativa Adventista (Cra. 44 #9-25) y Carrera 39A #5D-09." },
   { fecha:"11 de agosto de 2026, 1:05 p. m.", texto:"Centro de Refugio Animal: se necesita personal veterinario con urgencia." },
-  { fecha:"11 de agosto de 2026, 12:40 p. m.", texto:"Santa Isabel (Calle 5B con Carrera 39, cerca de TelepacÃ­fico / ClÃ­nica Imbanaco): acaba de colapsar un edificio. Se necesitan personas con urgencia en el sector." },
+  { fecha:"11 de agosto de 2026, 12:40 p. m.", texto:"Santa Isabel (Calle 5B con Carrera 39, cerca de TelepacÃÂ­fico / ClÃÂ­nica Imbanaco): acaba de colapsar un edificio. Se necesitan personas con urgencia en el sector." },
   { fecha:"11 de agosto de 2026, 12:00 m.", texto:"Edificio de Colores: se necesita nevera de icopor y hielo." },
   { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Carrera 46 con Calle 8B: ya tienen todo lo necesario." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Calle 9 con 44: NO acudir mÃ¡s, ya hay suficientes manos." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Olla vegana (NotarÃ­a 20): se necesitan platos, cubiertos, colaboradores y transporte para movilizar los alimentos desde la Casa de Luz en San Antonio hasta NotarÃ­a 20 y Edificio de Colores." },
-  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Edificio de Colores: aquÃ­ tambiÃ©n se harÃ¡ olla vegana." },
+  { fecha:"11 de agosto de 2026, 11:46 a. m.", texto:"Calle 9 con 44: NO acudir mÃÂ¡s, ya hay suficientes manos." },
   { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Calle 9 con 44: se necesitan neveras, hielos y costales." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Edificio de Colores: comida prÃ¡ctica que no requiera cubiertos y porras urgentes." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"NotarÃ­a 20 (Poblado): se harÃ¡ una olla vegana." },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Edificio de Colores: comida prÃÂ¡ctica que no requiera cubiertos y porras urgentes." },
   { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Refugio: olla comunitaria en marcha, por favor traer insumos de olla." },
-  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Capri: cubierto, ya hay suficiente donaciÃ³n y manos." },
-  { fecha:"11 de agosto de 2026, 4:48 a. m.", texto:"Catalina - LA RUTA STUDIO: Si tienes donaciones fisicas y no sabes a donde llevarlas, puedes escribirme al 3158068465, estamos mapeando la información y enviando a los lugares prioritarios" },
+  { fecha:"11 de agosto de 2026, 11:28 a. m.", texto:"Capri: cubierto, ya hay suficiente donaciÃÂ³n y manos." },
+  { fecha:"11 de agosto de 2026, 4:48 a. m.", texto:"Catalina - LA RUTA STUDIO: Si tienes donaciones fisicas y no sabes a donde llevarlas, puedes escribirme al 3158068465, estamos mapeando la informaciÃ³n y enviando a los lugares prioritarios" },
 ];
 
 const NECESIDADES_GENERALES = [
-  "Porras","Barras de demolición","Percutores","Discos de pulidora para varilla de acero",
-  "Picas","Palas","Cinceles","Seguetas","Compresor hidráulico","Guantes de construcción",
-  "Gafas de seguridad","Tapabocas","Costales o bolsas de basura","Agua",
-  "Pedialyte o electrolitos","Gotas para hidratar los ojos"
+  "Puntales o andamios metálicos",
+  "Grúa pluma",
+  "Oxicorte",
+  "Pulidoras inalámbricas",
+  "Rotomartillos inalámbricos",
+  "Porras grandes",
+  "Cinceles",
+  "Seguetas",
+  "Gatos hidráulicos",
+  "Guantes de construcción",
+  "Cascos de construcción",
+  "Botas de seguridad (punta de acero)",
+  "Gafas de seguridad",
+  "Tapabocas N95",
+  "Arneses",
+  "Reflectores",
+  "Pitos",
+  "Cámaras y scanner de búsqueda (leader scan)",
+  "Equipos de búsqueda canina"
 ];
 
 const ALERTA = "Antes de desplazarte a cualquier punto, confirma si están dejando entrar y qué elementos de seguridad exigen. En algunos solo entran con casco. Las condiciones cambian muy rápido.";
@@ -639,7 +650,8 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 const ALTA_PRIORIDAD = [
-  { punto:"Chiminangos", nota:"Se necesita baño portátil, manos para armar kits, agua, cobijas, comida y medicina. Ya no más alimentos preparados." },
+  { punto:"Grúa pluma en Edificio Ana Pilar", nota:"Carrera 56 #3-88. Se requiere con carácter urgente una grúa pluma para continuar las labores de rescate." },
+  { punto:"Puntales o andamios en La 56 con 3ra", nota:"La 56 (Guadalupe) con 3ra, al lado del D1. Sirven para sostener la estructura por dentro y seguir sacando escombros mientras se remueve." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -767,6 +779,10 @@ function App(){
 
   return (
     <div className="wrap">
+      <div className="lastupdate">
+        <span className="lu-label"><span className="live"></span>Última actualización</span>
+        <span className="lu-time">{ACTUALIZADO}</span>
+      </div>
       <header>
         <div className="eyebrow">Coordinación de donaciones</div>
         <h1>Puntos de <span>edificios afectados</span></h1>
@@ -777,12 +793,11 @@ function App(){
         <div className="meta">
           <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
           <span className="chip urgente"><span className="dot"></span>{totalPrio} prioritarios</span>
-          <span className="chip">Actualizado: {ACTUALIZADO}</span>
         </div>
 
         <div className="grid-info">
           <div className="card">
-            <h2>Insumos que se necesitan</h2>
+            <h2>Lo que se necesita para el rescate</h2>
             <div className="needs">
               {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
             </div>
