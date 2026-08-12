@@ -300,6 +300,13 @@
     font-size:18px;font-weight:400;line-height:1;
   }
   #reportar{scroll-margin-top:20px}
+  #refugio{scroll-margin-top:20px}
+  .cta-refugio{
+    background:linear-gradient(180deg,#22B27A,#178A5D);
+    border:1px solid rgba(120,230,190,.4);
+    box-shadow:0 8px 22px rgba(34,178,122,.28);
+  }
+  .cta-refugio:hover{box-shadow:0 10px 28px rgba(34,178,122,.42)}
   .map-btn{background:linear-gradient(180deg,#2E5FE0,#1E3FB0)}
   .mapa-box{
     margin-top:16px;border:1px solid rgba(127,168,255,.18);
@@ -492,12 +499,25 @@
 <body>
 
 <!-- Formulario oculto para que Netlify lo detecte en el build (la app se renderiza con JS) -->
-<form name="actualizaciones" data-netlify="true" netlify-honeypot="bot-field" hidden>
+<form name="actualizaciones" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
   <input type="text" name="fecha_hora" />
   <input type="text" name="punto" />
   <input type="text" name="direccion" />
   <input type="text" name="persona" />
   <textarea name="actualizacion"></textarea>
+  <div data-netlify-recaptcha="true"></div>
+</form>
+
+<!-- Formulario oculto: ofrecimiento de casa como refugio temporal -->
+<form name="refugios" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="fecha_hora" />
+  <input type="text" name="nombre" />
+  <input type="text" name="telefono" />
+  <input type="text" name="zona" />
+  <input type="text" name="cupos" />
+  <input type="text" name="dias_disponible" />
+  <textarea name="condiciones"></textarea>
+  <div data-netlify-recaptcha="true"></div>
 </form>
 
 <div id="root"></div>
@@ -951,6 +971,7 @@ function App(){
   const [q, setQ] = useState("");
   const [soloPrio, setSoloPrio] = useState(false);
   const [showUpdates, setShowUpdates] = useState(false);
+  const nowISO = useMemo(() => new Date().toISOString(), []);
 
   const filtrados = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -1067,6 +1088,11 @@ function App(){
         Deja aquí tu actualización
       </a>
 
+      <a className="cta-reportar cta-refugio" href="#refugio">
+        <span className="cta-ico">🏠</span>
+        Ofrece tu casa como refugio temporal
+      </a>
+
       {ACTUALIZACIONES.length ? (
         <div className="updates">
           <h2><span className="live"></span>Últimas actualizaciones ({ACTUALIZACIONES.length})</h2>
@@ -1163,9 +1189,11 @@ function App(){
         name="actualizaciones"
         method="POST"
         data-netlify="true"
+        data-netlify-recaptcha="true"
         netlify-honeypot="bot-field"
       >
         <input type="hidden" name="form-name" value="actualizaciones" />
+        <input type="hidden" name="fecha_hora" value={nowISO} />
         <p className="hp">
           <label>No llenar: <input name="bot-field" /></label>
         </p>
@@ -1181,10 +1209,6 @@ function App(){
               placeholder="Ej: Se necesitan cascos, guantes y agua. Ya hay suficientes manos."></textarea>
           </div>
           <div className="field">
-            <label htmlFor="f-fh">Fecha y hora</label>
-            <input id="f-fh" type="datetime-local" name="fecha_hora" required />
-          </div>
-          <div className="field">
             <label htmlFor="f-pt">Nombre del punto crítico</label>
             <input id="f-pt" type="text" name="punto" required placeholder="Ej: Edificio de Colores" />
           </div>
@@ -1196,7 +1220,58 @@ function App(){
             <label htmlFor="f-per">Persona de referencia</label>
             <input id="f-per" type="text" name="persona" placeholder="Nombre y contacto (opcional)" />
           </div>
+          <div className="field full" data-netlify-recaptcha="true"></div>
           <button className="btn-enviar" type="submit">Enviar actualización</button>
+        </div>
+      </form>
+
+      <form
+        id="refugio"
+        className="form-card"
+        name="refugios"
+        method="POST"
+        data-netlify="true"
+        data-netlify-recaptcha="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="refugios" />
+        <input type="hidden" name="fecha_hora" value={nowISO} />
+        <p className="hp">
+          <label>No llenar: <input name="bot-field" /></label>
+        </p>
+        <div className="eyebrow">Ofrece tu casa</div>
+        <h2>Ofrece tu casa como refugio temporal</h2>
+        <p className="form-sub">
+          Si tienes espacio seguro en tu casa o apartamento y quieres recibir temporalmente a personas que se quedaron sin dónde dormir, cuéntanos aquí. Vamos a verificar y coordinar contigo antes de enviar a alguien.
+        </p>
+        <div className="form-grid">
+          <div className="field">
+            <label htmlFor="r-nom">Nombre completo</label>
+            <input id="r-nom" type="text" name="nombre" required placeholder="Tu nombre" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-tel">Teléfono / WhatsApp</label>
+            <input id="r-tel" type="tel" name="telefono" required placeholder="Ej: 300 123 4567" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-zona">Barrio o zona</label>
+            <input id="r-zona" type="text" name="zona" required placeholder="Ej: Barrio San Fernando, Cali" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-cupos">¿Cuántas personas puedes recibir?</label>
+            <input id="r-cupos" type="number" min="1" name="cupos" required placeholder="Ej: 2" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-dias">¿Por cuánto tiempo?</label>
+            <input id="r-dias" type="text" name="dias_disponible" placeholder="Ej: Unos días, una semana, indefinido" />
+          </div>
+          <div className="field full">
+            <label htmlFor="r-cond">Condiciones o notas (opcional)</label>
+            <textarea id="r-cond" name="condiciones"
+              placeholder="Ej: Recibo mascotas, tengo espacio para una familia, sin costo, etc."></textarea>
+          </div>
+          <div className="field full" data-netlify-recaptcha="true"></div>
+          <button className="btn-enviar" type="submit">Ofrecer mi casa</button>
         </div>
       </form>
 
