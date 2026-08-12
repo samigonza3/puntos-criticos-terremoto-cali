@@ -588,11 +588,12 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 2:40 p. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 3:10 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"12 de agosto de 2026, 3:10 p. m.", punto:"Subsidio de arriendo de emergencia", contacto:"", texto:"El Gobierno Nacional decretó un subsidio de arriendo de emergencia por el sismo. El trámite NO se hace por internet: debe coordinarse presencialmente con la Alcaldía de Cali y la Secretaría de Gestión del Riesgo. Es obligatorio estar inscrito en el Registro Único de Damnificados (RUD) — verifique que los técnicos que visitaron su hogar registraron los datos exactos. Conserve el acta de inspección, fotos de las afectaciones y documentos de identidad del grupo familiar. Acuda a la Alcaldía Distrital de Cali o a los centros de atención de la Secretaría de Gestión del Riesgo en los barrios afectados. El trámite es gratuito: no entregue dinero ni datos personales a intermediarios. Más información y enlaces oficiales en la sección 'Recursos oficiales' del menú." },
   { fecha:"12 de agosto de 2026, 2:40 p. m.", punto:"Calle 9 con Cra 44", contacto:"", texto:"⚠️ EVACUACIÓN INMEDIATA ORDENADA en Calle 9 con Cra 44 por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. Aléjese del área de inmediato y no ingrese." },
   { fecha:"12 de agosto de 2026, 2:37 p. m.", punto:"Roldanillo", contacto:"", texto:"Se necesitan donaciones de maquinaria y personas disponibles, agua, etc. en Roldanillo. No tienen muchas donaciones." },
   { fecha:"12 de agosto de 2026, 2:36 p. m.", punto:"Dagua", contacto:"Alejandra, 314 8353553", texto:"Pregunta si en Dagua necesitan manos de ayuda; puede desplazarse hasta allá con otras dos personas." },
@@ -892,13 +893,13 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 const ALTA_PRIORIDAD = [
-  { punto:"⚠️ Evacuación inmediata: Calle 9 con Cra 44", nota:"Se ordenó evacuación inmediata por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. No ingrese al área." },
-  { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
-  { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
-  { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { punto:"Subsidio de arriendo de emergencia: trámite oficial", nota:"El trámite se hace presencial con la Alcaldía de Cali y la Secretaría de Gestión del Riesgo, no por internet. Es obligatorio estar en el Registro Único de Damnificados (RUD). Es gratuito: no dé dinero ni datos a intermediarios. Ver enlaces oficiales en 'Recursos oficiales' del menú." },
   { punto:"Motocarros disponibles para mover escombros", nota:"Tienen disponibles motocarros para mover escombros o insumos; los ponen en el sitio que se necesiten. Contacto: 315 4480910." },
   { punto:"Equipo de oxicorte disponible", nota:"Tienen disponible equipo de oxicorte con operario y oxígeno. Si alguien sabe dónde se necesita, contactar. Contacto: 315 4480910." },
   { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
+  { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
+  { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1037,6 +1038,7 @@ function App(){
             </div>
             <a href="index.html">Inicio · Puntos críticos</a>
             <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
+            <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
             <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
             <a href="#refugio" onClick={() => setShowMenu(false)}>Formulario: presta tu casa</a>
