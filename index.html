@@ -519,11 +519,18 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 1:20 p. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 2:40 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"12 de agosto de 2026, 2:40 p. m.", punto:"Calle 9 con Cra 44", contacto:"", texto:"⚠️ EVACUACIÓN INMEDIATA ORDENADA en Calle 9 con Cra 44 por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. Aléjese del área de inmediato y no ingrese." },
+  { fecha:"12 de agosto de 2026, 2:36 p. m.", punto:"Dagua", contacto:"Alejandra, 314 8353553", texto:"Pregunta si en Dagua necesitan manos de ayuda; puede desplazarse hasta allá con otras dos personas." },
+  { fecha:"12 de agosto de 2026, 1:45 p. m.", punto:"Centro de Acopio comunitario Comuna 21", contacto:"Cristian Perea Plazas, 301 4841243", texto:"Centro de acopio comunitario habilitado en Carrera 24F #82B-04 para recibir donaciones para familias afectadas de la Comuna 21: agua potable, alimentos no perecederos, víveres, alimentos preparados, medicamentos, elementos de aseo y de primera necesidad, cobijas, colchonetas y ropa en buen estado. No es un punto crítico, es de recepción y distribución. Reporta además edificios con grietas por colapsar en la zona y pide evacuar a la gente de esos apartamentos." },
+  { fecha:"12 de agosto de 2026, 1:41 p. m.", punto:"Cali", contacto:"Daniela Largo, 305 3299913", texto:"Busca saber en qué puntos de búsqueda de sobrevivientes se necesitan dispositivos de tecnología para escuchar; tienen disponibles aparatos de escucha y necesitan saber dónde hace falta." },
+  { fecha:"12 de agosto de 2026, 1:31 p. m.", punto:"Cali", contacto:"", texto:"Somos 1 APH y 2 civiles. ¿Dónde necesitan manos para apoyar?" },
+  { fecha:"12 de agosto de 2026, 1:26 p. m.", punto:"Cali", contacto:"David, 316 7385385", texto:"Tiene alimentos preparados disponibles para damnificados, rescatistas y voluntarios." },
+  { fecha:"12 de agosto de 2026, 1:26 p. m.", punto:"Al lado de Cimivet, Calle 5 con 44", contacto:"Felipe, 322 2113774", texto:"Se necesitan vigas de madera y bastones de madera." },
   { fecha:"12 de agosto de 2026, 1:20 p. m.", punto:"Evaluación estructural o de redes eléctricas", contacto:"Samuel Salazar, +57 313 7618582", texto:"Ofrece evaluación estructural o de redes eléctricas sin costo alguno para quien lo necesite." },
   { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Coliseo del Pueblo", contacto:"", texto:"Se necesitan relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
   { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Escuela Normal Superior", contacto:"", texto:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
@@ -832,6 +839,7 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 const ALTA_PRIORIDAD = [
+  { punto:"⚠️ Evacuación inmediata: Calle 9 con Cra 44", nota:"Se ordenó evacuación inmediata por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. No ingrese al área." },
   { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
   { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
   { punto:"Puntales y andamios en todos los puntos", nota:"No solo en La 56 con 3ra: en todos los puntos se necesitan con urgencia puntales o andamios metálicos para sostener las estructuras y seguir sacando escombros." },
