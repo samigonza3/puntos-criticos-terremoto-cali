@@ -519,11 +519,12 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 12:57 p. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 1:20 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"12 de agosto de 2026, 1:20 p. m.", punto:"Evaluación estructural o de redes eléctricas", contacto:"Samuel Salazar, +57 313 7618582", texto:"Ofrece evaluación estructural o de redes eléctricas sin costo alguno para quien lo necesite." },
   { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Coliseo del Pueblo", contacto:"", texto:"Se necesitan relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
   { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Escuela Normal Superior", contacto:"", texto:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
   { fecha:"12 de agosto de 2026, 12:00 p. m.", punto:"", contacto:"Natalia 3217079520", texto:"Buenas noches,,, Pertenecemos a una empresa que tiene la posibilidad de realizar una donación de cuñetes para sacar escombros. ¿Con quien podemos comunicarnos para su entrega? Quedamos atentos!!" },
@@ -835,6 +836,7 @@ const ALTA_PRIORIDAD = [
   { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
   { punto:"Puntales y andamios en todos los puntos", nota:"No solo en La 56 con 3ra: en todos los puntos se necesitan con urgencia puntales o andamios metálicos para sostener las estructuras y seguir sacando escombros." },
   { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -969,7 +971,7 @@ function App(){
         </p>
         <div className="meta">
           <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
-          <span className="chip urgente"><span className="dot"></span>{totalPrio} prioritarios</span>
+          <span className="chip urgente"><span className="dot"></span>{ALTA_PRIORIDAD.length} necesidades prioritarias</span>
         </div>
 
         <div className="grid-info">
@@ -1003,7 +1005,7 @@ function App(){
               <path d="M12 9v4M12 17h.01"></path>
               <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
             </svg>
-            Alta prioridad
+            Necesidades prioritarias
           </div>
           {ALTA_PRIORIDAD.map((p,i) => (
             <div className="pr-item" key={i}>
@@ -1089,55 +1091,38 @@ function App(){
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
-            placeholder="Buscar punto, dirección o insumo"
+            placeholder="Buscar punto, dirección o contacto"
             aria-label="Buscar"
           />
         </label>
-        <div
-          className={"toggle" + (soloPrio ? " on" : "")}
-          role="button" tabIndex="0"
-          onClick={() => setSoloPrio(v => !v)}
-          onKeyDown={e => (e.key === "Enter" || e.key === " ") && setSoloPrio(v => !v)}
-        >
-          <span className="box"></span> Solo prioritarios
-        </div>
         <span className="counter">{filtrados.length} resultado{filtrados.length === 1 ? "" : "s"}</span>
       </div>
 
       <table className="tabla">
         <thead>
           <tr>
-            <th style={{width:"30%"}}>Punto</th>
-            <th style={{width:"25%"}}>Dirección</th>
-            <th>Necesidades</th>
+            <th style={{width:"38%"}}>Punto</th>
+            <th style={{width:"32%"}}>Dirección</th>
+            <th>Contacto</th>
           </tr>
         </thead>
         <tbody>
           {filtrados.length === 0 ? (
             <tr><td colSpan="3" className="empty">No hay puntos que coincidan con la búsqueda.</td></tr>
           ) : filtrados.map((p,i) => (
-            <tr key={i} className={p.prioridad ? "prio" : ""}>
+            <tr key={i}>
               <td data-label="Punto">
-                <span className="lugar">
-                  {p.lugar}
-                  {p.estado === "urgente" ? <span className="badge">Urgente</span> : null}
-                  {p.cubierto ? <span className="badge ok">Cubierto</span> : null}
-                </span>
-                {(p.coordinador || p.contacto)
-                  ? <div className="p-coord">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</div>
-                  : null}
-                {p.hora ? <div className="p-hora">Actualizado: {p.hora}</div> : null}
+                <span className="lugar">{p.lugar}</span>
               </td>
               <td data-label="Dirección">
                 {(p.direccion && p.direccion.trim() !== p.lugar.trim())
                   ? <span className="dir">{p.direccion}</span>
                   : <span className="dir vacio">—</span>}
               </td>
-              <td data-label="Necesidades">
-                {p.nota ? <div className="cel-nota">{p.nota}</div> : null}
-                {p.necesidades.length
-                  ? <div className="cel-need">{p.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : (!p.nota ? <span className="sinnead">Ver insumos generales</span> : null)}
+              <td data-label="Contacto">
+                {(p.coordinador || p.contacto)
+                  ? <span className="dir">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</span>
+                  : <span className="dir vacio">—</span>}
               </td>
             </tr>
           ))}
