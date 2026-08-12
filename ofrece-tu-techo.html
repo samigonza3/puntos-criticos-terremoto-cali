@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ofrece tu techo · Ayuda a una familia de Cali</title>
+<meta name="description" content="Si tienes un cuarto, apartamento, aparta-estudio o un colchón disponible, ofrece tu techo a una familia caleña que lo perdió todo con el terremoto." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ofrece tu techo · Ayuda a una familia de Cali" />
+<meta property="og:description" content="Presta tu hogar temporalmente a una familia que se quedó sin dónde dormir tras el terremoto en Cali." />
+<meta property="og:locale" content="es_CO" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --space-950:#040817;
+    --space-900:#070D22;
+    --space-800:#0B1533;
+    --space-700:#122048;
+    --nebula:#1B2E66;
+    --star-blue:#3E7BFF;
+    --star-light:#7FA8FF;
+    --ice:#C9D9FF;
+    --white:#F4F7FF;
+    --muted:#8B9BC7;
+    --alert:#FF5C6B;
+    --ok:#22B27A;
+    --ok-light:#3EE08E;
+    --warn:#FFB020;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    background:var(--space-950);
+    color:var(--white);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:36px 24px 80px}
+
+  /* Menú hamburguesa */
+  .burger-btn{
+    position:fixed;top:18px;right:18px;z-index:60;
+    width:44px;height:44px;border-radius:12px;border:1px solid rgba(127,168,255,.3);
+    background:var(--space-800);display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:5px;cursor:pointer;
+  }
+  .burger-btn span{width:20px;height:2px;background:var(--ice);border-radius:2px}
+  .menu-overlay{position:fixed;inset:0;background:rgba(4,8,23,.6);z-index:70}
+  .menu-panel{
+    position:fixed;top:0;right:0;height:100%;width:min(78vw,300px);z-index:80;
+    background:var(--space-800);border-left:1px solid rgba(127,168,255,.2);
+    padding:20px 18px;display:flex;flex-direction:column;gap:6px;
+    box-shadow:-12px 0 40px rgba(0,0,0,.4);
+    transform:translateX(100%);transition:transform .2s ease;
+  }
+  .menu-panel.open{transform:translateX(0)}
+  .menu-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .menu-title{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--star-light)}
+  .menu-close{background:none;border:none;color:var(--ice);font-size:18px;cursor:pointer;padding:4px}
+  .menu-panel a{
+    display:block;padding:12px 10px;border-radius:10px;color:var(--white);
+    text-decoration:none;font-size:14.5px;font-weight:600;
+  }
+  .menu-panel a:hover{background:rgba(127,168,255,.1)}
+  .menu-link-highlight{color:var(--ok-light) !important;font-weight:800}
+
+  /* Hero */
+  .eyebrow{
+    font-size:12.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--star-light);
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,42px);font-weight:900;line-height:1.08;letter-spacing:-.01em;
+  }
+  h1 span{color:var(--ok-light)}
+  .lead{
+    margin-top:16px;color:var(--ice);font-size:16px;line-height:1.65;max-width:680px;
+  }
+  .lead strong{color:var(--white)}
+  .facts{
+    margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  }
+  .fact{
+    background:var(--space-800);border:1px solid rgba(127,168,255,.18);
+    border-radius:14px;padding:14px 12px;text-align:center;
+  }
+  .fact .fact-num{font-size:19px;font-weight:800;color:var(--ok-light)}
+  .fact .fact-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+  @media (max-width:600px){ .facts{grid-template-columns:1fr} }
+
+  .cta-top{
+    margin-top:26px;display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    background:linear-gradient(180deg,var(--ok),#178A5D);color:#fff;font-weight:700;font-size:15px;
+    padding:15px 26px;border-radius:14px;border:1px solid rgba(120,230,190,.4);
+    box-shadow:0 8px 22px rgba(34,178,122,.3);
+  }
+
+  .quienes{
+    margin-top:40px;background:var(--space-800);border:1px solid rgba(127,168,255,.16);
+    border-radius:20px;padding:26px;
+  }
+  .quienes h2{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light);margin-bottom:12px}
+  .quienes ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+  .quienes li{
+    background:var(--space-900);border:1px solid rgba(127,168,255,.2);border-radius:10px;
+    padding:8px 14px;font-size:13.5px;color:var(--ice);font-weight:600;
+  }
+  .quienes p{margin-top:14px;color:var(--ice);font-size:14px;line-height:1.6}
+
+  /* Form (mismo estilo y mismo form Netlify que en el home) */
+  .form-card{
+    margin-top:36px;
+    background:
+      radial-gradient(120% 160% at 100% 0%, rgba(34,178,122,.14) 0%, rgba(34,178,122,0) 55%),
+      var(--space-800);
+    border:1px solid rgba(120,230,190,.28);
+    border-radius:20px;padding:26px 26px 28px;
+  }
+  .form-card .eyebrow{margin-bottom:6px}
+  .form-card h2{
+    font-size:clamp(20px,2.6vw,26px);font-weight:800;line-height:1.12;
+    color:var(--white);margin:0 0 6px;letter-spacing:-.01em;text-transform:none;
+  }
+  .form-card .form-sub{color:var(--ice);font-size:14px;line-height:1.5;margin-bottom:20px;max-width:560px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1 / -1}
+  .field label{
+    font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light);
+  }
+  .field input,.field textarea{
+    width:100%;font-family:inherit;font-size:15px;color:var(--white);
+    background:var(--space-900);border:1px solid rgba(127,168,255,.18);
+    border-radius:12px;padding:12px 14px;outline:none;transition:.15s;
+  }
+  .field textarea{min-height:96px;resize:vertical;line-height:1.5}
+  .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+  .field input:focus,.field textarea:focus{
+    border-color:var(--ok);box-shadow:0 0 0 3px rgba(34,178,122,.18);
+  }
+  .btn-enviar{
+    grid-column:1 / -1;justify-self:start;margin-top:4px;
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+    font-family:inherit;font-size:15px;font-weight:700;color:#fff;
+    padding:13px 26px;border:none;border-radius:999px;
+    background:linear-gradient(180deg,var(--ok),#178A5D);
+    box-shadow:0 8px 22px rgba(34,178,122,.3);transition:.15s;
+  }
+  .btn-enviar:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(34,178,122,.42)}
+  .hp{position:absolute;left:-9999px}
+  #ok-msg{
+    display:none;margin-top:36px;background:var(--space-800);border:1px solid rgba(120,230,190,.3);
+    border-radius:20px;padding:28px;text-align:center;
+  }
+  #ok-msg h2{color:var(--ok-light);font-size:20px;margin-bottom:8px}
+  #ok-msg p{color:var(--ice);font-size:14.5px;line-height:1.5}
+
+  footer{
+    margin-top:44px;text-align:center;color:var(--muted);font-size:12.5px;
+  }
+  footer a{color:var(--star-light);text-decoration:none}
+
+  @media (max-width:680px){
+    .form-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- Formulario oculto para que Netlify lo detecte en el build -->
+<form name="refugios" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="fecha_hora" />
+  <input type="text" name="nombre" />
+  <input type="text" name="telefono" />
+  <input type="text" name="zona" />
+  <input type="text" name="cupos" />
+  <input type="text" name="dias_disponible" />
+  <textarea name="condiciones"></textarea>
+  <div data-netlify-recaptcha="true"></div>
+</form>
+
+<button class="burger-btn" id="burgerBtn" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+</button>
+<div class="menu-overlay" id="menuOverlay" style="display:none"></div>
+<nav class="menu-panel" id="menuPanel">
+  <div class="menu-top">
+    <span class="menu-title">Menú</span>
+    <button class="menu-close" id="menuClose" aria-label="Cerrar menú">✕</button>
+  </div>
+  <a href="index.html">Inicio · Puntos críticos</a>
+  <a href="index.html#reportar">Deja tu actualización</a>
+  <a href="index.html#albergues">Albergues temporales</a>
+  <a href="#formulario" class="menu-link-highlight" id="menuLinkForm">🏠 Ofrece tu techo (formulario)</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="eyebrow">Terremoto en Cali · 10 de agosto de 2026</div>
+  <h1>Ayúdanos a darle un <span>techo</span> a una familia caleña</h1>
+
+  <p class="lead">
+    En Cali hubo un terremoto de <strong>7,4 grados en la escala de Richter</strong> el pasado
+    10 de agosto, a las <strong>7:34 de la mañana</strong>. Desde entonces, cientos de familias
+    caleñas viven un drama muy real: perdieron su casa, quedaron con estructuras dañadas o
+    simplemente les da miedo volver a entrar. Muchas están durmiendo en la calle, en carpas
+    o en albergues improvisados.
+  </p>
+  <p class="lead">
+    Si vives en <strong>Cali, Jamundí, Palmira</strong> o ciudades cercanas, y tienes un
+    cuarto, un apartamento, un aparta-estudio, un colchón o un sofá-cama disponible, puedes
+    prestar tu hogar temporalmente y darle un techo seguro a una familia mientras se recupera.
+    No tiene que ser para siempre: unos días ya hacen una diferencia enorme.
+  </p>
+
+  <div class="facts">
+    <div class="fact"><div class="fact-num">7,4°</div><div class="fact-label">Magnitud Richter</div></div>
+    <div class="fact"><div class="fact-num">10 ago · 7:34 a.m.</div><div class="fact-label">Fecha y hora</div></div>
+    <div class="fact"><div class="fact-num">Cientos</div><div class="fact-label">de familias sin techo</div></div>
+  </div>
+
+  <a class="cta-top" href="#formulario">
+    <span>🏠</span> Ofrece tu techo ahora
+  </a>
+
+  <div class="quienes">
+    <h2>¿Quién puede ofrecer techo?</h2>
+    <ul>
+      <li>Cali</li>
+      <li>Jamundí</li>
+      <li>Palmira</li>
+      <li>Ciudades cercanas</li>
+    </ul>
+    <p>
+      No necesitas tener una casa grande. Un cuarto libre, un aparta-estudio que no estés
+      usando, un colchón extra o un sofá-cama ya pueden ser el lugar donde una familia
+      duerma tranquila esta noche. Nosotros verificamos la información y coordinamos
+      contigo antes de conectar a alguien con tu hogar.
+    </p>
+  </div>
+
+  <form
+    id="formulario"
+    class="form-card"
+    name="refugios"
+    method="POST"
+    data-netlify="true"
+    data-netlify-recaptcha="true"
+    netlify-honeypot="bot-field"
+    onsubmit="document.getElementById('fecha_hora_input').value = new Date().toISOString();"
+  >
+    <input type="hidden" name="form-name" value="refugios" />
+    <input type="hidden" id="fecha_hora_input" name="fecha_hora" value="" />
+    <p class="hp">
+      <label>No llenar: <input name="bot-field" /></label>
+    </p>
+    <div class="eyebrow">Ofrece tu techo</div>
+    <h2>Cuéntanos sobre el espacio que puedes prestar</h2>
+    <p class="form-sub">
+      Completa este formulario y te contactaremos para coordinar. Tu información solo se usa
+      para verificar y conectar tu ofrecimiento con una familia que lo necesite.
+    </p>
+    <div class="form-grid">
+      <div class="field">
+        <label for="r-nom">Nombre completo</label>
+        <input id="r-nom" type="text" name="nombre" required placeholder="Tu nombre" />
+      </div>
+      <div class="field">
+        <label for="r-tel">Teléfono / WhatsApp</label>
+        <input id="r-tel" type="tel" name="telefono" required placeholder="Ej: 300 123 4567" />
+      </div>
+      <div class="field">
+        <label for="r-zona">Ciudad y barrio o zona</label>
+        <input id="r-zona" type="text" name="zona" required placeholder="Ej: Cali, Barrio San Fernando" />
+      </div>
+      <div class="field">
+        <label for="r-cupos">¿Cuántas personas puedes recibir?</label>
+        <input id="r-cupos" type="number" min="1" name="cupos" required placeholder="Ej: 2" />
+      </div>
+      <div class="field">
+        <label for="r-dias">¿Por cuánto tiempo?</label>
+        <input id="r-dias" type="text" name="dias_disponible" placeholder="Ej: Unos días, una semana, indefinido" />
+      </div>
+      <div class="field full">
+        <label for="r-cond">Condiciones o notas (opcional)</label>
+        <textarea id="r-cond" name="condiciones"
+          placeholder="Ej: Es un cuarto con cama, un aparta-estudio, un sofá-cama, recibo mascotas, etc."></textarea>
+      </div>
+      <div class="field full" data-netlify-recaptcha="true"></div>
+      <button class="btn-enviar" type="submit">Ofrecer mi techo</button>
+    </div>
+  </form>
+
+  <footer>
+    Directorio comunitario de donaciones para el terremoto en Cali · <a href="index.html">Volver a puntos críticos</a>
+  </footer>
+
+</div>
+
+<script>
+  const burgerBtn = document.getElementById('burgerBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuPanel = document.getElementById('menuPanel');
+  const menuClose = document.getElementById('menuClose');
+  const menuLinkForm = document.getElementById('menuLinkForm');
+
+  function openMenu(){
+    menuOverlay.style.display = 'block';
+    menuPanel.classList.add('open');
+  }
+  function closeMenu(){
+    menuPanel.classList.remove('open');
+    setTimeout(() => { menuOverlay.style.display = 'none'; }, 200);
+  }
+  burgerBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  menuLinkForm.addEventListener('click', closeMenu);
+</script>
+
+</body>
+</html>
