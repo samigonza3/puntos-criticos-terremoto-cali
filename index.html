@@ -516,6 +516,9 @@
   .empty{padding:44px 20px;text-align:center;color:var(--muted);font-size:15px}
 
   footer{margin-top:34px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.7}
+  .footer-credit{margin-top:6px;font-size:11.5px;color:var(--muted)}
+  .footer-credit a{color:var(--star-light);text-decoration:none;font-weight:600}
+  .footer-credit a:hover{text-decoration:underline}
   footer strong{color:var(--ice);font-weight:600}
 
   @media (max-width:820px){
@@ -893,6 +896,8 @@ const ALTA_PRIORIDAD = [
   { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
   { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
   { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { punto:"Motocarros disponibles para mover escombros", nota:"Tienen disponibles motocarros para mover escombros o insumos; los ponen en el sitio que se necesiten. Contacto: 315 4480910." },
+  { punto:"Equipo de oxicorte disponible", nota:"Tienen disponible equipo de oxicorte con operario y oxígeno. Si alguien sabe dónde se necesita, contactar. Contacto: 315 4480910." },
   { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
 ];
 
@@ -1343,6 +1348,7 @@ function App(){
 
       <footer>
         Directorio comunitario de donaciones. Verifica cada punto antes de desplazarte.
+        <div className="footer-credit">Hecho con ❤️ por <a href="https://samuelgonzalez.org" target="_blank" rel="noopener noreferrer">SamuelGonzalez.org</a></div>
       </footer>
     </div>
   );
