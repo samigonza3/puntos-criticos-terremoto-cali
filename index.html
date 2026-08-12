@@ -489,7 +489,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 12:00 p. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 8:04 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -965,16 +965,6 @@ function App(){
             ))}
           </div>
           <p className="desc">{NOTA_NO_DESPLAZARSE}</p>
-        </div>
-      ) : null}
-
-      {CLINICAS.length ? (
-        <div className="clinicas">
-          <h2>Clínicas afectadas que requieren evacuación</h2>
-          <p className="cl-sub">Se necesita apoyo para evacuar estos centros de salud. No los descuidemos.</p>
-          <div className="cl-list">
-            {CLINICAS.map((c,i) => <div className="cl-item" key={i}>{c}</div>)}
-          </div>
         </div>
       ) : null}
 
