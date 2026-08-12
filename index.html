@@ -191,8 +191,16 @@
   }
   .albergues h2{
     font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--ok);margin-bottom:6px;
+    color:var(--ok);margin:0;
   }
+  .al-toggle{
+    width:100%;display:flex;align-items:center;justify-content:space-between;
+    background:none;border:none;padding:0;margin-bottom:6px;cursor:pointer;
+  }
+  .al-chevron{
+    color:var(--ok);font-size:16px;transition:transform .15s;flex:0 0 auto;margin-left:12px;
+  }
+  .al-chevron.open{transform:rotate(180deg)}
   .albergues .al-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin-bottom:16px}
   .al-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .al-item{
@@ -301,6 +309,13 @@
   }
   #reportar{scroll-margin-top:20px}
   #refugio{scroll-margin-top:20px}
+  .top-actions{
+    display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px;
+  }
+  .cta-sm{
+    flex:1 1 220px;margin-top:0;padding:11px 16px;font-size:13px;border-radius:12px;
+  }
+  .cta-sm .cta-ico{width:19px;height:19px;font-size:14px}
   .cta-refugio{
     background:linear-gradient(180deg,#22B27A,#178A5D);
     border:1px solid rgba(120,230,190,.4);
@@ -796,35 +811,18 @@ const NECESIDADES_GENERALES = [
   "Maquinaria amarilla y volquetas",
   "Grúa pluma",
   "Dispositivos Starlink",
-  "Puntales o andamios metálicos",
   "Oxicorte",
-  "Pulidoras inalámbricas",
-  "Rotomartillos inalámbricos",
-  "Porras grandes",
-  "Cinceles",
-  "Seguetas",
   "Gatos hidráulicos",
-  "Guantes de construcción",
-  "Cascos de construcción",
+  "Cascos y guantes de construcción",
   "Botas de seguridad (punta de acero)",
-  "Gafas de seguridad",
-  "Tapabocas N95",
-  "Arneses",
-  "Reflectores",
-  "Pitos",
+  "Cizallas y elementos para cortar",
   "Cámaras y scanner de búsqueda (leader scan)",
   "Equipos de búsqueda canina",
-  "Linternas y pilas AA/AAA",
-  "Linternas de cabeza / tipo topo",
-  "Reflectores portátiles",
-  "Maquinaria pesada (retroexcavadora)",
-  "Escaleras altas",
   "Discos diamantados (concreto y hierro)",
-  "Gasolina y ACPM para maquinaria",
-  "Cizallas y elementos para cortar"
+  "Gasolina y ACPM para maquinaria"
 ];
 
-const ALERTA = "En varios puntos solo dejan pasar civiles con casco, guantes y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
+const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
 
 /* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
    Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
@@ -862,7 +860,6 @@ const ALTA_PRIORIDAD = [
   { punto:"⚠️ Evacuación inmediata: Calle 9 con Cra 44", nota:"Se ordenó evacuación inmediata por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. No ingrese al área." },
   { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
   { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
-  { punto:"Puntales y andamios en todos los puntos", nota:"No solo en La 56 con 3ra: en todos los puntos se necesitan con urgencia puntales o andamios metálicos para sostener las estructuras y seguir sacando escombros." },
   { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
   { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
 ];
@@ -971,6 +968,7 @@ function App(){
   const [q, setQ] = useState("");
   const [soloPrio, setSoloPrio] = useState(false);
   const [showUpdates, setShowUpdates] = useState(false);
+  const [showAlbergues, setShowAlbergues] = useState(false);
   const nowISO = useMemo(() => new Date().toISOString(), []);
 
   const filtrados = useMemo(() => {
@@ -991,6 +989,18 @@ function App(){
         <span className="lu-label"><span className="live"></span>Última actualización</span>
         <span className="lu-time">{ACTUALIZADO}</span>
       </div>
+
+      <div className="top-actions">
+        <a className="cta-reportar cta-sm" href="#reportar">
+          <span className="cta-ico">＋</span>
+          Deja aquí tu actualización
+        </a>
+        <a className="cta-reportar cta-refugio cta-sm" href="#refugio">
+          <span className="cta-ico">🏠</span>
+          Ofrece tu casa como refugio
+        </a>
+      </div>
+
       <header>
         <div className="eyebrow">Ayuda focalizada para Cali</div>
         <h1>Coordinación de <span>Donaciones</span></h1>
@@ -1000,7 +1010,7 @@ function App(){
         </p>
         <div className="meta">
           <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
-          <span className="chip urgente"><span className="dot"></span>{ALTA_PRIORIDAD.length} necesidades prioritarias</span>
+          <span className="chip urgente"><span className="dot"></span>{ALTA_PRIORIDAD.length} actualizaciones importantes</span>
         </div>
 
         <div className="grid-info">
@@ -1034,7 +1044,7 @@ function App(){
               <path d="M12 9v4M12 17h.01"></path>
               <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
             </svg>
-            Necesidades prioritarias
+            Últimas actualizaciones importantes
           </div>
           {ALTA_PRIORIDAD.map((p,i) => (
             <div className="pr-item" key={i}>
@@ -1068,30 +1078,32 @@ function App(){
 
       {ALBERGUES.length ? (
         <div className="albergues">
-          <h2>Albergues temporales sin costo</h2>
-          <p className="al-sub">Si en Cali te quedaste sin dónde pasar la noche de forma segura porque tu casa o apartamento quedó inhabitable, estos albergues son gratuitos para ti y tu familia.</p>
-          <div className="al-list">
-            {ALBERGUES.map((a,i) => (
-              <div className="al-item" key={i}>
-                <div className="al-nombre">{a.nombre}</div>
-                {a.direccion ? <div className="al-dir">{a.direccion}</div> : null}
+          <button
+            type="button"
+            className="al-toggle"
+            onClick={() => setShowAlbergues(v => !v)}
+            aria-expanded={showAlbergues}
+          >
+            <h2>Albergues temporales sin costo</h2>
+            <span className={"al-chevron" + (showAlbergues ? " open" : "")}>▾</span>
+          </button>
+          {showAlbergues ? (
+            <>
+              <p className="al-sub">Si en Cali te quedaste sin dónde pasar la noche de forma segura porque tu casa o apartamento quedó inhabitable, estos albergues son gratuitos para ti y tu familia.</p>
+              <div className="al-list">
+                {ALBERGUES.map((a,i) => (
+                  <div className="al-item" key={i}>
+                    <div className="al-nombre">{a.nombre}</div>
+                    {a.direccion ? <div className="al-dir">{a.direccion}</div> : null}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
-          <div className="al-nota">Si quieres ayudar con almuerzos, comunícate antes con los albergues gratuitos para coordinar la entrega y evitar que se pierdan.</div>
+              <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
+              <div className="al-nota">Si quieres ayudar con almuerzos, comunícate antes con los albergues gratuitos para coordinar la entrega y evitar que se pierdan.</div>
+            </>
+          ) : null}
         </div>
       ) : null}
-
-      <a className="cta-reportar" href="#reportar">
-        <span className="cta-ico">＋</span>
-        Deja aquí tu actualización
-      </a>
-
-      <a className="cta-reportar cta-refugio" href="#refugio">
-        <span className="cta-ico">🏠</span>
-        Ofrece tu casa como refugio temporal
-      </a>
 
       {ACTUALIZACIONES.length ? (
         <div className="updates">
