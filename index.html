@@ -181,6 +181,30 @@
   .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
   .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
 
+  /* Albergues temporales */
+  .albergues{
+    margin-top:20px;padding:24px 26px;border-radius:20px;
+    background:var(--space-800);border:1px solid rgba(62,224,142,.32);
+  }
+  .albergues h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ok);margin-bottom:6px;
+  }
+  .albergues .al-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin-bottom:16px}
+  .al-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .al-item{
+    background:var(--space-900);border:1px solid rgba(62,224,142,.2);
+    border-radius:14px;padding:14px 16px;
+  }
+  .al-nombre{font-size:14.5px;font-weight:700;color:var(--white)}
+  .al-dir{color:var(--star-light);font-size:12.5px;font-weight:500;margin-top:5px;line-height:1.4}
+  .al-contacto{
+    margin-top:16px;padding:14px 16px;border-radius:12px;
+    background:rgba(62,224,142,.1);border:1px solid rgba(62,224,142,.28);
+    color:var(--white);font-size:13.5px;font-weight:600;line-height:1.5;
+  }
+  @media (max-width:680px){ .al-list{grid-template-columns:1fr} }
+
   /* Últimas actualizaciones */
   .updates{
     margin-top:20px;
@@ -489,11 +513,13 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 10:09 a. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 10:25 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
 const ACTUALIZACIONES = [
+  { fecha:"12 de agosto de 2026, 10:25 a. m.", texto:"Coliseo del Pueblo: FULL, ya no reciben más civiles para organizar donaciones. Dirige tu apoyo a otro punto." },
+  { fecha:"12 de agosto de 2026, 10:20 a. m.", texto:"Se reitera: NO se necesita gente en el edificio Ariguaní (Calle 3D con Carrera 67), en el refugio. Si pueden, ayuden en otros puntos." },
   { fecha:"12 de agosto de 2026, 12:00 p. m.", texto:"Buenas noches, , , Pertenecemos a una empresa que tiene la posibilidad de realizar una donaciÃÂ³n de cuÃÂ±etes para sacar escombros. ÃÂ¿Con quien podemos comunicarnos para su entrega? Quedamos atentos!!" },
   { fecha:"12 de agosto de 2026, 10:09 a. m.", texto:"Todos: Buenos días!! Por favor si tienen maquinaria, guantes, picas y toda ayuda posible, poner con Nombre y Teléfono para crear la publicación y subirla a los estados. MIL GRACIAS CALI!!" },
   { fecha:"12 de agosto de 2026, 9:51 a. m.", texto:"Disponible Camioneta Pickup para traslado de donaciones a municipios afectados, comunicarse al wsap. 3154347455" },
@@ -868,6 +894,21 @@ const NO_DESPLAZARSE = [
   { sector:"HUV", nota:"Reportado lleno; confirma antes de llevar donaciones" },
   { sector:"Cruz Roja", nota:"Colapsada; confirma si reciben personas, donaciones o insumos" },
 ];
+
+const ALBERGUES = [
+  { nombre:"Hotel Six Avenue Cali", direccion:"Av. 6a N #17N-73, Santa Mónica Residencial" },
+  { nombre:"Cancha de hockey Miguel Calero", direccion:"Calle 9 con Carrera 37A / 39" },
+  { nombre:"Diamante de béisbol", direccion:"" },
+  { nombre:"Loft House 14", direccion:"Carrera 26 #2-91" },
+  { nombre:"Motel California", direccion:"Cl. 10 #30-155, Arroyo Hondo" },
+  { nombre:"Motel Éxtasis", direccion:"3ra Norte 72 Esquina" },
+  { nombre:"Cristal Palace", direccion:"Enseguida de TQ Tecnoquímicas, Cra. 7a #23-43" },
+  { nombre:"Residencias Ramírez", direccion:"Enseguida de TQ Tecnoquímicas, Cra. 7a #23-43, San Nicolás" },
+  { nombre:"Residencias Bugatier", direccion:"Cra. 25a #14c-09" },
+  { nombre:"Plaza Real Norte", direccion:"Av. 2 Nte. #21 Norte-99" },
+  { nombre:"Motel Kamasutra", direccion:"Cl. 10 #29 A-50, Acopi" },
+];
+const ALBERGUES_CONTACTO = "Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076. Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.";
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
@@ -877,6 +918,8 @@ const ALTA_PRIORIDAD = [
   { punto:"Edificio Aguama", nota:"Reportan una mujer atrapada con sus dos hijos. Se necesita apoyo de rescate cercano." },
   { punto:"Panadería La Quinta (5ta con 42)", nota:"Personal profesional sigue verificando si hay una persona con vida. Requieren silencio y herramientas de rescate." },
   { punto:"Puntales o andamios en La 56 con 3ra", nota:"La 56 (Guadalupe) con 3ra, al lado del D1. Para sostener la estructura por dentro y seguir sacando escombros." },
+  { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
+  { punto:"Coliseo del Pueblo: FULL, no reciben más civiles", nota:"Ya no se necesitan más personas para organizar donaciones. Si querías apoyar ahí, dirígete a otro punto." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -894,15 +937,9 @@ const PUNTOS = [
   { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
   { lugar:"Torres de Limonar", direccion:"Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
   { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
-  { lugar:"Olla comunitaria El Poblado", direccion:"", coordinador:"Pilar Rodríguez / Asociación Eco de Mujeres", contacto:"301 7124668", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Proteína (carne, pollo, res)","Desechables para 50 personas"] },
   { lugar:"Edificio Elvira", direccion:"Carrera 4 # 58-18", coordinador:"Camila Sánchez", contacto:"314 8875589", hora:HORA_ACT, prioridad:true, nota:"Voluntarios en el lugar: Juan Manuel Almario, Kevin Zárate · Más voluntarios llegan a las 2:00 p. m.", necesidades:[] },
-  { lugar:"Edificio Cantabria", direccion:"", coordinador:"Estefanía Galarza", contacto:"300 3119223", hora:HORA_ACT, prioridad:true, estado:"urgente", nota:"No hay nada en el momento; se necesita personal con urgencia", necesidades:["Personal","Cascos","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Guantes","Alimentación"] },
-  { lugar:"Edificio Parques de la Fontana", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Linternas","Cascos","Guantes","Palas","Picos","Alimentos preparados","Cajas"] },
-  { lugar:"Damnificados Chiminangos", direccion:"Cerca al Conjunto Kumanday", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, estado:"urgente", necesidades:["Alimentación"] },
-  { lugar:"Calle 5 con 44 — Panadería Quinta Pan", direccion:"Calle 5 con 44", coordinador:"", contacto:"", hora:"1:30 p. m.", prioridad:true, estado:"urgente", nota:"NO hay olla · Intentan salvar a una persona (reportado 11:37 a. m.)", necesidades:["Guantes","Tapabocas","Mesas para alimentos"] },
 
   { lugar:"Edif. Vanessa", direccion:"Cra. 44 #9-35", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos","Guantes","Hielo","Carros de mercado","Zorras","Bisturís","Tijeras","Agujas para canalizar","Comida para animales","Medicamentos para animales"] },
-  { lugar:"Refugio — Unidad Residencial Ariguaní", direccion:"Carrera 67 #3C-15", coordinador:"Fabián Libreros", contacto:"311 2715635", hora:"1:30 p. m.", prioridad:true, estado:"urgente", necesidades:["Medicamentos básicos","Gafas de protección","Tapabocas","Tarros grandes","Hielo","Hidratación","Cascos","Guantes","Porras","Palas"] },
   { lugar:"Edificio Pilar", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos"] },
   { lugar:"Colegio Adventista", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos","Hielo"] },
   { lugar:"Edificio Archinie", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Alimentación"] },
@@ -1077,6 +1114,22 @@ function App(){
             ))}
           </div>
           <p className="desc">{NOTA_NO_DESPLAZARSE}</p>
+        </div>
+      ) : null}
+
+      {ALBERGUES.length ? (
+        <div className="albergues">
+          <h2>Albergues temporales sin costo</h2>
+          <p className="al-sub">Si en Cali te quedaste sin dónde pasar la noche de forma segura porque tu casa o apartamento quedó inhabitable, estos albergues son gratuitos para ti y tu familia.</p>
+          <div className="al-list">
+            {ALBERGUES.map((a,i) => (
+              <div className="al-item" key={i}>
+                <div className="al-nombre">{a.nombre}</div>
+                {a.direccion ? <div className="al-dir">{a.direccion}</div> : null}
+              </div>
+            ))}
+          </div>
+          <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
         </div>
       ) : null}
 
