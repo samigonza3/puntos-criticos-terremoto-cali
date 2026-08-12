@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coordinación de Donaciones · Ayuda focalizada para Cali</title>
+<meta name="description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="alternate icon" href="favicon.svg" />
+<link rel="apple-touch-icon" href="favicon.svg" />
+
+<!-- Tarjeta al compartir el link (Open Graph / Twitter) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Conoce aquí los puntos críticos del Terremoto en Cali 2026" />
+<meta property="og:description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
+<meta property="og:locale" content="es_CO" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Conoce aquí los puntos críticos del Terremoto en Cali 2026" />
+<meta name="twitter:description" content="Proyecto independiente. Estamos actualizando coordinados con puntos de desastre." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+  :root{
+    --space-950:#040817;
+    --space-900:#070D22;
+    --space-800:#0B1533;
+    --space-700:#122048;
+    --nebula:#1B2E66;
+    --star-blue:#3E7BFF;
+    --star-light:#7FA8FF;
+    --ice:#C9D9FF;
+    --white:#F4F7FF;
+    --muted:#8B9BC7;
+    --alert:#FF5C6B;
+    --alert-soft:rgba(255,92,107,.12);
+    --ok:#3EE08E;
+    --warn:#FFB020;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;
+    background:var(--space-950);
+    color:var(--white);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+
+  /* Menú hamburguesa */
+  .burger-btn{
+    position:fixed;top:18px;right:18px;z-index:60;
+    width:44px;height:44px;border-radius:12px;border:1px solid rgba(127,168,255,.3);
+    background:var(--space-800);display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:5px;cursor:pointer;
+  }
+  .burger-btn span{width:20px;height:2px;background:var(--ice);border-radius:2px}
+  .menu-overlay{
+    position:fixed;inset:0;background:rgba(4,8,23,.6);z-index:70;
+  }
+  .menu-panel{
+    position:fixed;top:0;right:0;height:100%;width:min(78vw,300px);z-index:80;
+    background:var(--space-800);border-left:1px solid rgba(127,168,255,.2);
+    padding:20px 18px;display:flex;flex-direction:column;gap:6px;
+    box-shadow:-12px 0 40px rgba(0,0,0,.4);
+  }
+  .menu-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .menu-title{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--star-light)}
+  .menu-close{background:none;border:none;color:var(--ice);font-size:18px;cursor:pointer;padding:4px}
+  .menu-panel a{
+    display:block;padding:12px 10px;border-radius:10px;color:var(--white);
+    text-decoration:none;font-size:14.5px;font-weight:600;
+  }
+  .menu-panel a:hover{background:rgba(127,168,255,.1)}
+  .menu-link-highlight{color:#22B27A !important;font-weight:800}
+
+  /* Header */
+  header{
+    position:relative;
+    padding:38px 30px 34px;
+    border-radius:22px;
+    background:
+      radial-gradient(120% 140% at 50% -20%, var(--nebula) 0%, rgba(27,46,102,0) 55%),
+      linear-gradient(180deg, var(--space-800) 0%, var(--space-900) 100%);
+    border:1px solid rgba(127,168,255,.14);
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    font-size:12px;color:var(--star-light);
+  }
+  h1{
+    font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.08;
+    margin:12px 0 10px;letter-spacing:-.01em;
+  }
+  h1 span{color:var(--star-blue);text-shadow:0 0 26px rgba(62,123,255,.55)}
+  .sub{color:var(--ice);max-width:640px;font-weight:400;font-size:15px;line-height:1.55}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:600;
+    background:rgba(18,32,72,.7);border:1px solid rgba(127,168,255,.16);color:var(--ice);
+  }
+  .chip .dot{width:7px;height:7px;border-radius:999px;background:var(--star-blue)}
+  .chip.urgente .dot{background:var(--alert)}
+
+  /* Última actualización en grande */
+  .lastupdate{
+    display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;
+    margin-bottom:20px;padding:26px 22px;border-radius:22px;
+    background:linear-gradient(180deg, rgba(62,123,255,.20), rgba(62,123,255,.05));
+    border:1px solid rgba(127,168,255,.4);
+    box-shadow:0 10px 34px rgba(62,123,255,.16);
+  }
+  .lastupdate .lu-label{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--star-light);
+  }
+  .lastupdate .lu-label .live{
+    width:9px;height:9px;border-radius:999px;background:var(--ok);
+    box-shadow:0 0 0 0 rgba(62,224,142,.6);animation:pulse 2s infinite;
+  }
+  .lastupdate .lu-time{font-size:clamp(26px,6vw,44px);font-weight:900;color:var(--white);line-height:1.02;letter-spacing:-.01em}
+
+  /* Bloques informativos */
+  .grid-info{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-top:20px}
+  .card{
+    background:var(--space-800);
+    border:1px solid rgba(127,168,255,.14);
+    border-radius:18px;padding:22px 24px;
+  }
+  .card h2{
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--star-light);margin-bottom:14px;
+  }
+  .needs{display:flex;flex-wrap:wrap;gap:8px}
+  .need{
+    padding:7px 13px;border-radius:999px;font-size:13px;font-weight:500;
+    background:var(--space-700);border:1px solid rgba(127,168,255,.12);color:var(--white);
+  }
+  .alert-card{
+    background:var(--alert-soft);
+    border:1px solid rgba(255,92,107,.4);
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .alert-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:8px;
+  }
+  .alert-card p{font-size:16px;font-weight:700;line-height:1.35;color:var(--white)}
+
+  /* Banner sectores sobreabastecidos */
+  .overstock{
+    margin-top:20px;padding:22px 24px;border-radius:20px;
+    background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.42);
+  }
+  .overstock .tag{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--warn);margin-bottom:14px;display:flex;align-items:center;gap:9px;line-height:1.3;
+  }
+  .overstock .tag svg{flex:none}
+  .overstock .needs{margin-bottom:12px}
+  .overstock .need{
+    background:rgba(255,176,32,.14);border-color:rgba(255,176,32,.35);color:#FFE1A8;font-weight:600;
+  }
+  .overstock .desc{font-size:13.5px;line-height:1.55;color:var(--ice)}
+
+  /* Sección de contraste: no salir sin verificar */
+  .contrast{
+    margin-bottom:20px;padding:26px 26px;border-radius:22px;text-align:center;
+    background:linear-gradient(180deg, rgba(62,224,142,.14), rgba(62,224,142,.04));
+    border:1px solid rgba(62,224,142,.45);
+  }
+  .contrast h2{
+    font-size:clamp(18px,3vw,24px);font-weight:900;line-height:1.15;color:var(--white);
+    margin-bottom:12px;letter-spacing:-.01em;
+  }
+  .contrast h2 span{color:var(--ok)}
+  .contrast p{font-size:14.5px;line-height:1.6;color:var(--ice);max-width:640px;margin:0 auto 10px}
+  .contrast p:last-child{margin-bottom:0}
+  .contrast p strong{color:var(--white);font-weight:800}
+  .contrast .contrast-cierre{margin-top:12px;font-size:15px;font-weight:800;color:var(--ok)}
+
+  /* Marco de alta prioridad */
+  .priority{
+    margin-top:20px;padding:22px 24px;border-radius:20px;
+    background:linear-gradient(180deg, rgba(255,92,107,.16), rgba(255,92,107,.07));
+    border:1px solid rgba(255,92,107,.55);
+    box-shadow:0 0 0 1px rgba(255,92,107,.15), 0 10px 30px rgba(255,92,107,.12);
+  }
+  .priority .tag{
+    font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:14px;display:flex;align-items:center;gap:9px;
+  }
+  .priority .tag svg{flex:none}
+  .priority .pr-item{
+    display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,92,107,.16);
+  }
+  .priority .pr-item:last-child{border-bottom:none;padding-bottom:0}
+  .priority .pr-item:first-of-type{padding-top:0}
+  .priority .pr-dot{flex:none;width:9px;height:9px;border-radius:999px;background:var(--alert);margin-top:6px}
+  .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
+  .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
+
+  /* Albergues temporales */
+  .albergues{
+    margin-top:20px;padding:24px 26px;border-radius:20px;
+    background:var(--space-800);border:1px solid rgba(62,224,142,.32);
+  }
+  .albergues h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ok);margin:0;
+  }
+  .al-toggle{
+    width:100%;display:flex;align-items:center;justify-content:space-between;
+    background:none;border:none;padding:0;margin-bottom:6px;cursor:pointer;
+  }
+  .al-chevron{
+    color:var(--ok);font-size:16px;transition:transform .15s;flex:0 0 auto;margin-left:12px;
+  }
+  .al-chevron.open{transform:rotate(180deg)}
+  .albergues .al-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin-bottom:16px}
+  .al-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .al-item{
+    background:var(--space-900);border:1px solid rgba(62,224,142,.2);
+    border-radius:14px;padding:14px 16px;
+  }
+  .al-nombre{font-size:14.5px;font-weight:700;color:var(--white)}
+  .al-dir{color:var(--star-light);font-size:12.5px;font-weight:500;margin-top:5px;line-height:1.4}
+  .al-contacto{
+    margin-top:16px;padding:14px 16px;border-radius:12px;
+    background:rgba(62,224,142,.1);border:1px solid rgba(62,224,142,.28);
+    color:var(--white);font-size:13.5px;font-weight:600;line-height:1.5;
+  }
+  .al-nota{margin-top:10px;color:var(--ice);font-size:13px;line-height:1.5}
+  @media (max-width:680px){ .al-list{grid-template-columns:1fr} }
+
+  /* Últimas actualizaciones */
+  .updates{
+    margin-top:20px;
+    background:var(--space-800);
+    border:1px solid rgba(127,168,255,.14);
+    border-radius:18px;padding:22px 24px;
+  }
+  .updates h2{
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--star-light);margin-bottom:16px;display:flex;align-items:center;gap:9px;
+  }
+  .updates h2 .live{
+    width:8px;height:8px;border-radius:999px;background:var(--ok);
+    box-shadow:0 0 0 0 rgba(62,224,142,.6);animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(62,224,142,.5)}
+    70%{box-shadow:0 0 0 8px rgba(62,224,142,0)}
+    100%{box-shadow:0 0 0 0 rgba(62,224,142,0)}
+  }
+  .up-item{
+    display:flex;gap:14px;padding:12px 0;
+    border-bottom:1px solid rgba(127,168,255,.08);
+  }
+  .up-item:last-child{border-bottom:none;padding-bottom:0}
+  .up-item:first-child{padding-top:0}
+  .up-dot{
+    flex:none;width:9px;height:9px;border-radius:999px;background:var(--star-blue);margin-top:6px;
+  }
+  .up-body{flex:1}
+  .up-time{
+    font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:3px;
+  }
+  .up-text{font-size:14px;color:var(--white);line-height:1.5;font-weight:500}
+  .up-punto{font-size:14px;font-weight:800;color:var(--star-light);margin-bottom:2px}
+  .up-contacto{font-size:12.5px;font-weight:600;color:var(--ok);margin-top:5px}
+  .up-toggle{
+    margin-top:16px;width:100%;cursor:pointer;font-family:inherit;
+    font-size:13.5px;font-weight:700;color:var(--star-light);
+    background:var(--space-900);border:1px solid rgba(127,168,255,.2);
+    border-radius:12px;padding:11px 16px;transition:.15s;
+  }
+  .up-toggle:hover{border-color:var(--star-blue);color:var(--white)}
+
+  /* Ayuda disponible */
+  .ayudas{
+    margin-top:20px;
+    background:var(--space-800);
+    border:1px solid rgba(62,224,142,.3);
+    border-radius:20px;padding:24px 26px;
+  }
+  .ayudas h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ok);margin-bottom:6px;
+  }
+  .ayudas .ay-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
+  .ay-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ay-item{
+    background:var(--space-900);border:1px solid rgba(62,224,142,.2);
+    border-radius:14px;padding:14px 16px;
+  }
+  .ay-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ay-rec{font-size:14.5px;font-weight:700;color:var(--white)}
+  .ay-dest{
+    font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ok);background:rgba(62,224,142,.12);padding:3px 9px;border-radius:999px;flex:none;
+  }
+  .ay-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:7px}
+  .ay-obs{color:var(--muted);font-size:12.5px;margin-top:4px;line-height:1.45}
+  @media (max-width:680px){
+    .ay-list{grid-template-columns:1fr}
+  }
+
+  /* Botón que lleva al formulario */
+  .cta-reportar{
+    display:flex;align-items:center;justify-content:center;gap:11px;
+    margin-top:20px;text-decoration:none;cursor:pointer;
+    font-size:15.5px;font-weight:700;color:#fff;
+    padding:16px 24px;border-radius:16px;
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+    border:1px solid rgba(127,168,255,.4);
+    box-shadow:0 8px 22px rgba(62,123,255,.28);transition:.15s;
+  }
+  .cta-reportar:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(62,123,255,.42)}
+  .cta-reportar .cta-ico{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:999px;background:rgba(255,255,255,.2);
+    font-size:18px;font-weight:400;line-height:1;
+  }
+  #reportar{scroll-margin-top:20px}
+  #refugio{scroll-margin-top:20px}
+  .top-actions{
+    display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px;
+  }
+  .cta-sm{
+    flex:1 1 220px;margin-top:0;padding:11px 16px;font-size:13px;border-radius:12px;
+  }
+  .cta-sm .cta-ico{width:19px;height:19px;font-size:14px}
+  .cta-refugio{
+    background:linear-gradient(180deg,#22B27A,#178A5D);
+    border:1px solid rgba(120,230,190,.4);
+    box-shadow:0 8px 22px rgba(34,178,122,.28);
+  }
+  .cta-refugio:hover{box-shadow:0 10px 28px rgba(34,178,122,.42)}
+  .map-btn{background:linear-gradient(180deg,#2E5FE0,#1E3FB0)}
+  .mapa-box{
+    margin-top:16px;border:1px solid rgba(127,168,255,.18);
+    border-radius:20px;overflow:hidden;background:var(--space-800);
+  }
+  .mapa{height:460px;width:100%}
+  .mapa .leaflet-popup-content{font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4}
+  .mapa-nota{padding:12px 18px;font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* Clínicas que requieren evacuación */
+  .clinicas{
+    margin-top:20px;
+    background:var(--alert-soft);
+    border:1px solid rgba(255,92,107,.4);
+    border-radius:20px;padding:24px 26px;
+  }
+  .clinicas h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:6px;display:flex;align-items:center;gap:9px;
+  }
+  .clinicas .cl-sub{color:var(--ice);font-size:13.5px;margin-bottom:16px}
+  .cl-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .cl-item{
+    display:flex;align-items:center;gap:10px;
+    background:var(--space-900);border:1px solid rgba(255,92,107,.25);
+    border-radius:12px;padding:12px 15px;font-size:14.5px;font-weight:600;color:var(--white);
+  }
+  .cl-item::before{
+    content:"";flex:none;width:8px;height:8px;border-radius:999px;background:var(--alert);
+  }
+  @media (max-width:680px){
+    .cl-list{grid-template-columns:1fr}
+  }
+
+  /* Formulario de actualización */
+  .form-card{
+    margin-top:20px;
+    background:
+      radial-gradient(120% 160% at 100% 0%, rgba(62,123,255,.14) 0%, rgba(62,123,255,0) 55%),
+      var(--space-800);
+    border:1px solid rgba(127,168,255,.22);
+    border-radius:20px;padding:26px 26px 28px;
+  }
+  .form-card .eyebrow{margin-bottom:6px}
+  .form-card h2{
+    font-size:clamp(20px,2.6vw,26px);font-weight:800;line-height:1.12;
+    color:var(--white);margin:0 0 6px;letter-spacing:-.01em;text-transform:none;
+  }
+  .form-card .form-sub{color:var(--ice);font-size:14px;line-height:1.5;margin-bottom:20px;max-width:560px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1 / -1}
+  .field label{
+    font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light);
+  }
+  .field input,.field textarea{
+    width:100%;font-family:inherit;font-size:15px;color:var(--white);
+    background:var(--space-900);border:1px solid rgba(127,168,255,.18);
+    border-radius:12px;padding:12px 14px;outline:none;transition:.15s;
+  }
+  .field textarea{min-height:96px;resize:vertical;line-height:1.5}
+  .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+  .field input:focus,.field textarea:focus{
+    border-color:var(--star-blue);box-shadow:0 0 0 3px rgba(62,123,255,.18);
+  }
+  .btn-enviar{
+    grid-column:1 / -1;justify-self:start;margin-top:4px;
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+    font-family:inherit;font-size:15px;font-weight:700;color:#fff;
+    padding:13px 26px;border:none;border-radius:999px;
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+    box-shadow:0 8px 22px rgba(62,123,255,.28);transition:.15s;
+  }
+  .btn-enviar:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(62,123,255,.4)}
+  .hp{position:absolute;left:-9999px}
+  @media (max-width:680px){
+    .form-grid{grid-template-columns:1fr}
+  }
+
+  /* Controles */
+  .controls{
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+    margin:32px 0 16px;
+  }
+  .search{
+    flex:1;min-width:220px;display:flex;align-items:center;gap:10px;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.16);
+    border-radius:999px;padding:12px 18px;
+  }
+  .search:focus-within{border-color:var(--star-blue);box-shadow:0 0 0 3px rgba(62,123,255,.18)}
+  .search svg{flex:none;opacity:.7}
+  .search input{
+    flex:1;background:none;border:none;outline:none;color:var(--white);
+    font-family:inherit;font-size:15px;
+  }
+  .search input::placeholder{color:var(--muted)}
+  .toggle{
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;
+    padding:12px 18px;border-radius:999px;font-size:14px;font-weight:600;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.16);color:var(--ice);
+    transition:.15s;
+  }
+  .toggle.on{
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+    border-color:transparent;color:#fff;box-shadow:0 8px 22px rgba(62,123,255,.28);
+  }
+  .toggle .box{width:16px;height:16px;border-radius:5px;border:2px solid currentColor;position:relative}
+  .toggle.on .box::after{content:"";position:absolute;inset:2px;border-radius:2px;background:#fff}
+
+  .counter{font-size:13px;color:var(--muted);margin-left:auto;font-weight:500}
+
+  /* Tabla */
+  .tabla{
+    width:100%;border-collapse:separate;border-spacing:0;
+    background:var(--space-900);border:1px solid rgba(127,168,255,.12);
+    border-radius:18px;overflow:hidden;
+  }
+  .tabla thead th{
+    text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--star-light);padding:16px 20px;background:var(--space-800);
+    border-bottom:1px solid rgba(127,168,255,.14);
+  }
+  .tabla tbody td{
+    padding:16px 20px;border-bottom:1px solid rgba(127,168,255,.07);
+    vertical-align:top;font-size:14.5px;
+  }
+  .tabla tbody tr:last-child td{border-bottom:none}
+  .tabla tbody tr.prio{background:linear-gradient(90deg,rgba(62,123,255,.09),transparent 60%)}
+  .lugar{font-weight:700;color:var(--white);display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .badge{
+    font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 8px;border-radius:999px;flex:none;
+    background:var(--alert);color:#fff;
+  }
+  .badge.ok{background:var(--ok);color:#04240F}
+  .nota-ok{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;font-weight:600;color:var(--ok);
+  }
+  .nota-ok::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--ok);flex:none}
+  .nota-info{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:13px;font-weight:600;color:var(--star-light);
+  }
+  .nota-info::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--star-blue);flex:none}
+  .nota-alert{
+    display:inline-flex;align-items:flex-start;gap:7px;
+    font-size:13px;font-weight:700;color:var(--alert);line-height:1.4;
+  }
+  .nota-alert::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--alert);flex:none;margin-top:5px}
+  .dir{color:var(--ice);font-weight:500}
+  .dir.vacio{color:var(--muted);font-style:italic;font-weight:400}
+  .p-dir{color:var(--ice);font-size:13px;font-weight:500;margin-top:3px}
+  .p-coord{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:5px}
+  .p-hora{color:var(--muted);font-size:11.5px;font-weight:500;margin-top:5px}
+  .cel-nota{color:var(--ice);font-size:13.5px;font-weight:500;line-height:1.45;margin-bottom:8px}
+  .badge.activo{background:rgba(127,168,255,.16);color:var(--star-light)}
+  .cel-need{display:flex;flex-wrap:wrap;gap:6px}
+  .cel-need .need{font-size:12px;padding:5px 10px}
+  .sinnead{color:var(--muted);font-size:13px}
+  .empty{padding:44px 20px;text-align:center;color:var(--muted);font-size:15px}
+
+  footer{margin-top:34px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.7}
+  footer strong{color:var(--ice);font-weight:600}
+
+  @media (max-width:820px){
+    .grid-info{grid-template-columns:1fr}
+  }
+  @media (max-width:680px){
+    .wrap{padding:24px 14px 60px}
+    header{padding:28px 20px}
+    .counter{width:100%;margin:0;order:5}
+    .tabla thead{display:none}
+    .tabla,.tabla tbody,.tabla tr,.tabla td{display:block;width:100%}
+    .tabla{border-radius:16px}
+    .tabla tbody tr{
+      border-bottom:1px solid rgba(127,168,255,.12);padding:6px 0;
+    }
+    .tabla tbody tr:last-child{border-bottom:none}
+    .tabla tbody td{border:none;padding:6px 18px}
+    .tabla tbody td::before{
+      content:attr(data-label);display:block;
+      font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--star-light);margin-bottom:4px;
+    }
+    .tabla tbody td[data-label="Punto"]{padding-top:16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Formulario oculto para que Netlify lo detecte en el build (la app se renderiza con JS) -->
+<form name="actualizaciones" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="fecha_hora" />
+  <input type="text" name="punto" />
+  <input type="text" name="direccion" />
+  <input type="text" name="persona" />
+  <textarea name="actualizacion"></textarea>
+  <div data-netlify-recaptcha="true"></div>
+</form>
+
+<!-- Formulario oculto: ofrecimiento de casa como refugio temporal -->
+<form name="refugios" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="fecha_hora" />
+  <input type="text" name="nombre" />
+  <input type="text" name="telefono" />
+  <input type="text" name="zona" />
+  <input type="text" name="cupos" />
+  <input type="text" name="dias_disponible" />
+  <textarea name="condiciones"></textarea>
+  <div data-netlify-recaptcha="true"></div>
+</form>
+
+<div id="root"></div>
+
+<script type="text/babel">
+/* ============================================================
+   EDITA AQUI PARA ACTUALIZAR LA INFORMACION
+   ------------------------------------------------------------
+   1. ACTUALIZADO      -> fecha que se muestra en el encabezado.
+   2. NECESIDADES_GENERALES -> insumos base que se necesitan en los puntos.
+   3. ALERTA           -> mensaje rojo destacado (deja "" para ocultarlo).
+   4. NO_DESPLAZARSE -> puntos cerrados o llenos (banner amarillo). Cada uno: {sector, nota}.
+        NOTA_NO_DESPLAZARSE -> texto explicativo de ese banner.
+   5. PUNTOS           -> agrega, edita o borra objetos.
+        lugar        : nombre o direccion del punto
+        direccion    : direccion exacta (deja "" si no aplica)
+        prioridad    : true = punto urgente (resaltado + etiqueta)
+        necesidades  : lista de insumos de ESE punto (deja [] si no hay)
+   Guarda el archivo y vuelve a arrastrarlo a Netlify.
+   ============================================================ */
+
+const ACTUALIZADO = "12 de agosto de 2026, 2:40 p. m.";
+
+/* ULTIMAS ACTUALIZACIONES
+   Agrega arriba la más reciente. Formato de fecha libre. */
+const ACTUALIZACIONES = [
+  { fecha:"12 de agosto de 2026, 2:40 p. m.", punto:"Calle 9 con Cra 44", contacto:"", texto:"⚠️ EVACUACIÓN INMEDIATA ORDENADA en Calle 9 con Cra 44 por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. Aléjese del área de inmediato y no ingrese." },
+  { fecha:"12 de agosto de 2026, 2:37 p. m.", punto:"Roldanillo", contacto:"", texto:"Se necesitan donaciones de maquinaria y personas disponibles, agua, etc. en Roldanillo. No tienen muchas donaciones." },
+  { fecha:"12 de agosto de 2026, 2:36 p. m.", punto:"Dagua", contacto:"Alejandra, 314 8353553", texto:"Pregunta si en Dagua necesitan manos de ayuda; puede desplazarse hasta allá con otras dos personas." },
+  { fecha:"12 de agosto de 2026, 1:45 p. m.", punto:"Centro de Acopio comunitario Comuna 21", contacto:"Cristian Perea Plazas, 301 4841243", texto:"Centro de acopio comunitario habilitado en Carrera 24F #82B-04 para recibir donaciones para familias afectadas de la Comuna 21: agua potable, alimentos no perecederos, víveres, alimentos preparados, medicamentos, elementos de aseo y de primera necesidad, cobijas, colchonetas y ropa en buen estado. No es un punto crítico, es de recepción y distribución. Reporta además edificios con grietas por colapsar en la zona y pide evacuar a la gente de esos apartamentos." },
+  { fecha:"12 de agosto de 2026, 1:41 p. m.", punto:"Cali", contacto:"Daniela Largo, 305 3299913", texto:"Busca saber en qué puntos de búsqueda de sobrevivientes se necesitan dispositivos de tecnología para escuchar; tienen disponibles aparatos de escucha y necesitan saber dónde hace falta." },
+  { fecha:"12 de agosto de 2026, 1:31 p. m.", punto:"Cali", contacto:"", texto:"Somos 1 APH y 2 civiles. ¿Dónde necesitan manos para apoyar?" },
+  { fecha:"12 de agosto de 2026, 1:26 p. m.", punto:"Cali", contacto:"David, 316 7385385", texto:"Tiene alimentos preparados disponibles para damnificados, rescatistas y voluntarios." },
+  { fecha:"12 de agosto de 2026, 1:26 p. m.", punto:"Al lado de Cimivet, Calle 5 con 44", contacto:"Felipe, 322 2113774", texto:"Se necesitan vigas de madera y bastones de madera." },
+  { fecha:"12 de agosto de 2026, 1:20 p. m.", punto:"Evaluación estructural o de redes eléctricas", contacto:"Samuel Salazar, +57 313 7618582", texto:"Ofrece evaluación estructural o de redes eléctricas sin costo alguno para quien lo necesite." },
+  { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Coliseo del Pueblo", contacto:"", texto:"Se necesitan relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
+  { fecha:"12 de agosto de 2026, 11:30 a. m.", punto:"Escuela Normal Superior", contacto:"", texto:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { fecha:"12 de agosto de 2026, 12:00 p. m.", punto:"", contacto:"Natalia 3217079520", texto:"Buenas noches,,, Pertenecemos a una empresa que tiene la posibilidad de realizar una donación de cuñetes para sacar escombros. ¿Con quien podemos comunicarnos para su entrega? Quedamos atentos!!" },
+  { fecha:"12 de agosto de 2026, 11:02 a. m.", punto:"", contacto:"", texto:"Centro de acopio para animales: Centro de Bienestar Animal Cali (Carrera 56 #7 Oeste-445), desde el 11 de agosto a partir de las 9:00 a. m. Reciben alimento, medicamentos, artículos de aseo y cobijas o camas." },
+  { fecha:"12 de agosto de 2026, 11:00 a. m.", punto:"", contacto:"", texto:"Puntos oficiales de la Alcaldía para disposición de escombros: Estación de Transferencia, Cra. 50 con Av. Simón Bolívar (volquetas y chanas), 24 horas; y Cra. 8va con Cl. 59, barrio La Base (lote de Emcali, contiguo a Talleres del Municipio), solo volquetas, de 6:00 a. m. a 11:59 p. m." },
+  { fecha:"12 de agosto de 2026, 10:25 a. m.", punto:"", contacto:"", texto:"Coliseo del Pueblo: FULL, ya no reciben más civiles para organizar donaciones. Dirige tu apoyo a otro punto." },
+  { fecha:"12 de agosto de 2026, 10:21 a. m.", punto:"Clínica Imbanaco", contacto:"", texto:"En clínica Imbanaco, solo están recibiendo a la hora sangre O-., En cruz roja no están recibiendo a la hora porque están congestionados." },
+  { fecha:"12 de agosto de 2026, 10:20 a. m.", punto:"", contacto:"", texto:"Se reitera: NO se necesita gente en el edificio Ariguaní (Calle 3D con Carrera 67), en el refugio. Si pueden, ayuden en otros puntos." },
+  { fecha:"12 de agosto de 2026, 10:12 a. m.", punto:"Cruz roja", contacto:"", texto:"Cruz roja está full. Por ahora no reciben donaciones de sangre. Se puede hacer donaciones después del jueves." },
+  { fecha:"12 de agosto de 2026, 10:09 a. m.", punto:"Todos", contacto:"", texto:"Buenos días!! Por favor si tienen maquinaria, guantes, picas y toda ayuda posible, poner con Nombre y Teléfono para crear la publicación y subirla a los estados. MIL GRACIAS CALI!!" },
+  { fecha:"12 de agosto de 2026, 9:51 a. m.", punto:"", contacto:"", texto:"Disponible Camioneta Pickup para traslado de donaciones a municipios afectados, comunicarse al wsap. 3154347455" },
+  { fecha:"12 de agosto de 2026, 9:20 a. m.", punto:"", contacto:"", texto:"Antigua Licorera del Valle: punto de acopio para enviar ayudas a otros municipios." },
+  { fecha:"12 de agosto de 2026, 9:15 a. m.", punto:"", contacto:"", texto:"Dagua y El Cairo están pidiendo ayuda urgente." },
+  { fecha:"12 de agosto de 2026, 9:15 a. m.", punto:"", contacto:"", texto:"Muchas donaciones se están redireccionando a municipios del Chocó y a Buenaventura." },
+  { fecha:"12 de agosto de 2026, 9:15 a. m.", punto:"", contacto:"", texto:"Los topos mexicanos que llegaron ayer piden dispositivos Starlink para facilitar las labores de rescate." },
+  { fecha:"12 de agosto de 2026, 9:15 a. m.", punto:"", contacto:"", texto:"En varios puntos solo dejan pasar civiles con casco, guantes y zapatos de construcción, idealmente con certificación en uso de herramientas." },
+  { fecha:"12 de agosto de 2026, 9:15 a. m.", punto:"", contacto:"", texto:"La mayor necesidad ahora es maquinaria amarilla, volquetas y grúa pluma." },
+  { fecha:"12 de agosto de 2026, 9:10 a. m.", punto:"", contacto:"", texto:"Conjunto Ariguaní (Calle 3D con Carrera 67): por el momento NO venir personas, NO traer donaciones y absoluto silencio. Están trabajando con maquinaria especializada." },
+  { fecha:"12 de agosto de 2026, 9:08 a. m.", punto:"", contacto:"", texto:"La Flora: hay apartaestudios disponibles para personas que se quedaron sin casa o sin dónde pasar la noche. Escribir al 315 4384271." },
+  { fecha:"12 de agosto de 2026, 9:05 a. m.", punto:"", contacto:"", texto:"Poblado y Manuela Beltrán: requieren de todo." },
+  { fecha:"12 de agosto de 2026, 9:05 a. m.", punto:"", contacto:"", texto:"Alto Meléndez y Polvorines: necesitan comida, líquidos y colchonetas; hay personas durmiendo en los andenes." },
+  { fecha:"12 de agosto de 2026, 9:00 a. m.", punto:"Capri", contacto:"Juan Camilo 315 8500909", texto:"Tengo a disposición maquinaria pesada: excavadora oruga y retroexcavadora pájarita. A partir de las 9 am mañana, SE NECESITA OPERARIO, una persona que lo maneje" },
+  { fecha:"12 de agosto de 2026, 8:55 a. m.", punto:"EDIFICIO MARÍA ELVIRA", contacto:"Sofia Ronderos +57 310 2391830", texto:"Se necesita URGENTE PORFAVOR grúas, ph o Crain 10, 20, o 30 TONELADAS con cables para levantar techos, grúas y vigas" },
+  { fecha:"12 de agosto de 2026, 8:27 a. m.", punto:"Poblado 2", contacto:"", texto:"Se necesita la presencia de grupos capacitados para desastres cómo los bomberos, la defensa civil porque hay una casa que está de lado después del terremoto y con muchas grietas y hay casas a su alrededor" },
+  { fecha:"12 de agosto de 2026, 8:00 a. m.", punto:"Ciudadela Petronio, Unidad alberto galindo", contacto:"Alcaldía Santiago de Cali", texto:"Ciudadela Petronio (unidad alberto galindo, panamericanas)Se convierte en punto de acopio, a partir de mañana 12 de agosto a las 8am, se destinará las ayudas para el Valle, Choco, Risaralda, Quindío y caldas" },
+  { fecha:"12 de agosto de 2026, 7:06 a. m.", punto:"Drogas la rebaja calle 5 con 44", contacto:"Kevin riascos", texto:"Estamos necesitando maquinaria amarilla" },
+  { fecha:"12 de agosto de 2026, 6:48 a. m.", punto:"Melendez", contacto:"ESTEFANY", texto:"Rescstistas, cobijas, viveres, insumos medicos, colchonetas, linternas" },
+  { fecha:"12 de agosto de 2026, 6:26 a. m.", punto:"Unidsd residencial danubio", contacto:"Jenny marquez", texto:"Se necesita mercado para dos personas que perdieron su casa y les toco desalojar el lugar escríbame al 300 331 0326" },
+  { fecha:"12 de agosto de 2026, 4:39 a. m.", punto:"Torres del limonar", contacto:"", texto:"Haciendo prueba de sonido. Todos fuera del punto por ahora. Hasta las 5:20 am" },
+  { fecha:"12 de agosto de 2026, 3:45 a. m.", punto:"Melendez", contacto:"", texto:"Colchonetas, sábanas, gasas, micropore" },
+  { fecha:"12 de agosto de 2026, 3:45 a. m.", punto:"Notaría 20", contacto:"3113344939", texto:"Chiminangos 1 están sin luz se necesita linternas, batería, pilas,, Tequendama necesitan herramientas para quitar los escombros, elementos de seguridad,,, Notaría 20, Necesitan linternas, volqueta solo tienen 1" },
+  { fecha:"12 de agosto de 2026, 1:52 a. m.", punto:"Barrio caldas", contacto:"", texto:"Se necesitan manos con todos los elementos de protección, pulidoras, cascos. Ya no se necesita ni comida ni bebidas" },
+  { fecha:"12 de agosto de 2026, 1:14 a. m.", punto:"Capri", contacto:"Maria Osorio- 3169389230", texto:"Esparadrapo. Linternas y Tijeras para sutura." },
+  { fecha:"12 de agosto de 2026, 12:30 a. m.", punto:"CAPRI", contacto:"Royipets", texto:"Se necesitan Guacales para animales de todos los tamaños, toallas para cuerpo, comida húmeda para perro y gato" },
+  { fecha:"11 de agosto de 2026, 11:55 p. m.", punto:"La carrera 44 con 9", contacto:"Cali Iniciativas sociales", texto:"EN LA 44 CON 9, NECESITAN PERSONAS PARA SACAR ESCOMBROS,, LLEVAR TAPABOCAS, GAFAS Y GUANTES" },
+  { fecha:"11 de agosto de 2026, 11:43 p. m.", punto:"Edificio Ramalí", contacto:"Pati muñoz 3215644443", texto:"Se necesitan colchonetas, sabanas, toldillos, repelentes, pañales para niños menores de 2 años y alimento" },
+  { fecha:"11 de agosto de 2026, 11:38 p. m.", punto:"Conjunto Ramalí", contacto:"Persona encargada en el punto", texto:"Se necesitan colchonetas, toldillos, sabanas, repelente, pañales para niños menores de 2 años y alimentos." },
+  { fecha:"11 de agosto de 2026, 11:21 p. m.", punto:"Aguama", contacto:"", texto:"ALGUIEN CERCA AL EDIFICIO AGUAMA? MUJER ATRAPADA CON SUS DOS HIJOS" },
+  { fecha:"11 de agosto de 2026, 11:17 p. m.", punto:"Frente al éxito de San Fernando y enseguida de la bomba", contacto:"", texto:"En la calle 5 al frente del éxito de San Fernando donde habían llegado los 70 personas de la 3 edad ya no están ahí, fueron traslados a otros lados, no reciben comida preparada,, Solo alimentos no perecederos, agua, pañales de adulto y productos de aseo" },
+  { fecha:"11 de agosto de 2026, 11:07 p. m.", punto:"Altos de Santa Elena", contacto:"@elpikirey", texto:"Se necesitan carpas, cobijas, cosas para que las personas que se quedaron sin hogar puedan dormir ahí" },
+  { fecha:"11 de agosto de 2026, 10:29 p. m.", punto:"", contacto:"", texto:"Hola! Busco albergues pequeños o zonas poco visibilizadas donde estén alojadas familias desplazadas por el terremoto y necesiten voluntarios o recursos. Si conocen alguno, por favor envíenme la información" },
+  { fecha:"11 de agosto de 2026, 10:21 p. m.", punto:"Clinica Rey David", contacto:"Leidy Chávez", texto:"Clinica Rey David Necesitan, Agua para lavado de manos, Agua para aseo de pacientes, Linternas, Lámparas Led portátiles" },
+  { fecha:"11 de agosto de 2026, 10:20 p. m.", punto:"Palmero", contacto:"", texto:"En puntos cómo palmeto, se necesita alcohol, tapabocas, gazas, medicamentos: acetaminofen, ibuprofeno, vendas. No llevar nada de comida ni preparada." },
+  { fecha:"11 de agosto de 2026, 10:20 p. m.", punto:"Edificio Cantabria", contacto:"", texto:"Se necesita con urgencia escaleras altas" },
+  { fecha:"11 de agosto de 2026, 10:11 p. m.", punto:"Chiminangos", contacto:"", texto:"En chiminangos por fortuna ya hay mucha comida, y suficiente hidratación. Lo que necesitan son repelentes ya que deben acampar en un parque y también mantas, almohadas" },
+  { fecha:"11 de agosto de 2026, 9:54 p. m.", punto:"Panadería", contacto:"", texto:"En la panadería de La quinta están intentando rescatar a una persona" },
+  { fecha:"11 de agosto de 2026, 9:52 p. m.", punto:"Edificio de colores", contacto:"", texto:"Ya hay suficientes manos no se necesita más ayuda y mucha saturación de gente" },
+  { fecha:"11 de agosto de 2026, 9:50 p. m.", punto:"Hospital Carlos Holmes Trujillo", contacto:"", texto:"Están recibiendo todo tipo de ayuda." },
+  { fecha:"11 de agosto de 2026, 9:41 p. m.", punto:"Edificio Cantabria Calle 8B#45-17", contacto:"", texto:"En el edificio Cantabria Calle 8B#45-17 se encuentra Vicky Perea y ha dado señales de vida se ha escuchado gritar su nombre pero hay poco personal" },
+  { fecha:"11 de agosto de 2026, 9:38 p. m.", punto:"Edificio Vanessa", contacto:"", texto:"Se necesita maquinaria pesada para remoción de escombros." },
+  { fecha:"11 de agosto de 2026, 9:36 p. m.", punto:"Capri", contacto:"", texto:"Se necesita ayuda para levantar escombros en capri" },
+  { fecha:"11 de agosto de 2026, 9:35 p. m.", punto:"Torres de limonar Capri", contacto:"", texto:"Torres de limonar en Capri. Solo civiles voluntarios después de las 6:00 am del 12 de agosto. No se necesitan más insumos, necesitan SILENCIO." },
+  { fecha:"11 de agosto de 2026, 9:27 p. m.", punto:"Panaderia Quinta Pan", contacto:"", texto:"Personal profesional sigue verificando si hay personas con vida. Hay suficiente comida y agua" },
+  { fecha:"11 de agosto de 2026, 9:23 p. m.", punto:"", contacto:"Cali", texto:"Tenemos insumos para bebés donde necesitan???" },
+  { fecha:"11 de agosto de 2026, 9:20 p. m.", punto:"Altos de santa elena", contacto:"", texto:"Se necesitan agua alimentos no perecederos cobijas y ropa artículos de higiene medicamentos el edificio colapso y decretaron completa evacuación el día de hoy. Las personas están refugiadas en el cide los pinos comuna 18" },
+  { fecha:"11 de agosto de 2026, 9:18 p. m.", punto:"Altos de santa Elena", contacto:"Neysbyth Valencia", texto:"Se necesitan colchonetas, medicamentos, insumos urgente" },
+  { fecha:"11 de agosto de 2026, 9:14 p. m.", punto:"", contacto:"3148353553", texto:"En algún punto necesitan manos????" },
+  { fecha:"11 de agosto de 2026, 9:12 p. m.", punto:"ANA PILAR", contacto:"", texto:"RESCATISTAS EDIFICIO ANA PILAR POR LA PALZA DE TOROS HAY UN NIÑO UNA MADRE Y ABUELA ESTÁN VIVO" },
+  { fecha:"11 de agosto de 2026, 9:11 p. m.", punto:"Pampalinda", contacto:"Laura", texto:"Tenemos insumos, dónde podemos llevarlos?" },
+  { fecha:"11 de agosto de 2026, 9:07 p. m.", punto:"Chininangos", contacto:"", texto:"Chininangos, entregar sólo en el parquecito de niños, al frente de los asados. No entregar en el semáforo., Preguntar por Johana., Necesitan productos de aseo personal, carpas, colchonetas y cobijas, sobre todo, requieren repelente, pañitos. NO COMIDA PREPARADA" },
+  { fecha:"11 de agosto de 2026, 9:01 p. m.", punto:"Chininangos", contacto:"", texto:"Chininangos, Productos de aseo personal, carpas, colchonetas, repelente, pañitos.,, Sólo entregar en el parquecito de niños, entrada principal, al frente de los asados. La responsable se llama Johana" },
+  { fecha:"11 de agosto de 2026, 9:00 p. m.", punto:"", contacto:"", texto:"Pampalinda: solo requieren bebidas, baterías, hielo y gasolina." },
+  { fecha:"11 de agosto de 2026, 8:54 p. m.", punto:"", contacto:"", texto:"Tenemos linternas, por favor informar qué punto necesita. Informar por WhatsApp al 3214563381" },
+  { fecha:"11 de agosto de 2026, 8:50 p. m.", punto:"Portal del Alameda 2", contacto:"Sandra Viviana Torres - 3164986329", texto:"Se requiere revisión de la estructura por parte de Ingenieros o Bomberos" },
+  { fecha:"11 de agosto de 2026, 8:49 p. m.", punto:"Quintapan", contacto:"", texto:"Tengo linternas, en qué punto las puedo entregar? Comunicarse por whatsapp al 3214563381" },
+  { fecha:"11 de agosto de 2026, 8:48 p. m.", punto:"Edificio AnaPilar - plaza de toros", contacto:"", texto:"No más alimentos en pampalinda. Se requieren linternas y pilas doble A o triple A. NO MAS ALIMENTOS NI BEBIDAS. Suficientes manos de obra" },
+  { fecha:"11 de agosto de 2026, 8:45 p. m.", punto:"NOTARÍA 20 - POBLADO 2", contacto:"", texto:"NOTARÍA 20 - POBLADO 2, Se necesitan:, Insumos médicos., Alimentos no perecederos., Hielo., Cobijas y colchones inflables" },
+  { fecha:"11 de agosto de 2026, 8:44 p. m.", punto:"Altos de Santa Elena", contacto:"", texto:"Llevamos comida, colchonetas, ropa, cosas para bebés, cobijas, sábanas, cosas de aseo pero confirmar si es necesario en altos de Santa Elena" },
+  { fecha:"11 de agosto de 2026, 8:44 p. m.", punto:"Autopista sur", contacto:"Anne López", texto:"Hola, alguien que me diga un barrio donde necesiten ayuda mañana temprano estaré comprando y llevamos cosas con mis amigos para ayudar, dónde no haya mucha difusión y falte gente, estaré atenta por favor" },
+  { fecha:"11 de agosto de 2026, 8:43 p. m.", punto:"Edificio Vanessa", contacto:"", texto:"Se necesita policía para que despejen la zona hay mucha gente que no ayuda porque ya hay mucha gente, y lo que hace es ruido" },
+  { fecha:"11 de agosto de 2026, 8:41 p. m.", punto:"Edificio Vanessa", contacto:"", texto:"Se necesitan guantes de carnaza, cascos, linternas, cizallas, gatos, cosas para cortar." },
+  { fecha:"11 de agosto de 2026, 8:29 p. m.", punto:"Normal de Varones", contacto:"", texto:"Se necesitan linternas con pilas o cargadas por traslado de pacientes Clinica Nuestra." },
+  { fecha:"11 de agosto de 2026, 8:28 p. m.", punto:"", contacto:"Rocio", texto:"Hola, tengo medicamentos, para dolores musculares, para la presión alta, vitaminas, vendas, alcohol, pañitos, tapabocas, guantes quirúrgicos,, Gaseosas, pilas o baterías, sawis para preparar., Dónde las puedo llevar?" },
+  { fecha:"11 de agosto de 2026, 8:27 p. m.", punto:"Quintapan", contacto:"Maria fernanda", texto:"Se necesitan linternas, guantes, cascos y manos, no hay maquinaria" },
+  { fecha:"11 de agosto de 2026, 8:17 p. m.", punto:"Palmeto por la novena", contacto:"", texto:"Por palmeto está lleno no llevar comida preparada. Traer alimentos no perecederos, agua, cascos, linternas y bolsas de basura" },
+  { fecha:"11 de agosto de 2026, 8:13 p. m.", punto:"Hospital San Juan de Dios", contacto:"", texto:"Hospital San Juan de Dios no llevar más pañales ni toallitas ya tienen demasiados y no se puede recibir más" },
+  { fecha:"11 de agosto de 2026, 8:11 p. m.", punto:"Chimangos 2", contacto:"", texto:"Se solicita voluntarios en chimangos para repartir ayudas" },
+  { fecha:"11 de agosto de 2026, 8:09 p. m.", punto:"Hospital Carlos Holmes Trujillo", contacto:"", texto:"Que medicamentos o insumos necesitan en el Hospital Carlos Holmes? Necesitan comida preparada? Para llevar mañana." },
+  { fecha:"11 de agosto de 2026, 8:07 p. m.", punto:"Edificio cantabria", contacto:"", texto:"Edificio cantabria mucha aglomeración no necesitan ayuda. Hay de todo." },
+  { fecha:"11 de agosto de 2026, 8:06 p. m.", punto:"Edificio cantabria", contacto:"", texto:"Exceso de comunidad" },
+  { fecha:"11 de agosto de 2026, 8:05 p. m.", punto:"Calle 5ta con 44", contacto:"", texto:"Se necesitan reflectores portátiles en la calle 5ta con 44" },
+  { fecha:"11 de agosto de 2026, 8:03 p. m.", punto:"Ariguani", contacto:"", texto:"Exceso de comunidad, No se requieren víveres" },
+  { fecha:"11 de agosto de 2026, 8:03 p. m.", punto:"Edificio de los colores", contacto:"", texto:"En la escuela nacional del deporte tiene herramientas, no hay quien las lleve a los puntos por favor si alguien puede acercarlas." },
+  { fecha:"11 de agosto de 2026, 8:01 p. m.", punto:"Panaderia 5ta con 42", contacto:"", texto:"Reflectores, cascos, guantes, gafas" },
+  { fecha:"11 de agosto de 2026, 8:00 p. m.", punto:"Chiminangos 2", contacto:"", texto:"Hola Family, estoy en chiminangos II, reciben papel higiénico, medicinas, cobijas, colchonetas. Comida para peludos. Comida no perecedera. Para Cali y B/Tura. Por favor. Gracias" },
+  { fecha:"11 de agosto de 2026, 7:59 p. m.", punto:"", contacto:"", texto:"Saben dónde están dejando donar sangre?, En tequendama no reciben" },
+  { fecha:"11 de agosto de 2026, 7:57 p. m.", punto:"Chiminangos 2 al frente de olimpica", contacto:"", texto:"Se necesitan ARROZ, AZUCAR, ACEITE, productos NO PERECEDEROS para albergue" },
+  { fecha:"11 de agosto de 2026, 7:57 p. m.", punto:"Calle. 44 con 5 diagonal al oxx", contacto:"", texto:"Está necesitando reflectores porque está ya muy oscuro. En esta dirección Calle. 44 con 5 diagonal al oxx" },
+  { fecha:"11 de agosto de 2026, 7:50 p. m.", punto:"Edificio Cantabria", contacto:"", texto:"En CANTABRIA están ya abastecidos de alimentos, bebidas, herramientas y voluntarios. Redirigir la ayuda a otros puntos." },
+  { fecha:"11 de agosto de 2026, 7:48 p. m.", punto:"Pista De Patinaje Los Alamos", contacto:"IG: @gracopatinaje", texto:"TE ESPERAMOS DE 6:00 PM A 8:00 PM EN NUESTRAS CARPAS ROJAS DEL CLUB GRACO" },
+  { fecha:"11 de agosto de 2026, 7:45 p. m.", punto:"Por la plaza de toros", contacto:"Karen Muñoz", texto:"Se requiere ACPM PARA LAS MAQUINARIAS EN LA 5 con 56 en la plaza de toros" },
+  { fecha:"11 de agosto de 2026, 7:40 p. m.", punto:"Edificio", contacto:"", texto:"Personal de asistencia, linternas, pilas, colchones, colchonetas, sabanas, cobijas,insumos médicos ( gasas, micropore, alcohol, vendas, etc)" },
+  { fecha:"11 de agosto de 2026, 7:38 p. m.", punto:"Edificio Daniela", contacto:"", texto:"Se necesita presencia de policia o ejercito, edificio con daño estructural y sin seguridad, evacuado y tienen miedo que entren a robar." },
+  { fecha:"11 de agosto de 2026, 7:37 p. m.", punto:"UR Ariguani", contacto:"", texto:"Unidad Residencial Ariguani, ya tenemos suficiente de todo y hay mucha gente ayudando, no venir más ni traer más comida o bebidas.,, SOLO LINTERNAS TIPO TOPO." },
+  { fecha:"11 de agosto de 2026, 7:30 p. m.", punto:"", contacto:"", texto:"Capri: están dispersando y sacando las ayudas hacia otras áreas. Dirige tus donaciones a otros puntos." },
+  { fecha:"11 de agosto de 2026, 7:16 p. m.", punto:"Edificio ariguaní", contacto:"", texto:"Edificio ariguaní refugio: NO vayan más personas, están entorpeciendo las búsquedas de personas atrapadas aún, donar guantes de carnaza, picos, palas y casco, NO MÁS PERSONAS PORFAVOR!!!!" },
+  { fecha:"11 de agosto de 2026, 7:16 p. m.", punto:"", contacto:"Valerie 3173665662", texto:"Donde se necesitan palas por favor?" },
+  { fecha:"11 de agosto de 2026, 7:14 p. m.", punto:"Meléndez, alto jordan", contacto:"", texto:"Por favor averiguar acerca de la situación de MELÉNDEZ, ALTO JORDAN vi publicaciones de personas cercanas que no han recibido ayuda por más de 24 horas y hay personas que no tienen donde dormir" },
+  { fecha:"11 de agosto de 2026, 7:13 p. m.", punto:"Calle 5", contacto:"Dayany 3122146613", texto:"Tenemos sandwich y gaseosa dónde necesitan??" },
+  { fecha:"11 de agosto de 2026, 7:07 p. m.", punto:"Edifico Vanessa", contacto:"Valeria Ruiz. 3117181700", texto:"Se necesita gasolina para volqueta de remoción de escombros en edificio Vanessa" },
+  { fecha:"11 de agosto de 2026, 7:07 p. m.", punto:"Cenco Limonar", contacto:"", texto:"Se estan recibiendo donaciones, algunas van dirigidas a Buenaventura" },
+  { fecha:"11 de agosto de 2026, 7:07 p. m.", punto:"Quinta Pan", contacto:"Enrique Gutiérrez", texto:"Se necesitan cascos, linternas para cascos, linternas manuales, porras y reflectores." },
+  { fecha:"11 de agosto de 2026, 7:03 p. m.", punto:"Torres del Limonar - Capri", contacto:"", texto:"Se necesitan linternas y baterías" },
+  { fecha:"11 de agosto de 2026, 7:02 p. m.", punto:"Calle 8#14-35 barrio san bosco", contacto:"3007750122", texto:"Guantes gafas. Linternas" },
+  { fecha:"11 de agosto de 2026, 7:00 p. m.", punto:"", contacto:"", texto:"Lista oficial del jefe de bomberos: oxicorte, 500 pitos, 50 arneses, 300 porras grandes, 100 pulidoras inalámbricas, 100 reflectores, 1000 tapabocas N95, 100 rotomartillos inalámbricos, 50 gatos hidráulicos, 50 cámaras sensores, 50 scanner para búsqueda en estructuras colapsadas (leader scan), equipos de búsqueda canina para personas vivas, 50 cámaras de búsqueda y 400 gafas." },
+  { fecha:"11 de agosto de 2026, 7:00 p. m.", punto:"CENTRO COMERCIAL UNICO PARA BUENAVENTURA", contacto:"", texto:"Se necesita alimentos, ropa, cobijas, insumos medicos PARA ENVIAR A BUENAVENTURA" },
+  { fecha:"11 de agosto de 2026, 7:00 p. m.", punto:"Edificio Vanesa los cambulos", contacto:"", texto:"Los cambios edificio Vanesa se requiere gasolina, pulidoras, hojas de pulidoras, martillos eléctricos, picas, porras,plantas eléctricas, aceite dos tiempos" },
+  { fecha:"11 de agosto de 2026, 7:00 p. m.", punto:"Alto de Santa elena", contacto:"", texto:"No están recibiendo comida, reciben agua, colchonetas, voluntarios, linternas" },
+  { fecha:"11 de agosto de 2026, 6:56 p. m.", punto:"Pampalimda", contacto:"Rasgo", texto:"Capturado 916, por 904 en apartamento" },
+  { fecha:"11 de agosto de 2026, 6:54 p. m.", punto:"Chiminangos", contacto:"", texto:"Chiminangos no recibe mas ayudas, ya llegaron las necesarias" },
+  { fecha:"11 de agosto de 2026, 6:47 p. m.", punto:"Edificio de colores", contacto:"", texto:"Se necesita Hielo, hay mucha hidratación pero con el calor que está haciendo ya están calientes" },
+  { fecha:"11 de agosto de 2026, 6:47 p. m.", punto:"", contacto:"", texto:"Cuarto de legua o Pampalinda, Necesita gente!!!? Pa ahora en la noche?" },
+  { fecha:"11 de agosto de 2026, 6:46 p. m.", punto:"Charo de legua", contacto:"", texto:"Se necesita Hielo!!!! Hay mucha hidratación pero con el calor que está haciendo ya están calientes." },
+  { fecha:"11 de agosto de 2026, 6:45 p. m.", punto:"", contacto:"", texto:"La 56 (Guadalupe) con 3ra, al lado del D1: se requieren puntales o andamios metálicos para sostener la estructura por dentro y seguir sacando escombros." },
+  { fecha:"11 de agosto de 2026, 6:43 p. m.", punto:"Torres del limonar", contacto:"", texto:"En torres del limonar esta colapsado, no se necesita gasolina. Si linternas ( si se puede de las q se colocan en la cabeza)" },
+  { fecha:"11 de agosto de 2026, 6:40 p. m.", punto:"", contacto:"", texto:"Puntos que necesitan manos (lleguen con tapabocas, guantes, gafas y casco): Calle 72 #10 Bis-21, OXXO 44 con Novena, Corporación Educativa Adventista (Cra. 44 #9-25), Edificio Elvira (Cra. 4 #58-18), Edificio Vanesa (Cra. 44 #9-35), Carrera 56 con Calle 3A, Calle 4 #66b-52, Carrera 39A #5D-09 y Carrera 58 #3-138." },
+  { fecha:"11 de agosto de 2026, 6:36 p. m.", punto:"Cuarto de legua", contacto:"", texto:"Se necesitan insumos médicos y medicamentos para animalitos!" },
+  { fecha:"11 de agosto de 2026, 6:35 p. m.", punto:"Cra. 57 #3-102, Cuarto de Legua, Cali, Valle del Cauca", contacto:"Guadalupe", texto:"Guantes y gafas. Linternas discos diamantada lara concreto y hierro" },
+  { fecha:"11 de agosto de 2026, 6:35 p. m.", punto:"Meléndez", contacto:"Jp", texto:"En Meléndez hay que sacar escombros pero no sé necesita más comida por hoy no más comida por hoy se necesita gente pa sacar escombros de casas" },
+  { fecha:"11 de agosto de 2026, 6:33 p. m.", punto:"CALLE 5", contacto:"El Lido", texto:"Herramientas, comida para los de casco ACPM" },
+  { fecha:"11 de agosto de 2026, 6:32 p. m.", punto:"Notaría 20", contacto:"", texto:"Linterna, Gafas, y tapa bocas" },
+  { fecha:"11 de agosto de 2026, 6:32 p. m.", punto:"", contacto:"", texto:"Se necesitan colchonetas, alimentos, insumos médicos y de rescate para melendez, hay varios edificios que están colapsando, necesitamos alimento para los animalitos y cobijas, por favor traer lo que puedan" },
+  { fecha:"11 de agosto de 2026, 6:30 p. m.", punto:"Conjunto residencial ariguani", contacto:"Isabella Carabali", texto:"En la 67 con 4ta no necesitan más ayudas, están full gracias a Dios" },
+  { fecha:"11 de agosto de 2026, 6:28 p. m.", punto:"Edificio Ariguani", contacto:"", texto:"Ahora estan necesitando: cinta aislante, LINTERNAS, destornilladores, alicates." },
+  { fecha:"11 de agosto de 2026, 6:28 p. m.", punto:"Hospital Universitario Del Valle", contacto:"", texto:"En HUV Irne diciendo que no necesitan donaciones y la gente está sin ropa, sin pañales y sin como alimentar a los bebés!!!" },
+  { fecha:"11 de agosto de 2026, 6:26 p. m.", punto:"Hospital Juan de Dios", contacto:"", texto:"Se necesitan pañales para bebés y adultos, tapa bocas, guantes de nitrilo, solución salina, cuello ortopédico." },
+  { fecha:"11 de agosto de 2026, 6:24 p. m.", punto:"Altos de Santa Elena", contacto:"Alejandro Pazos", texto:"Agua, linternas, pañales, carpas, cobijas, ropa, comid e Hidratación" },
+  { fecha:"11 de agosto de 2026, 6:23 p. m.", punto:"", contacto:"3504429920", texto:"Tenemos herramientas para levantar escombros. En qué punto las necesitan?" },
+  { fecha:"11 de agosto de 2026, 6:21 p. m.", punto:"", contacto:"", texto:"Hola, tengo una Van de transporte disponible para movilizar lo que se necesite" },
+  { fecha:"11 de agosto de 2026, 6:20 p. m.", punto:"Cali cualquier zona", contacto:"Karol 3504429920", texto:"Tenemos discos para cortar, carretillas, seguetas, cuerdas. Donde necesitan cosas así?" },
+  { fecha:"11 de agosto de 2026, 6:19 p. m.", punto:"Tequendama", contacto:"", texto:"Acabo de estar en Cantabria y había máquina pesada y defensa civil trabajando en el sitio" },
+  { fecha:"11 de agosto de 2026, 6:16 p. m.", punto:"Cuarto de Legua", contacto:"", texto:"Están recibiendo todo tipo de insumos" },
+  { fecha:"11 de agosto de 2026, 6:16 p. m.", punto:"", contacto:"", texto:"Hola, donde se requiere ayuda en el norte de Cali ahora en la noche? Para hacer relevo" },
+  { fecha:"11 de agosto de 2026, 6:12 p. m.", punto:"Chiminangos", contacto:"", texto:"Se necesitan colchonetas y cosas para dormir en chiminanngos" },
+  { fecha:"11 de agosto de 2026, 6:09 p. m.", punto:"Edificio Vanessa", contacto:"", texto:"Al frente de metrópolis plaza: Hay mucha gente ayudando, tanta que no hacen silencio para escuchar a las personas debajo de los escombros. Hay muchas bebidas y herramientas." },
+  { fecha:"11 de agosto de 2026, 6:09 p. m.", punto:"Pampalinda", contacto:"Lorena Hincapie", texto:"Tenemos Agua, sándwiches, pañales, jugos en caja, arroz, papel higiénico, comida para perritos, pañitos húmedos, cepillos de dientes... podemos llevarla adonde más lo requieran." },
+  { fecha:"11 de agosto de 2026, 6:09 p. m.", punto:"Torres de limonar", contacto:"", texto:"Ya no están dejando entrar" },
+  { fecha:"11 de agosto de 2026, 6:05 p. m.", punto:"", contacto:"", texto:"¿Dónde están necesitando personas para ayudar?" },
+  { fecha:"11 de agosto de 2026, 6:04 p. m.", punto:"Quinta Pan", contacto:"", texto:"Se necesitan guantes, herramientas para abrir camino en los escombros y hielo" },
+  { fecha:"11 de agosto de 2026, 6:04 p. m.", punto:"Edificio Cantabria", contacto:"", texto:"Dejar dirección exacta los que necesitan ayudan en el edificio Cantabria. Tenemos insumos para llevar" },
+  { fecha:"11 de agosto de 2026, 6:03 p. m.", punto:"Meléndez", contacto:"", texto:"Carpas, cobijas,comida, remover escombros" },
+  { fecha:"11 de agosto de 2026, 6:01 p. m.", punto:"", contacto:"Danielle Figueroa", texto:"Personas, guantes, recursos para bajo Meléndez" },
+  { fecha:"11 de agosto de 2026, 6:00 p. m.", punto:"Edificio Vanesa", contacto:"", texto:"Gasolina, pulidoras,hojas de pulidora, martillos eléctricos,picas, porras,plantas eléctricas, aceite 2 tiempos, no se requiere comida" },
+  { fecha:"11 de agosto de 2026, 6:00 p. m.", punto:"", contacto:"Fundación semillitas cristianas", texto:"Desde la fundación Emilia's Christiana's y el barrio Santo Domingo, hemos realizado una cena para los rescatistas y voluntarios. Estoy buscando punto para llevarlo ahora a las 6pm" },
+  { fecha:"11 de agosto de 2026, 5:58 p. m.", punto:"", contacto:"Karen Velasco 3215436342-3184038270", texto:"Hola tenemos más de 100 cajas con comida, guantes, jeringas, pañales a donde podemos llevarlas" },
+  { fecha:"11 de agosto de 2026, 5:56 p. m.", punto:"Escuela Nacional del Deporte", contacto:"", texto:"Se están recibiendo todo tipo de insumos para ser repartidos al resto de la ciudad. Se necesitan manos para revisar fechas de vencimiento de los productos." },
+  { fecha:"11 de agosto de 2026, 5:54 p. m.", punto:"Hospital Carlos hommes", contacto:"", texto:"Se necesitan pañales para bebés y personas mayores y medicamentos" },
+  { fecha:"11 de agosto de 2026, 5:46 p. m.", punto:"Edificio CANTABRIA", contacto:"", texto:"Se necesitan voluntarios, maquinaria pesada, ayuda en general no se ha recibido casi nada de ayuda el dia de hoy" },
+  { fecha:"11 de agosto de 2026, 5:45 p. m.", punto:"notaría 20", contacto:"", texto:"Tienen suficiente equipos de rescate e insumos, no entra más gente" },
+  { fecha:"11 de agosto de 2026, 5:42 p. m.", punto:"Jairo Varela", contacto:"", texto:"Pidieron evacuar a los voluntarios. Mucha gente" },
+  { fecha:"11 de agosto de 2026, 5:40 p. m.", punto:"Santa Elena, Bajo Jordan", contacto:"", texto:"En Santa elena- bajo Jordan, comida tienen pero necesitan colchonetas, carpas, donde dormir, las torres están en riesgo de colapso, necesitan productos de aseo, pañales, toallas higiénicas,, Contacto: +57 322 9467002" },
+  { fecha:"11 de agosto de 2026, 5:36 p. m.", punto:"", contacto:"Mary", texto:"En el sur de Cali, dónde se requieren apoyo en esta noche? Favor dejar datos de contacto para verificar la información." },
+  { fecha:"11 de agosto de 2026, 5:35 p. m.", punto:"MELENDEZ", contacto:"MAR", texto:"n Meléndez ya no necesitan más comida preparada. Gracias a Dios y a todas las personas que han aportado, en este momento hay bastante comida.,, Ahora mismo, lo que más se necesita es:,, Colchonetas, gafas de protección, cascos, aceite, cepillos de dientes, cremas dentales, granos, sábanas, almohadas y pañales etapa 5.,, Si pueden aportar alguno de estos elementos, pueden llevarlos a la caseta comunal de Meléndez.,, Gracias a todos los que han respondido al llamado. Dios les multiplique cada ayuda.,, Carrera 92 # 2A-65" },
+  { fecha:"11 de agosto de 2026, 5:28 p. m.", punto:"ESCUELA NORMAL SUPERIOR", contacto:"", texto:"Escuela normal superior Full abasto de suministros y comida, redirigir a otro punto la ayuda" },
+  { fecha:"11 de agosto de 2026, 5:26 p. m.", punto:"Bajo Meléndez", contacto:"", texto:"Se necesitan alimentos, agua, cascos, guantes, tapabocas, personas y herramientas para remover escombros, insumos médicos." },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Clínica Colombia", contacto:"", texto:"Se requiere evacuación, favor informar a secretaría de salud donde se pueden trasladar a los pacientes, la clínica Colombia por dentro está súper afectada,, Podría colapsar" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Reserva de Meléndez", contacto:"", texto:"Las personas de reservas de Meléndez necesitan albergues y dónde guardar sus cosas" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Viva al máximo", contacto:"", texto:"Tenemos disponibilidad de palas, gafas, guantes, linternas, tapabocas. Comida y refrigerios. Punto de acopio oeste. # de teléfono 3186592719, 3116166169" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Universidad Santiago de Cali", contacto:"Natalia Narváez", texto:"En la 66 con tercera por la universidad Santiago no se necesitan más alimentos, solo porras y linternas" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Ana del pilar", contacto:"", texto:"Edificio ana del pilar no están dejando pasar, calle 5ta a la altura de la plaza de toros cerrada por wl ejército" },
+  { fecha:"11 de agosto de 2026, 5:23 p. m.", punto:"Clínica valle de lili", contacto:"", texto:"Ya no se aceptan donaciones de sangre en valle de Lili" },
+  { fecha:"11 de agosto de 2026, 5:20 p. m.", punto:"Notaria 20", contacto:"", texto:"No se necesita más ayuda en este lugar" },
+  { fecha:"11 de agosto de 2026, 5:19 p. m.", punto:"Chiminangos", contacto:"", texto:"Hay mucho desorden" },
+  { fecha:"11 de agosto de 2026, 5:18 p. m.", punto:"", contacto:"", texto:"Se tiene para donar catéter y medicamentos a donde se pueden llevar que los estén necesitando realmente" },
+  { fecha:"11 de agosto de 2026, 5:15 p. m.", punto:"", contacto:"", texto:"Vendas elásticas x 8 rollos, Gasas estériles x 5 paquetes" },
+  { fecha:"11 de agosto de 2026, 5:12 p. m.", punto:"Panaderia quinta pan", contacto:"", texto:"Se necesita presencia de bomberos en 5ta con 42 (Panaderia quinta pan) presencia de persona con vida atrapada" },
+  { fecha:"11 de agosto de 2026, 5:07 p. m.", punto:"", contacto:"Erika Sánchez", texto:"Tenemos picas, palas, gafas, gorros dónde lo podemos dejar" },
+  { fecha:"11 de agosto de 2026, 5:05 p. m.", punto:"Meléndez y ladera", contacto:"", texto:"Se necesitan pañales etapa 2 y 5, elementos de aseo, alimentos no perecederos, agua, cobijas y colchonetas en sector de Meléndez, alto Jordan y Santa Elena" },
+  { fecha:"11 de agosto de 2026, 5:04 p. m.", punto:"", contacto:"", texto:"NO MÁS PERSONAL EN LA 56 CON 3RA NI EN LA 5TA CON 44!!" },
+  { fecha:"11 de agosto de 2026, 5:00 p. m.", punto:"Edificio Cantabria", contacto:"Valentina Ceballos 3188299544", texto:"Insumos médicos hacen falta" },
+  { fecha:"11 de agosto de 2026, 4:57 p. m.", punto:"", contacto:"", texto:"@danielasan.a ofrece guantes, gafas, vendas, comida preparada, electrolitos, bocadillo etc. Requiere saber dónde llevar?" },
+  { fecha:"11 de agosto de 2026, 4:56 p. m.", punto:"Chiminangos", contacto:"", texto:"Se necesitan carpas, colchonetas y cobijas" },
+  { fecha:"11 de agosto de 2026, 4:56 p. m.", punto:"Panadería peter pan", contacto:"", texto:"Necesitamos ayuda para sacar escombros, insumos, herramientas, baldes" },
+  { fecha:"11 de agosto de 2026, 4:55 p. m.", punto:"Altos de jordan melendez", contacto:"", texto:"Guantes linternas hidratación, personal para ayudar" },
+  { fecha:"11 de agosto de 2026, 4:50 p. m.", punto:"Chiminangos 2", contacto:"", texto:"Cobijas, pañales para bebe, papel higiénico, productos de aseo" },
+  { fecha:"11 de agosto de 2026, 4:49 p. m.", punto:"Centro de acopio - Acuaparque de la Caña", contacto:"Yuliana Obando", texto:"Se necesitan alimentos, productos de aseo y materiales en el Acuaparque de la Caña hasta las 8pm" },
+  { fecha:"11 de agosto de 2026, 4:48 p. m.", punto:"Chiminangos", contacto:"", texto:"En chiminangos está demasiado abastecido, de todo y no hay heridos, solo gente que no quiere entrar a sus casas por temor de las mismas edificaciones." },
+  { fecha:"11 de agosto de 2026, 4:45 p. m.", punto:"Hospital Carlos Holmes Trujillo", contacto:"", texto:"Se necesita de todo no hay nada de insumos, se necesitan con urgencia" },
+  { fecha:"11 de agosto de 2026, 4:44 p. m.", punto:"", contacto:"Contacto: 3224576729", texto:"Tengo almuerzos disponibles, comida preparada, agua y jugo para los rescatistas o víctimas que lo requieran." },
+  { fecha:"11 de agosto de 2026, 4:42 p. m.", punto:"", contacto:"sofia", texto:"Tengo gafas, guantes y agua para entregar necesito saber donde 311 6577005" },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", punto:"Panadería quinta pan", contacto:"", texto:"Se necesitan hidratación, guantes de construcción, palas, herramientas para poder sacar escombros, extensiones de energía, tapabocas, taladros, discos de corte" },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", punto:"Santa Helena", contacto:"", texto:"Se requiere atención de emergencias familia macroproyecto Santa Helena comuna 18." },
+  { fecha:"11 de agosto de 2026, 4:36 p. m.", punto:"", contacto:"", texto:"Tenemos voluntarios dispuestos ayudar, indiquen a qué sondas pueden ir. Ya sea armar kits, estar pendiente de las víctimas o demás." },
+  { fecha:"11 de agosto de 2026, 4:35 p. m.", punto:"Edificio de colores", contacto:"", texto:"Se necesita un megafono" },
+  { fecha:"11 de agosto de 2026, 4:33 p. m.", punto:"Antigua Licorera del Valle", contacto:"", texto:"Punto de acopio: Antigua Licorera del valle llegada factible a la escuela nacional del deporte." },
+  { fecha:"11 de agosto de 2026, 4:31 p. m.", punto:"", contacto:"Nathalia 3136548447", texto:"Tengo tapabocas jugos croasantts ropa porfavor a donde puedo llevarlos" },
+  { fecha:"11 de agosto de 2026, 4:31 p. m.", punto:"Cra 56 con Cl 13", contacto:"Edgar Correa", texto:"No están dejando pasar, ni siquiera a pie, muchas personas." },
+  { fecha:"11 de agosto de 2026, 4:30 p. m.", punto:"", contacto:"", texto:"Se necesita saber a donde necesitan comida y gatorade para voluntarios, por favor!" },
+  { fecha:"11 de agosto de 2026, 4:28 p. m.", punto:"", contacto:"Sur 3113425438", texto:"Tenemos insumos de comida y aseo donde se requieren?" },
+  { fecha:"11 de agosto de 2026, 4:27 p. m.", punto:"", contacto:"3022971682", texto:"Buenas tardes., Tengo guantes, tapabocas, linternas, extensiones, discos de corte y seguetas., Me pueden decir donde necesitan!!!!!" },
+  { fecha:"11 de agosto de 2026, 4:27 p. m.", punto:"Notaria 20", contacto:"", texto:"No se necesita más comida. Se necesitan implementos como Casco, tapabocas, herramientas para poder sacar escombros." },
+  { fecha:"11 de agosto de 2026, 4:26 p. m.", punto:"Edificio colores", contacto:"", texto:"Tengo bastantes discos de corte ¿A qué punto los llevo? 3158273443" },
+  { fecha:"11 de agosto de 2026, 4:23 p. m.", punto:"", contacto:"Esperanza Bedoya", texto:"Necesitamos andamios de suma urgencia! Es para una empresa que necesita construir unas paredes que se cayeron en unas casas., 3176935866" },
+  { fecha:"11 de agosto de 2026, 4:22 p. m.", punto:"Clínica Uribe", contacto:"", texto:"Clínica Uribe Cali necesita donantes O" },
+  { fecha:"11 de agosto de 2026, 4:20 p. m.", punto:"Edificio gurumuani", contacto:"", texto:"Se necesita alambre 2 2, cinta aislante, destornilladores, herramientas, tijeras industriales" },
+  { fecha:"11 de agosto de 2026, 4:19 p. m.", punto:"44 con 9", contacto:"", texto:"La gente no está devolviendo los cascos, guantes y demás elementos que se les entregan. Se van con ellos y, cuando llegan nuevas personas a ayudar, se quedan sin herramientas ni elementos de protección para poder realizar su labor." },
+  { fecha:"11 de agosto de 2026, 4:15 p. m.", punto:"Calle 5", contacto:"", texto:"Volqueta para escombros" },
+  { fecha:"11 de agosto de 2026, 4:14 p. m.", punto:"Chiminangos", contacto:"", texto:"Chiminangos necesita personal de apoyo, está solo con las mismas personas, necesitan relevo, personal médico, cobijas, colchonetas" },
+  { fecha:"11 de agosto de 2026, 4:14 p. m.", punto:"", contacto:"Sofia. 3104714137", texto:"Tenemos: picas, palas, tapabocas, guantes de carnaza, sándwiches, electrolitos, linternas. Donde necesitan?" },
+  { fecha:"11 de agosto de 2026, 4:13 p. m.", punto:"Chiminangos", contacto:"", texto:"Cobijas, Almohadas, Colchonetas, Agua, Pañales, Toallas higiénicas, Hielo, Hielera, Alimentos para perros y gatos" },
+  { fecha:"11 de agosto de 2026, 4:12 p. m.", punto:"Cra 56 con 3ra", contacto:"", texto:"Se necesita únicamente Electrolit" },
+  { fecha:"11 de agosto de 2026, 4:11 p. m.", punto:"Torres de limonar", contacto:"", texto:"¿Qué se necesita en Torres de Limona? Voy con un grupo de vecinos." },
+  { fecha:"11 de agosto de 2026, 4:11 p. m.", punto:"", contacto:"", texto:"De que medida se necesita los discos de corte y en dónde? 3158273443" },
+  { fecha:"11 de agosto de 2026, 4:10 p. m.", punto:"Hacienda alférez real 1", contacto:"Viejitos", texto:"Se necesita alimentos, ensures y aseo personal" },
+  { fecha:"11 de agosto de 2026, 4:08 p. m.", punto:"Edificio Vanesa", contacto:"", texto:"Equipo de protección: cascos, guantes, gafas, tapabocas" },
+  { fecha:"11 de agosto de 2026, 4:08 p. m.", punto:"CERCA A SAN ANTONIO", contacto:"JUAN ORDÓÑEZ 3002571324", texto:"TENEMOS ELEMENTOS DE PROTECCIÓN: CASCOS, GUANTES, GAFAS. LINTERNAS Y BATERIAS.,, EL PUNTO QUE LOS NECESITE POR FAVOR COMUNICARSE CON 3002571324" },
+  { fecha:"11 de agosto de 2026, 4:07 p. m.", punto:"", contacto:"3167336295, Diego Ospina", texto:"Tenemos comida preparada, pañales y pañitos, comida para preparar y algun recurso para comprar algo especifico y urgente., Indicarnos cual es el punto ideal" },
+  { fecha:"11 de agosto de 2026, 4:07 p. m.", punto:"Edificio colores", contacto:"", texto:"Alguien sabe donde puedo ir a dejar más suministros" },
+  { fecha:"11 de agosto de 2026, 4:02 p. m.", punto:"Notaria 20 de cali, totalmente destruida", contacto:"", texto:"Se necesitan personas para mover escombros. Agua, comida. Profesionales rescatistas." },
+  { fecha:"11 de agosto de 2026, 3:53 p. m.", punto:"", contacto:"", texto:"Necesito actualización. Tengo guantes, gafas y lo que requieran pero necesito información para llevar eso" },
+  { fecha:"11 de agosto de 2026, 3:50 p. m.", punto:"Cuarto de Legua", contacto:"Juan Trejos", texto:"Ya está muy lleno de gente, ambulancias, bomberos, de todo. Hay como 2000 personas en el sitio" },
+  { fecha:"11 de agosto de 2026, 3:48 p. m.", punto:"Poblado", contacto:"", texto:"En Poblado están necesitando baldes, hielo y extintores. Se puede ingresar pero se recomienda no quedarse en la zona mucho tiempo y hacer silencio. Preguntar qué se necesita." },
+  { fecha:"11 de agosto de 2026, 3:48 p. m.", punto:"Notaría 20", contacto:"", texto:"Se necesitan cascos y herramientas para remover escombros. Agua y alimento hay suficiente" },
+  { fecha:"11 de agosto de 2026, 3:46 p. m.", punto:"Cuarto de Legua", contacto:"", texto:"Se necesita ayuda de personas para levantar escombros. Además, se necesita agua y hielo para la protección solar de lxs voluntarixs." },
+  { fecha:"11 de agosto de 2026, 3:44 p. m.", punto:"Chiminangos", contacto:"", texto:"Se necesita un baño portátil en Chiminangos ( se necesitas manos para formar kits ) ya no más alimentos" },
+  { fecha:"11 de agosto de 2026, 3:40 p. m.", punto:"Altos de Meléndez", contacto:"", texto:"Se necesitan cascos, agua, insumos primeros auxilios, personas" },
+  { fecha:"11 de agosto de 2026, 3:36 p. m.", punto:"", contacto:"Stefania Rodriguez 3163075395", texto:"Tenemos disponibles almuerzos para 50 personas si saben dónde se necesitan estamos atentos" },
+  { fecha:"11 de agosto de 2026, 3:24 p. m.", punto:"46 con 8va atras de palmetto", contacto:"", texto:"Se quiere apoyo con refelctores, linternas, pilas AA, hielo y neveras" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", punto:"El Poblado, la Notaría 20", contacto:"", texto:"Notaría 20 está llena" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", punto:"Clínica de colores", contacto:"", texto:"En la clínica de colores está la defensa civil y está lleno" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", punto:"HUV lleno", contacto:"", texto:"Hospital Universitario del Valle está lleno HUV" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", punto:"9na con 44 está llena", contacto:"", texto:"9na con 44 está llena" },
+  { fecha:"11 de agosto de 2026, 3:16 p. m.", punto:"Clínica Nuestra", contacto:"", texto:"La Clínica Nuestra está llena" },
+  { fecha:"11 de agosto de 2026, 3:11 p. m.", punto:"Chiminango", contacto:"", texto:"No agua, no manos.,, Se necesita comida no perecedera,, cobijas, colchonetas." },
+  { fecha:"11 de agosto de 2026, 3:07 p. m.", punto:"Capri", contacto:"", texto:"Capri, suficiente agua, manos, comidas y bebidas., Requieren cinceles y porras." },
+  { fecha:"11 de agosto de 2026, 3:00 p. m.", punto:"Notaria 20", contacto:"", texto:"Se necesitan personas para relevar, cascos, herramientas, NO se necesita mas comida." },
+  { fecha:"11 de agosto de 2026, 2:52 p. m.", punto:"Edificio de colores", contacto:"", texto:"Al lado del edificio de colores hay comida, agua y palas suficientes. Se necesitan guantes, cascos y seguramente en la noche más linternas" },
+  { fecha:"11 de agosto de 2026, 2:48 p. m.", punto:"Veterinaria Mi Cachorrito Barrio San Luis", contacto:"", texto:"Jeringas, gasas, agua oxigenada. Implementos de veterinaria" },
+  { fecha:"11 de agosto de 2026, 2:47 p. m.", punto:"Chiminangos", contacto:"Todo el barrio chiminangos", texto:"Se necesita agua cobijas comida medicina para las personas que alojaron sus viviendas en el barrio chiminangos" },
+  { fecha:"11 de agosto de 2026, 2:47 p. m.", punto:"barrio melendez", contacto:"", texto:"organismos de emergencia y toda la ayuda posible" },
+  { fecha:"11 de agosto de 2026, 2:30 p. m.", punto:"Pampalinda", contacto:"Isabella Acosta", texto:"Ya no están dejando entrar, hay suficientes manos y comida." },
+  { fecha:"11 de agosto de 2026, 2:22 p. m.", punto:"Clínica Cali", contacto:"Dra Collazoz 320 8964337", texto:"Ya revisaron la estructura y está operando con normalidad." },
+  { fecha:"11 de agosto de 2026, 2:19 p. m.", punto:"", contacto:"", texto:"La Cruz Roja también está colapsada. Confirma antes de desplazarte si siguen recibiendo personas, donaciones o insumos." },
+  { fecha:"11 de agosto de 2026, 2:15 p. m.", punto:"", contacto:"Leidy", texto:"Disponible maquinaria pesada tel: 3244339670" },
+  { fecha:"11 de agosto de 2026, 1:25 p. m.", punto:"Cra 44", contacto:"", texto:"Se está llegando a los puntos críticos ayudar y dicen que ya hay mucha gente, entonces que es lo que pasa? Acepten la mano de obra..." },
+  { fecha:"11 de agosto de 2026, 1:20 p. m.", punto:"calle 9 con Cra 72", contacto:"Sandra Gómez", texto:"Tubos orotraqueales 4-4.5-5.0-5.5, Mascara para dispositivo BVM, Dispositivo BV pediatrico, Hoja de laringo pediatrico" },
+  { fecha:"11 de agosto de 2026, 12:00 p. m.", punto:"Edificio de Colores", contacto:"", texto:"Edificio de Colores: Se necesita nevera de icopor y hielo." },
+  { fecha:"11 de agosto de 2026, 4:48 a. m.", punto:"Catalina - LA RUTA STUDIO", contacto:"Catalina - LA RUTA STUDIO", texto:"Si tienes donaciones fisicas y no sabes a donde llevarlas, puedes escribirme al 3158068465, estamos mapeando la información y enviando a los lugares prioritarios" },
+];
+
+const NECESIDADES_GENERALES = [
+  "Maquinaria amarilla y volquetas",
+  "Grúa pluma",
+  "Dispositivos Starlink",
+  "Oxicorte",
+  "Gatos hidráulicos",
+  "Cascos y guantes de construcción",
+  "Botas de seguridad (punta de acero)",
+  "Cizallas y elementos para cortar",
+  "Cámaras y scanner de búsqueda (leader scan)",
+  "Equipos de búsqueda canina",
+  "Discos diamantados (concreto y hierro)",
+  "Gasolina y ACPM para maquinaria"
+];
+
+const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
+
+/* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
+   Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
+   Las condiciones cambian rápido; deja [] para ocultar este banner. */
+const NO_DESPLAZARSE = [
+  { sector:"Conjunto Ariguaní (Calle 3D con Carrera 67)", nota:"Por el momento NO venir personas, NO traer donaciones y absoluto silencio: están con maquinaria especializada" },
+  { sector:"Torres de Limonar (Capri)", nota:"Solo civiles voluntarios; no más insumos, necesitan SILENCIO" },
+  { sector:"Capri", nota:"Están dispersando la ayuda a otras zonas; dirige tus donaciones a otros puntos" },
+  { sector:"Edificio de Colores", nota:"Suficientes manos y mucha saturación; no se necesita más ayuda" },
+  { sector:"La 56 con Calle 5 (Guadalupe)", nota:"Cerrado por riesgo de caída del edificio contiguo" },
+  { sector:"Pampalinda", nota:"Suficiente mano de obra; solo requieren bebidas, baterías, hielo y gasolina" },
+  { sector:"Notaría 20", nota:"Suficientes equipos e insumos; no entra más gente" },
+  { sector:"HUV", nota:"Reportado lleno; confirma antes de llevar donaciones" },
+  { sector:"Cruz Roja", nota:"Colapsada; confirma si reciben personas, donaciones o insumos" },
+];
+
+const ALBERGUES = [
+  { nombre:"Hotel Six Avenue Cali", direccion:"Av. 6a N #17N-73, Santa Mónica Residencial" },
+  { nombre:"Cancha de hockey Miguel Calero", direccion:"Calle 9 con Carrera 37A / 39" },
+  { nombre:"Diamante de béisbol", direccion:"" },
+  { nombre:"Loft House 14", direccion:"Carrera 26 #2-91" },
+  { nombre:"Motel California", direccion:"Cl. 10 #30-155, Arroyo Hondo" },
+  { nombre:"Motel Éxtasis", direccion:"3ra Norte 72 Esquina" },
+  { nombre:"Cristal Palace", direccion:"Enseguida de TQ Tecnoquímicas, Cra. 7a #23-43" },
+  { nombre:"Residencias Ramírez", direccion:"Enseguida de TQ Tecnoquímicas, Cra. 7a #23-43, San Nicolás" },
+  { nombre:"Residencias Bugatier", direccion:"Cra. 25a #14c-09" },
+  { nombre:"Plaza Real Norte", direccion:"Av. 2 Nte. #21 Norte-99" },
+  { nombre:"Motel Kamasutra", direccion:"Cl. 10 #29 A-50, Acopi" },
+];
+const ALBERGUES_CONTACTO = "Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076. Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.";
+const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
+
+/* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
+const ALTA_PRIORIDAD = [
+  { punto:"⚠️ Evacuación inmediata: Calle 9 con Cra 44", nota:"Se ordenó evacuación inmediata por riesgo de colapso del Hotel y de la edificación contigua al Edificio Vanessa. No ingrese al área." },
+  { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
+  { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
+  { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
+  { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
+];
+
+/* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
+const CLINICAS = [
+  "Clínica Alba",
+  "Clínica Rey David",
+  "Clínica Nuestra Señora del Rosario",
+  "Clínica Sanitas Tequendama",
+  "Hospital Carlos Holmes Trujillo",
+];
+
+const HORA_ACT = "12:51 p. m.";
+
+const PUNTOS = [
+  { lugar:"Edif. Colores — Tequendama", direccion:"Calle 5D #38A-35", coordinador:"Jonathan Gómez", contacto:"320 7499522", hora:HORA_ACT, prioridad:true, nota:"NO más agua; sí bebidas hidratantes", necesidades:["Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Guantes de carnaza","Gotas para ojos","Bebidas hidratantes"] },
+  { lugar:"Torres de Limonar", direccion:"Cra. 72 #10 Bis-141 a 10 Bis-3, Comuna 17", coordinador:"María Paula Hernández", contacto:"314 7874022", hora:HORA_ACT, prioridad:true, necesidades:["Gasolina","Discos de pulidora","Médicos","Enfermeros","Taladro percutor","Pulidora","Cintas de seguridad","Alicates","Baldes","Comida","Sándwiches"] },
+  { lugar:"Calle 8 con 42", direccion:"Calle 8 con 42", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:true, nota:"Mila se retiró del lugar", necesidades:["Tarros","Guantes","Agua","Pala","Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos"] },
+  { lugar:"Edificio Elvira", direccion:"Carrera 4 # 58-18", coordinador:"Camila Sánchez", contacto:"314 8875589", hora:HORA_ACT, prioridad:true, nota:"Voluntarios en el lugar: Juan Manuel Almario, Kevin Zárate · Más voluntarios llegan a las 2:00 p. m.", necesidades:[] },
+
+  { lugar:"Edif. Vanessa", direccion:"Cra. 44 #9-35", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Herramientas pesadas","Picos","Gatos eléctricos","Discos de corte","Taladros","Extensiones","Plantas eléctricas","Cascos","Guantes","Hielo","Carros de mercado","Zorras","Bisturís","Tijeras","Agujas para canalizar","Comida para animales","Medicamentos para animales"] },
+  { lugar:"Edificio Pilar", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos"] },
+  { lugar:"Colegio Adventista", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Cascos","Hielo"] },
+  { lugar:"Edificio Archinie", direccion:"", coordinador:"", contacto:"", hora:HORA_ACT, prioridad:false, necesidades:["Alimentación"] },
+  { lugar:"Autopista con 73", direccion:"", coordinador:"", contacto:"318 5026611", hora:HORA_ACT, prioridad:false, necesidades:["Megáfonos"] },
+];
+
+/* AYUDA DISPONIBLE — PENDIENTE POR ASIGNAR */
+const AYUDAS = [
+  { recurso:"5 mujeres de Olla Comunitaria", destino:"Poblado", coordinador:"Daniela Orjuela", contacto:"", obs:"Tiene transporte, falta implementos" },
+  { recurso:"Dos equipos de sonido y personal", destino:"Poblado", coordinador:"Daniel Centenario", contacto:"305 3158708", obs:"Se dirigió a Brigadistas de Sonido" },
+  { recurso:"Planta de 6000 y EcoFlows", destino:"Casa Moisés Wells", coordinador:"Nathalia Varela", contacto:"314 7778914", obs:"Tienda de Modas Samara Wells — Calle 2 #10-16, Barrio San Antonio, Cali" },
+  { recurso:"Maquinaria pesada", destino:"Sin destino aún", coordinador:"Sarah Marín", contacto:"302 8525671", obs:"" },
+  { recurso:"Hielo (Kolbitos)", destino:"Sin destino aún", coordinador:"@hielokolbitos (Instagram)", contacto:"317 5154927", obs:"Transporte y hielo a disposición" },
+  { recurso:"Guantes · 500 almuerzos", destino:"Por asignar", coordinador:"María Paula", contacto:"314 7874022", obs:"Contacto de Edif. Cantabria enviado" },
+];
+
+/* ============================================================
+   De aquí para abajo no necesitas tocar nada.
+   ============================================================ */
+
+const { useState, useMemo, useRef, useEffect } = React;
+
+function Mapa({ puntos }){
+  const ref = useRef(null);
+  const mapRef = useRef(null);
+  const [estado, setEstado] = useState("Cargando mapa y ubicando puntos…");
+
+  useEffect(() => {
+    if (!ref.current || mapRef.current || typeof L === "undefined") return;
+    const map = L.map(ref.current).setView([3.4372, -76.5225], 13);
+    mapRef.current = map;
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: "© OpenStreetMap"
+    }).addTo(map);
+    setTimeout(() => map.invalidateSize(), 120);
+
+    let cancel = false;
+    (async () => {
+      const bounds = [];
+      let ok = 0;
+      for (const p of puntos) {
+        if (cancel) return;
+        let lat, lon;
+        if (p.coords) { lat = p.coords[0]; lon = p.coords[1]; }
+        else {
+          const q = (p.mapq || p.direccion || p.lugar) + ", Cali, Valle del Cauca, Colombia";
+          try {
+            const r = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=co&q=" + encodeURIComponent(q));
+            const d = await r.json();
+            if (d && d[0]) { lat = parseFloat(d[0].lat); lon = parseFloat(d[0].lon); }
+          } catch (e) {}
+          await new Promise(res => setTimeout(res, 1100));
+        }
+        if (cancel) return;
+        if (lat != null && lon != null && !isNaN(lat) && !isNaN(lon)) {
+          const color = p.estado === "urgente" ? "#FF5C6B" : p.cubierto ? "#3EE08E" : "#3E7BFF";
+          const mk = L.circleMarker([lat, lon], {
+            radius: 9, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1
+          }).addTo(map);
+          const needs = (p.necesidades && p.necesidades.length) ? "<br/>" + p.necesidades.join(", ") : "";
+          mk.bindPopup("<b>" + p.lugar + "</b>" + (p.direccion ? "<br/>" + p.direccion : "") + needs);
+          bounds.push([lat, lon]); ok++;
+          setEstado(ok + " puntos ubicados…");
+        }
+      }
+      if (!cancel) {
+        if (bounds.length) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+        setEstado(ok ? (ok + " de " + puntos.length + " puntos ubicados") : "No se pudieron ubicar los puntos automáticamente");
+      }
+    })();
+
+    return () => { cancel = true; };
+  }, []);
+
+  return (
+    <div className="mapa-box">
+      <div ref={ref} className="mapa"></div>
+      <div className="mapa-nota">{estado}. Ubicaciones aproximadas (geocodificadas automáticamente); verifica antes de desplazarte.</div>
+    </div>
+  );
+}
+
+function App(){
+  const [q, setQ] = useState("");
+  const [soloPrio, setSoloPrio] = useState(false);
+  const [showUpdates, setShowUpdates] = useState(false);
+  const [showAlbergues, setShowAlbergues] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const nowISO = useMemo(() => new Date().toISOString(), []);
+
+  const filtrados = useMemo(() => {
+    const t = q.trim().toLowerCase();
+    return PUNTOS.filter(p => {
+      if (soloPrio && !p.prioridad) return false;
+      if (!t) return true;
+      const blob = (p.lugar + " " + (p.direccion||"") + " " + (p.coordinador||"") + " " + (p.nota||"") + " " + p.necesidades.join(" ")).toLowerCase();
+      return blob.includes(t);
+    });
+  }, [q, soloPrio]);
+
+  const totalPrio = PUNTOS.filter(p => p.prioridad).length;
+
+  return (
+    <div className="wrap">
+      <button className="burger-btn" onClick={() => setShowMenu(true)} aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      {showMenu ? (
+        <>
+          <div className="menu-overlay" onClick={() => setShowMenu(false)}></div>
+          <nav className="menu-panel">
+            <div className="menu-top">
+              <span className="menu-title">Menú</span>
+              <button className="menu-close" onClick={() => setShowMenu(false)} aria-label="Cerrar menú">✕</button>
+            </div>
+            <a href="index.html">Inicio · Puntos críticos</a>
+            <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
+            <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
+            <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
+            <a href="#refugio" onClick={() => setShowMenu(false)}>Formulario: presta tu casa</a>
+          </nav>
+        </>
+      ) : null}
+
+      <div className="lastupdate">
+        <span className="lu-label"><span className="live"></span>Última actualización</span>
+        <span className="lu-time">{ACTUALIZADO}</span>
+      </div>
+
+      <div className="top-actions">
+        <a className="cta-reportar cta-sm" href="#reportar">
+          <span className="cta-ico">＋</span>
+          Deja aquí tu actualización
+        </a>
+        <a className="cta-reportar cta-refugio cta-sm" href="#refugio">
+          <span className="cta-ico">🏠</span>
+          Ofrece tu casa como refugio
+        </a>
+      </div>
+
+      <header>
+        <div className="eyebrow">Ayuda focalizada para Cali</div>
+        <h1>Coordinación de <span>Donaciones</span></h1>
+        <p className="sub">
+          Directorio de los puntos reportados y los insumos que se necesitan en cada uno.
+          Comparte esta página con quien quiera aportar.
+        </p>
+        <div className="meta">
+          <span className="chip"><span className="dot"></span>{PUNTOS.length} puntos en total</span>
+          <span className="chip urgente"><span className="dot"></span>{ALTA_PRIORIDAD.length} actualizaciones importantes</span>
+        </div>
+
+        <div className="grid-info">
+          <div className="card">
+            <h2>Lo que se necesita para el rescate</h2>
+            <div className="needs">
+              {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
+            </div>
+          </div>
+          {ALERTA ? (
+            <div className="card alert-card">
+              <div className="tag">Importante</div>
+              <p>{ALERTA}</p>
+            </div>
+          ) : null}
+        </div>
+      </header>
+
+      <div className="contrast">
+        <h2><span>A veces la mejor ayuda es no salir.</span></h2>
+        <p><strong>Los puntos de Cali ya están 90-100% abastecidos</strong> y cuentan con las necesidades principales.</p>
+        <p>No vayamos sin una labor específica: evitemos generar congestión y obstruir las labores de rescate.</p>
+        <p>Sigamos ayudando: lleva tus donaciones a los centros de acopio. Desde allí llegan a Cali, a otros municipios del Valle y a las ciudades afectadas.</p>
+        <p className="contrast-cierre">Tu ayuda sí hace la diferencia.</p>
+      </div>
+
+      {ALTA_PRIORIDAD.length ? (
+        <div className="priority">
+          <div className="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
+              <path d="M12 9v4M12 17h.01"></path>
+              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            Últimas actualizaciones importantes
+          </div>
+          {ALTA_PRIORIDAD.map((p,i) => (
+            <div className="pr-item" key={i}>
+              <span className="pr-dot"></span>
+              <div>
+                <div className="pr-name">{p.punto}</div>
+                {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {NO_DESPLAZARSE.length ? (
+        <div className="overstock">
+          <div className="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB020" strokeWidth="2.2">
+              <path d="M12 9v4M12 17h.01"></path>
+              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            Puntos cerrados o llenos, no te desplaces sin confirmar
+          </div>
+          <div className="needs">
+            {NO_DESPLAZARSE.map((s,i) => (
+              <span className="need" key={i}>{s.sector}{s.nota ? ": " + s.nota : ""}</span>
+            ))}
+          </div>
+          <p className="desc">{NOTA_NO_DESPLAZARSE}</p>
+        </div>
+      ) : null}
+
+      {ALBERGUES.length ? (
+        <div className="albergues" id="albergues">
+          <button
+            type="button"
+            className="al-toggle"
+            onClick={() => setShowAlbergues(v => !v)}
+            aria-expanded={showAlbergues}
+          >
+            <h2>Albergues temporales sin costo</h2>
+            <span className={"al-chevron" + (showAlbergues ? " open" : "")}>▾</span>
+          </button>
+          {showAlbergues ? (
+            <>
+              <p className="al-sub">Si en Cali te quedaste sin dónde pasar la noche de forma segura porque tu casa o apartamento quedó inhabitable, estos albergues son gratuitos para ti y tu familia.</p>
+              <div className="al-list">
+                {ALBERGUES.map((a,i) => (
+                  <div className="al-item" key={i}>
+                    <div className="al-nombre">{a.nombre}</div>
+                    {a.direccion ? <div className="al-dir">{a.direccion}</div> : null}
+                  </div>
+                ))}
+              </div>
+              <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
+              <div className="al-nota">Si quieres ayudar con almuerzos, comunícate antes con los albergues gratuitos para coordinar la entrega y evitar que se pierdan.</div>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      {ACTUALIZACIONES.length ? (
+        <div className="updates">
+          <h2><span className="live"></span>Últimas actualizaciones ({ACTUALIZACIONES.length})</h2>
+          {(showUpdates ? ACTUALIZACIONES : ACTUALIZACIONES.slice(0,3)).map((u,i) => (
+            <div className="up-item" key={i}>
+              <span className="up-dot"></span>
+              <div className="up-body">
+                <div className="up-time">{u.fecha}</div>
+                {u.punto ? <div className="up-punto">{u.punto}</div> : null}
+                <div className="up-text">{u.texto}</div>
+                {u.contacto ? <div className="up-contacto">Contacto: {u.contacto}</div> : null}
+              </div>
+            </div>
+          ))}
+          {ACTUALIZACIONES.length > 3 ? (
+            <button className="up-toggle" onClick={() => setShowUpdates(v => !v)}>
+              {showUpdates
+                ? "Ver menos"
+                : "Ver todas (" + (ACTUALIZACIONES.length - 3) + " más)"}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="controls">
+        <label className="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7FA8FF" strokeWidth="2">
+            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>
+          </svg>
+          <input
+            value={q}
+            onChange={e => setQ(e.target.value)}
+            placeholder="Buscar punto, dirección o contacto"
+            aria-label="Buscar"
+          />
+        </label>
+        <span className="counter">{filtrados.length} resultado{filtrados.length === 1 ? "" : "s"}</span>
+      </div>
+
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th style={{width:"38%"}}>Punto</th>
+            <th style={{width:"32%"}}>Dirección</th>
+            <th>Contacto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filtrados.length === 0 ? (
+            <tr><td colSpan="3" className="empty">No hay puntos que coincidan con la búsqueda.</td></tr>
+          ) : filtrados.map((p,i) => (
+            <tr key={i}>
+              <td data-label="Punto">
+                <span className="lugar">{p.lugar}</span>
+              </td>
+              <td data-label="Dirección">
+                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
+                  ? <span className="dir">{p.direccion}</span>
+                  : <span className="dir vacio">—</span>}
+              </td>
+              <td data-label="Contacto">
+                {(p.coordinador || p.contacto)
+                  ? <span className="dir">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</span>
+                  : <span className="dir vacio">—</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {false ? (
+        <div className="ayudas">
+          <h2>Ayuda disponible — pendiente por asignar</h2>
+          <p className="ay-sub">Recursos ofrecidos que aún buscan destino o coordinación. Notifica en el grupo si tu punto los necesita.</p>
+          <div className="ay-list">
+            {AYUDAS.map((a,i) => (
+              <div className="ay-item" key={i}>
+                <div className="ay-top">
+                  <span className="ay-rec">{a.recurso}</span>
+                  <span className="ay-dest">{a.destino}</span>
+                </div>
+                {(a.coordinador || a.contacto)
+                  ? <div className="ay-coord">{a.coordinador}{a.contacto ? " · " + a.contacto : ""}</div> : null}
+                {a.obs ? <div className="ay-obs">{a.obs}</div> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <form
+        id="reportar"
+        className="form-card"
+        name="actualizaciones"
+        method="POST"
+        data-netlify="true"
+        data-netlify-recaptcha="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="actualizaciones" />
+        <input type="hidden" name="fecha_hora" value={nowISO} />
+        <p className="hp">
+          <label>No llenar: <input name="bot-field" /></label>
+        </p>
+        <div className="eyebrow">Reporta desde el terreno</div>
+        <h2>Deja aquí tu actualización</h2>
+        <p className="form-sub">
+          Si estás en uno de los puntos críticos, escribe tu actualización de necesidades de donación.
+        </p>
+        <div className="form-grid">
+          <div className="field full">
+            <label htmlFor="f-act">Tu actualización de necesidades</label>
+            <textarea id="f-act" name="actualizacion" required
+              placeholder="Ej: Se necesitan cascos, guantes y agua. Ya hay suficientes manos."></textarea>
+          </div>
+          <div className="field">
+            <label htmlFor="f-pt">Nombre del punto crítico</label>
+            <input id="f-pt" type="text" name="punto" required placeholder="Ej: Edificio de Colores" />
+          </div>
+          <div className="field">
+            <label htmlFor="f-dir">Dirección</label>
+            <input id="f-dir" type="text" name="direccion" placeholder="Ej: Calle 5D #38A-35" />
+          </div>
+          <div className="field">
+            <label htmlFor="f-per">Persona de referencia</label>
+            <input id="f-per" type="text" name="persona" placeholder="Nombre y contacto (opcional)" />
+          </div>
+          <div className="field full" data-netlify-recaptcha="true"></div>
+          <button className="btn-enviar" type="submit">Enviar actualización</button>
+        </div>
+      </form>
+
+      <form
+        id="refugio"
+        className="form-card"
+        name="refugios"
+        method="POST"
+        data-netlify="true"
+        data-netlify-recaptcha="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="refugios" />
+        <input type="hidden" name="fecha_hora" value={nowISO} />
+        <p className="hp">
+          <label>No llenar: <input name="bot-field" /></label>
+        </p>
+        <div className="eyebrow">Ofrece tu casa</div>
+        <h2>Ofrece tu casa como refugio temporal</h2>
+        <p className="form-sub">
+          Si tienes espacio seguro en tu casa o apartamento y quieres recibir temporalmente a personas que se quedaron sin dónde dormir, cuéntanos aquí. Vamos a verificar y coordinar contigo antes de enviar a alguien.
+        </p>
+        <div className="form-grid">
+          <div className="field">
+            <label htmlFor="r-nom">Nombre completo</label>
+            <input id="r-nom" type="text" name="nombre" required placeholder="Tu nombre" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-tel">Teléfono / WhatsApp</label>
+            <input id="r-tel" type="tel" name="telefono" required placeholder="Ej: 300 123 4567" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-zona">Barrio o zona</label>
+            <input id="r-zona" type="text" name="zona" required placeholder="Ej: Barrio San Fernando, Cali" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-cupos">¿Cuántas personas puedes recibir?</label>
+            <input id="r-cupos" type="number" min="1" name="cupos" required placeholder="Ej: 2" />
+          </div>
+          <div className="field">
+            <label htmlFor="r-dias">¿Por cuánto tiempo?</label>
+            <input id="r-dias" type="text" name="dias_disponible" placeholder="Ej: Unos días, una semana, indefinido" />
+          </div>
+          <div className="field full">
+            <label htmlFor="r-cond">Condiciones o notas (opcional)</label>
+            <textarea id="r-cond" name="condiciones"
+              placeholder="Ej: Recibo mascotas, tengo espacio para una familia, sin costo, etc."></textarea>
+          </div>
+          <div className="field full" data-netlify-recaptcha="true"></div>
+          <button className="btn-enviar" type="submit">Ofrecer mi casa</button>
+        </div>
+      </form>
+
+      <footer>
+        Directorio comunitario de donaciones. Verifica cada punto antes de desplazarte.
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
