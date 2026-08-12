@@ -158,7 +158,10 @@
     margin-bottom:12px;letter-spacing:-.01em;
   }
   .contrast h2 span{color:var(--ok)}
-  .contrast p{font-size:14.5px;line-height:1.6;color:var(--ice);max-width:640px;margin:0 auto}
+  .contrast p{font-size:14.5px;line-height:1.6;color:var(--ice);max-width:640px;margin:0 auto 10px}
+  .contrast p:last-child{margin-bottom:0}
+  .contrast p strong{color:var(--white);font-weight:800}
+  .contrast .contrast-cierre{margin-top:12px;font-size:15px;font-weight:800;color:var(--ok)}
 
   /* Marco de alta prioridad */
   .priority{
@@ -516,7 +519,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "12 de agosto de 2026, 11:30 a. m.";
+const ACTUALIZADO = "12 de agosto de 2026, 12:57 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -987,7 +990,10 @@ function App(){
 
       <div className="contrast">
         <h2><span>A veces la mejor ayuda es no salir.</span></h2>
-        <p>Verifica primero, antes de ir a cualquier punto, si necesitan manos y donaciones. La convocatoria ha sido muy grande, pero tanta gente sin nada que hacer obstruye las labores de rescate.</p>
+        <p><strong>Los puntos de Cali ya están 90-100% abastecidos</strong> y cuentan con las necesidades principales.</p>
+        <p>No vayamos sin una labor específica: evitemos generar congestión y obstruir las labores de rescate.</p>
+        <p>Sigamos ayudando: lleva tus donaciones a los centros de acopio. Desde allí llegan a Cali, a otros municipios del Valle y a las ciudades afectadas.</p>
+        <p className="contrast-cierre">Tu ayuda sí hace la diferencia.</p>
       </div>
 
       {ALTA_PRIORIDAD.length ? (
