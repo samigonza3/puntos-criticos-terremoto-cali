@@ -288,6 +288,26 @@
   .dir-serv{color:var(--ice);font-size:13px;line-height:1.45}
   .dir-zona{color:var(--star-light);font-size:12px;font-weight:600;margin-top:5px}
   .dir-obs{color:var(--muted);font-size:11.5px;line-height:1.45;margin-top:5px;font-style:italic}
+  .dir-filtros{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 14px}
+  .dir-filtro{
+    cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;
+    color:var(--ice);background:var(--space-900);border:1px solid rgba(62,224,142,.28);
+    padding:6px 12px;border-radius:999px;transition:background .15s,color .15s,border-color .15s;
+  }
+  .dir-filtro:hover{border-color:rgba(62,224,142,.55)}
+  .dir-filtro.activo{background:#5EEAA0;color:#04240F;border-color:#5EEAA0}
+  .dir-cat-chip{
+    display:inline-block;margin-bottom:6px;font-size:10.5px;font-weight:700;
+    color:#5EEAA0;background:rgba(62,224,142,.12);border:1px solid rgba(62,224,142,.3);
+    padding:2px 8px;border-radius:999px;
+  }
+  .dir-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
+  .dir-count{font-size:12px;font-weight:600;color:var(--muted)}
+  .dir-vermas{
+    cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;
+    color:#04240F;background:#5EEAA0;border:none;padding:9px 18px;border-radius:12px;transition:background .15s;
+  }
+  .dir-vermas:hover{background:#7ef0b4}
   @media (max-width:680px){ .al-list{grid-template-columns:1fr} .dir-items{grid-template-columns:1fr} }
 
   /* Últimas actualizaciones */
@@ -789,7 +809,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "13 de agosto de 2026, 5:34:47 p. m.";
+const ACTUALIZADO = "13 de agosto de 2026, 5:52:08 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1407,6 +1427,8 @@ function App(){
   const [showCierres, setShowCierres] = useState(false);
   const [showCifras, setShowCifras] = useState(false);
   const [showDirectorio, setShowDirectorio] = useState(false);
+  const [dirFiltro, setDirFiltro] = useState("Todos");
+  const [dirVisible, setDirVisible] = useState(6);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1678,32 +1700,51 @@ function App(){
             <h2>🧭 Directorio de ayuda · Damnificados</h2>
             <span className={"al-chevron" + (showDirectorio ? " open" : "")}>▾</span>
           </button>
-          {showDirectorio ? (
-            <>
-              <p className="al-sub">{DIRECTORIO_FUENTE}</p>
-              {DIRECTORIO_AYUDA.map((g,gi) => (
-                <div className="dir-cat" key={gi}>
-                  <div className="dir-cat-tit">{g.cat}</div>
-                  {g.nota ? <p className="dir-cat-nota">{g.nota}</p> : null}
-                  <div className="dir-items">
-                    {g.items.map((it,i) => (
-                      <div className="dir-item" key={i}>
-                        <div className="dir-item-head">
-                          <span className="dir-nombre">{it.nombre}</span>
-                          {it.wa
-                            ? <a className="dir-contacto" href={"https://wa.me/" + it.wa} target="_blank" rel="noopener noreferrer">{it.contacto}</a>
-                            : <span className="dir-contacto texto">{it.contacto}</span>}
-                        </div>
-                        <div className="dir-serv">{it.servicio}</div>
-                        {it.zona ? <div className="dir-zona">📍 {it.zona}</div> : null}
-                        {it.obs ? <div className="dir-obs">{it.obs}</div> : null}
-                      </div>
-                    ))}
-                  </div>
+          {showDirectorio ? (() => {
+            const dirFlat = DIRECTORIO_AYUDA.flatMap(g => g.items.map(it => ({ ...it, cat: g.cat })));
+            const dirFiltrados = dirFiltro === "Todos" ? dirFlat : dirFlat.filter(x => x.cat === dirFiltro);
+            const catNota = dirFiltro !== "Todos"
+              ? (DIRECTORIO_AYUDA.find(g => g.cat === dirFiltro) || {}).nota
+              : null;
+            const mostrados = dirFiltrados.slice(0, dirVisible);
+            const seleccionar = (cat) => { setDirFiltro(cat); setDirVisible(6); };
+            return (
+              <>
+                <p className="al-sub">{DIRECTORIO_FUENTE}</p>
+                <div className="dir-filtros">
+                  <button type="button" className={"dir-filtro" + (dirFiltro === "Todos" ? " activo" : "")} onClick={() => seleccionar("Todos")}>Todos</button>
+                  {DIRECTORIO_AYUDA.map((g,gi) => (
+                    <button type="button" key={gi} className={"dir-filtro" + (dirFiltro === g.cat ? " activo" : "")} onClick={() => seleccionar(g.cat)}>{g.cat}</button>
+                  ))}
                 </div>
-              ))}
-            </>
-          ) : null}
+                {catNota ? <p className="dir-cat-nota">{catNota}</p> : null}
+                <div className="dir-items">
+                  {mostrados.map((it,i) => (
+                    <div className="dir-item" key={i}>
+                      <div className="dir-item-head">
+                        <span className="dir-nombre">{it.nombre}</span>
+                        {it.wa
+                          ? <a className="dir-contacto" href={"https://wa.me/" + it.wa} target="_blank" rel="noopener noreferrer">{it.contacto}</a>
+                          : <span className="dir-contacto texto">{it.contacto}</span>}
+                      </div>
+                      {dirFiltro === "Todos" ? <span className="dir-cat-chip">{it.cat}</span> : null}
+                      <div className="dir-serv">{it.servicio}</div>
+                      {it.zona ? <div className="dir-zona">📍 {it.zona}</div> : null}
+                      {it.obs ? <div className="dir-obs">{it.obs}</div> : null}
+                    </div>
+                  ))}
+                </div>
+                <div className="dir-foot">
+                  <span className="dir-count">Mostrando {mostrados.length} de {dirFiltrados.length}</span>
+                  {dirVisible < dirFiltrados.length
+                    ? <button type="button" className="dir-vermas" onClick={() => setDirVisible(v => v + 6)}>Ver más ▾</button>
+                    : (dirFiltrados.length > 6
+                        ? <button type="button" className="dir-vermas" onClick={() => setDirVisible(6)}>Ver menos ▴</button>
+                        : null)}
+                </div>
+              </>
+            );
+          })() : null}
         </div>
       ) : null}
 
