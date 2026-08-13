@@ -570,6 +570,19 @@
   .cifra.ok .cifra-n{color:var(--ok)}
   @media (max-width:760px){ .cifras-grid{grid-template-columns:repeat(2,1fr)} }
 
+  /* ===== Alerta máxima: niñez ===== */
+  .alerta-trata{
+    margin-bottom:18px;border-radius:16px;padding:18px 20px;
+    background:#C0182A;border:2px solid #FF5C6B;
+    box-shadow:0 8px 26px rgba(192,24,42,.45);
+  }
+  .at-titulo{
+    font-size:16px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;
+    color:#fff;margin-bottom:8px;
+  }
+  .alerta-trata p{color:#FFE3E6;font-size:14px;line-height:1.55;font-weight:500}
+  .alerta-trata p strong{color:#fff;font-weight:800}
+
   /* ===== Alerta de fase / coordinación ===== */
   .card-sub{color:var(--ice);font-size:13px;line-height:1.45;margin:-4px 0 12px}
   .alerta-fase{
@@ -1037,7 +1050,6 @@ const NO_DESPLAZARSE = [
 
 const ALBERGUES = [
   { nombre:"Centro Comercial Bochalema", direccion:"Cali · Habilitado por Fundación Esperanza Color Arcoíris y Pañalera Angie · Contacto: Viviana, WhatsApp 301 834 1033", cupos:"40" },
-  { nombre:"Colegio Bilingüe Lacordaire", direccion:"Calle 5 #80-7, Meléndez (Sur de Cali)", cupos:"50" },
   { nombre:"Reserva Natural Anáhuac", direccion:"Pueblo Pance, Cali · Techo sin costo para damnificados · Contacto: 304 453 3506" },
   { nombre:"Karen Agudelo · Airbnb sin costo", direccion:"Granada, Cali · Amoblado, cama doble y sofá cama · Del 13 al 20 de agosto (8 días) · 3.er piso sin ascensor, sin parqueadero · WhatsApp: 312 209 7085", cupos:"3" },
   { nombre:"Hotel Six Avenue Cali", direccion:"Av. 6a N #17N-73, Santa Mónica Residencial" },
@@ -1275,6 +1287,11 @@ function App(){
           </nav>
         </>
       ) : null}
+
+      <div className="alerta-trata">
+        <div className="at-titulo">⚠ Máxima alerta con la niñez</div>
+        <p>Después de un desastre natural hay personas que aprovechan para la <strong>trata de niños, niñas y adolescentes</strong>. Máxima atención con los menores en las calles y con los niños y niñas damnificados: no los dejes solos y reporta cualquier situación sospechosa.</p>
+      </div>
 
       <div className="lastupdate">
         <span className="lu-label"><span className="live"></span>Última actualización</span>
