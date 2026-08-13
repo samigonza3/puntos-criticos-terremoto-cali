@@ -1078,6 +1078,9 @@ const APOYO_PSICOLOGICO = [
 const JURIDICA_INFO = "Acompañamiento legal sin costo para los afectados por el terremoto: reclamación de seguros de propiedad, auxilio funerario, activación de la ruta de personas desaparecidas, auxilio de alquiler y dudas jurídicas en general.";
 const ASESORIA_JURIDICA = [
   { nombre:"Bryan Taborda", area:"Reclamación de seguro de propiedad · Auxilio funerario · Ruta de desaparecidos · Auxilio de alquiler · Dudas jurídicas", contacto:"310 378 2035", wa:"573103782035" },
+  { nombre:"Juan Andrés Cuéllar", area:"Reclamaciones ante aseguradoras · Contratos de arrendamiento · Sucesiones · Demás temas", contacto:"316 381 9989", wa:"573163819989" },
+  { nombre:"Valentina Valencia", area:"Reclamaciones ante aseguradoras · Contratos de arrendamiento · Sucesiones · Demás temas", contacto:"315 865 2444", wa:"573158652444" },
+  { nombre:"Nicole Rivas", area:"Reclamaciones ante aseguradoras · Contratos de arrendamiento · Sucesiones · Demás temas", contacto:"315 336 8111", wa:"573153368111" },
 ];
 
 /* Cierres viales activos en Cali (Secretaría de Movilidad) */
@@ -1327,24 +1330,30 @@ function App(){
       </div>
 
       <header>
-        <div className="eyebrow">Día 4 · Redistribución de ayuda</div>
-        <h1>La ayuda ahora va a los <span>municipios y las laderas</span></h1>
+        <div className="eyebrow">Coordinación de ayuda · Terremoto en Cali</div>
+        <h1>Sigamos ayudando: <span>municipios, laderas y los puntos de rescate en Cali</span></h1>
         <p className="sub">
-          Ahora la prioridad es llevar la ayuda a los municipios del norte del Valle y a las
-          laderas de Cali. Aquí ves a dónde dirigirla y en qué centros de acopio dejarla para
-          que llegue a quienes más la necesitan. Comparte esta página con quien quiera aportar.
+          La prioridad tiene dos frentes: llevar ayuda a los municipios del norte del Valle y a las
+          laderas de Cali, y seguir abasteciendo los puntos de Cali que aún están en labores de
+          rescate. Aquí ves a dónde dirigir tu ayuda y qué se necesita en cada frente.
+          Comparte esta página con quien quiera aportar.
         </p>
         <div className="meta">
           <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios pidiendo ayuda</span>
+          <span className="chip"><span className="dot"></span>{FRENTES.length} puntos de trabajo en Cali</span>
           <span className="chip"><span className="dot"></span>{ACOPIOS.length} centros de acopio</span>
         </div>
 
         <div className="grid-info">
           <div className="card">
-            <h2>Necesidades generales · municipios y laderas</h2>
-            <p className="card-sub">Todo lo necesario para apoyar a quienes se quedaron sin su casa y que puedan dormir con dignidad.</p>
+            <h2>Necesidades generales</h2>
+            <p className="card-sub">Para municipios y laderas — apoyar a quienes se quedaron sin su casa y que puedan dormir con dignidad:</p>
             <div className="needs">
               {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
+            </div>
+            <p className="card-sub" style={{marginTop:"14px"}}>Para los puntos de rescate en Cali — se renuevan constantemente:</p>
+            <div className="needs">
+              {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
             </div>
           </div>
           {ALERTA ? (
@@ -1355,6 +1364,27 @@ function App(){
           ) : null}
         </div>
       </header>
+
+      {ALTA_PRIORIDAD.length ? (
+        <div className="priority">
+          <div className="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
+              <path d="M12 9v4M12 17h.01"></path>
+              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            Últimas actualizaciones importantes
+          </div>
+          {ALTA_PRIORIDAD.map((p,i) => (
+            <div className="pr-item" key={i}>
+              <span className="pr-dot"></span>
+              <div>
+                <div className="pr-name">{p.punto}</div>
+                {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       {CIFRAS.length ? (
         <div className="cifras">
@@ -1502,39 +1532,7 @@ function App(){
             ))}
           </div>
         ) : null}
-        <button className="cta-reportar map-btn" onClick={() => setShowMapa(v => !v)}>
-          <span className="cta-ico">🗺</span>
-          {showMapa ? "Ocultar mapa" : "Ver mapa de municipios y acopios"}
-        </button>
-        {showMapa ? (
-          <Mapa puntos={[
-            ...MUNICIPIOS.map(m => ({ lugar:m.nombre, direccion:m.region, mapq:m.nombre + ", Valle del Cauca, Colombia", estado:m.estado, necesidades:m.necesidades })),
-            ...LADERAS.map(l => ({ lugar:l.nombre, direccion:"Ladera de Cali", necesidades:l.necesidades })),
-            ...ACOPIOS.map(a => ({ lugar:a.nombre, direccion:a.direccion, cubierto:true, necesidades:[] })),
-          ]} />
-        ) : null}
       </div>
-
-      {ALTA_PRIORIDAD.length ? (
-        <div className="priority">
-          <div className="tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
-              <path d="M12 9v4M12 17h.01"></path>
-              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
-            </svg>
-            Últimas actualizaciones importantes
-          </div>
-          {ALTA_PRIORIDAD.map((p,i) => (
-            <div className="pr-item" key={i}>
-              <span className="pr-dot"></span>
-              <div>
-                <div className="pr-name">{p.punto}</div>
-                {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : null}
 
       {ALBERGUES.length ? (
         <div className="albergues" id="albergues">
