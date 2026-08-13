@@ -252,7 +252,43 @@
     color:var(--white);font-size:13.5px;font-weight:600;line-height:1.5;
   }
   .al-nota{margin-top:10px;color:var(--ice);font-size:13px;line-height:1.5}
-  @media (max-width:680px){ .al-list{grid-template-columns:1fr} }
+  .psico-grupo{margin-top:18px;padding-top:16px;border-top:1px solid rgba(127,168,255,.14)}
+  .psico-grupo:first-of-type{margin-top:4px;padding-top:0;border-top:none}
+  .psico-grupo-tit{font-size:15px;font-weight:800;color:var(--white);margin-bottom:5px}
+  .psico-grupo-info{color:var(--ice);font-size:13px;line-height:1.5;margin-bottom:10px}
+
+  /* ===== Directorio de ayuda (collapse con color de contraste) ===== */
+  .albergues.directorio{
+    border:1.5px solid rgba(62,224,142,.5);
+    background:linear-gradient(180deg,rgba(62,224,142,.09),rgba(62,224,142,.02));
+    box-shadow:0 0 0 1px rgba(62,224,142,.12), 0 10px 30px rgba(0,0,0,.25);
+  }
+  .albergues.directorio .al-toggle h2{color:#5EEAA0}
+  .albergues.directorio .al-chevron{color:#5EEAA0}
+  .dir-cat{margin-top:18px;padding-top:14px;border-top:1px solid rgba(62,224,142,.18)}
+  .dir-cat:first-of-type{margin-top:6px;padding-top:0;border-top:none}
+  .dir-cat-tit{
+    display:inline-block;font-size:13px;font-weight:800;letter-spacing:.02em;
+    color:#04240F;background:#5EEAA0;padding:4px 11px;border-radius:999px;margin-bottom:10px;
+  }
+  .dir-cat-nota{color:var(--ice);font-size:12.5px;line-height:1.5;margin:0 0 10px}
+  .dir-items{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .dir-item{
+    background:var(--space-900);border:1px solid rgba(127,168,255,.14);
+    border-radius:12px;padding:12px 14px;
+  }
+  .dir-item-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+  .dir-nombre{font-size:14px;font-weight:800;color:var(--white)}
+  .dir-contacto{
+    flex:none;font-size:12.5px;font-weight:800;color:#04240F;background:#5EEAA0;
+    padding:3px 9px;border-radius:999px;text-decoration:none;white-space:nowrap;
+  }
+  .dir-contacto:hover{background:#7ef0b4}
+  .dir-contacto.texto{background:transparent;color:var(--star-light);padding:0}
+  .dir-serv{color:var(--ice);font-size:13px;line-height:1.45}
+  .dir-zona{color:var(--star-light);font-size:12px;font-weight:600;margin-top:5px}
+  .dir-obs{color:var(--muted);font-size:11.5px;line-height:1.45;margin-top:5px;font-style:italic}
+  @media (max-width:680px){ .al-list{grid-template-columns:1fr} .dir-items{grid-template-columns:1fr} }
 
   /* Últimas actualizaciones */
   .updates{
@@ -753,7 +789,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "13 de agosto de 2026, 4:32:10 p. m.";
+const ACTUALIZADO = "13 de agosto de 2026, 5:20:14 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1097,11 +1133,30 @@ const ALBERGUES = [
 const ALBERGUES_CONTACTO = "Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076. Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.";
 
 /* Apoyo psicológico gratuito (psicólogos especializados en desastres) */
-const APOYO_PSICO_INFO = "Si fuiste afectado por el terremoto, tu salud mental también importa. El miedo, la tristeza, la angustia y el estrés son reacciones normales; pedir ayuda es un acto de cuidado. Atención presencial en Cali, barrio Nápoles — Calle 2B #78A-09.";
-const APOYO_PSICOLOGICO = [
-  { nombre:"Psicóloga Michelle Burgos", contacto:"323 234 9966", wa:"573232349966" },
-  { nombre:"Psicóloga Karen Medina", contacto:"312 252 3059", wa:"573122523059" },
-  { nombre:"Psicóloga Isabella Vera (voluntaria)", contacto:"304 444 5255", wa:"573044445255" },
+const APOYO_PSICO_INFO = "Si fuiste afectado por el terremoto, tu salud mental también importa. El miedo, la tristeza, la angustia y el estrés son reacciones normales; pedir ayuda es un acto de cuidado.";
+const APOYO_PSICO_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdTgXmhTJL_xLCp03ah5xzTnueTOip_3FtG9t8Zdge5D8FNEg/viewform";
+const APOYO_PSICO_GRUPOS = [
+  {
+    titulo:"Atención presencial · barrio Nápoles",
+    info:"Atención presencial en Cali, barrio Nápoles — Calle 2B #78A-09.",
+    profesionales:[
+      { nombre:"Psicóloga Michelle Burgos", contacto:"323 234 9966", wa:"573232349966" },
+      { nombre:"Psicóloga Karen Medina", contacto:"312 252 3059", wa:"573122523059" },
+    ],
+  },
+  {
+    titulo:"Red de psicólogos voluntarios de Cali",
+    info:"Un grupo de profesionales de Cali se unió para ofrecer orientación y apoyo psicológico voluntario tras el sismo. Diligencia el formulario y un profesional de la red te contactará.",
+    form:true,
+    profesionales:[],
+  },
+  {
+    titulo:"Voluntarios inscritos",
+    info:"Profesionales que se sumaron de forma voluntaria a la red de apoyo.",
+    profesionales:[
+      { nombre:"Psicóloga Isabella Vera", contacto:"304 444 5255", wa:"573044445255" },
+    ],
+  },
 ];
 
 /* Asesoría jurídica gratuita */
@@ -1124,6 +1179,69 @@ const CIERRES_VIALES = [
   "Calle 10 con Carrera 72","Roosevelt con Carrera 39","Carrera 28D con Calle 72W",
 ];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
+
+/* ============================================================
+   DIRECTORIO DE AYUDA — DAMNIFICADOS · consolidado por Fundación Concretar
+   Cada item: {nombre, contacto, wa (opcional), servicio, zona, obs}
+   ============================================================ */
+const DIRECTORIO_FUENTE = "En Fundación Concretar consolidamos este directorio de personas y empresas voluntarias de la red de apoyo de la ciudad para temas de alimento, insumos médicos, infraestructura y más. Confirma cada contacto antes de difundir o coordinar.";
+const DIRECTORIO_AYUDA = [
+  { cat:"Salud · Insulina y medicamentos", items:[
+    { nombre:"Pamela Tangarife", contacto:"323 204 9641", wa:"573232049641", servicio:"Donación/consecución de insulina (varias plumas disponibles, foto verificada).", zona:"Cali", obs:"" },
+    { nombre:"Donante de insulina", contacto:"324 478 1238", wa:"573244781238", servicio:"Donación de insulina.", zona:"Cali", obs:"No se tiene nombre de la persona; verificar antes de difundir." },
+    { nombre:"Yori Mallorca", contacto:"316 250 8605", wa:"573162508605", servicio:"Medicamentos especializados para diabetes o trasplante (insulina glargina, inmunosupresores). Entrega personal.", zona:"Cali y todo el Valle", obs:"Confirmar nombres, concentraciones, conservación y prescripción directamente. No usar ni redistribuir medicamentos de prescripción sin validación de un profesional de salud." },
+  ]},
+  { cat:"Salud · Atención médica", items:[
+    { nombre:"Tatiana Ruiz", contacto:"@TatianaRuiz1708", servicio:"Curaciones médicas a domicilio.", zona:"Cali", obs:"Contacto por red social; no aparece teléfono." },
+  ]},
+  { cat:"Remoción de escombros y maquinaria", items:[
+    { nombre:"Natassja Volquetas (Natassja VT)", contacto:"314 785 3740", wa:"573147853740", servicio:"Volquetas para remoción de escombros.", zona:"Cali", obs:"" },
+    { nombre:"David Arcila", contacto:"+52 55 8078 3545", wa:"525580783545", servicio:"Volquetas.", zona:"Cali", obs:"" },
+    { nombre:"Diana Acevedo U. · Arturo Acevedo S.A.S.", contacto:"313 755 3759", wa:"573137553759", servicio:"Grúa hidráulica telescópica (25 y 50 toneladas) para apoyo en puntos críticos.", zona:"Cali", obs:"Empresa con marca comercial visible; confirmar antes de coordinar." },
+  ]},
+  { cat:"Alimentación", items:[
+    { nombre:"Mares 2019 (Mares García)", contacto:"316 630 1466", wa:"573166301466", servicio:"Cocinas industriales preparando comida para la comunidad. Se le llevan insumos y se le piden cenas.", zona:"Cali", obs:"Confirmar capacidad diaria y forma de coordinar entregas de insumos." },
+    { nombre:"Chef Daniel Flórez (@danielflorezb)", contacto:"316 525 7056", wa:"573165257056", servicio:"Cocina en zonas afectadas para quienes lo necesitan; recibe aportes para ampliar las comidas.", zona:"Zonas afectadas de Cali", obs:"" },
+  ]},
+  { cat:"Alojamiento y albergues", items:[
+    { nombre:"Fundación IPO · Albergue Solidario", contacto:"317 517 2973", wa:"573175172973", servicio:"Albergue para familias. Reciben colchones, sábanas/cobijas, almohadas/toallas, ventiladores y utensilios de aseo.", zona:"Calle 30 Norte #2BN-82, Barrio San Vicente, Cali", obs:"También mapean familias que necesiten hogar temporal. Verificar directamente antes de transferir dinero." },
+    { nombre:"Fundación Esperanza Color Arcoíris / Pañalera Angie · Viviana", contacto:"301 834 1033", wa:"573018341033", servicio:"Albergue habilitado para 40 personas.", zona:"Centro Comercial Bochalema, Cali", obs:"Confirmar cupos antes de enviar familias." },
+    { nombre:"Karen Agudelo", contacto:"312 209 7085", wa:"573122097085", servicio:"Airbnb sin costo, 100% amoblado, cama doble y sofá cama; máximo 3 personas.", zona:"Granada, Cali", obs:"Del 13 al 20 de agosto. 3.er piso sin ascensor; sin parqueadero." },
+  ]},
+  { cat:"Ropa, calzado y abrigo", items:[
+    { nombre:"Donante de calzado y ropa", contacto:"311 656 7583", wa:"573116567583", servicio:"Calzado, medias y ropa para quienes lo necesiten.", zona:"Cali", obs:"" },
+    { nombre:"Donante de ropa y zapatos", contacto:"313 510 8352", wa:"573135108352", servicio:"Ropa y zapatos.", zona:"Cali", obs:"Confirmar disponibilidad." },
+    { nombre:"Donante de colchonetas y cobijas", contacto:"320 675 5988", wa:"573206755988", servicio:"Colchonetas y cobijas.", zona:"Cali", obs:"Contacto recibido por imagen; confirmar disponibilidad." },
+    { nombre:"Donante de colchonetas", contacto:"315 449 0154", wa:"573154490154", servicio:"Colchonetas.", zona:"Cali", obs:"Contacto recibido por imagen; confirmar disponibilidad." },
+  ]},
+  { cat:"Bebés y primera necesidad", items:[
+    { nombre:"Donante para bebés", contacto:"323 519 1921", wa:"573235191921", servicio:"Pañales, leche de fórmula y crema Almipro.", zona:"Cali", obs:"Confirmar disponibilidad y condiciones." },
+  ]},
+  { cat:"Inspección de edificaciones", items:[
+    { nombre:"Arquitectos voluntarios", contacto:"350 398 4785", wa:"573503984785", servicio:"Visitas técnicas de inspección visual por arquitectos.", zona:"Cali", obs:"Confirmar alcance y disponibilidad." },
+  ]},
+  { cat:"Servicio funerario", items:[
+    { nombre:"Esteban · Funeraria Jardines del Renacer", contacto:"313 577 5451", wa:"573135775451", servicio:"Servicio funerario gratuito para víctimas del terremoto sin cobertura, en convenio con la Alcaldía.", zona:"Ciudad por indicar al contactar", obs:"Requisitos: ciudad, número de contacto y datos de la persona fallecida. Confirmar convenio y vigencia." },
+  ]},
+  { cat:"Rescate especializado", items:[
+    { nombre:"Universidad Icesi · Carlos González", contacto:"304 376 1705", wa:"573043761705", servicio:"Cámara térmica infrarroja Fluke TiX580 para evaluación, búsqueda y rescate; apoyo a brigadas.", zona:"Cali", obs:"Solo WhatsApp según publicación de la Universidad Icesi." },
+    { nombre:"Julian Cuéllar", contacto:"311 582 1739", wa:"573115821739", servicio:"Aparatos de escucha para búsqueda de sobrevivientes; solicita puntos donde se requiere.", zona:"Cali · zonas de búsqueda", obs:"Requiere coordinación con equipos oficiales de búsqueda y rescate." },
+  ]},
+  { cat:"Transporte y trasteos", nota:"Red de vehículos coordinada por Juan Camilo Cardona · 320 789 4553 (confirma punto de recogida, destino, carga y horario antes de asignar).", items:[
+    { nombre:"Juan Camilo Cardona", contacto:"320 789 4553", wa:"573207894553", servicio:"Coordinación de vehículos para recoger carga, alimentos, personal de salud y ayudas humanitarias.", zona:"Cali", obs:"" },
+    { nombre:"Trasteos solidarios", contacto:"310 669 3350", wa:"573106693350", servicio:"Trasteos totalmente gratis para personas cuya vivienda quedó afectada.", zona:"Cali", obs:"Confirmar disponibilidad antes de coordinar." },
+    { nombre:"Luis Fernando Aguilar", contacto:"Coordinar: 320 789 4553", servicio:"Camioneta de estacas, capacidad 1 tonelada; todo el día.", zona:"Sector La Luna", obs:"" },
+    { nombre:"Catalina Cerón", contacto:"Coordinar: 320 789 4553", servicio:"Motocicleta; se desplaza por toda la ciudad y veredas.", zona:"Norte", obs:"" },
+    { nombre:"Lizeth Ararat", contacto:"Coordinar: 320 789 4553", servicio:"Motocicleta; se desplaza por toda la ciudad.", zona:"Oriente", obs:"" },
+    { nombre:"Esteban Montehermoso", contacto:"Coordinar: 320 789 4553", servicio:"Toyota Fortuner; todo el día.", zona:"Norte–Sur", obs:"" },
+    { nombre:"Brayan Robles", contacto:"Coordinar: 320 789 4553", servicio:"Carro / moto; disponible después de 4:00 p. m.", zona:"Oriente", obs:"" },
+    { nombre:"Sebastián Paz", contacto:"Coordinar: 320 789 4553", servicio:"Gixxer 150 con canasta; todo el día.", zona:"Autopista con 46", obs:"" },
+    { nombre:"Andrés Ochoa", contacto:"Coordinar: 320 789 4553", servicio:"Raider 125; después de 5:00 p. m.; sin parrilla.", zona:"No especificada", obs:"" },
+    { nombre:"Diego Monroy", contacto:"Coordinar: 320 789 4553", servicio:"Renault Kwid / Pulsar 180; después de 5:30 p. m.", zona:"Suroriente (Prados de Oriente / Santa Mónica Popular)", obs:"" },
+    { nombre:"Doneys García", contacto:"Coordinar: 320 789 4553", servicio:"Moto / carro. Moto intermitente; carro según trabajo.", zona:"Oriente, Córdoba y alrededores", obs:"" },
+    { nombre:"Jorge Andrés Riaño", contacto:"Coordinar: 320 789 4553", servicio:"Hyundai i25 Sedán; desde 10:30 a. m.; cajuela + pasajeros.", zona:"Suroriente", obs:"" },
+  ]},
+];
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 /* Necesidades que SIEMPRE se renuevan en los puntos de rescate de Cali */
@@ -1288,6 +1406,7 @@ function App(){
   const [showJuridica, setShowJuridica] = useState(false);
   const [showCierres, setShowCierres] = useState(false);
   const [showCifras, setShowCifras] = useState(false);
+  const [showDirectorio, setShowDirectorio] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1320,6 +1439,7 @@ function App(){
               <button className="menu-close" onClick={() => setShowMenu(false)} aria-label="Cerrar menú">✕</button>
             </div>
             <a href="index.html">Inicio</a>
+            <a href="#directorio" className="menu-link-highlight" onClick={() => setShowMenu(false)}>🧭 Directorio de ayuda</a>
             <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
             <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
@@ -1552,6 +1672,41 @@ function App(){
         </div>
       ) : null}
 
+      {DIRECTORIO_AYUDA.length ? (
+        <div className="albergues directorio" id="directorio">
+          <button type="button" className="al-toggle" onClick={() => setShowDirectorio(v => !v)} aria-expanded={showDirectorio}>
+            <h2>🧭 Directorio de ayuda · Damnificados</h2>
+            <span className={"al-chevron" + (showDirectorio ? " open" : "")}>▾</span>
+          </button>
+          {showDirectorio ? (
+            <>
+              <p className="al-sub">{DIRECTORIO_FUENTE}</p>
+              {DIRECTORIO_AYUDA.map((g,gi) => (
+                <div className="dir-cat" key={gi}>
+                  <div className="dir-cat-tit">{g.cat}</div>
+                  {g.nota ? <p className="dir-cat-nota">{g.nota}</p> : null}
+                  <div className="dir-items">
+                    {g.items.map((it,i) => (
+                      <div className="dir-item" key={i}>
+                        <div className="dir-item-head">
+                          <span className="dir-nombre">{it.nombre}</span>
+                          {it.wa
+                            ? <a className="dir-contacto" href={"https://wa.me/" + it.wa} target="_blank" rel="noopener noreferrer">{it.contacto}</a>
+                            : <span className="dir-contacto texto">{it.contacto}</span>}
+                        </div>
+                        <div className="dir-serv">{it.servicio}</div>
+                        {it.zona ? <div className="dir-zona">📍 {it.zona}</div> : null}
+                        {it.obs ? <div className="dir-obs">{it.obs}</div> : null}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
       {ALBERGUES.length ? (
         <div className="albergues" id="albergues">
           <button
@@ -1581,7 +1736,7 @@ function App(){
         </div>
       ) : null}
 
-      {APOYO_PSICOLOGICO.length ? (
+      {APOYO_PSICO_GRUPOS.length ? (
         <div className="albergues" id="psicologia">
           <button type="button" className="al-toggle" onClick={() => setShowPsico(v => !v)} aria-expanded={showPsico}>
             <h2>Apoyo psicológico gratuito</h2>
@@ -1590,28 +1745,38 @@ function App(){
           {showPsico ? (
             <>
               <p className="al-sub">{APOYO_PSICO_INFO}</p>
-              <div className="al-nota">
-                ¿Prefieres que un profesional te contacte? Un grupo de psicólogos de Cali ofrece apoyo voluntario tras el sismo. Diligencia este formulario y la red se pondrá en contacto contigo:{" "}
-                <a className="dir" href="https://docs.google.com/forms/d/e/1FAIpQLSdTgXmhTJL_xLCp03ah5xzTnueTOip_3FtG9t8Zdge5D8FNEg/viewform" target="_blank" rel="noopener noreferrer">Solicitar apoyo psicológico (formulario)</a>
-              </div>
-              <table className="tabla">
-                <thead>
-                  <tr>
-                    <th style={{width:"55%"}}>Profesional</th>
-                    <th>WhatsApp</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {APOYO_PSICOLOGICO.map((p,i) => (
-                    <tr key={i}>
-                      <td data-label="Profesional"><span className="lugar">{p.nombre}</span></td>
-                      <td data-label="WhatsApp">
-                        <a className="dir" href={"https://wa.me/" + p.wa} target="_blank" rel="noopener noreferrer">{p.contacto}</a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {APOYO_PSICO_GRUPOS.map((g,gi) => (
+                <div className="psico-grupo" key={gi}>
+                  <div className="psico-grupo-tit">{g.titulo}</div>
+                  {g.info ? <p className="psico-grupo-info">{g.info}</p> : null}
+                  {g.form ? (
+                    <div className="al-nota">
+                      Diligencia este formulario y un profesional de la red se pondrá en contacto contigo:{" "}
+                      <a className="dir" href={APOYO_PSICO_FORM} target="_blank" rel="noopener noreferrer">Solicitar apoyo psicológico (formulario)</a>
+                    </div>
+                  ) : null}
+                  {g.profesionales.length ? (
+                    <table className="tabla">
+                      <thead>
+                        <tr>
+                          <th style={{width:"55%"}}>Profesional</th>
+                          <th>WhatsApp</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {g.profesionales.map((p,i) => (
+                          <tr key={i}>
+                            <td data-label="Profesional"><span className="lugar">{p.nombre}</span></td>
+                            <td data-label="WhatsApp">
+                              <a className="dir" href={"https://wa.me/" + p.wa} target="_blank" rel="noopener noreferrer">{p.contacto}</a>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : null}
+                </div>
+              ))}
             </>
           ) : null}
         </div>
