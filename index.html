@@ -213,6 +213,7 @@
   .priority .pr-item:first-of-type{padding-top:0}
   .priority .pr-dot{flex:none;width:9px;height:9px;border-radius:999px;background:var(--alert);margin-top:6px}
   .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
+  .priority .pr-fecha{font-size:11.5px;font-weight:700;color:var(--star-light);letter-spacing:.01em;margin-bottom:4px}
   .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
 
   /* Albergues temporales */
@@ -632,6 +633,13 @@
   }
   .frente-dir{font-size:15px;font-weight:700;color:var(--white)}
   .frente-barrio{font-size:12.5px;font-weight:500;color:var(--star-light);margin-top:2px}
+  .frente.alerta{border-color:rgba(245,197,66,.75);background:rgba(245,197,66,.12)}
+  .frente.alerta .frente-n{background:linear-gradient(180deg,#F5C542,#D99A1E);color:#3a2a00}
+  .frente-alerta-badge{
+    display:inline-block;margin-top:6px;padding:3px 9px;border-radius:999px;
+    font-size:11px;font-weight:800;letter-spacing:.02em;
+    background:#F5C542;color:#3a2a00;
+  }
   @media (max-width:680px){ .frentes-grid{grid-template-columns:1fr} }
 
   /* ===== Fase 4: municipios, laderas, acopios ===== */
@@ -651,6 +659,7 @@
   .dest-nombre{font-size:17px;font-weight:800;color:var(--white)}
   .dest-region{font-size:12px;font-weight:600;color:var(--star-light)}
   .dest-nota{color:var(--ice);font-size:13.5px;line-height:1.45;margin:6px 0 10px}
+  .dest-dano{color:var(--star-light);font-size:12.5px;line-height:1.5;margin:2px 0 8px;padding-left:10px;border-left:2px solid rgba(255,92,107,.5)}
   .dest-porconf{color:var(--muted);font-size:13px;font-style:italic}
   .dest-contacto{color:var(--star-light);font-size:12.5px;font-weight:600;margin-top:8px}
   .acopio-list{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
@@ -736,7 +745,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "13 de agosto de 2026, 3:51 p. m.";
+const ACTUALIZADO = "13 de agosto de 2026, 4:15:22 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1022,8 +1031,8 @@ const FRENTES = [
   { dir:"Carrera 1 con Calle 65", barrio:"Popular Calima · Comuna 4" },
   { dir:"Carrera 1 con Calle 46C", barrio:"Popular · Comuna 4" },
   { dir:"Avenida 6 Norte con Calle 14", barrio:"Granada · Comuna 2" },
-  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · 44 con Novena" },
-  { dir:"Edificio Ana Pilar", barrio:"Carrera 56 con 4C · reporte comunitario" },
+  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · 44 con Novena", alerta:true, alertaTexto:"Personas dentro confirmadas · rescate en curso" },
+  { dir:"Edificio Ana Pilar", barrio:"Carrera 56 con 4C · reporte comunitario", alerta:true, alertaTexto:"Personas dentro confirmadas · rescate en curso" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1100,19 +1109,9 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 const RESCATE_NECESIDADES = ["Hielo","Desayunos","Almuerzos","Cenas","Linternas","Reflectores","Equipos de oxicorte","Rotomartillos"];
 
 const ALTA_PRIORIDAD = [
-  { punto:"Apoyo psicológico voluntario · deja tu solicitud", nota:"Un grupo de psicólogos de Cali se unió para dar orientación y apoyo psicológico voluntario a quien lo necesite tras el sismo. Si estás sintiendo miedo, ansiedad, angustia, dificultad para dormir o solo necesitas hablar con alguien, diligencia el formulario y un profesional de la red te contactará. Es únicamente para solicitar apoyo psicológico.", link:"https://docs.google.com/forms/d/e/1FAIpQLSdTgXmhTJL_xLCp03ah5xzTnueTOip_3FtG9t8Zdge5D8FNEg/viewform", linkTexto:"Diligenciar formulario de apoyo psicológico" },
-  { punto:"Punto de la Guadalupe · faltan porras grandes", nota:"En el punto de la Guadalupe faltan porras grandes. (Reportado el 13 de agosto, 2:50 p. m.)" },
-  { punto:"Máxima urgencia · Edificio Ana Pilar (Guadalupe con 3ª)", nota:"Se necesitan discos de corte de 4\" y 7\", más pipas de oxígeno y gas. Contactos: Alexa 311 419 9007 y Daniel 302 492 2200." },
-  { punto:"Peaje El Cerrito · paso gratis para ayudas al norte del Valle", nota:"Si llevas ayudas hacia el norte del Valle del Cauca, pasa por el carril 6 del Peaje El Cerrito: te dejan pasar gratis." },
-  { punto:"Edificio Ariguaní · se necesitan herramientas", nota:"En el Edificio Ariguaní (Carrera 67 con 3C) se necesitan equipos de oxicorte y rotomartillos." },
-  { punto:"¿Necesitas ayuda? Estamos buscando a quien la necesite", nota:"Si tú o alguien que conoces necesita ropa, comida, transporte de ayudas o albergue, no dudes en comunicarte. WhatsApp: 311 446 7872 y 323 797 0760." },
-  { punto:"Demoliciones controladas hoy (jueves 13 de agosto)", nota:"Hoy empiezan a implosionar (demoler) edificios que quedaron muy afectados. No entres en pánico ni hagas cadenas pidiendo apoyo para esas edificaciones: están vacías y ya fueron evacuadas. Si escuchas explosiones o ves edificios caer, son situaciones controladas. Confirma toda la información antes de difundirla." },
-  { punto:"Norte del Valle · entrega la ayuda directamente a la gente", nota:"Compañeros que estuvieron ayer en el norte del Valle reportan que en varios municipios la ayuda no está llegando cuando se deja en la Alcaldía, los Bomberos o la Cruz Roja. Por favor, entrega las donaciones directamente a las personas y familias del pueblo afectado." },
-  { punto:"Zarzal · ayuda urgente", nota:"Se necesitan agua potable, alimentos no perecederos, carpas y colchonetas. Hay un bus que sale este viernes a entregar ayudas. Contacto: 318 573 8184." },
-  { punto:"Laderas: Meléndez, Alto Nápoles y Santa Helena", nota:"Entrega las ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades (maestra Carmiña)." },
-  { punto:"Sevilla", nota:"Están pidiendo alimentos para mascota y alimentos no perecederos." },
-  { punto:"El Cairo · se requieren insumos", nota:"En El Cairo se requieren frazadas y plástico negro de construcción." },
-  { punto:"¿Buscas a alguien?", nota:"Líneas oficiales 24/7 para reportar personas desaparecidas: Personería de Cali 318 335 5722 y WhatsApp Cruz Roja 321 213 9525." },
+  { fecha:"13 de agosto de 2026, 3:51:40 p. m.", punto:"Municipios del norte del Valle · balance real de daños", nota:"Actualizamos la sección de municipios con el balance verificado de daños y las necesidades reales, incluyendo lo básico para reconstrucción y para los damnificados. Roldanillo (~1.300 viviendas afectadas y sin agua para 8 municipios), El Cairo (~80% destruido), La Victoria, Zarzal, Riofrío, Sevilla y El Águila/Argelia.", link:"#municipios", linkTexto:"Ver municipios y necesidades" },
+  { fecha:"13 de agosto de 2026, 3:12:05 p. m.", punto:"Apoyo psicológico voluntario · formulario", nota:"Un grupo de psicólogos de Cali ofrece orientación y apoyo psicológico voluntario. Puedes dejar tu solicitud en el formulario y un profesional de la red te contactará.", link:"#psicologia", linkTexto:"Ver apoyo psicológico" },
+  { fecha:"13 de agosto de 2026, 1:27:12 p. m.", punto:"Asesoría jurídica gratuita", nota:"Acompañamiento legal sin costo para los afectados: reclamación de seguros de propiedad, auxilio funerario, activación de la ruta de personas desaparecidas y dudas sobre el auxilio de arriendo.", link:"#juridica", linkTexto:"Ver asesoría jurídica" },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1154,13 +1153,18 @@ const AYUDAS = [
    Edita estas listas para actualizar la nueva prioridad.
    ============================================================ */
 
-/* Municipios que piden ayuda. estado:"urgente" resalta la tarjeta. */
+/* Municipios que piden ayuda. estado:"urgente" resalta la tarjeta.
+   Datos de daños con base en reportes de El País, El Colombiano, Semana e Infobae (10-12 ago 2026).
+   El Valle del Cauca declaró calamidad pública por 6 meses. */
+const MUNICIPIOS_FUENTE = "Balance de daños según Gobernación del Valle y medios (El País, El Colombiano, Semana, Infobae), 10–12 de agosto de 2026. Las condiciones cambian rápido: confirma antes de despachar.";
 const MUNICIPIOS = [
-  { nombre:"Roldanillo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"Tienen pocas donaciones; requieren apoyo.", necesidades:["Maquinaria","Personas / voluntarios","Agua"] },
-  { nombre:"Zarzal", region:"Norte del Valle", estado:"urgente", contacto:"318 573 8184", nota:"Ayuda urgente · Hay un bus que sale mañana viernes a entregar ayudas.", necesidades:["Agua potable","Alimentos no perecederos","Carpas","Colchonetas"] },
-  { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"", necesidades:["Frazadas","Plástico negro de construcción"] },
-  { nombre:"Sevilla", region:"Norte del Valle", estado:"", contacto:"", nota:"", necesidades:["Alimentos para mascota","Alimentos no perecederos"] },
-  { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", nota:"Riofrío y sus corregimientos y veredas nos necesitan.", necesidades:["Agua","Ropa","Cosas de aseo personal","Alimentos no perecederos","Alimentos para mascotas","Colchonetas","Cobijas"] },
+  { nombre:"Roldanillo", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Uno de los municipios más golpeados: cerca de 1.300 viviendas afectadas y unas 500 destruidas. La iglesia, la alcaldía y la Casa de la Cultura deben demolerse; el hospital quedó con ~60% de daño estructural. La rotura del acueducto dejó sin agua a 8 municipios del norte del Valle.", nota:"Requieren apoyo para remoción de escombros y para las familias que perdieron su vivienda.", necesidades:["Agua potable","Alimentos no perecederos","Maquinaria amarilla","Voluntarios para escombros","Colchonetas","Cobijas","Carpas","Kits de aseo","Materiales de construcción (tejas, zinc, madera)"] },
+  { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Uno de los más afectados del departamento: cerca del 80% de las edificaciones resultaron destruidas. Reporta 2 personas fallecidas.", nota:"Familias sin techo a la intemperie; se necesita cubrir y abrigar.", necesidades:["Frazadas","Plástico negro de construcción","Agua potable","Alimentos no perecederos","Carpas","Colchonetas","Kits de aseo","Ropa"] },
+  { nombre:"La Victoria", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"615 viviendas con daños. El hospital resultó afectado en el 2.º y 3.er piso y el puente Mariano Ospina fue cerrado por fisuras; unas 5 instituciones educativas con afectaciones.", nota:"Requiere revisión estructural y apoyo para familias reubicadas.", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Cobijas","Carpas","Kits de aseo"] },
+  { nombre:"Zarzal", region:"Norte del Valle", estado:"urgente", contacto:"318 573 8184", dano:"1 persona fallecida y viviendas con daños en el casco urbano.", nota:"Ayuda urgente · Hay un bus que sale el viernes a entregar ayudas.", necesidades:["Agua potable","Alimentos no perecederos","Carpas","Colchonetas","Kits de aseo"] },
+  { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", dano:"Afectaciones en el casco urbano, corregimientos y veredas.", nota:"Riofrío y sus corregimientos y veredas nos necesitan.", necesidades:["Agua potable","Ropa","Aseo personal","Alimentos no perecederos","Alimentos para mascotas","Colchonetas","Cobijas","Kits de aseo"] },
+  { nombre:"Sevilla", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Reporta 5 personas fallecidas y afectaciones en viviendas.", nota:"", necesidades:["Alimentos para mascota","Alimentos no perecederos","Agua potable","Colchonetas","Kits de aseo"] },
+  { nombre:"El Águila y Argelia", region:"Norte del Valle", estado:"", contacto:"", dano:"Municipios del norte inspeccionados por aire; reportan daños en viviendas y vías. Necesidades en evaluación por la Gobernación.", nota:"", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Kits de aseo"] },
 ];
 
 /* Laderas de Cali afectadas. */
@@ -1296,7 +1300,6 @@ function App(){
             <a href="index.html">Inicio</a>
             <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
-            <a href="#enviar" onClick={() => setShowMenu(false)}>Cómo enviar tu ayuda</a>
             <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
             <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
@@ -1342,7 +1345,6 @@ function App(){
         <div className="meta">
           <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios pidiendo ayuda</span>
           <span className="chip"><span className="dot"></span>{FRENTES.length} puntos de trabajo en Cali</span>
-          <span className="chip"><span className="dot"></span>{ACOPIOS.length} centros de acopio</span>
         </div>
 
         <div className="grid-info">
@@ -1379,9 +1381,10 @@ function App(){
             <div className="pr-item" key={i}>
               <span className="pr-dot"></span>
               <div>
+                {p.fecha ? <div className="pr-fecha">{p.fecha}</div> : null}
                 <div className="pr-name">{p.punto}</div>
                 {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
-                {p.link ? <div className="pr-nota"><a className="dir" href={p.link} target="_blank" rel="noopener noreferrer">{p.linkTexto || "Abrir enlace"}</a></div> : null}
+                {p.link ? <div className="pr-nota"><a className="dir" href={p.link} {...(p.link.startsWith("#") ? {} : {target:"_blank", rel:"noopener noreferrer"})}>{p.linkTexto || "Abrir enlace"}</a></div> : null}
               </div>
             </div>
           ))}
@@ -1435,11 +1438,12 @@ function App(){
           </div>
           <div className="frentes-grid">
             {FRENTES.map((f,i) => (
-              <div className="frente" key={i}>
+              <div className={"frente" + (f.alerta ? " alerta" : "")} key={i}>
                 <span className="frente-n">{i + 1}</span>
                 <div>
                   <div className="frente-dir">{f.dir}</div>
                   <div className="frente-barrio">{f.barrio}</div>
+                  {f.alerta ? <span className="frente-alerta-badge">⚠ {f.alertaTexto}</span> : null}
                 </div>
               </div>
             ))}
@@ -1463,7 +1467,8 @@ function App(){
       <div className="seccion" id="municipios">
         <div className="sec-head">
           <h2>Municipios que piden ayuda</h2>
-          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del norte del Valle. Llévala a un centro de acopio (más abajo) para que llegue allá.</p>
+          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del norte del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias.</p>
+          <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
         </div>
         <div className="dest-list">
           {MUNICIPIOS.map((m,i) => (
@@ -1475,6 +1480,7 @@ function App(){
                   : <span className="dest-region">{m.region}</span>}
               </div>
               {m.estado === "urgente" ? <div className="dest-region">{m.region}</div> : null}
+              {m.dano ? <div className="dest-dano">{m.dano}</div> : null}
               {m.nota ? <div className="dest-nota">{m.nota}</div> : null}
               {m.necesidades.length
                 ? <div className="cel-need">{m.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
@@ -1507,34 +1513,6 @@ function App(){
           </div>
         </div>
       ) : null}
-
-      <div className="seccion" id="enviar">
-        <div className="sec-head">
-          <h2>Cómo enviar tu ayuda</h2>
-          <p className="sec-sub">Lleva tus donaciones a estos centros de acopio: desde ahí las despachan a los municipios y a las laderas. Si tienes vehículo, revisa el transporte disponible.</p>
-        </div>
-        <div className="acopio-list">
-          {ACOPIOS.map((a,i) => (
-            <div className="acopio-item" key={i}>
-              <div className="acopio-nombre">{a.nombre}</div>
-              {a.direccion ? <div className="acopio-dir">{a.direccion}</div> : null}
-              {a.nota ? <div className="acopio-nota">{a.nota}</div> : null}
-              {a.contacto ? <div className="dest-contacto">Contacto: {a.contacto}</div> : null}
-            </div>
-          ))}
-        </div>
-        {TRANSPORTE.length ? (
-          <div className="transporte">
-            <div className="tr-tag">🚚 Transporte disponible hacia municipios</div>
-            {TRANSPORTE.map((t,i) => (
-              <div className="tr-item" key={i}>
-                <span>{t.recurso}</span>
-                {t.contacto ? <span className="tr-contacto">Contacto: {t.contacto}</span> : null}
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
 
       {ALBERGUES.length ? (
         <div className="albergues" id="albergues">
