@@ -239,6 +239,11 @@
     border-radius:14px;padding:14px 16px;
   }
   .al-nombre{font-size:14.5px;font-weight:700;color:var(--white)}
+  .al-cupos{
+    display:inline-block;margin-left:8px;font-size:11px;font-weight:800;
+    letter-spacing:.04em;color:#04240F;background:var(--ok);
+    padding:2px 8px;border-radius:999px;vertical-align:middle;
+  }
   .al-dir{color:var(--star-light);font-size:12.5px;font-weight:500;margin-top:5px;line-height:1.4}
   .al-contacto{
     margin-top:16px;padding:14px 16px;border-radius:12px;
@@ -1021,6 +1026,7 @@ const NO_DESPLAZARSE = [
 ];
 
 const ALBERGUES = [
+  { nombre:"Colegio Bilingüe Lacordaire", direccion:"Calle 5 #80-7, Meléndez (Sur de Cali)", cupos:"50" },
   { nombre:"Hotel Six Avenue Cali", direccion:"Av. 6a N #17N-73, Santa Mónica Residencial" },
   { nombre:"Cancha de hockey Miguel Calero", direccion:"Calle 9 con Carrera 37A / 39" },
   { nombre:"Diamante de béisbol", direccion:"" },
@@ -1469,7 +1475,7 @@ function App(){
               <div className="al-list">
                 {ALBERGUES.map((a,i) => (
                   <div className="al-item" key={i}>
-                    <div className="al-nombre">{a.nombre}</div>
+                    <div className="al-nombre">{a.nombre}{a.cupos ? <span className="al-cupos">{a.cupos} cupos</span> : null}</div>
                     {a.direccion ? <div className="al-dir">{a.direccion}</div> : null}
                   </div>
                 ))}

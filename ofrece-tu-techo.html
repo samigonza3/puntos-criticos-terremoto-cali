@@ -174,8 +174,30 @@
   .footer-credit a{color:var(--star-light);text-decoration:none;font-weight:600}
   .footer-credit a:hover{text-decoration:underline}
 
+  /* Listas de albergues y casas confirmadas */
+  .lista{
+    margin-top:36px;background:var(--space-800);border:1px solid rgba(127,168,255,.16);
+    border-radius:20px;padding:26px;
+  }
+  .lista h2{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light);margin-bottom:6px}
+  .lista.ok-border{border-color:rgba(34,178,122,.32)}
+  .lista.ok-border h2{color:var(--ok-light)}
+  .lista-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin-bottom:16px}
+  .lista-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .lista-item{
+    background:var(--space-900);border:1px solid rgba(127,168,255,.18);
+    border-radius:14px;padding:14px 16px;
+  }
+  .lista-nombre{font-size:14.5px;font-weight:700;color:var(--white)}
+  .lista-badge{
+    display:inline-block;margin-left:8px;font-size:11px;font-weight:800;letter-spacing:.04em;
+    color:#04240F;background:var(--ok-light);padding:2px 8px;border-radius:999px;vertical-align:middle;
+  }
+  .lista-dir{color:var(--star-light);font-size:12.5px;font-weight:500;margin-top:5px;line-height:1.4}
+  .lista-meta{color:var(--muted);font-size:12.5px;margin-top:7px;line-height:1.45}
   @media (max-width:680px){
     .form-grid{grid-template-columns:1fr}
+    .lista-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -252,6 +274,38 @@
       duerma tranquila esta noche. Nosotros verificamos la información y coordinamos
       contigo antes de conectar a alguien con tu hogar.
     </p>
+  </div>
+
+  <div class="lista">
+    <h2>Albergues temporales confirmados</h2>
+    <p class="lista-sub">Espacios gratuitos y verificados en Cali para quienes se quedaron sin dónde dormir de forma segura.</p>
+    <div class="lista-grid">
+      <div class="lista-item"><div class="lista-nombre">Colegio Bilingüe Lacordaire<span class="lista-badge">50 cupos</span></div><div class="lista-dir">Calle 5 #80-7, Meléndez (Sur de Cali)</div></div>
+      <div class="lista-item"><div class="lista-nombre">Hotel Six Avenue Cali</div><div class="lista-dir">Av. 6a N #17N-73, Santa Mónica Residencial</div></div>
+      <div class="lista-item"><div class="lista-nombre">Cancha de hockey Miguel Calero</div><div class="lista-dir">Calle 9 con Carrera 37A / 39</div></div>
+      <div class="lista-item"><div class="lista-nombre">Diamante de béisbol</div></div>
+      <div class="lista-item"><div class="lista-nombre">Loft House 14</div><div class="lista-dir">Carrera 26 #2-91</div></div>
+      <div class="lista-item"><div class="lista-nombre">Motel California</div><div class="lista-dir">Cl. 10 #30-155, Arroyo Hondo</div></div>
+      <div class="lista-item"><div class="lista-nombre">Motel Éxtasis</div><div class="lista-dir">3ra Norte 72 Esquina</div></div>
+      <div class="lista-item"><div class="lista-nombre">Cristal Palace</div><div class="lista-dir">Enseguida de TQ Tecnoquímicas, Cra. 7a #23-43</div></div>
+      <div class="lista-item"><div class="lista-nombre">Residencias Ramírez</div><div class="lista-dir">Cra. 7a #23-43, San Nicolás</div></div>
+      <div class="lista-item"><div class="lista-nombre">Residencias Bugatier</div><div class="lista-dir">Cra. 25a #14c-09</div></div>
+      <div class="lista-item"><div class="lista-nombre">Plaza Real Norte</div><div class="lista-dir">Av. 2 Nte. #21 Norte-99</div></div>
+      <div class="lista-item"><div class="lista-nombre">Motel Kamasutra</div><div class="lista-dir">Cl. 10 #29 A-50, Acopi</div></div>
+    </div>
+    <p class="lista-meta">Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076 · Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.</p>
+  </div>
+
+  <div class="lista ok-border">
+    <h2>Casas ofrecidas por la comunidad</h2>
+    <p class="lista-sub">Personas que ya abrieron su hogar. Coordinamos y verificamos antes de conectar a alguien. ¿Quieres sumarte? Llena el formulario de abajo.</p>
+    <div class="lista-grid">
+      <div class="lista-item">
+        <div class="lista-nombre">Nathalia Camacho<span class="lista-badge">2 cupos</span></div>
+        <div class="lista-dir">Buenos Aires, Cali</div>
+        <div class="lista-meta">Disponibilidad: unos días · Es una cama · Contacto: 319 566 3091</div>
+      </div>
+    </div>
   </div>
 
   <form
