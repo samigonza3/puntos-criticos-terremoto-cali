@@ -569,6 +569,14 @@
   .cifra.alert .cifra-n{color:var(--alert)}
   .cifra.ok{border-color:rgba(62,224,142,.35)}
   .cifra.ok .cifra-n{color:var(--ok)}
+  .cifras-nota{margin-top:14px;font-size:12.5px;line-height:1.55;color:var(--ice)}
+  .cifras-toggle{
+    margin-top:14px;width:100%;cursor:pointer;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.22);
+    color:var(--star-light);font-family:inherit;font-size:13px;font-weight:700;
+    padding:11px 14px;border-radius:12px;transition:background .15s,border-color .15s;
+  }
+  .cifras-toggle:hover{background:var(--space-700);border-color:rgba(127,168,255,.4)}
   @media (max-width:760px){ .cifras-grid{grid-template-columns:repeat(2,1fr)} }
 
   /* ===== Alerta máxima: niñez ===== */
@@ -745,7 +753,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "13 de agosto de 2026, 4:15:22 p. m.";
+const ACTUALIZADO = "13 de agosto de 2026, 4:32:10 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1010,15 +1018,28 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Cifras oficiales · Cali · 13/08/2026, 8:27 a. m.";
+const CIFRAS_FUENTE = "Cifras oficiales · Cali · 13/08/2026, 12:12 p. m.";
 const CIFRAS = [
   { n:"96", label:"Fallecidos", tono:"alert" },
-  { n:"107", label:"Desaparecidos", tono:"alert" },
+  { n:"111", label:"Desaparecidos", tono:"alert" },
   { n:"1.401", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"86", label:"Estructuras colapsadas", tono:"" },
-  { n:"1.142", label:"Daños reportados", tono:"" },
+  { n:"91", label:"Estructuras colapsadas (total + parcial)", tono:"" },
+  { n:"1.142", label:"Con daños estructurales", tono:"" },
   { n:"8", label:"Frentes activos de trabajo", tono:"" },
+];
+/* Cifras adicionales — se muestran al abrir "Ver más cifras". */
+const CIFRAS_MAS = [
+  { n:"45", label:"Colapso total", tono:"alert" },
+  { n:"46", label:"Colapso parcial", tono:"" },
+  { n:"18", label:"Estructuras evacuadas", tono:"" },
+  { n:"8.236 t", label:"Escombros removidos", tono:"" },
+  { n:"250", label:"Evaluaciones de daños", tono:"" },
+  { n:"1.800", label:"Rescatistas activos", tono:"ok" },
+  { n:"9", label:"Puntos de búsqueda especializada", tono:"" },
+  { n:"55", label:"Animales rescatados", tono:"ok" },
+  { n:"15", label:"Animales muertos", tono:"alert" },
+  { n:"290", label:"Animales desaparecidos", tono:"" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
@@ -1266,6 +1287,7 @@ function App(){
   const [showPsico, setShowPsico] = useState(false);
   const [showJuridica, setShowJuridica] = useState(false);
   const [showCierres, setShowCierres] = useState(false);
+  const [showCifras, setShowCifras] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1405,6 +1427,22 @@ function App(){
               </div>
             ))}
           </div>
+          {showCifras ? (
+            <>
+              <div className="cifras-grid" style={{marginTop:"14px"}}>
+                {CIFRAS_MAS.map((c,i) => (
+                  <div className={"cifra" + (c.tono ? " " + c.tono : "")} key={i}>
+                    <span className="cifra-n">{c.n}</span>
+                    <span className="cifra-label">{c.label}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="cifras-nota">El terremoto (magnitud 7,4, epicentro en Chocó) ocurrió el 10 de agosto de 2026. Cali y Pereira son las ciudades más afectadas del Valle del Cauca; las cifras siguen aumentando conforme avanzan las inspecciones y las labores de rescate, según la Alcaldía.</p>
+            </>
+          ) : null}
+          <button type="button" className="cifras-toggle" onClick={() => setShowCifras(v => !v)} aria-expanded={showCifras}>
+            {showCifras ? "Ver menos cifras ▴" : "Ver más cifras ▾"}
+          </button>
         </div>
       ) : null}
 
