@@ -1071,12 +1071,24 @@ const APOYO_PSICO_INFO = "Si fuiste afectado por el terremoto, tu salud mental t
 const APOYO_PSICOLOGICO = [
   { nombre:"Psicóloga Michelle Burgos", contacto:"323 234 9966", wa:"573232349966" },
   { nombre:"Psicóloga Karen Medina", contacto:"312 252 3059", wa:"573122523059" },
+  { nombre:"Psicóloga Isabella Vera (voluntaria)", contacto:"304 444 5255", wa:"573044445255" },
 ];
 
 /* Asesoría jurídica gratuita */
 const JURIDICA_INFO = "Acompañamiento legal sin costo para los afectados por el terremoto: reclamación de seguros de propiedad, auxilio funerario, activación de la ruta de personas desaparecidas, auxilio de alquiler y dudas jurídicas en general.";
 const ASESORIA_JURIDICA = [
   { nombre:"Bryan Taborda", area:"Reclamación de seguro de propiedad · Auxilio funerario · Ruta de desaparecidos · Auxilio de alquiler · Dudas jurídicas", contacto:"310 378 2035", wa:"573103782035" },
+];
+
+/* Cierres viales activos en Cali (Secretaría de Movilidad) */
+const CIERRES_FUENTE = "Reporte de la Secretaría de Movilidad, Alcaldía de Santiago de Cali.";
+const CIERRES_VIALES = [
+  "Avenida 5N con Calle 67","Calle 3 con Carrera 67","Calle 3 entre Carrera 56 y 62",
+  "Carrera 1 con Calle 19","Carrera 4 con Calle 11","Calle 5 con Carrera 42",
+  "Calle 5 con Carrera 56","Calle 5 entre Carrera 56 y 62","Calle 6 con Carrera 42",
+  "Calle 6 con Carrera 44","Calle 7 con Carrera 41","Calle 8 con Carrera 42",
+  "Calle 9 con Carrera 44","Calle 10 con Carrera 38","Calle 10 con Carrera 39",
+  "Calle 10 con Carrera 72","Roosevelt con Carrera 39","Carrera 28D con Calle 72W",
 ];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
@@ -1085,6 +1097,8 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 const RESCATE_NECESIDADES = ["Hielo","Desayunos","Almuerzos","Cenas","Linternas","Reflectores","Equipos de oxicorte","Rotomartillos"];
 
 const ALTA_PRIORIDAD = [
+  { punto:"Máxima urgencia · Edificio Ana Pilar (Guadalupe con 3ª)", nota:"Se necesitan discos de corte de 4\" y 7\", más pipas de oxígeno y gas. Contactos: Alexa 311 419 9007 y Daniel 302 492 2200." },
+  { punto:"Peaje El Cerrito · paso gratis para ayudas al norte del Valle", nota:"Si llevas ayudas hacia el norte del Valle del Cauca, pasa por el carril 6 del Peaje El Cerrito: te dejan pasar gratis." },
   { punto:"Edificio Ariguaní · se necesitan herramientas", nota:"En el Edificio Ariguaní (Carrera 67 con 3C) se necesitan equipos de oxicorte y rotomartillos." },
   { punto:"¿Necesitas ayuda? Estamos buscando a quien la necesite", nota:"Si tú o alguien que conoces necesita ropa, comida, transporte de ayudas o albergue, no dudes en comunicarte. WhatsApp: 311 446 7872 y 323 797 0760." },
   { punto:"Demoliciones controladas hoy (jueves 13 de agosto)", nota:"Hoy empiezan a implosionar (demoler) edificios que quedaron muy afectados. No entres en pánico ni hagas cadenas pidiendo apoyo para esas edificaciones: están vacías y ya fueron evacuadas. Si escuchas explosiones o ves edificios caer, son situaciones controladas. Confirma toda la información antes de difundirla." },
@@ -1242,6 +1256,7 @@ function App(){
   const [showAlbergues, setShowAlbergues] = useState(false);
   const [showPsico, setShowPsico] = useState(false);
   const [showJuridica, setShowJuridica] = useState(false);
+  const [showCierres, setShowCierres] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1283,6 +1298,7 @@ function App(){
             <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
             <a href="#psicologia" onClick={() => setShowMenu(false)}>Apoyo psicológico gratuito</a>
             <a href="#juridica" onClick={() => setShowMenu(false)}>Asesoría jurídica gratuita</a>
+            <a href="#cierres" onClick={() => setShowMenu(false)}>Vías cerradas en Cali</a>
             <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de trabajo críticos en Cali</a>
           </nav>
         </>
@@ -1609,6 +1625,23 @@ function App(){
                   ))}
                 </tbody>
               </table>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      {CIERRES_VIALES.length ? (
+        <div className="albergues" id="cierres">
+          <button type="button" className="al-toggle" onClick={() => setShowCierres(v => !v)} aria-expanded={showCierres}>
+            <h2>Vías cerradas en Cali ({CIERRES_VIALES.length})</h2>
+            <span className={"al-chevron" + (showCierres ? " open" : "")}>▾</span>
+          </button>
+          {showCierres ? (
+            <>
+              <p className="al-sub">Cierres viales activos por la emergencia. Evita estas zonas y planea rutas alternas. {CIERRES_FUENTE}</p>
+              <div className="needs">
+                {CIERRES_VIALES.map((c,i) => <span className="need" key={i}>{c}</span>)}
+              </div>
             </>
           ) : null}
         </div>
