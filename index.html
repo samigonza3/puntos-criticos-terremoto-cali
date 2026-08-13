@@ -1247,7 +1247,7 @@ function App(){
             <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
             <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
-            <a href="#rescate" onClick={() => setShowMenu(false)}>Puntos de rescate (fase anterior)</a>
+            <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de trabajo críticos en Cali</a>
           </nav>
         </>
       ) : null}
@@ -1333,8 +1333,15 @@ function App(){
       {FRENTES.length ? (
         <div className="seccion" id="frentes">
           <div className="sec-head">
-            <h2>Frentes de trabajo · Alcaldía de Cali</h2>
+            <h2>Puntos de trabajo críticos en Cali</h2>
             <p className="sec-sub">{FRENTES_FUENTE}.</p>
+          </div>
+          <div className="resc-nec">
+            <div className="rn-tag">Necesidades que se renuevan constantemente</div>
+            <div className="needs">
+              {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
+            </div>
+            <p className="rn-nota">Los alimentos (desayunos, almuerzos y cenas) se coordinan siempre antes de llevarlos. Las linternas y los reflectores nunca sobran.</p>
           </div>
           <div className="frentes-grid">
             {FRENTES.map((f,i) => (
@@ -1499,70 +1506,6 @@ function App(){
           ) : null}
         </div>
       ) : null}
-
-      <div className="rescate" id="rescate">
-      <button type="button" className="al-toggle" onClick={() => setShowRescate(v => !v)} aria-expanded={showRescate}>
-        <h2>Puntos de rescate en Cali · fase anterior</h2>
-        <span className={"al-chevron" + (showRescate ? " open" : "")}>▾</span>
-      </button>
-      {showRescate ? (
-      <>
-      <p className="al-sub">Registro de los puntos de rescate de los primeros días. La mayoría ya están abastecidos o cerrados; se conservan como referencia. Confirma antes de desplazarte.</p>
-      <div className="resc-nec">
-        <div className="rn-tag">Necesidades principales · se renuevan constantemente</div>
-        <div className="needs">
-          {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-        </div>
-        <p className="rn-nota">Los alimentos (desayunos, almuerzos y cenas) se coordinan siempre antes de llevarlos. Las linternas y los reflectores nunca sobran.</p>
-      </div>
-      <div className="controls">
-        <label className="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7FA8FF" strokeWidth="2">
-            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>
-          </svg>
-          <input
-            value={q}
-            onChange={e => setQ(e.target.value)}
-            placeholder="Buscar punto, dirección o contacto"
-            aria-label="Buscar"
-          />
-        </label>
-        <span className="counter">{filtrados.length} resultado{filtrados.length === 1 ? "" : "s"}</span>
-      </div>
-
-      <table className="tabla">
-        <thead>
-          <tr>
-            <th style={{width:"38%"}}>Punto</th>
-            <th style={{width:"32%"}}>Dirección</th>
-            <th>Contacto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtrados.length === 0 ? (
-            <tr><td colSpan="3" className="empty">No hay puntos que coincidan con la búsqueda.</td></tr>
-          ) : filtrados.map((p,i) => (
-            <tr key={i}>
-              <td data-label="Punto">
-                <span className="lugar">{p.lugar}</span>
-              </td>
-              <td data-label="Dirección">
-                {(p.direccion && p.direccion.trim() !== p.lugar.trim())
-                  ? <span className="dir">{p.direccion}</span>
-                  : <span className="dir vacio">—</span>}
-              </td>
-              <td data-label="Contacto">
-                {(p.coordinador || p.contacto)
-                  ? <span className="dir">{p.coordinador}{(p.coordinador && p.contacto) ? " · " : ""}{p.contacto}</span>
-                  : <span className="dir vacio">—</span>}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </>
-      ) : null}
-      </div>
 
       {false ? (
         <div className="ayudas">
