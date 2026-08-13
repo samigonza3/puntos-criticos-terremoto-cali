@@ -634,7 +634,17 @@
   .tr-tag{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ok);margin-bottom:10px}
   .tr-item{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--white);font-weight:500;padding:6px 0}
   .tr-contacto{color:var(--star-light);font-weight:600;flex:none}
-  .rescate{margin-top:26px;border-top:1px solid rgba(127,168,255,.12);padding-top:8px}
+  .rescate{
+    margin-top:26px;padding:22px 24px;border-radius:20px;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.16);
+  }
+  .rescate .al-toggle h2{
+    font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--star-light);margin:0;text-align:left;line-height:1.3;
+  }
+  .rescate .al-chevron{color:var(--star-light)}
+  .rescate .al-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin:8px 0 16px}
+  .rescate .controls{margin-top:0}
   @media (max-width:680px){
     .dest-list,.acopio-list{grid-template-columns:1fr}
   }
@@ -1071,20 +1081,24 @@ const AYUDAS = [
 /* Municipios que piden ayuda. estado:"urgente" resalta la tarjeta. */
 const MUNICIPIOS = [
   { nombre:"Roldanillo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"Tienen pocas donaciones; requieren apoyo.", necesidades:["Maquinaria","Personas / voluntarios","Agua"] },
-  { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"Piden ayuda urgente.", necesidades:[] },
+  { nombre:"Zarzal", region:"Norte del Valle", estado:"urgente", contacto:"318 573 8184", nota:"Ayuda urgente · Hay un bus que sale mañana viernes a entregar ayudas.", necesidades:["Agua potable","Alimentos no perecederos","Carpas","Colchonetas"] },
+  { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"Pendiente confirmar qué necesitan.", necesidades:[] },
+  { nombre:"Sevilla", region:"Norte del Valle", estado:"", contacto:"", nota:"", necesidades:["Alimentos para mascota","Alimentos no perecederos"] },
   { nombre:"Montebello", region:"Ladera norte de Cali", estado:"", contacto:"", nota:"Solicitó apoyo; necesidad por confirmar.", necesidades:[] },
   { nombre:"Riofrío", region:"Norte del Valle", estado:"", contacto:"", nota:"Solicitó apoyo; necesidad por confirmar.", necesidades:[] },
-  { nombre:"Zarzal", region:"Norte del Valle", estado:"", contacto:"", nota:"Solicitó apoyo; necesidad por confirmar.", necesidades:[] },
 ];
 
 /* Laderas de Cali afectadas. */
 const LADERAS = [
-  { nombre:"Alto Meléndez", nota:"Hay personas durmiendo en los andenes.", necesidades:["Comida","Líquidos","Colchonetas"] },
+  { nombre:"Meléndez / Alto Meléndez", nota:"Entregar ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades (maestra Carmiña).", necesidades:["Comida","Líquidos","Colchonetas"] },
+  { nombre:"Alto Nápoles", nota:"Entregar ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades.", necesidades:[] },
+  { nombre:"Santa Helena", nota:"Entregar ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades.", necesidades:[] },
   { nombre:"Polvorines", nota:"Hay personas durmiendo en los andenes.", necesidades:["Comida","Líquidos","Colchonetas"] },
 ];
 
 /* Centros de acopio que despachan a municipios y ladera. */
 const ACOPIOS = [
+  { nombre:"Salón Comunitario · Comuna 18", direccion:"Frente a la Biblioteca Tejiendo Sororidades (maestra Carmiña)", contacto:"", nota:"Acopio para las laderas: Meléndez, Alto Nápoles y Santa Helena." },
   { nombre:"Antigua Licorera del Valle", direccion:"", contacto:"", nota:"Punto de acopio para enviar ayudas a otros municipios." },
   { nombre:"Ciudadela Petronio", direccion:"Unidad Alberto Galindo (Panamericanas)", contacto:"Alcaldía de Cali", nota:"Acopio oficial: destina ayudas al Valle, Chocó, Risaralda, Quindío y Caldas." },
   { nombre:"Centro de acopio Comuna 21", direccion:"Carrera 24F #82B-04", contacto:"Cristian Perea, 301 4841243", nota:"Recepción y distribución para familias afectadas de la Comuna 21." },
