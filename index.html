@@ -565,6 +565,22 @@
   .cifra.ok .cifra-n{color:var(--ok)}
   @media (max-width:760px){ .cifras-grid{grid-template-columns:repeat(2,1fr)} }
 
+  /* ===== Alerta de fase / coordinación ===== */
+  .card-sub{color:var(--ice);font-size:13px;line-height:1.45;margin:-4px 0 12px}
+  .alerta-fase{
+    margin-top:20px;background:var(--alert-soft);
+    border:1px solid rgba(255,92,107,.42);border-radius:20px;padding:22px 24px;
+  }
+  .af-tag{
+    display:flex;align-items:center;gap:9px;
+    font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--alert);margin-bottom:12px;
+  }
+  .af-tag svg{flex:none}
+  .alerta-fase p{color:var(--white);font-size:14.5px;line-height:1.55;margin-bottom:10px}
+  .alerta-fase p strong{color:var(--alert)}
+  .af-cierre{color:var(--ice) !important;font-weight:600;margin-bottom:0 !important}
+
   /* ===== ¿Buscas a alguien? ===== */
   .busqueda{
     margin-top:20px;background:var(--alert-soft);
@@ -949,18 +965,10 @@ const ACTUALIZACIONES = [
 ];
 
 const NECESIDADES_GENERALES = [
-  "Maquinaria amarilla y volquetas",
-  "Grúa pluma",
-  "Dispositivos Starlink",
-  "Oxicorte",
-  "Gatos hidráulicos",
-  "Cascos y guantes de construcción",
-  "Botas de seguridad (punta de acero)",
-  "Cizallas y elementos para cortar",
-  "Cámaras y scanner de búsqueda (leader scan)",
-  "Equipos de búsqueda canina",
-  "Discos diamantados (concreto y hierro)",
-  "Gasolina y ACPM para maquinaria"
+  "Colchonetas","Cobijas","Carpas","Almohadas",
+  "Sábanas","Kits de aseo personal","Pañales (niños y adultos)","Toallas higiénicas",
+  "Agua potable","Alimentos no perecederos","Utensilios de cocina","Linternas",
+  "Ropa en buen estado"
 ];
 
 const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
@@ -1030,13 +1038,11 @@ const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de se
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 const ALTA_PRIORIDAD = [
-  { punto:"Subsidio de arriendo de emergencia: trámite oficial", nota:"El trámite se hace presencial con la Alcaldía de Cali y la Secretaría de Gestión del Riesgo, no por internet. Es obligatorio estar en el Registro Único de Damnificados (RUD). Es gratuito: no dé dinero ni datos a intermediarios. Ver enlaces oficiales en 'Recursos oficiales' del menú." },
-  { punto:"Motocarros disponibles para mover escombros", nota:"Tienen disponibles motocarros para mover escombros o insumos; los ponen en el sitio que se necesiten. Contacto: 315 4480910." },
-  { punto:"Equipo de oxicorte disponible", nota:"Tienen disponible equipo de oxicorte con operario y oxígeno. Si alguien sabe dónde se necesita, contactar. Contacto: 315 4480910." },
-  { punto:"Evaluación estructural o de redes eléctricas, gratis", nota:"Samuel Salazar ofrece evaluación estructural o de redes eléctricas sin costo alguno. Contacto: +57 313 7618582." },
-  { punto:"Escuela Normal Superior", nota:"Necesitan hielo, canastas, cajas de icopor y pañales para niños y adultos." },
-  { punto:"Coliseo del Pueblo: se necesitan relevos", nota:"Piden relevos de voluntarios a las 2:00 p. m. y a las 6:00 p. m." },
-  { punto:"Dispositivos Starlink para los topos", nota:"Los rescatistas topos mexicanos piden Starlink para facilitar y agilizar las labores de búsqueda y rescate." },
+  { punto:"Zarzal · ayuda urgente", nota:"Se necesitan agua potable, alimentos no perecederos, carpas y colchonetas. Hay un bus que sale este viernes a entregar ayudas. Contacto: 318 573 8184." },
+  { punto:"Laderas: Meléndez, Alto Nápoles y Santa Helena", nota:"Entrega las ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades (maestra Carmiña)." },
+  { punto:"Sevilla", nota:"Están pidiendo alimentos para mascota y alimentos no perecederos." },
+  { punto:"El Cairo", nota:"Piden ayuda; pendiente confirmar qué necesitan exactamente." },
+  { punto:"¿Buscas a alguien?", nota:"Líneas oficiales 24/7 para reportar personas desaparecidas: Personería de Cali 318 335 5722 y WhatsApp Cruz Roja 321 213 9525." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1255,7 +1261,8 @@ function App(){
 
         <div className="grid-info">
           <div className="card">
-            <h2>Lo que se necesita para el rescate</h2>
+            <h2>Necesidades generales · municipios y laderas</h2>
+            <p className="card-sub">Todo lo necesario para apoyar a quienes se quedaron sin su casa y que puedan dormir con dignidad.</p>
             <div className="needs">
               {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
             </div>
@@ -1321,12 +1328,17 @@ function App(){
         </div>
       ) : null}
 
-      <div className="contrast">
-        <h2><span>A veces la mejor ayuda es no salir.</span></h2>
-        <p><strong>Los puntos de Cali ya están 90-100% abastecidos</strong> y cuentan con las necesidades principales.</p>
-        <p>No vayamos sin una labor específica: evitemos generar congestión y obstruir las labores de rescate.</p>
-        <p>Sigamos ayudando: lleva tus donaciones a los centros de acopio. Desde allí llegan a Cali, a otros municipios del Valle y a las ciudades afectadas.</p>
-        <p className="contrast-cierre">Tu ayuda sí hace la diferencia.</p>
+      <div className="alerta-fase">
+        <div className="af-tag">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
+            <path d="M12 9v4M12 17h.01"></path>
+            <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+          </svg>
+          Actualización urgente · Coordinemos la ayuda
+        </div>
+        <p>Lo ideal es <strong>no saturar las vías del Valle</strong>. Coordinemos las donaciones que se llevan a los municipios para que no todas lleguen al mismo lugar.</p>
+        <p>Prioricemos la entrega de <strong>insumos y herramientas en los puntos de acopio oficial</strong>, que están siendo entregados por la Primera Dama y la Presidencia.</p>
+        <p className="af-cierre">Coordinar bien la ayuda hace que llegue a más gente. Tu aporte sí hace la diferencia.</p>
       </div>
 
       <div className="seccion" id="municipios">
