@@ -544,6 +544,27 @@
     .tabla tbody td[data-label="Punto"]{padding-top:16px}
   }
 
+  /* ===== Cifras oficiales ===== */
+  .cifras{
+    margin-top:20px;background:var(--space-800);
+    border:1px solid rgba(127,168,255,.16);border-radius:20px;padding:22px 24px;
+  }
+  .cifras-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .cifras-head h2{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light)}
+  .cifras-fuente{font-size:11.5px;color:var(--muted);font-weight:600}
+  .cifras-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .cifra{
+    background:var(--space-900);border:1px solid rgba(127,168,255,.12);
+    border-radius:14px;padding:16px 14px;display:flex;flex-direction:column;gap:4px;
+  }
+  .cifra-n{font-size:30px;font-weight:800;line-height:1;color:var(--white);letter-spacing:-.02em}
+  .cifra-label{font-size:12px;font-weight:600;color:var(--muted);line-height:1.3}
+  .cifra.alert{border-color:rgba(255,92,107,.35)}
+  .cifra.alert .cifra-n{color:var(--alert)}
+  .cifra.ok{border-color:rgba(62,224,142,.35)}
+  .cifra.ok .cifra-n{color:var(--ok)}
+  @media (max-width:760px){ .cifras-grid{grid-template-columns:repeat(2,1fr)} }
+
   /* ===== Fase 4: municipios, laderas, acopios ===== */
   .seccion{margin-top:26px}
   .sec-head{margin-bottom:14px}
@@ -899,6 +920,18 @@ const NECESIDADES_GENERALES = [
 
 const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
 
+/* CIFRAS OFICIALES (solo Cali) */
+const CIFRAS_FUENTE = "Cifras oficiales · Cali · 13/08/2026, 8:27 a. m.";
+const CIFRAS = [
+  { n:"96", label:"Fallecidos", tono:"alert" },
+  { n:"107", label:"Desaparecidos", tono:"alert" },
+  { n:"1.401", label:"Heridos", tono:"" },
+  { n:"88", label:"Rescatados con vida", tono:"ok" },
+  { n:"86", label:"Estructuras colapsadas", tono:"" },
+  { n:"1.142", label:"Daños reportados", tono:"" },
+  { n:"8", label:"Frentes activos de trabajo", tono:"" },
+];
+
 /* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
    Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
    Las condiciones cambian rápido; deja [] para ocultar este banner. */
@@ -1166,6 +1199,23 @@ function App(){
           ) : null}
         </div>
       </header>
+
+      {CIFRAS.length ? (
+        <div className="cifras">
+          <div className="cifras-head">
+            <h2>Cifras oficiales · Cali</h2>
+            <span className="cifras-fuente">{CIFRAS_FUENTE}</span>
+          </div>
+          <div className="cifras-grid">
+            {CIFRAS.map((c,i) => (
+              <div className={"cifra" + (c.tono ? " " + c.tono : "")} key={i}>
+                <span className="cifra-n">{c.n}</span>
+                <span className="cifra-label">{c.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="contrast">
         <h2><span>A veces la mejor ayuda es no salir.</span></h2>
