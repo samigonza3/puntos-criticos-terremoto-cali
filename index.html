@@ -565,6 +565,41 @@
   .cifra.ok .cifra-n{color:var(--ok)}
   @media (max-width:760px){ .cifras-grid{grid-template-columns:repeat(2,1fr)} }
 
+  /* ===== ¿Buscas a alguien? ===== */
+  .busqueda{
+    margin-top:20px;background:var(--alert-soft);
+    border:1px solid rgba(255,92,107,.4);border-radius:20px;padding:22px 24px;
+  }
+  .busqueda h2{font-size:16px;font-weight:800;color:var(--alert);margin-bottom:6px}
+  .bq-sub{color:var(--ice);font-size:13.5px;line-height:1.5;margin-bottom:14px}
+  .bq-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .bq-item{
+    display:flex;flex-direction:column;gap:3px;text-decoration:none;
+    background:var(--space-900);border:1px solid rgba(255,92,107,.25);
+    border-radius:12px;padding:13px 15px;transition:.15s;
+  }
+  .bq-item:hover{border-color:var(--alert);transform:translateY(-1px)}
+  .bq-label{font-size:11.5px;font-weight:600;color:var(--muted)}
+  .bq-valor{font-size:15px;font-weight:700;color:var(--white)}
+  @media (max-width:680px){ .bq-list{grid-template-columns:1fr} }
+
+  /* ===== Frentes de trabajo (Alcaldía) ===== */
+  .frentes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .frente{
+    display:flex;gap:13px;align-items:center;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.16);
+    border-radius:14px;padding:14px 16px;
+  }
+  .frente-n{
+    flex:none;width:28px;height:28px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:#fff;
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+  }
+  .frente-dir{font-size:15px;font-weight:700;color:var(--white)}
+  .frente-barrio{font-size:12.5px;font-weight:500;color:var(--star-light);margin-top:2px}
+  @media (max-width:680px){ .frentes-grid{grid-template-columns:1fr} }
+
   /* ===== Fase 4: municipios, laderas, acopios ===== */
   .seccion{margin-top:26px}
   .sec-head{margin-bottom:14px}
@@ -932,6 +967,26 @@ const CIFRAS = [
   { n:"8", label:"Frentes activos de trabajo", tono:"" },
 ];
 
+/* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
+const FRENTES_FUENTE = "Puntos críticos atendidos por la Alcaldía de Cali (UAESP) · boletín oficial del 12/08/2026";
+const FRENTES = [
+  { dir:"Carrera 4 con Calle 115", barrio:"San Pedro · Comuna 3" },
+  { dir:"Carrera 5 con Calle 38", barrio:"Popular · Comuna 4" },
+  { dir:"Calle 10A con Carrera 33", barrio:"Colseguros · Comuna 10" },
+  { dir:"Calle 72W con Carrera 28D", barrio:"El Poblado II · Comuna 13 · Notaría 20" },
+  { dir:"Carrera 1 con Calle 65", barrio:"Popular Calima · Comuna 4" },
+  { dir:"Carrera 1 con Calle 46C", barrio:"Popular · Comuna 4" },
+  { dir:"Avenida 6 Norte con Calle 14", barrio:"Granada · Comuna 2" },
+  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · 44 con Novena" },
+];
+
+/* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
+const BUSQUEDA = [
+  { label:"Personería de Cali", valor:"318 335 5722", href:"tel:+573183355722" },
+  { label:"WhatsApp Cruz Roja", valor:"321 213 9525", href:"https://wa.me/573212139525" },
+  { label:"Correo Cruz Roja Colombiana", valor:"rcf@cruzrojacolombiana.org", href:"mailto:rcf@cruzrojacolombiana.org" },
+];
+
 /* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
    Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
    Las condiciones cambian rápido; deja [] para ocultar este banner. */
@@ -1217,6 +1272,41 @@ function App(){
         </div>
       ) : null}
 
+      {BUSQUEDA.length ? (
+        <div className="busqueda">
+          <h2>¿Buscas a alguien?</h2>
+          <p className="bq-sub">Si tienes un familiar o ser querido desaparecido tras el sismo, repórtalo en estas líneas oficiales de atención 24/7:</p>
+          <div className="bq-list">
+            {BUSQUEDA.map((l,i) => (
+              <a className="bq-item" href={l.href} key={i} target="_blank" rel="noopener noreferrer">
+                <span className="bq-label">{l.label}</span>
+                <span className="bq-valor">{l.valor}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {FRENTES.length ? (
+        <div className="seccion" id="frentes">
+          <div className="sec-head">
+            <h2>Frentes de trabajo · Alcaldía de Cali</h2>
+            <p className="sec-sub">{FRENTES_FUENTE}.</p>
+          </div>
+          <div className="frentes-grid">
+            {FRENTES.map((f,i) => (
+              <div className="frente" key={i}>
+                <span className="frente-n">{i + 1}</span>
+                <div>
+                  <div className="frente-dir">{f.dir}</div>
+                  <div className="frente-barrio">{f.barrio}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
       <div className="contrast">
         <h2><span>A veces la mejor ayuda es no salir.</span></h2>
         <p><strong>Los puntos de Cali ya están 90-100% abastecidos</strong> y cuentan con las necesidades principales.</p>
@@ -1333,24 +1423,6 @@ function App(){
         </div>
       ) : null}
 
-      {NO_DESPLAZARSE.length ? (
-        <div className="overstock">
-          <div className="tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB020" strokeWidth="2.2">
-              <path d="M12 9v4M12 17h.01"></path>
-              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
-            </svg>
-            Puntos cerrados o llenos, no te desplaces sin confirmar
-          </div>
-          <div className="needs">
-            {NO_DESPLAZARSE.map((s,i) => (
-              <span className="need" key={i}>{s.sector}{s.nota ? ": " + s.nota : ""}</span>
-            ))}
-          </div>
-          <p className="desc">{NOTA_NO_DESPLAZARSE}</p>
-        </div>
-      ) : null}
-
       {ALBERGUES.length ? (
         <div className="albergues" id="albergues">
           <button
@@ -1376,30 +1448,6 @@ function App(){
               <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
               <div className="al-nota">Si quieres ayudar con almuerzos, comunícate antes con los albergues gratuitos para coordinar la entrega y evitar que se pierdan.</div>
             </>
-          ) : null}
-        </div>
-      ) : null}
-
-      {ACTUALIZACIONES.length ? (
-        <div className="updates">
-          <h2><span className="live"></span>Últimas actualizaciones ({ACTUALIZACIONES.length})</h2>
-          {(showUpdates ? ACTUALIZACIONES : ACTUALIZACIONES.slice(0,3)).map((u,i) => (
-            <div className="up-item" key={i}>
-              <span className="up-dot"></span>
-              <div className="up-body">
-                <div className="up-time">{u.fecha}</div>
-                {u.punto ? <div className="up-punto">{u.punto}</div> : null}
-                <div className="up-text">{u.texto}</div>
-                {u.contacto ? <div className="up-contacto">Contacto: {u.contacto}</div> : null}
-              </div>
-            </div>
-          ))}
-          {ACTUALIZACIONES.length > 3 ? (
-            <button className="up-toggle" onClick={() => setShowUpdates(v => !v)}>
-              {showUpdates
-                ? "Ver menos"
-                : "Ver todas (" + (ACTUALIZACIONES.length - 3) + " más)"}
-            </button>
           ) : null}
         </div>
       ) : null}
