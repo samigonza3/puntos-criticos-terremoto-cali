@@ -1049,6 +1049,13 @@ const ALBERGUES = [
   { nombre:"Motel Kamasutra", direccion:"Cl. 10 #29 A-50, Acopi" },
 ];
 const ALBERGUES_CONTACTO = "Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076. Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.";
+
+/* Apoyo psicológico gratuito (psicólogos especializados en desastres) */
+const APOYO_PSICO_INFO = "Si fuiste afectado por el terremoto, tu salud mental también importa. El miedo, la tristeza, la angustia y el estrés son reacciones normales; pedir ayuda es un acto de cuidado. Atención presencial en Cali, barrio Nápoles — Calle 2B #78A-09.";
+const APOYO_PSICOLOGICO = [
+  { nombre:"Psicóloga Michelle Burgos", contacto:"323 234 9966", wa:"573232349966" },
+  { nombre:"Psicóloga Karen Medina", contacto:"312 252 3059", wa:"573122523059" },
+];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
@@ -1208,6 +1215,7 @@ function App(){
   const [soloPrio, setSoloPrio] = useState(false);
   const [showUpdates, setShowUpdates] = useState(false);
   const [showAlbergues, setShowAlbergues] = useState(false);
+  const [showPsico, setShowPsico] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1247,6 +1255,7 @@ function App(){
             <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
             <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
+            <a href="#psicologia" onClick={() => setShowMenu(false)}>Apoyo psicológico gratuito</a>
             <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de trabajo críticos en Cali</a>
           </nav>
         </>
@@ -1502,6 +1511,38 @@ function App(){
               </div>
               <div className="al-contacto">{ALBERGUES_CONTACTO}</div>
               <div className="al-nota">Si quieres ayudar con almuerzos, comunícate antes con los albergues gratuitos para coordinar la entrega y evitar que se pierdan.</div>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      {APOYO_PSICOLOGICO.length ? (
+        <div className="albergues" id="psicologia">
+          <button type="button" className="al-toggle" onClick={() => setShowPsico(v => !v)} aria-expanded={showPsico}>
+            <h2>Apoyo psicológico gratuito</h2>
+            <span className={"al-chevron" + (showPsico ? " open" : "")}>▾</span>
+          </button>
+          {showPsico ? (
+            <>
+              <p className="al-sub">{APOYO_PSICO_INFO}</p>
+              <table className="tabla">
+                <thead>
+                  <tr>
+                    <th style={{width:"55%"}}>Profesional</th>
+                    <th>WhatsApp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {APOYO_PSICOLOGICO.map((p,i) => (
+                    <tr key={i}>
+                      <td data-label="Profesional"><span className="lugar">{p.nombre}</span></td>
+                      <td data-label="WhatsApp">
+                        <a className="dir" href={"https://wa.me/" + p.wa} target="_blank" rel="noopener noreferrer">{p.contacto}</a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </>
           ) : null}
         </div>
