@@ -1010,6 +1010,7 @@ const FRENTES = [
   { dir:"Carrera 1 con Calle 46C", barrio:"Popular · Comuna 4" },
   { dir:"Avenida 6 Norte con Calle 14", barrio:"Granada · Comuna 2" },
   { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · 44 con Novena" },
+  { dir:"Edificio Ana Pilar", barrio:"Carrera 56 con 4C · reporte comunitario" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1059,11 +1060,17 @@ const APOYO_PSICOLOGICO = [
   { nombre:"Psicóloga Michelle Burgos", contacto:"323 234 9966", wa:"573232349966" },
   { nombre:"Psicóloga Karen Medina", contacto:"312 252 3059", wa:"573122523059" },
 ];
+
+/* Asesoría jurídica gratuita */
+const JURIDICA_INFO = "Acompañamiento legal sin costo para los afectados por el terremoto: reclamación de seguros de propiedad, auxilio funerario, activación de la ruta de personas desaparecidas, auxilio de alquiler y dudas jurídicas en general.";
+const ASESORIA_JURIDICA = [
+  { nombre:"Bryan Taborda", area:"Reclamación de seguro de propiedad · Auxilio funerario · Ruta de desaparecidos · Auxilio de alquiler · Dudas jurídicas", contacto:"310 378 2035", wa:"573103782035" },
+];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 /* Necesidades que SIEMPRE se renuevan en los puntos de rescate de Cali */
-const RESCATE_NECESIDADES = ["Hielo","Desayunos","Almuerzos","Cenas","Linternas","Reflectores"];
+const RESCATE_NECESIDADES = ["Hielo","Desayunos","Almuerzos","Cenas","Linternas","Reflectores","Equipos de oxicorte","Rotomartillos"];
 
 const ALTA_PRIORIDAD = [
   { punto:"Edificio Ariguaní · se necesitan herramientas", nota:"En el Edificio Ariguaní (Carrera 67 con 3C) se necesitan equipos de oxicorte y rotomartillos." },
@@ -1122,7 +1129,6 @@ const MUNICIPIOS = [
   { nombre:"Zarzal", region:"Norte del Valle", estado:"urgente", contacto:"318 573 8184", nota:"Ayuda urgente · Hay un bus que sale mañana viernes a entregar ayudas.", necesidades:["Agua potable","Alimentos no perecederos","Carpas","Colchonetas"] },
   { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", nota:"", necesidades:["Frazadas","Plástico negro de construcción"] },
   { nombre:"Sevilla", region:"Norte del Valle", estado:"", contacto:"", nota:"", necesidades:["Alimentos para mascota","Alimentos no perecederos"] },
-  { nombre:"Montebello", region:"Ladera norte de Cali", estado:"", contacto:"", nota:"Solicitó apoyo; necesidad por confirmar.", necesidades:[] },
   { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", nota:"Riofrío y sus corregimientos y veredas nos necesitan.", necesidades:["Agua","Ropa","Cosas de aseo personal","Alimentos no perecederos","Alimentos para mascotas","Colchonetas","Cobijas"] },
 ];
 
@@ -1132,6 +1138,7 @@ const LADERAS = [
   { nombre:"Alto Nápoles", nota:"Entregar ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades.", necesidades:[] },
   { nombre:"Santa Helena", nota:"Entregar ayudas en el acopio del Salón Comunitario Comuna 18, frente a la Biblioteca Tejiendo Sororidades.", necesidades:[] },
   { nombre:"Polvorines", nota:"Hay personas durmiendo en los andenes.", necesidades:["Comida","Líquidos","Colchonetas"] },
+  { nombre:"Montebello", nota:"Muchas casas quedaron destruidas; se necesita apoyo para familias que perdieron su vivienda.", necesidades:["Colchonetas","Cobijas","Carpas","Plástico negro de construcción","Agua","Alimentos no perecederos","Kits de aseo","Ropa"] },
 ];
 
 /* Centros de acopio que despachan a municipios y ladera. */
@@ -1222,6 +1229,7 @@ function App(){
   const [showUpdates, setShowUpdates] = useState(false);
   const [showAlbergues, setShowAlbergues] = useState(false);
   const [showPsico, setShowPsico] = useState(false);
+  const [showJuridica, setShowJuridica] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
@@ -1262,6 +1270,7 @@ function App(){
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
             <a href="#albergues" onClick={() => setShowMenu(false)}>Albergues temporales</a>
             <a href="#psicologia" onClick={() => setShowMenu(false)}>Apoyo psicológico gratuito</a>
+            <a href="#juridica" onClick={() => setShowMenu(false)}>Asesoría jurídica gratuita</a>
             <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de trabajo críticos en Cali</a>
           </nav>
         </>
@@ -1542,6 +1551,40 @@ function App(){
                   {APOYO_PSICOLOGICO.map((p,i) => (
                     <tr key={i}>
                       <td data-label="Profesional"><span className="lugar">{p.nombre}</span></td>
+                      <td data-label="WhatsApp">
+                        <a className="dir" href={"https://wa.me/" + p.wa} target="_blank" rel="noopener noreferrer">{p.contacto}</a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      {ASESORIA_JURIDICA.length ? (
+        <div className="albergues" id="juridica">
+          <button type="button" className="al-toggle" onClick={() => setShowJuridica(v => !v)} aria-expanded={showJuridica}>
+            <h2>Asesoría jurídica gratuita</h2>
+            <span className={"al-chevron" + (showJuridica ? " open" : "")}>▾</span>
+          </button>
+          {showJuridica ? (
+            <>
+              <p className="al-sub">{JURIDICA_INFO}</p>
+              <table className="tabla">
+                <thead>
+                  <tr>
+                    <th style={{width:"30%"}}>Profesional</th>
+                    <th>En qué te puede ayudar</th>
+                    <th style={{width:"20%"}}>WhatsApp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ASESORIA_JURIDICA.map((p,i) => (
+                    <tr key={i}>
+                      <td data-label="Profesional"><span className="lugar">{p.nombre}</span></td>
+                      <td data-label="En qué te puede ayudar"><span className="dir">{p.area}</span></td>
                       <td data-label="WhatsApp">
                         <a className="dir" href={"https://wa.me/" + p.wa} target="_blank" rel="noopener noreferrer">{p.contacto}</a>
                       </td>
