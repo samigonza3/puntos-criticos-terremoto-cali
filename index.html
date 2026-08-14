@@ -852,7 +852,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "14 de agosto de 2026, 11:25 a. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 11:40 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1142,17 +1142,15 @@ const CIFRAS_MAS = [
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
-const FRENTES_FUENTE = "Puntos críticos atendidos por la Alcaldía de Cali (UAESP) · boletín oficial del 12/08/2026";
+const FRENTES_FUENTE = "9 puntos activos de búsqueda especializada del PMU, donde el PMU amplió la ventana de vida por 48 horas más · boletín oficial de la Alcaldía de Cali del 13/08/2026. En estos puntos, HAZ SILENCIO: los rescatistas trabajan con sensores de sonido y temperatura y perros entrenados";
 const FRENTES = [
-  { dir:"Carrera 4 con Calle 115", barrio:"San Pedro · Comuna 3" },
-  { dir:"Carrera 5 con Calle 38", barrio:"Popular · Comuna 4" },
-  { dir:"Calle 10A con Carrera 33", barrio:"Colseguros · Comuna 10" },
-  { dir:"Calle 72W con Carrera 28D", barrio:"El Poblado II · Comuna 13 · Notaría 20" },
-  { dir:"Carrera 1 con Calle 65", barrio:"Popular Calima · Comuna 4" },
-  { dir:"Carrera 1 con Calle 46C", barrio:"Popular · Comuna 4" },
-  { dir:"Avenida 6 Norte con Calle 14", barrio:"Granada · Comuna 2" },
-  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · 44 con Novena", alerta:true, alertaTexto:"Personas dentro confirmadas · rescate en curso" },
-  { dir:"Edificio Ana Pilar", barrio:"Carrera 56 con 4C · reporte comunitario", alerta:true, alertaTexto:"Personas dentro confirmadas · rescate en curso" },
+  { dir:"Hospital Universitario del Valle (HUV)", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Cuarto de Legua", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Capri", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Calle 5 con Carrera 39", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Calle 5 con Carrera 56", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · punto activo de búsqueda", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Frente a la Clínica de Colores", barrio:"Tequendama · punto activo de búsqueda", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1556,7 +1554,7 @@ function App(){
             <a href="#psicologia" onClick={() => setShowMenu(false)}>Apoyo psicológico gratuito</a>
             <a href="#juridica" onClick={() => setShowMenu(false)}>Asesoría jurídica gratuita</a>
             <a href="#cierres" onClick={() => setShowMenu(false)}>Vías cerradas en Cali</a>
-            <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de trabajo críticos en Cali</a>
+            <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de búsqueda y rescate en Cali</a>
           </nav>
         </>
       ) : null}
@@ -1590,7 +1588,7 @@ function App(){
         </p>
         <div className="meta">
           <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios y zonas pidiendo ayuda</span>
-          <span className="chip"><span className="dot"></span>{FRENTES.length} puntos de trabajo en Cali</span>
+          <span className="chip"><span className="dot"></span>{FRENTES.length} puntos de búsqueda activos en Cali</span>
         </div>
 
         <div className="grid-info">
@@ -1695,7 +1693,7 @@ function App(){
       {FRENTES.length ? (
         <div className="seccion" id="frentes">
           <div className="sec-head">
-            <h2>Puntos de trabajo críticos en Cali</h2>
+            <h2>Puntos activos de búsqueda y rescate en Cali</h2>
             <p className="sec-sub">{FRENTES_FUENTE}.</p>
           </div>
           <div className="resc-nec">
