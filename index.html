@@ -215,6 +215,12 @@
   .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
   .priority .pr-fecha{font-size:11.5px;font-weight:700;color:var(--star-light);letter-spacing:.01em;margin-bottom:4px}
   .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
+  .pr-vermas{
+    margin-top:6px;width:100%;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;
+    color:var(--star-light);background:rgba(127,168,255,.08);border:1px solid rgba(127,168,255,.25);
+    padding:10px 14px;border-radius:12px;transition:background .15s,border-color .15s;
+  }
+  .pr-vermas:hover{background:rgba(127,168,255,.16);border-color:rgba(127,168,255,.45)}
 
   /* Albergues temporales */
   .albergues{
@@ -422,6 +428,13 @@
   }
   .mapa{height:460px;width:100%}
   .mapa .leaflet-popup-content{font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.4}
+  .mapa .leaflet-tooltip.mapa-label{
+    background:rgba(7,13,34,.9);border:1px solid rgba(127,168,255,.4);color:var(--white);
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;padding:2px 7px;border-radius:7px;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);white-space:nowrap;
+  }
+  .mapa .leaflet-tooltip.mapa-label.urg{border-color:var(--alert);color:#FFD7DC}
+  .mapa .leaflet-tooltip.mapa-label::before{display:none}
   .mapa-nota{padding:12px 18px;font-size:12px;color:var(--muted);line-height:1.5}
 
   /* Clínicas que requieren evacuación */
@@ -877,7 +890,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "14 de agosto de 2026, 2:10 p. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 2:25 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1341,16 +1354,17 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
-  { fecha:"14 de agosto de 2026, 12:20:00 p. m.", punto:"⚠ Caracterización de damnificados (RUFE) · cuídate de estafas", nota:"La Alcaldía inició la caracterización de familias damnificadas mediante el Registro Único de Familias en Emergencia (RUFE). Es un proceso 100% institucional: funcionarios de Gestión del Riesgo, Vivienda y Bienestar Social visitan las viviendas afectadas en territorio y usan un FORMATO FÍSICO. NO se hace por códigos QR, formularios digitales, enlaces por redes ni apps, y NUNCA se pide dinero, bienes ni contraprestación. Si alguien se presenta como funcionario y genera dudas, verifica por los canales oficiales de la Alcaldía. Ya se consolidaron más de 1.000 RUFE. Además llegaron 40 profesionales de Medellín (ingenieros estructurales y arquitectos) para evaluar las edificaciones afectadas antes de las demoliciones.", link:"https://www.cali.gov.co/boletines/publicaciones/193666/alcaldia-de-cali-inicia-caracterizacion-de-familias-damnificadas-por-el-sismo-mediante-el-registro-unico-de-familias-en-emergencia/", linkTexto:"Leer el boletín del RUFE" },
-  { fecha:"14 de agosto de 2026, 11:50:00 a. m.", punto:"Salud Pública descarta alertas epidemiológicas", nota:"La Secretaría de Salud desmintió las cadenas falsas sobre supuestas alertas sanitarias y descartó alertas epidemiológicas. Recomienda: al limpiar cerca de la remoción de escombros, hacerlo con AGUA (mojar antejardines y patios), nunca en seco ni barriendo; usar tapabocas para evitar afecciones por el polvo; y vacunarse contra Influenza y COVID-19 (sobre todo adultos mayores y personas con comorbilidades). Agua solo de fuentes seguras (red, carrotanques oficiales o embotellada), almacenada en recipientes limpios y tapados. Con los alimentos: protégelos del polvo, prefiere no perecederos, verifica registro sanitario y fechas, y lava bien las manos. El manejo digno de los cuerpos lo realizan CTI, Fiscalía y Medicina Legal; deja trabajar a los organismos.", link:"https://www.cali.gov.co/boletines/publicaciones/193665/salud-publica-descarta-alertas-epidemiologicas-y-aclara-protocolo-de-manejo-de-cuerpos-tras-el-terremoto/", linkTexto:"Leer las recomendaciones de Salud Pública" },
-  { fecha:"14 de agosto de 2026, 11:30:00 a. m.", punto:"Misión médica de Antioquia apoyando en los albergues", nota:"Una misión médica de más de 40 profesionales (médicos, enfermeros y paramédicos) llegó desde Antioquia para apoyar a los damnificados. En la Unidad Deportiva Jaime Aparicio instalaron dos carpas para atender al albergue del escenario de hockey: valoraciones, entrega de medicamentos, jornadas de vacunación y prevención de enfermedades. La Secretaría de Salud Distrital sumó una unidad móvil. El complejo también funciona como centro de acopio en el Diamante de Béisbol Miguel Chávez, donde se reciben y organizan colchones, colchonetas, almohadas, agua, alimentos no perecederos, comida para mascotas, pañales, ropa, frazadas, sábanas, aseo, leche en polvo y refrigerios.", link:"https://www.cali.gov.co/boletines/publicaciones/193668/una-mision-medica-de-40-personas-llego-desde-antioquia-a-la-unidad-panamericana-para-apoyar-a-los-damnificados-del-terremoto/", linkTexto:"Leer el boletín de la misión médica" },
-  { fecha:"14 de agosto de 2026, 9:15:00 a. m.", punto:"El PMU amplía la ventana de vida por 48 horas más", nota:"Palpita la esperanza: como todavía hay indicios de vida, el Puesto de Mando Unificado (PMU) decidió ampliar la ventana de búsqueda y rescate por 48 horas más, buscando rescatar a gran parte de las 111 personas aún desaparecidas (van 88 rescatadas con vida). Se mantienen 9 puntos activos de búsqueda especializada — entre ellos el HUV, Cuarto de Legua, Capri, Calle 5 con Cra 39, Calle 5 con Cra 56, Calle 9 con Cra 44 y el frente de la Clínica de Colores — con 1.800 rescatistas activos, nacionales e internacionales (incluido el topo mexicano Héctor Méndez). El secretario de Gestión del Riesgo, Ricardo Peñuela, reitera lo esencial: HAZ SILENCIO en esos puntos y deja trabajar a los rescatistas; son momentos críticos donde cada segundo cuenta. Trabajan con sensores de sonido y temperatura y perros entrenados.", link:"https://www.cali.gov.co/boletines/publicaciones/193661/palpita-la-esperanza-y-la-busqueda-de-sobrevivientes-se-intensifica-pmu-amplia-la-ventana-de-vida-por-48-horas-mas/", linkTexto:"Leer el boletín oficial de la Alcaldía" },
-  { fecha:"14 de agosto de 2026, 9:10:00 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Es la prioridad número uno. Necesitan urgente hidratación, electrolitos y hielo todos los días, y alimentación durante el día. Si vas a preparar desayunos o almuerzos, confirma primero a dónde enviarlos para que no se pierdan." },
-  { fecha:"14 de agosto de 2026, 9:05:00 a. m.", punto:"Cali ya está cubierto en su mayoría · renovar lo que se gasta rápido", nota:"En Cali estamos cubiertos con la mayoría de insumos. Hay que estar renovando lo que se consume rápido: guantes industriales, extensiones, linternas, cascos y la hidratación necesaria." },
-  { fecha:"14 de agosto de 2026, 9:00:00 a. m.", punto:"El Ejército se está tomando varios puntos de trabajo", nota:"En los frentes donde entra el Ejército y los equipos especializados, cada vez se necesitarán menos voluntarios. Confirma antes de desplazarte a esos puntos." },
-  { fecha:"14 de agosto de 2026, 8:55:00 a. m.", punto:"Prioricemos la remoción con los rescatistas", nota:"Cada día que pasa hay menor probabilidad de encontrar personas con vida y mayor riesgo de que otros edificios colapsen. Lo mejor es empezar a permitir que los rescatistas y equipos especializados hagan las labores de remoción." },
-  { fecha:"14 de agosto de 2026, 8:50:00 a. m.", punto:"Apoyemos las brigadas de barrio", nota:"Hay brigadas de voluntarios yendo a los barrios a ayudar a casas y locales con la remoción de escombros. Apoyémoslas, y miremos en nuestro propio barrio quién puede estar necesitando la ayuda." },
-  { fecha:"14 de agosto de 2026, 8:45:00 a. m.", punto:"Municipios y veredas del Valle · visibilidad", nota:"Segunda prioridad: los municipios priorizados del Valle y las veredas de baja conectividad que lo perdieron todo. Sumamos a Buga, y damos visibilidad a Riofrío (muy golpeado) y a Fenicia.", link:"#municipios", linkTexto:"Ver municipios y veredas" },
+  { critico:true, fecha:"14 ago · 9:15 a. m.", punto:"🔴 El PMU amplía la ventana de vida 48 horas más · HAZ SILENCIO", nota:"Todavía hay indicios de vida. En los 9 puntos activos de búsqueda, guarda silencio y deja trabajar a los rescatistas.", link:"https://www.cali.gov.co/boletines/publicaciones/193661/palpita-la-esperanza-y-la-busqueda-de-sobrevivientes-se-intensifica-pmu-amplia-la-ventana-de-vida-por-48-horas-mas/", linkTexto:"Boletín Alcaldía" },
+  { critico:true, fecha:"14 ago · 9:10 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Cada día necesitan hidratación, electrolitos y hielo. Si vas a llevar comida, confirma antes a dónde enviarla." },
+  { critico:true, fecha:"14 ago · 8:45 a. m.", punto:"Prioridad: municipios y veredas del Valle", nota:"Riofrío muy golpeado y veredas de baja conectividad que lo perdieron todo. Sumamos a Buga.", link:"#municipios", linkTexto:"Ver municipios" },
+  { critico:true, fecha:"14 ago · 12:20 p. m.", punto:"⚠ Caracterización RUFE · cuídate de estafas", nota:"La caracterización de damnificados es en territorio y con formato físico. Nunca por QR, links ni pagos. Verifica en canales oficiales.", link:"https://www.cali.gov.co/boletines/publicaciones/193666/alcaldia-de-cali-inicia-caracterizacion-de-familias-damnificadas-por-el-sismo-mediante-el-registro-unico-de-familias-en-emergencia/", linkTexto:"Boletín RUFE" },
+
+  { fecha:"14 ago · 11:50 a. m.", punto:"Salud Pública descarta epidemias", nota:"No hay alerta epidemiológica. Limpia con agua (no en seco), usa tapabocas cerca de escombros y consume agua de fuentes seguras.", link:"https://www.cali.gov.co/boletines/publicaciones/193665/salud-publica-descarta-alertas-epidemiologicas-y-aclara-protocolo-de-manejo-de-cuerpos-tras-el-terremoto/", linkTexto:"Boletín Salud Pública" },
+  { fecha:"14 ago · 11:30 a. m.", punto:"Misión médica de Antioquia en los albergues", nota:"40+ profesionales atienden en la Unidad Deportiva Jaime Aparicio (albergue de hockey). El Diamante de Béisbol Miguel Chávez funciona como centro de acopio.", link:"https://www.cali.gov.co/boletines/publicaciones/193668/una-mision-medica-de-40-personas-llego-desde-antioquia-a-la-unidad-panamericana-para-apoyar-a-los-damnificados-del-terremoto/", linkTexto:"Boletín misión médica" },
+  { fecha:"14 ago · 9:05 a. m.", punto:"Cali ya está cubierto · renovar lo que se gasta rápido", nota:"Renovar guantes industriales, extensiones, linternas, cascos e hidratación." },
+  { fecha:"14 ago · 9:00 a. m.", punto:"El Ejército se está tomando varios puntos", nota:"Donde entra el Ejército se necesitarán menos voluntarios. Confirma antes de ir." },
+  { fecha:"14 ago · 8:55 a. m.", punto:"Prioricemos la remoción con los rescatistas", nota:"Menor probabilidad de vida y más riesgo de colapsos: deja que los rescatistas hagan la remoción." },
+  { fecha:"14 ago · 8:50 a. m.", punto:"Apoyemos las brigadas de barrio", nota:"Hay brigadas ayudando casa por casa. Mira en tu barrio quién puede necesitar ayuda." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1502,6 +1516,7 @@ function Mapa({ puntos }){
           }).addTo(map);
           const needs = (p.necesidades && p.necesidades.length) ? "<br/>" + p.necesidades.join(", ") : "";
           mk.bindPopup("<b>" + p.lugar + "</b>" + (p.direccion ? "<br/>" + p.direccion : "") + needs);
+          mk.bindTooltip(p.lugar, { permanent: true, direction: "top", offset: [0, -8], className: "mapa-label" + (p.estado === "urgente" ? " urg" : "") });
           bounds.push([lat, lon]); ok++;
           setEstado(ok + " puntos ubicados…");
         }
@@ -1681,7 +1696,7 @@ function App(){
             </svg>
             Últimas actualizaciones importantes
           </div>
-          {ALTA_PRIORIDAD.map((p,i) => (
+          {ALTA_PRIORIDAD.filter(p => p.critico).map((p,i) => (
             <div className="pr-item" key={i}>
               <span className="pr-dot"></span>
               <div>
@@ -1692,6 +1707,24 @@ function App(){
               </div>
             </div>
           ))}
+          {ALTA_PRIORIDAD.some(p => !p.critico) ? (
+            <>
+              {showUpdates ? ALTA_PRIORIDAD.filter(p => !p.critico).map((p,i) => (
+                <div className="pr-item" key={"o"+i}>
+                  <span className="pr-dot" style={{background:"var(--muted)"}}></span>
+                  <div>
+                    {p.fecha ? <div className="pr-fecha">{p.fecha}</div> : null}
+                    <div className="pr-name">{p.punto}</div>
+                    {p.nota ? <div className="pr-nota">{p.nota}</div> : null}
+                    {p.link ? <div className="pr-nota"><a className="dir" href={p.link} {...(p.link.startsWith("#") ? {} : {target:"_blank", rel:"noopener noreferrer"})}>{p.linkTexto || "Abrir enlace"}</a></div> : null}
+                  </div>
+                </div>
+              )) : null}
+              <button type="button" className="pr-vermas" onClick={() => setShowUpdates(v => !v)} aria-expanded={showUpdates}>
+                {showUpdates ? "Ver menos ▴" : ("Ver más actualizaciones (" + ALTA_PRIORIDAD.filter(p => !p.critico).length + ") ▾")}
+              </button>
+            </>
+          ) : null}
         </div>
       ) : null}
 
