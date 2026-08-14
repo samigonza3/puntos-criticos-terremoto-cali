@@ -682,6 +682,43 @@
   .bq-valor{font-size:15px;font-weight:700;color:var(--white)}
   @media (max-width:680px){ .bq-list{grid-template-columns:1fr} }
 
+  /* ===== Muro de apoyo ===== */
+  .muro{
+    margin-top:20px;border-radius:20px;padding:24px;
+    border:1px solid rgba(127,168,255,.28);
+    background:linear-gradient(180deg,rgba(62,123,255,.12),rgba(11,21,51,.4));
+  }
+  .muro-head h2{font-size:clamp(18px,2.4vw,22px);font-weight:800;color:var(--white);margin:4px 0 8px;letter-spacing:-.01em}
+  .muro-sub{color:var(--ice);font-size:13.5px;line-height:1.55;max-width:680px;margin-bottom:16px}
+  .muro-form{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+  .muro-nombre{flex:0 1 190px;min-width:150px}
+  .muro-mensaje{flex:1 1 320px;min-width:200px}
+  .muro-form input{
+    font-family:inherit;font-size:14px;color:var(--white);
+    background:var(--space-900);border:1px solid rgba(127,168,255,.28);
+    border-radius:12px;padding:12px 14px;
+  }
+  .muro-form input::placeholder{color:var(--muted)}
+  .muro-form input:focus{outline:none;border-color:var(--star-blue)}
+  .muro-btn{
+    flex:0 0 auto;cursor:pointer;font-family:inherit;font-size:14px;font-weight:800;color:#fff;
+    border:none;border-radius:12px;padding:12px 20px;white-space:nowrap;
+    background:linear-gradient(180deg,var(--star-blue),#2E5FE0);transition:transform .15s,box-shadow .15s;
+  }
+  .muro-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(62,123,255,.4)}
+  .muro-gracias{margin-top:12px;color:var(--star-light);font-size:13.5px;font-weight:700}
+  .muro-grid{
+    margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  }
+  .muro-card{
+    background:var(--space-900);border:1px solid rgba(127,168,255,.16);
+    border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:8px;
+  }
+  .muro-texto{color:var(--ice);font-size:13.5px;line-height:1.5;font-style:italic}
+  .muro-firma{color:var(--star-light);font-size:12px;font-weight:700}
+  @media (max-width:820px){ .muro-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:560px){ .muro-grid{grid-template-columns:1fr} .muro-btn{width:100%} }
+
   /* ===== Frentes de trabajo (Alcaldía) ===== */
   .frentes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .frente{
@@ -778,6 +815,12 @@
   <div data-netlify-recaptcha="true"></div>
 </form>
 
+<!-- Formulario oculto: muro de apoyo (mensajes de aliento) -->
+<form name="muro-apoyo" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="nombre" />
+  <textarea name="mensaje"></textarea>
+</form>
+
 <!-- Formulario oculto: ofrecimiento de casa como refugio temporal -->
 <form name="refugios" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
   <input type="text" name="fecha_hora" />
@@ -809,7 +852,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "14 de agosto de 2026, 9:15 a. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 11:25 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1119,6 +1162,15 @@ const BUSQUEDA = [
   { label:"Correo Cruz Roja Colombiana", valor:"rcf@cruzrojacolombiana.org", href:"mailto:rcf@cruzrojacolombiana.org" },
 ];
 
+/* MURO DE APOYO — mensajes iniciales (curados). Los nuevos mensajes llegan por el
+   formulario de Netlify "muro-apoyo"; agrega aquí los que quieras dejar fijos en el muro. */
+const MENSAJES_APOYO = [
+  { nombre:"Una caleña", mensaje:"Cali entera está con ustedes. No están solos; vamos a reconstruir todo, ladrillo por ladrillo." },
+  { nombre:"Equipo de voluntarios", mensaje:"Gracias a cada persona que ha llevado un balde de agua, un guante o un abrazo. Eso también salva." },
+  { nombre:"Anónimo", mensaje:"A las familias que perdieron su casa: su historia no se cayó con las paredes. Aquí seguimos." },
+  { nombre:"Desde el norte del Valle", mensaje:"Fuerza a los municipios y a las veredas. Los vemos, los escuchamos y no los vamos a soltar." },
+];
+
 /* PUNTOS CERRADOS O SATURADOS — CONFIRMAR ANTES DE IR
    Reportados como cerrados, saturados o que ya no reciben ayuda/personas.
    Las condiciones cambian rápido; deja [] para ocultar este banner. */
@@ -1271,7 +1323,7 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
-  { fecha:"14 de agosto de 2026, 9:15:00 a. m.", punto:"La Alcaldía amplía la ventana de búsqueda y rescate", nota:"La Alcaldía confirmó que, dado que en varios puntos hay indicios de vida, se ampliará la ventana de búsqueda y rescate. Es fundamental mantener el silencio en los alrededores de esos puntos para que los equipos puedan escuchar. Atiende las indicaciones de los rescatistas." },
+  { fecha:"14 de agosto de 2026, 9:15:00 a. m.", punto:"El PMU amplía la ventana de vida por 48 horas más", nota:"Palpita la esperanza: como todavía hay indicios de vida, el Puesto de Mando Unificado (PMU) decidió ampliar la ventana de búsqueda y rescate por 48 horas más, buscando rescatar a gran parte de las 111 personas aún desaparecidas (van 88 rescatadas con vida). Se mantienen 9 puntos activos de búsqueda especializada — entre ellos el HUV, Cuarto de Legua, Capri, Calle 5 con Cra 39, Calle 5 con Cra 56, Calle 9 con Cra 44 y el frente de la Clínica de Colores — con 1.800 rescatistas activos, nacionales e internacionales (incluido el topo mexicano Héctor Méndez). El secretario de Gestión del Riesgo, Ricardo Peñuela, reitera lo esencial: HAZ SILENCIO en esos puntos y deja trabajar a los rescatistas; son momentos críticos donde cada segundo cuenta. Trabajan con sensores de sonido y temperatura y perros entrenados.", link:"https://www.cali.gov.co/boletines/publicaciones/193661/palpita-la-esperanza-y-la-busqueda-de-sobrevivientes-se-intensifica-pmu-amplia-la-ventana-de-vida-por-48-horas-mas/", linkTexto:"Leer el boletín oficial de la Alcaldía" },
   { fecha:"14 de agosto de 2026, 9:10:00 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Es la prioridad número uno. Necesitan urgente hidratación, electrolitos y hielo todos los días, y alimentación durante el día. Si vas a preparar desayunos o almuerzos, confirma primero a dónde enviarlos para que no se pierdan." },
   { fecha:"14 de agosto de 2026, 9:05:00 a. m.", punto:"Cali ya está cubierto en su mayoría · renovar lo que se gasta rápido", nota:"En Cali estamos cubiertos con la mayoría de insumos. Hay que estar renovando lo que se consume rápido: guantes industriales, extensiones, linternas, cascos y la hidratación necesaria." },
   { fecha:"14 de agosto de 2026, 9:00:00 a. m.", punto:"El Ejército se está tomando varios puntos de trabajo", nota:"En los frentes donde entra el Ejército y los equipos especializados, cada vez se necesitarán menos voluntarios. Confirma antes de desplazarte a esos puntos." },
@@ -1443,7 +1495,27 @@ function App(){
   const [showMenu, setShowMenu] = useState(false);
   const [showRescate, setShowRescate] = useState(false);
   const [showMapa, setShowMapa] = useState(false);
+  const [muroNombre, setMuroNombre] = useState("");
+  const [muroMensaje, setMuroMensaje] = useState("");
+  const [muroEnviado, setMuroEnviado] = useState(false);
+  const [muroExtra, setMuroExtra] = useState([]);
   const nowISO = useMemo(() => new Date().toISOString(), []);
+
+  const enviarApoyo = (e) => {
+    e.preventDefault();
+    const nombre = muroNombre.trim() || "Anónimo";
+    const mensaje = muroMensaje.trim();
+    if (!mensaje) return;
+    const datos = new URLSearchParams();
+    datos.append("form-name", "muro-apoyo");
+    datos.append("nombre", nombre);
+    datos.append("mensaje", mensaje);
+    fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: datos.toString() }).catch(() => {});
+    setMuroExtra(prev => [{ nombre, mensaje }, ...prev]);
+    setMuroNombre("");
+    setMuroMensaje("");
+    setMuroEnviado(true);
+  };
 
   const filtrados = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -1473,6 +1545,7 @@ function App(){
             </div>
             <a href="index.html">Inicio</a>
             <a href="#directorio" className="menu-link-highlight" onClick={() => setShowMenu(false)}>🧭 Directorio de ayuda</a>
+            <a href="#muro" onClick={() => setShowMenu(false)}>💙 Muro de apoyo</a>
             <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios y veredas que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
             <a href="#medicamentos" onClick={() => setShowMenu(false)}>Medicamentos para albergues</a>
@@ -1597,20 +1670,27 @@ function App(){
         </div>
       ) : null}
 
-      {BUSQUEDA.length ? (
-        <div className="busqueda">
-          <h2>¿Buscas a alguien?</h2>
-          <p className="bq-sub">Si tienes un familiar o ser querido desaparecido tras el sismo, repórtalo en estas líneas oficiales de atención 24/7:</p>
-          <div className="bq-list">
-            {BUSQUEDA.map((l,i) => (
-              <a className="bq-item" href={l.href} key={i} target="_blank" rel="noopener noreferrer">
-                <span className="bq-label">{l.label}</span>
-                <span className="bq-valor">{l.valor}</span>
-              </a>
-            ))}
-          </div>
+      <div className="muro" id="muro">
+        <div className="muro-head">
+          <div className="eyebrow">Muro de apoyo</div>
+          <h2>Déjale un mensaje de aliento a quienes hoy la están pasando muy mal</h2>
+          <p className="muro-sub">Una palabra puede sostener a alguien en su peor día. Escribe un mensaje de apoyo para las familias, los rescatistas y todos los afectados. Entre todos vamos a construir un gran muro de apoyo por Cali y el Valle.</p>
         </div>
-      ) : null}
+        <form className="muro-form" onSubmit={enviarApoyo}>
+          <input type="text" className="muro-nombre" name="nombre" value={muroNombre} onChange={e => setMuroNombre(e.target.value)} placeholder="Tu nombre (opcional)" maxLength={40} />
+          <input type="text" className="muro-mensaje" name="mensaje" value={muroMensaje} onChange={e => setMuroMensaje(e.target.value)} placeholder="Escribe tu mensaje de apoyo…" maxLength={240} required />
+          <button type="submit" className="muro-btn">Publicar 💙</button>
+        </form>
+        {muroEnviado ? <div className="muro-gracias">¡Gracias! Tu mensaje ya es parte del muro. 💙</div> : null}
+        <div className="muro-grid">
+          {muroExtra.concat(MENSAJES_APOYO).map((m,i) => (
+            <div className="muro-card" key={i}>
+              <p className="muro-texto">“{m.mensaje}”</p>
+              <span className="muro-firma">— {m.nombre}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {FRENTES.length ? (
         <div className="seccion" id="frentes">
