@@ -809,7 +809,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "13 de agosto de 2026, 5:36 p. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 9:15 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1152,6 +1152,9 @@ const ALBERGUES = [
 ];
 const ALBERGUES_CONTACTO = "Coordinación (Six Avenue, hockey, béisbol, Loft House): Kevin Cardoso, 317 4246076. Información de moteles (Menga, Sameco y centro de Cali): 317 8865887.";
 
+/* Medicamentos que empiezan a necesitarse en los albergues temporales. */
+const MEDICAMENTOS_ALBERGUES = ["Salbutamol","Midazolam","Omeprazol","Aspirinas","Diclofenaco","Gasa","Alcohol","Mascarillas pediátricas"];
+
 /* Apoyo psicológico gratuito (psicólogos especializados en desastres) */
 const APOYO_PSICO_INFO = "Si fuiste afectado por el terremoto, tu salud mental también importa. El miedo, la tristeza, la angustia y el estrés son reacciones normales; pedir ayuda es un acto de cuidado.";
 const APOYO_PSICO_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdTgXmhTJL_xLCp03ah5xzTnueTOip_3FtG9t8Zdge5D8FNEg/viewform";
@@ -1265,12 +1268,15 @@ const DIRECTORIO_AYUDA = [
 
 /* PUNTOS DE ALTA PRIORIDAD — se muestran en el marco rojo de arriba. Cada uno: {punto, nota}. */
 /* Necesidades que SIEMPRE se renuevan en los puntos de rescate de Cali */
-const RESCATE_NECESIDADES = ["Hielo","Desayunos","Almuerzos","Cenas","Linternas","Reflectores","Equipos de oxicorte","Rotomartillos"];
+const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
-  { fecha:"13 de agosto de 2026, 3:51:40 p. m.", punto:"Municipios del norte del Valle · balance real de daños", nota:"Actualizamos la sección de municipios con el balance verificado de daños y las necesidades reales, incluyendo lo básico para reconstrucción y para los damnificados. Roldanillo (~1.300 viviendas afectadas y sin agua para 8 municipios), El Cairo (~80% destruido), La Victoria, Zarzal, Riofrío, Sevilla y El Águila/Argelia.", link:"#municipios", linkTexto:"Ver municipios y necesidades" },
-  { fecha:"13 de agosto de 2026, 3:12:05 p. m.", punto:"Apoyo psicológico voluntario · formulario", nota:"Un grupo de psicólogos de Cali ofrece orientación y apoyo psicológico voluntario. Puedes dejar tu solicitud en el formulario y un profesional de la red te contactará.", link:"#psicologia", linkTexto:"Ver apoyo psicológico" },
-  { fecha:"13 de agosto de 2026, 1:27:12 p. m.", punto:"Asesoría jurídica gratuita", nota:"Acompañamiento legal sin costo para los afectados: reclamación de seguros de propiedad, auxilio funerario, activación de la ruta de personas desaparecidas y dudas sobre el auxilio de arriendo.", link:"#juridica", linkTexto:"Ver asesoría jurídica" },
+  { fecha:"14 de agosto de 2026, 9:10:00 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Es la prioridad número uno. Necesitan urgente hidratación, electrolitos y hielo todos los días, y alimentación durante el día. Si vas a preparar desayunos o almuerzos, confirma primero a dónde enviarlos para que no se pierdan." },
+  { fecha:"14 de agosto de 2026, 9:05:00 a. m.", punto:"Cali ya está cubierto en su mayoría · renovar lo que se gasta rápido", nota:"En Cali estamos cubiertos con la mayoría de insumos. Hay que estar renovando lo que se consume rápido: guantes industriales, extensiones, linternas, cascos y la hidratación necesaria." },
+  { fecha:"14 de agosto de 2026, 9:00:00 a. m.", punto:"El Ejército se está tomando varios puntos de trabajo", nota:"En los frentes donde entra el Ejército y los equipos especializados, cada vez se necesitarán menos voluntarios. Confirma antes de desplazarte a esos puntos." },
+  { fecha:"14 de agosto de 2026, 8:55:00 a. m.", punto:"Prioricemos la remoción con los rescatistas", nota:"Cada día que pasa hay menor probabilidad de encontrar personas con vida y mayor riesgo de que otros edificios colapsen. Lo mejor es empezar a permitir que los rescatistas y equipos especializados hagan las labores de remoción." },
+  { fecha:"14 de agosto de 2026, 8:50:00 a. m.", punto:"Apoyemos las brigadas de barrio", nota:"Hay brigadas de voluntarios yendo a los barrios a ayudar a casas y locales con la remoción de escombros. Apoyémoslas, y miremos en nuestro propio barrio quién puede estar necesitando la ayuda." },
+  { fecha:"14 de agosto de 2026, 8:45:00 a. m.", punto:"Municipios y veredas del Valle · visibilidad", nota:"Segunda prioridad: los municipios priorizados del Valle y las veredas de baja conectividad que lo perdieron todo. Sumamos a Buga, y damos visibilidad a Riofrío (muy golpeado) y a Fenicia.", link:"#municipios", linkTexto:"Ver municipios y veredas" },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1315,13 +1321,17 @@ const AYUDAS = [
 /* Municipios que piden ayuda. estado:"urgente" resalta la tarjeta.
    Datos de daños con base en reportes de El País, El Colombiano, Semana e Infobae (10-12 ago 2026).
    El Valle del Cauca declaró calamidad pública por 6 meses. */
-const MUNICIPIOS_FUENTE = "Balance de daños según Gobernación del Valle y medios (El País, El Colombiano, Semana, Infobae), 10–12 de agosto de 2026. Las condiciones cambian rápido: confirma antes de despachar.";
+const MUNICIPIOS_FUENTE = "Balance de daños según Gobernación del Valle y medios (El País, El Colombiano, Semana, Infobae), actualizado al 14 de agosto de 2026. Las condiciones cambian rápido: confirma antes de despachar.";
+/* Materiales que empiezan a necesitarse para la fase de reconstrucción en los municipios. */
+const MATERIALES_RECONSTRUCCION = ["Bloques y ladrillos","Láminas de zinc","Tejas","Varillas de acero","Arena","Grava","Aditivos para concreto"];
 const MUNICIPIOS = [
+  { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", dano:"Uno de los más golpeados. Afectaciones graves en el casco urbano, corregimientos y numerosas veredas de difícil acceso y muy baja conectividad, que quedaron prácticamente incomunicadas y perdieron casi todo.", nota:"Riofrío y sus corregimientos y veredas nos necesitan. Demos visibilidad a las veredas que casi nadie conoce.", necesidades:["Agua potable","Alimentos no perecederos","Ropa","Aseo personal","Colchonetas","Cobijas","Carpas","Plástico negro de construcción","Alimentos para mascotas"] },
+  { nombre:"Fenicia (corregimiento de Riofrío)", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Corregimiento de Riofrío muy afectado, con veredas de baja conectividad que quedaron aisladas. Muchas familias lo perdieron todo.", nota:"Zona de difícil acceso; coordina el transporte antes de despachar.", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Cobijas","Carpas","Kits de aseo","Ropa"] },
+  { nombre:"Buga", region:"Centro del Valle", estado:"urgente", contacto:"", dano:"350 viviendas afectadas y 30 con pérdida total, en zona rural y urbana.", nota:"Requiere apoyo para familias que perdieron su vivienda y para la remoción.", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Cobijas","Carpas","Kits de aseo","Materiales de construcción"] },
   { nombre:"Roldanillo", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Uno de los municipios más golpeados: cerca de 1.300 viviendas afectadas y unas 500 destruidas. La iglesia, la alcaldía y la Casa de la Cultura deben demolerse; el hospital quedó con ~60% de daño estructural. La rotura del acueducto dejó sin agua a 8 municipios del norte del Valle.", nota:"Requieren apoyo para remoción de escombros y para las familias que perdieron su vivienda.", necesidades:["Agua potable","Alimentos no perecederos","Maquinaria amarilla","Voluntarios para escombros","Colchonetas","Cobijas","Carpas","Kits de aseo","Materiales de construcción (tejas, zinc, madera)"] },
   { nombre:"El Cairo", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Uno de los más afectados del departamento: cerca del 80% de las edificaciones resultaron destruidas. Reporta 2 personas fallecidas.", nota:"Familias sin techo a la intemperie; se necesita cubrir y abrigar.", necesidades:["Frazadas","Plástico negro de construcción","Agua potable","Alimentos no perecederos","Carpas","Colchonetas","Kits de aseo","Ropa"] },
   { nombre:"La Victoria", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"615 viviendas con daños. El hospital resultó afectado en el 2.º y 3.er piso y el puente Mariano Ospina fue cerrado por fisuras; unas 5 instituciones educativas con afectaciones.", nota:"Requiere revisión estructural y apoyo para familias reubicadas.", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Cobijas","Carpas","Kits de aseo"] },
   { nombre:"Zarzal", region:"Norte del Valle", estado:"urgente", contacto:"318 573 8184", dano:"1 persona fallecida y viviendas con daños en el casco urbano.", nota:"Ayuda urgente · Hay un bus que sale el viernes a entregar ayudas.", necesidades:["Agua potable","Alimentos no perecederos","Carpas","Colchonetas","Kits de aseo"] },
-  { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", dano:"Afectaciones en el casco urbano, corregimientos y veredas.", nota:"Riofrío y sus corregimientos y veredas nos necesitan.", necesidades:["Agua potable","Ropa","Aseo personal","Alimentos no perecederos","Alimentos para mascotas","Colchonetas","Cobijas","Kits de aseo"] },
   { nombre:"Sevilla", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Reporta 5 personas fallecidas y afectaciones en viviendas.", nota:"", necesidades:["Alimentos para mascota","Alimentos no perecederos","Agua potable","Colchonetas","Kits de aseo"] },
   { nombre:"El Águila y Argelia", region:"Norte del Valle", estado:"", contacto:"", dano:"Municipios del norte inspeccionados por aire; reportan daños en viviendas y vías. Necesidades en evaluación por la Gobernación.", nota:"", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Kits de aseo"] },
 ];
@@ -1462,8 +1472,9 @@ function App(){
             </div>
             <a href="index.html">Inicio</a>
             <a href="#directorio" className="menu-link-highlight" onClick={() => setShowMenu(false)}>🧭 Directorio de ayuda</a>
-            <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios que piden ayuda</a>
+            <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios y veredas que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
+            <a href="#medicamentos" onClick={() => setShowMenu(false)}>Medicamentos para albergues</a>
             <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
             <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
@@ -1494,15 +1505,17 @@ function App(){
 
       <header>
         <div className="eyebrow">Coordinación de ayuda · Terremoto en Cali</div>
-        <h1>Sigamos ayudando: <span>municipios, laderas y los puntos de rescate en Cali</span></h1>
+        <h1>Sigamos ayudando: <span>que no se desabastezcan los puntos de trabajo, y visibilidad a los municipios y veredas del Valle</span></h1>
         <p className="sub">
-          La prioridad tiene dos frentes: llevar ayuda a los municipios del norte del Valle y a las
-          laderas de Cali, y seguir abasteciendo los puntos de Cali que aún están en labores de
-          rescate. Aquí ves a dónde dirigir tu ayuda y qué se necesita en cada frente.
-          Comparte esta página con quien quiera aportar.
+          Han pasado cuatro días desde el sismo del 10 de agosto. La prioridad ahora es doble:
+          primero, <strong>que los puntos de trabajo en Cali no se queden sin insumos</strong> — necesitan
+          hidratación, electrolitos y hielo todos los días, y alimentación coordinada (si vas a hacer
+          desayunos o almuerzos, confirma antes a dónde enviarlos). Y segundo, <strong>llevar ayuda a los
+          municipios del Valle priorizados y a las veredas</strong> que casi nadie conoce, con muy baja
+          conectividad, que lo perdieron todo. Comparte esta página con quien quiera aportar.
         </p>
         <div className="meta">
-          <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios pidiendo ayuda</span>
+          <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios y zonas pidiendo ayuda</span>
           <span className="chip"><span className="dot"></span>{FRENTES.length} puntos de trabajo en Cali</span>
         </div>
 
@@ -1513,7 +1526,7 @@ function App(){
             <div className="needs">
               {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
             </div>
-            <p className="card-sub" style={{marginTop:"14px"}}>Para los puntos de rescate en Cali — se renuevan constantemente:</p>
+            <p className="card-sub" style={{marginTop:"14px"}}>Para los puntos de trabajo en Cali — ya cubiertos en su mayoría; hay que renovar a diario lo que se gasta rápido:</p>
             <div className="needs">
               {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
             </div>
@@ -1641,9 +1654,16 @@ function App(){
 
       <div className="seccion" id="municipios">
         <div className="sec-head">
-          <h2>Municipios que piden ayuda</h2>
-          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del norte del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias.</p>
+          <h2>Municipios y veredas que piden ayuda</h2>
+          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias. Demos visibilidad a las <strong>veredas de baja conectividad</strong> que casi nadie conoce y que lo perdieron todo.</p>
           <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
+        </div>
+        <div className="resc-nec" style={{marginBottom:"14px"}}>
+          <div className="rn-tag">Necesidades urgentes para reconstrucción</div>
+          <div className="needs">
+            {MATERIALES_RECONSTRUCCION.map((n,i) => <span className="need" key={i}>{n}</span>)}
+          </div>
+          <p className="rn-nota">Además de agua, alimentos y abrigo, los municipios empiezan a necesitar materiales para reconstruir las viviendas afectadas.</p>
         </div>
         <div className="dest-list">
           {MUNICIPIOS.map((m,i) => (
@@ -1685,6 +1705,21 @@ function App(){
                   : null}
               </div>
             ))}
+          </div>
+        </div>
+      ) : null}
+
+      {MEDICAMENTOS_ALBERGUES.length ? (
+        <div className="seccion" id="medicamentos">
+          <div className="sec-head">
+            <h2>Medicamentos para albergues temporales</h2>
+            <p className="sec-sub">A medida que las familias pasan más días en los albergues, empiezan a necesitarse estos medicamentos e insumos básicos. Entrégalos siempre con verificación de un profesional de salud; no se deben administrar medicamentos de prescripción sin acompañamiento médico.</p>
+          </div>
+          <div className="resc-nec">
+            <div className="rn-tag">Empiezan a necesitarse</div>
+            <div className="needs">
+              {MEDICAMENTOS_ALBERGUES.map((n,i) => <span className="need" key={i}>{n}</span>)}
+            </div>
           </div>
         </div>
       ) : null}
