@@ -647,6 +647,10 @@
   }
   .alerta-trata p{color:#FFE3E6;font-size:14px;line-height:1.55;font-weight:500}
   .alerta-trata p strong{color:#fff;font-weight:800}
+  .alerta-trata.aclaracion{background:#0B3D2E;border-color:var(--ok);box-shadow:0 8px 26px rgba(62,224,142,.28)}
+  .alerta-trata.aclaracion .at-titulo{color:#A8F5CE}
+  .alerta-trata.aclaracion p{color:#D7FBEA}
+  .alerta-trata.aclaracion p strong{color:#fff}
 
   /* ===== Alerta de fase / coordinación ===== */
   .card-sub{color:var(--ice);font-size:13px;line-height:1.45;margin:-4px 0 12px}
@@ -873,7 +877,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "14 de agosto de 2026, 12:20 p. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 2:10 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1394,6 +1398,28 @@ const AYUDAS = [
 const MUNICIPIOS_FUENTE = "Balance de daños según Gobernación del Valle y medios (El País, El Colombiano, Semana, Infobae), actualizado al 14 de agosto de 2026. Las condiciones cambian rápido: confirma antes de despachar.";
 /* Materiales que empiezan a necesitarse para la fase de reconstrucción en los municipios. */
 const MATERIALES_RECONSTRUCCION = ["Bloques y ladrillos","Láminas de zinc","Tejas","Varillas de acero","Arena","Grava","Aditivos para concreto"];
+
+/* Mapa · Puntos críticos del Norte del Valle (coords aproximadas). estado:"urgente" = rojo. */
+const MUNICIPIOS_MAPA = [
+  { lugar:"Roldanillo", coords:[4.413,-76.152], estado:"urgente", necesidades:["Agua","Alimentos","Maquinaria","Materiales de construcción"] },
+  { lugar:"El Cairo", coords:[4.762,-76.223], estado:"urgente", necesidades:["Frazadas","Plástico negro","Carpas","Agua"] },
+  { lugar:"La Victoria", coords:[4.522,-76.036], estado:"urgente", necesidades:["Agua","Alimentos","Colchonetas","Carpas"] },
+  { lugar:"Zarzal", coords:[4.393,-76.073], estado:"urgente", necesidades:["Agua","Alimentos","Carpas","Colchonetas"] },
+  { lugar:"Riofrío", coords:[4.157,-76.289], estado:"urgente", necesidades:["Agua","Ropa","Colchonetas","Kits de aseo"] },
+  { lugar:"Sevilla", coords:[4.271,-75.936], estado:"urgente", necesidades:["Alimentos","Agua","Colchonetas"] },
+  { lugar:"El Águila", coords:[4.906,-76.030], estado:"", necesidades:["Necesidades en evaluación"] },
+  { lugar:"Argelia", coords:[4.727,-76.121], estado:"", necesidades:["Necesidades en evaluación"] },
+  { lugar:"Ansermanuevo", coords:[4.795,-75.993], estado:"" },
+  { lugar:"Cartago", coords:[4.746,-75.911], estado:"" },
+  { lugar:"Toro", coords:[4.611,-76.077], estado:"" },
+  { lugar:"Versalles", coords:[4.575,-76.192], estado:"" },
+  { lugar:"La Unión", coords:[4.531,-76.101], estado:"" },
+  { lugar:"Obando", coords:[4.577,-75.970], estado:"" },
+  { lugar:"El Dovio", coords:[4.508,-76.238], estado:"" },
+  { lugar:"Bolívar", coords:[4.338,-76.183], estado:"" },
+  { lugar:"Trujillo", coords:[4.213,-76.320], estado:"" },
+  { lugar:"Bugalagrande", coords:[4.211,-76.157], estado:"" },
+];
 const MUNICIPIOS = [
   { nombre:"Riofrío", region:"Norte del Valle", estado:"urgente", contacto:"320 516 3851", dano:"Uno de los más golpeados. Afectaciones graves en el casco urbano, corregimientos y numerosas veredas de difícil acceso y muy baja conectividad, que quedaron prácticamente incomunicadas y perdieron casi todo.", nota:"Riofrío y sus corregimientos y veredas nos necesitan. Demos visibilidad a las veredas que casi nadie conoce.", necesidades:["Agua potable","Alimentos no perecederos","Ropa","Aseo personal","Colchonetas","Cobijas","Carpas","Plástico negro de construcción","Alimentos para mascotas"] },
   { nombre:"Fenicia (corregimiento de Riofrío)", region:"Norte del Valle", estado:"urgente", contacto:"", dano:"Corregimiento de Riofrío muy afectado, con veredas de baja conectividad que quedaron aisladas. Muchas familias lo perdieron todo.", nota:"Zona de difícil acceso; coordina el transporte antes de despachar.", necesidades:["Agua potable","Alimentos no perecederos","Colchonetas","Cobijas","Carpas","Kits de aseo","Ropa"] },
@@ -1492,7 +1518,7 @@ function Mapa({ puntos }){
   return (
     <div className="mapa-box">
       <div ref={ref} className="mapa"></div>
-      <div className="mapa-nota">{estado}. Ubicaciones aproximadas (geocodificadas automáticamente); verifica antes de desplazarte.</div>
+      <div className="mapa-nota">{estado}. Ubicaciones aproximadas; confirma antes de desplazarte.</div>
     </div>
   );
 }
@@ -1562,6 +1588,7 @@ function App(){
             </div>
             <a href="index.html">Inicio</a>
             <a href="#directorio" className="menu-link-highlight" onClick={() => setShowMenu(false)}>🧭 Directorio de ayuda</a>
+            <a href="#mapa-valle" onClick={() => setShowMenu(false)}>🗺️ Mapa · Norte del Valle</a>
             <a href="#muro" onClick={() => setShowMenu(false)}>💙 Muro de apoyo</a>
             <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios y veredas que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
@@ -1579,9 +1606,9 @@ function App(){
         </>
       ) : null}
 
-      <div className="alerta-trata">
-        <div className="at-titulo">⚠ Máxima alerta con estafadores</div>
-        <p>Nos han reportado <strong>estafas</strong> en medio de esta situación. Los delincuentes aprovechan las emociones encontradas de la gente para engañar. Antes de enviar dinero a cualquier cuenta, <strong>verifica muy bien a quién se lo vas a enviar y para qué</strong>. Ante la duda, no transfieras.</p>
+      <div className="alerta-trata aclaracion">
+        <div className="at-titulo">✅ No hay epidemia · no te alarmes</div>
+        <p>La <strong>Alcaldía de Cali ya desmintió las cadenas falsas</strong> que circulan sobre una supuesta epidemia tras el terremoto. La Secretaría de Salud <strong>descartó alertas epidemiológicas</strong>. Mantén la calma, no difundas cadenas y sigue únicamente los canales oficiales. Cuídate con lo básico: agua de fuentes seguras, tapabocas cerca de la remoción de escombros y buena higiene.</p>
       </div>
 
       <div className="lastupdate">
@@ -1636,6 +1663,14 @@ function App(){
           ) : null}
         </div>
       </header>
+
+      <div className="seccion" id="mapa-valle">
+        <div className="sec-head">
+          <h2>🗺️ Puntos críticos · Norte del Valle</h2>
+          <p className="sec-sub">Municipios del norte y centro del Valle afectados por el sismo. En <span style={{color:"var(--alert)",fontWeight:800}}>rojo</span> los que priorizamos como urgentes; en azul, los demás en seguimiento. Toca un punto para ver qué necesita. Ubicaciones aproximadas: confirma antes de desplazarte.</p>
+        </div>
+        <Mapa puntos={MUNICIPIOS_MAPA} />
+      </div>
 
       {ALTA_PRIORIDAD.length ? (
         <div className="priority">
