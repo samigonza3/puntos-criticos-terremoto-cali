@@ -3,196 +3,187 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>¿Tu hijo sigue nervioso tras el terremoto? · Guía para acompañarlo · Con Sofii</title>
+<title>¿Tu hijo sigue nervioso tras el terremoto? · Guía para acompañarlo</title>
 <meta name="description" content="Guía gratuita y práctica para padres: cómo acompañar a niñas y niños que siguen nerviosos, con miedo o comportamientos difíciles después del terremoto. Frases, pasos y herramientas suaves." />
+<link rel="icon" type="image/jpeg" href="favicon.jpg" />
+<meta property="og:type" content="website" />
 <meta property="og:title" content="Después de lo que pasó · Guía para acompañar a tu hijo tras el terremoto" />
 <meta property="og:description" content="Si tu hijo sigue nervioso, con miedo o comportamientos difíciles después del sismo, esta guía gratuita te da herramientas para acompañarlo con calma." />
-<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_CO" />
+<meta name="twitter:card" content="summary" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --cream:#FDF8F1;
-    --cream-2:#FBF1E6;
-    --plum:#6E2A4C;
-    --plum-soft:#8A4468;
-    --rose:#C9789A;
-    --rose-bg:#F7E6EE;
-    --rose-line:rgba(201,120,154,.4);
-    --gold:#E4A93C;
-    --gold-bg:#FBEEC6;
-    --gold-line:rgba(228,169,60,.45);
-    --ink:#54433E;
-    --ink-soft:#7A675F;
-    --white:#fff;
-    --shadow:0 14px 40px rgba(110,42,76,.10);
+    --space-950:#040817;
+    --space-900:#070D22;
+    --space-800:#0B1533;
+    --space-700:#122048;
+    --nebula:#1B2E66;
+    --star-blue:#3E7BFF;
+    --star-light:#7FA8FF;
+    --ice:#C9D9FF;
+    --white:#F4F7FF;
+    --muted:#8B9BC7;
+    --alert:#FF5C6B;
+    --alert-soft:rgba(255,92,107,.12);
+    --ok:#3EE08E;
+    --warn:#FFB020;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Nunito',system-ui,sans-serif;
-    color:var(--ink);background:var(--cream);
-    line-height:1.6;-webkit-font-smoothing:antialiased;
+    font-family:'Montserrat',system-ui,sans-serif;
+    background:var(--space-950);color:var(--white);min-height:100vh;
+    -webkit-font-smoothing:antialiased;line-height:1.6;
   }
-  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;color:var(--plum);font-weight:600;line-height:1.15}
-  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-  .eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-  strong{color:var(--plum);font-weight:800}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--star-light)}
+  strong{color:var(--white);font-weight:800}
+  h1,h2,h3{letter-spacing:-.01em;line-height:1.15}
 
-  /* ===== HERO ===== */
-  header.hero{position:relative;overflow:hidden;padding:64px 0 46px;background:
-     radial-gradient(60% 55% at 88% 8%, rgba(201,120,154,.22), transparent 60%),
-     radial-gradient(50% 45% at 5% 96%, rgba(228,169,60,.20), transparent 60%),
-     var(--cream);}
-  .hero .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;z-index:0}
-  .hero .b1{width:260px;height:260px;background:var(--rose-bg);top:-70px;right:-60px}
-  .hero .b2{width:180px;height:180px;background:var(--gold-bg);bottom:-70px;left:-50px}
+  /* ===== HERO con campo de estrellas ===== */
+  header.hero{position:relative;overflow:hidden;padding:70px 0 48px;
+    background:
+      radial-gradient(60% 60% at 85% 5%, rgba(62,123,255,.22), transparent 60%),
+      radial-gradient(50% 50% at 5% 100%, rgba(27,46,102,.5), transparent 60%),
+      var(--space-950);
+  }
+  .stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .stars i{position:absolute;background:#fff;border-radius:50%;opacity:.7;animation:tw 3s infinite ease-in-out}
+  @keyframes tw{0%,100%{opacity:.25}50%{opacity:.9}}
   .hero .inner{position:relative;z-index:1}
-  .brand{display:inline-flex;align-items:center;gap:8px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--plum);margin-bottom:26px}
-  .brand .dot{color:var(--rose)}
-  .hero h1{font-size:clamp(29px,5.4vw,46px);margin:12px 0 16px}
-  .hero h1 em{font-style:italic;color:var(--rose)}
-  .hero .lead{font-size:clamp(16px,2.3vw,19px);color:var(--ink-soft);max-width:640px}
-  .hero .reassure{margin-top:22px;background:var(--white);border:1px solid var(--rose-line);
-    border-radius:18px;padding:18px 20px;max-width:660px;box-shadow:var(--shadow)}
-  .hero .reassure b{display:block;color:var(--plum);font-family:'Fraunces',serif;font-size:17px;margin-bottom:5px}
-  .hero .reassure p{font-size:14.5px;color:var(--ink-soft)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .chip{font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--plum-soft);
-    background:var(--white);border:1px solid var(--rose-line);border-radius:999px;padding:7px 13px}
+  .backlink{display:inline-flex;align-items:center;gap:6px;color:var(--star-light);text-decoration:none;font-size:13px;font-weight:700;margin-bottom:22px}
+  .backlink:hover{color:var(--white)}
+  .hero h1{font-size:clamp(28px,5.2vw,44px);font-weight:800;margin:12px 0 16px}
+  .hero h1 span{color:var(--star-light)}
+  .hero .lead{font-size:clamp(15.5px,2.2vw,18px);color:var(--ice);max-width:660px}
+  .reassure{margin-top:22px;background:var(--space-800);border:1px solid rgba(127,168,255,.28);
+    border-radius:18px;padding:18px 20px;max-width:680px}
+  .reassure b{display:block;color:var(--white);font-size:16px;margin-bottom:5px}
+  .reassure p{font-size:14px;color:var(--ice)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chip{font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--star-light);
+    background:rgba(62,123,255,.1);border:1px solid rgba(127,168,255,.28);border-radius:999px;padding:7px 13px}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;
-    font-size:15px;text-decoration:none;border-radius:14px;padding:13px 22px;cursor:pointer;border:none;transition:.18s}
-  .btn-primary{background:linear-gradient(180deg,var(--rose),#B5638A);color:#fff;box-shadow:0 10px 24px rgba(201,120,154,.4)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-weight:800;font-size:15px;
+    text-decoration:none;border-radius:14px;padding:13px 22px;cursor:pointer;border:none;transition:.18s}
+  .btn-primary{background:linear-gradient(180deg,var(--star-blue),#2E5FE0);color:#fff;box-shadow:0 12px 28px rgba(62,123,255,.4)}
   .btn-primary:hover{transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--plum);border:1.5px solid var(--rose-line)}
-  .btn-ghost:hover{border-color:var(--rose);background:var(--rose-bg)}
+  .btn-ghost{background:transparent;color:var(--ice);border:1.5px solid rgba(127,168,255,.3)}
+  .btn-ghost:hover{border-color:var(--star-blue);background:rgba(62,123,255,.1)}
 
-  /* ===== SECTIONS ===== */
   section{padding:34px 0}
-  .sec-eyebrow{margin-bottom:8px}
-  h2.sec-title{font-size:clamp(22px,3.4vw,30px);margin-bottom:10px}
-  .sec-intro{color:var(--ink-soft);font-size:15.5px;max-width:680px;margin-bottom:22px}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--rose-line),transparent);margin:8px 0}
+  h2.sec-title{font-size:clamp(21px,3.3vw,29px);font-weight:800;margin:8px 0 10px;color:var(--white)}
+  .sec-intro{color:var(--ice);font-size:15px;max-width:700px;margin-bottom:22px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(127,168,255,.25),transparent);margin:6px 0}
 
-  /* two-column soft cards */
   .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .softcard{border-radius:18px;padding:20px 22px;border:1px solid transparent}
-  .softcard h3{font-size:15px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;margin-bottom:12px;font-family:'Nunito',sans-serif}
-  .softcard.rose{background:var(--rose-bg);border-color:var(--rose-line)}
-  .softcard.rose h3{color:var(--plum)}
-  .softcard.gold{background:var(--gold-bg);border-color:var(--gold-line)}
-  .softcard.gold h3{color:#9A6B14}
-  .softcard p{font-size:14.5px;color:var(--ink);margin-bottom:8px}
+  .softcard{border-radius:18px;padding:20px 22px;background:var(--space-800);border:1px solid rgba(127,168,255,.16)}
+  .softcard h3{font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;margin-bottom:12px}
+  .softcard.blue{border-color:rgba(62,123,255,.45)}
+  .softcard.blue h3{color:var(--star-light)}
+  .softcard.amber{border-color:rgba(255,176,32,.4)}
+  .softcard.amber h3{color:var(--warn)}
+  .softcard p{font-size:14px;color:var(--ice);margin-bottom:8px}
   .softcard p:last-child{margin-bottom:0}
 
-  /* interactive checklist */
   .check{list-style:none;display:flex;flex-direction:column;gap:2px}
-  .check li{display:flex;gap:11px;align-items:flex-start;padding:8px 6px;border-radius:10px;cursor:pointer;transition:background .15s;font-size:14.5px}
-  .check li:hover{background:rgba(255,255,255,.55)}
-  .check .box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid var(--rose);
-    background:var(--white);margin-top:1px;display:flex;align-items:center;justify-content:center;
-    font-size:13px;color:#fff;transition:.15s}
-  .softcard.gold .check .box{border-color:var(--gold)}
-  .check li.on .box{background:var(--rose);border-color:var(--rose)}
-  .softcard.gold .check li.on .box{background:var(--gold);border-color:var(--gold)}
-  .check li.on span.txt{color:var(--plum-soft)}
-  .check .box::after{content:"✓";opacity:0;transition:.15s}
+  .check li{display:flex;gap:11px;align-items:flex-start;padding:8px 6px;border-radius:10px;cursor:pointer;transition:background .15s;font-size:14px;color:var(--ice)}
+  .check li:hover{background:rgba(127,168,255,.06)}
+  .check .box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid var(--star-blue);
+    background:transparent;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#04240F;transition:.15s}
+  .softcard.amber .check .box{border-color:var(--warn)}
+  .check li.on .box{background:var(--star-blue);border-color:var(--star-blue)}
+  .softcard.amber .check li.on .box{background:var(--warn);border-color:var(--warn)}
+  .check li.on .txt{color:var(--muted);text-decoration:line-through}
+  .check .box::after{content:"✓";opacity:0;transition:.15s;color:#fff}
   .check li.on .box::after{opacity:1}
 
-  /* quotes */
-  .say{background:var(--gold-bg);border:1px solid var(--gold-line);border-radius:16px;padding:16px 20px;margin:14px 0}
-  .say .say-tag{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9A6B14;margin-bottom:6px}
-  .say p{font-family:'Fraunces',serif;font-size:16.5px;color:var(--plum);font-style:italic;line-height:1.45}
-  .frase{display:inline;background:linear-gradient(180deg,transparent 62%,rgba(228,169,60,.35) 0);padding:0 2px;font-weight:700;color:var(--plum)}
+  .say{background:rgba(62,123,255,.1);border:1px solid rgba(62,123,255,.35);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .say .say-tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--star-light);margin-bottom:6px}
+  .say p{font-size:16px;color:var(--white);line-height:1.5}
+  .frase{background:rgba(62,123,255,.22);padding:1px 5px;border-radius:5px;font-weight:700;color:#fff}
 
-  /* accordion steps */
   .steps{display:flex;flex-direction:column;gap:12px}
-  .step{background:var(--white);border:1px solid var(--rose-line);border-radius:18px;overflow:hidden;box-shadow:0 8px 22px rgba(110,42,76,.06)}
-  .step-head{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:none;
-    cursor:pointer;padding:18px 20px;font-family:inherit}
-  .step-num{flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:#fff;background:linear-gradient(180deg,var(--rose),#B5638A)}
+  .step{background:var(--space-900);border:1px solid rgba(127,168,255,.16);border-radius:18px;overflow:hidden}
+  .step.open{border-color:rgba(62,123,255,.45)}
+  .step-head{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:18px 20px;font-family:inherit}
+  .step-num{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:20px;background:rgba(62,123,255,.14);border:1px solid rgba(127,168,255,.3)}
   .step-titles{flex:1}
-  .step-kicker{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-  .step-title{font-family:'Fraunces',serif;font-size:18px;color:var(--plum);font-weight:600;line-height:1.2}
-  .step-chev{flex:none;color:var(--rose);font-size:20px;transition:transform .25s}
+  .step-kicker{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light)}
+  .step-title{font-size:17px;font-weight:800;color:var(--white);line-height:1.25}
+  .step-chev{flex:none;color:var(--star-light);font-size:18px;transition:transform .25s}
   .step.open .step-chev{transform:rotate(180deg)}
   .step-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
   .step-body-inner{padding:2px 20px 22px}
-  .step-body-inner p{font-size:14.5px;color:var(--ink);margin-bottom:12px}
-  .mini-h{font-weight:800;color:var(--plum);font-size:13.5px;letter-spacing:.02em;text-transform:uppercase;margin:14px 0 8px}
+  .step-body-inner p{font-size:14px;color:var(--ice);margin-bottom:12px}
+  .mini-h{font-weight:800;color:var(--white);font-size:13px;letter-spacing:.02em;text-transform:uppercase;margin:14px 0 8px}
 
-  .banner{background:var(--rose-bg);border:1px solid var(--rose-line);border-radius:14px;padding:14px 18px;margin:12px 0;font-size:14px;color:var(--ink)}
-  .story{background:var(--cream-2);border:1px dashed var(--rose-line);border-radius:14px;padding:16px 18px;margin:10px 0;font-size:14.5px;font-style:italic;color:var(--plum-soft)}
+  .banner{background:var(--alert-soft);border:1px solid rgba(255,92,107,.35);border-radius:14px;padding:14px 18px;margin:12px 0;font-size:13.5px;color:var(--ice)}
+  .story{background:var(--space-800);border:1px dashed rgba(127,168,255,.3);border-radius:14px;padding:16px 18px;margin:10px 0;font-size:14px;color:var(--star-light);font-style:italic}
   ul.dots{list-style:none;display:flex;flex-direction:column;gap:6px;margin:6px 0}
-  ul.dots li{position:relative;padding-left:18px;font-size:14.5px}
-  ul.dots li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--rose)}
+  ul.dots li{position:relative;padding-left:18px;font-size:14px;color:var(--ice)}
+  ul.dots li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--star-blue)}
 
-  /* numbered mini steps */
   .flow{display:flex;flex-direction:column;gap:10px;margin:6px 0}
   .flow-item{display:flex;gap:12px}
-  .flow-n{flex:none;width:26px;height:26px;border-radius:8px;background:var(--gold-bg);border:1px solid var(--gold-line);
-    color:#9A6B14;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-  .flow-item b{color:var(--plum)}
-  .flow-item p{font-size:14px;color:var(--ink);margin:2px 0 0}
+  .flow-n{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(62,123,255,.14);border:1px solid rgba(127,168,255,.3);
+    color:var(--star-light);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .flow-item b{color:var(--white)}
+  .flow-item p{font-size:13.5px;color:var(--ice);margin:2px 0 0}
 
-  /* resources */
   .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .res{background:var(--white);border:1px solid var(--rose-line);border-radius:16px;padding:18px 20px}
-  .res .res-t{font-weight:800;color:var(--plum);font-size:15px;margin-bottom:4px}
-  .res .res-n{font-family:'Fraunces',serif;font-size:22px;color:var(--rose);font-weight:700}
-  .res p{font-size:13.5px;color:var(--ink-soft);margin-top:5px}
-  .res a{color:var(--rose);font-weight:700;text-decoration:none;border-bottom:1px solid var(--rose-line)}
-  .res a:hover{color:var(--plum)}
+  .res{background:var(--space-800);border:1px solid rgba(127,168,255,.16);border-radius:16px;padding:18px 20px}
+  .res .res-t{font-weight:800;color:var(--white);font-size:14px;margin-bottom:4px}
+  .res .res-n{font-size:22px;color:var(--star-light);font-weight:900}
+  .res p{font-size:13px;color:var(--muted);margin-top:5px}
 
-  .callout{background:linear-gradient(180deg,var(--rose-bg),#fff);border:1px solid var(--rose-line);
-    border-radius:20px;padding:26px;text-align:center;box-shadow:var(--shadow)}
-  .callout .serif{font-size:clamp(19px,3vw,24px);margin-bottom:8px}
-  .callout p{color:var(--ink-soft);font-size:15px;max-width:560px;margin:0 auto}
+  .callout{background:linear-gradient(180deg,var(--space-800),var(--space-900));border:1px solid rgba(62,123,255,.35);
+    border-radius:20px;padding:26px;text-align:center}
+  .callout .big{font-size:clamp(18px,2.8vw,23px);font-weight:800;color:var(--white);margin-bottom:8px}
+  .callout p{color:var(--ice);font-size:14.5px;max-width:580px;margin:0 auto}
 
-  .closing{text-align:center;font-family:'Fraunces',serif;font-style:italic;color:var(--plum-soft);font-size:17px;max-width:640px;margin:6px auto 0}
+  .closing{text-align:center;color:var(--star-light);font-size:16px;max-width:640px;margin:6px auto 0;font-weight:600}
 
-  footer{padding:40px 0 60px;text-align:center;color:var(--ink-soft);font-size:13px;background:var(--cream-2);margin-top:20px}
-  footer .brand{justify-content:center;display:flex;margin-bottom:12px}
-  footer a{color:var(--rose);text-decoration:none;font-weight:700}
-  .disclaimer{font-size:12px;color:var(--ink-soft);max-width:640px;margin:10px auto 0;opacity:.85}
+  footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:13px;background:var(--space-900);margin-top:24px;border-top:1px solid rgba(127,168,255,.12)}
+  footer a{color:var(--star-light);text-decoration:none;font-weight:700}
+  .disclaimer{font-size:12px;color:var(--muted);max-width:660px;margin:10px auto 0;opacity:.9}
 
-  /* floating help */
   .floating{position:fixed;right:16px;bottom:16px;z-index:50}
-  .floating a{display:inline-flex;align-items:center;gap:8px;background:var(--plum);color:#fff;text-decoration:none;
-    font-weight:800;font-size:13.5px;border-radius:999px;padding:12px 18px;box-shadow:0 12px 30px rgba(110,42,76,.35)}
-  .floating a:hover{background:#5a2340}
+  .floating a{display:inline-flex;align-items:center;gap:8px;background:var(--alert);color:#fff;text-decoration:none;
+    font-weight:800;font-size:13.5px;border-radius:999px;padding:12px 18px;box-shadow:0 12px 30px rgba(255,92,107,.35)}
+  .floating a:hover{filter:brightness(1.08)}
 
   @media (max-width:680px){
     .duo{grid-template-columns:1fr}
     .res-grid{grid-template-columns:1fr}
-    .hero{padding:44px 0 34px}
+    .hero{padding:48px 0 34px}
   }
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <span class="blob b1"></span>
-  <span class="blob b2"></span>
+  <div class="stars" id="stars"></div>
   <div class="wrap inner">
-    <div class="brand">Con Sof<span class="dot">i</span></div>
-    <div class="eyebrow">Guía gratuita para familias · después del terremoto</div>
-    <h1>¿Tu hijo sigue nervioso o con <em>comportamientos difíciles</em> estos días?</h1>
-    <p class="lead">Después del sismo, muchas niñas y niños siguen asustados, con pesadillas, más irritables, pegados a ti o "portándose raro". No estás haciendo nada mal: así procesan lo que vivieron. Aquí tienes herramientas suaves para acompañarlos.</p>
+    <a class="backlink" href="index.html">← Volver a la página de ayuda del terremoto</a>
+    <div class="eyebrow">🧸 Guía gratuita para familias · después del terremoto</div>
+    <h1>¿Tu hijo sigue nervioso o con <span>comportamientos difíciles</span> estos días?</h1>
+    <p class="lead">Después del sismo, muchas niñas y niños siguen asustados, con pesadillas, más irritables, pegados a ti o "portándose raro". No estás haciendo nada mal: así procesan lo que vivieron. Aquí tienes herramientas suaves para acompañarlos. 💙</p>
 
     <div class="reassure">
-      <b>Esta guía no busca que tu hija o hijo deje de sentir miedo.</b>
+      <b>🤍 Esta guía no busca que tu hija o hijo deje de sentir miedo.</b>
       <p>Busca darte herramientas para acompañar lo que quedó después del susto, hablar sin presionar, volver al cuerpo y encontrar juntos pequeñas formas de recuperar seguridad.</p>
     </div>
 
     <div class="chips">
-      <span class="chip">Hablar</span>
-      <span class="chip">Conectar</span>
-      <span class="chip">Organizar</span>
-      <span class="chip">Ayudar</span>
+      <span class="chip">🗣️ Hablar</span>
+      <span class="chip">🤝 Conectar</span>
+      <span class="chip">🧩 Organizar</span>
+      <span class="chip">🌱 Ayudar</span>
     </div>
 
     <div class="cta-row">
@@ -204,14 +195,13 @@
 
 <main class="wrap">
 
-  <!-- EMPEZAR -->
   <section id="empezar">
-    <div class="eyebrow sec-eyebrow">Antes de empezar</div>
+    <div class="eyebrow">📍 Antes de empezar</div>
     <h2 class="sec-title">Primero: ¿qué necesita tu familia ahora?</h2>
     <p class="sec-intro">Esta guía está pensada para cuando el movimiento ya terminó y hay un mínimo de seguridad. No todas las familias empiezan por el mismo lugar. Elige el que más se parezca a tu caso.</p>
     <div class="duo">
-      <div class="softcard rose">
-        <h3>Si hubo afectación directa</h3>
+      <div class="softcard blue">
+        <h3>🏚️ Si hubo afectación directa</h3>
         <p>Si hay heridas, pérdidas, separación familiar, desplazamiento, falta de agua o alimento, o dudas sobre la seguridad de la vivienda, prioriza:</p>
         <ul class="dots">
           <li>seguridad física y atención médica;</li>
@@ -221,8 +211,8 @@
         </ul>
         <p>Las actividades emocionales pueden esperar. <strong>Cuidar lo básico también es acompañar.</strong></p>
       </div>
-      <div class="softcard gold">
-        <h3>Si lo sintieron o vieron en noticias</h3>
+      <div class="softcard amber">
+        <h3>📺 Si lo sintieron o vieron en noticias</h3>
         <p>Si tu familia está a salvo, pero quedaron preguntas, imágenes o miedo, puede ayudar:</p>
         <ul class="dots">
           <li>abrir un espacio sin interrogar;</li>
@@ -235,34 +225,28 @@
     </div>
 
     <div class="say" style="margin-top:18px">
-      <div class="say-tag">Antes de hablar con tu hijo, regresa un poquito a ti</div>
+      <div class="say-tag">🫶 Antes de hablar con tu hijo, regresa un poquito a ti</div>
       <p>No tienes que fingir que no te asustaste. Apoya los pies, mira a tu alrededor y suelta el aire lentamente dos o tres veces. Puedes decirte: “Estamos juntos. Ahora estamos a salvo.”</p>
     </div>
-    <p class="closing">No necesitas hacer esta guía completa ni hacerlo todo hoy. Elige solo lo que corresponda a la niña o al niño que tienes enfrente.</p>
+    <p class="closing">No necesitas hacer esta guía completa ni hacerlo todo hoy. Elige solo lo que corresponda a la niña o al niño que tienes enfrente. 🌙</p>
   </section>
 
   <div class="divider"></div>
 
-  <!-- PASOS -->
   <section id="pasos">
-    <div class="eyebrow sec-eyebrow">Paso a paso · toca para abrir</div>
+    <div class="eyebrow">👇 Paso a paso · toca para abrir</div>
     <h2 class="sec-title">Cómo acompañarlo, un poquito a la vez</h2>
     <p class="sec-intro">Diez formas de acompañar. No van en orden estricto: abre la que necesites hoy. En cada una vas a encontrar qué observar, qué evitar y frases concretas que puedes decir.</p>
 
     <div class="steps" id="steps">
 
-      <!-- 1 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">1</span>
-          <span class="step-titles"><span class="step-kicker">Observar</span><span class="step-title">Cuando deja de temblar, no siempre termina todo</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">👀</span><span class="step-titles"><span class="step-kicker">1 · Observar</span><span class="step-title">Cuando deja de temblar, no siempre termina todo</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>En el momento del sismo, el cuerpo estuvo ocupado respondiendo. Después pueden aparecer preguntas, recuerdos, juego sobre lo ocurrido o emociones que no vimos enseguida. Y se ve muy diferente en cada niño. <em>Marca lo que reconozcas:</em></p>
           <div class="duo">
-            <div class="softcard rose">
-              <h3>Quizás quiere acercarse al tema</h3>
+            <div class="softcard blue">
+              <h3>🙋 Quizás quiere acercarse al tema</h3>
               <ul class="check">
                 <li><span class="box"></span><span class="txt">Hace muchas preguntas.</span></li>
                 <li><span class="box"></span><span class="txt">Pregunta varias veces lo mismo.</span></li>
@@ -271,8 +255,8 @@
                 <li><span class="box"></span><span class="txt">Busca estar más cerca de ti.</span></li>
               </ul>
             </div>
-            <div class="softcard gold">
-              <h3>Quizás necesita más distancia o tiempo</h3>
+            <div class="softcard amber">
+              <h3>🌫️ Quizás necesita más distancia o tiempo</h3>
               <ul class="check">
                 <li><span class="box"></span><span class="txt">No quiere hablar del tema.</span></li>
                 <li><span class="box"></span><span class="txt">Parece haber seguido con su día.</span></li>
@@ -283,108 +267,76 @@
             </div>
           </div>
           <p style="margin-top:14px">También pueden aparecer, por un tiempo, pesadillas, más irritabilidad, dificultad para separarse, molestias físicas o el regreso a conductas de antes. Muchas son reacciones esperables. Observa su <strong>intensidad</strong>, si <strong>empeoran</strong> y cuánto interfieren con su sueño, comida, juego, colegio o vida familiar.</p>
-          <div class="say">
-            <div class="say-tag">Cambia la pregunta</div>
-            <p>En vez de “¿Cómo hago para que deje de tener miedo?”, prueba con: <span class="frase">“¿Cómo está viviendo mi hijo todo esto y qué puede necesitar de mí?”</span></p>
-          </div>
+          <div class="say"><div class="say-tag">🔁 Cambia la pregunta</div><p>En vez de “¿Cómo hago para que deje de tener miedo?”, prueba con: <span class="frase">“¿Cómo está viviendo mi hijo todo esto y qué puede necesitar de mí?”</span></p></div>
         </div></div>
       </div>
 
-      <!-- 2 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">2</span>
-          <span class="step-titles"><span class="step-kicker">Abrir la puerta</span><span class="step-title">¿Hablamos de lo que pasó?</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🚪</span><span class="step-titles"><span class="step-kicker">2 · Abrir la puerta</span><span class="step-title">¿Hablamos de lo que pasó?</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Los días posteriores pueden ser un buen momento para volver a lo ocurrido. Pero volver no significa interrogar.</p>
           <div class="duo">
-            <div class="softcard rose">
-              <h3>Evita una cadena de preguntas</h3>
+            <div class="softcard amber">
+              <h3>🚫 Evita una cadena de preguntas</h3>
               <p>“¿Te dio miedo?” · “¿Pensaste que nos íbamos a morir?” · “¿Todavía estás asustado?” · “¿Seguro estás bien?”</p>
               <p>Tantas preguntas ponen más atención sobre algo que el niño apenas intenta organizar.</p>
             </div>
-            <div class="softcard gold">
-              <h3>Puedes probar con</h3>
+            <div class="softcard blue">
+              <h3>✅ Puedes probar con</h3>
               <p>“Ayer pasaron muchas cosas. ¿Hay algo de lo que pasó que todavía estés pensando?”</p>
               <p>“¿Qué recuerdas?” · “Cuéntame más.”</p>
               <p>“Si no quieres hablar ahora, está bien. Cuando quieras podemos volver.”</p>
             </div>
           </div>
-          <div class="banner"><strong>Protege su mente de una emergencia repetida en pantalla.</strong> Evita que vea una y otra vez videos o imágenes fuertes, y cuida las conversaciones adultas que escucha: puede completar lo que no entiende con algo aún más aterrador. Si vio algo, no lo regañes; pregunta qué entendió y corrige con información breve.</div>
-          <div class="say">
-            <div class="say-tag">Puedes decir</div>
-            <p>“Viste una imagen muy fuerte. Eso ocurrió en un lugar específico. <span class="frase">Ahora vamos a revisar información confiable y yo te contaré lo que necesites saber.</span>”</p>
-          </div>
+          <div class="banner">📵 <strong>Protege su mente de una emergencia repetida en pantalla.</strong> Evita que vea una y otra vez videos o imágenes fuertes, y cuida las conversaciones adultas que escucha: puede completar lo que no entiende con algo aún más aterrador. Si vio algo, no lo regañes; pregunta qué entendió y corrige con información breve.</div>
+          <div class="say"><div class="say-tag">💬 Puedes decir</div><p>“Viste una imagen muy fuerte. Eso ocurrió en un lugar específico. <span class="frase">Ahora vamos a revisar información confiable y yo te contaré lo que necesites saber.</span>”</p></div>
         </div></div>
       </div>
 
-      <!-- 3 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">3</span>
-          <span class="step-titles"><span class="step-kicker">Validar</span><span class="step-title">Validar no siempre se ve igual</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">💗</span><span class="step-titles"><span class="step-kicker">3 · Validar</span><span class="step-title">Validar no siempre se ve igual</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>A algunas niñas y niños les ayuda que pongamos palabras. A otros, hablar directo de la emoción puede hacerlos sentir más expuestos.</p>
           <div class="duo">
-            <div class="softcard rose">
-              <h3>Validación directa</h3>
+            <div class="softcard blue">
+              <h3>🎯 Validación directa</h3>
               <p>“Eso te asustó mucho.” · “No esperabas que algo así fuera a pasar.” · “Veo que todavía estás pensando en eso.”</p>
               <p>Si no sabes qué sintió: “Me pregunto si eso te asustó o te confundió.”</p>
             </div>
-            <div class="softcard gold">
-              <h3>Validación indirecta</h3>
+            <div class="softcard amber">
+              <h3>🌿 Validación indirecta</h3>
               <p>“Cuando pasan cosas inesperadas, las personas podemos sentir muchas cosas distintas.”</p>
               <p>“Hay niños que necesitan preguntar mucho y otros que necesitan más tiempo.”</p>
               <p>“Podemos hablar de esto cuando quieras.”</p>
             </div>
           </div>
-          <div class="say">
-            <div class="say-tag">Validar no es quitar ni agrandar</div>
-            <p>En vez de “No pasó nada” o “Tienes que ser valiente”: <span class="frase">“Ya terminó el movimiento. Ahora estamos juntos. Si tu cuerpo todavía se siente asustado, me puedo quedar contigo.”</span></p>
-          </div>
+          <div class="say"><div class="say-tag">⚖️ Validar no es quitar ni agrandar</div><p>En vez de “No pasó nada” o “Tienes que ser valiente”: <span class="frase">“Ya terminó el movimiento. Ahora estamos juntos. Si tu cuerpo todavía se siente asustado, me puedo quedar contigo.”</span></p></div>
           <p class="closing" style="text-align:left;margin-top:14px">No prometas lo que no puedes saber. La seguridad también se construye cuando un adulto dice la verdad con calma y se mantiene disponible.</p>
         </div></div>
       </div>
 
-      <!-- 4 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">4</span>
-          <span class="step-titles"><span class="step-kicker">Organizar</span><span class="step-title">Volver a la historia puede ayudar a ordenarla</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🧩</span><span class="step-titles"><span class="step-kicker">4 · Organizar</span><span class="step-title">Volver a la historia puede ayudar a ordenarla</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Una experiencia fuerte puede quedar como momentos sueltos: el ruido, una cara, salir rápido, algo que se cayó. Poner eso en orden ayuda.</p>
-          <div class="banner"><strong>Antes de hacer esta actividad:</strong> invítala solo cuando el niño esté tranquilo y muestre disposición. No tiene que completarla ni repetirla. Si notas que se activa más, pausa y vuelve a la conexión, el juego o la rutina.</div>
-          <p class="mini-h">Así viví lo que pasó · puede hablar, dibujar o escribir</p>
+          <div class="banner">⏳ <strong>Antes de hacer esta actividad:</strong> invítala solo cuando el niño esté tranquilo y muestre disposición. No tiene que completarla ni repetirla. Si notas que se activa más, pausa y vuelve a la conexión, el juego o la rutina.</div>
+          <p class="mini-h">📝 Así viví lo que pasó · puede hablar, dibujar o escribir</p>
           <ul class="dots">
             <li><strong>¿Qué recuerdas?</strong> Antes, durante y después.</li>
             <li><strong>¿Qué pasó por dentro?</strong> Una emoción (miedo, sorpresa, enojo, tristeza, confusión, calma…) o una sensación del cuerpo (corazón rápido, barriga apretada, piernas inquietas, ganas de llorar…).</li>
             <li><strong>¿Qué o quién te ayudó?</strong></li>
             <li><strong>Todavía quiero saber…</strong></li>
           </ul>
-          <div class="say">
-            <div class="say-tag">Puedes responder</div>
-            <p>“No sé la respuesta, pero podemos buscarla” o <span class="frase">“Voy a averiguarlo y después volvemos a hablar.”</span> Tus hijos no necesitan que sepas absolutamente todo.</p>
-          </div>
+          <div class="say"><div class="say-tag">💬 Puedes responder</div><p>“No sé la respuesta, pero podemos buscarla” o <span class="frase">“Voy a averiguarlo y después volvemos a hablar.”</span> Tus hijos no necesitan que sepas absolutamente todo.</p></div>
         </div></div>
       </div>
 
-      <!-- 5 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">5</span>
-          <span class="step-titles"><span class="step-kicker">Usar lo indirecto</span><span class="step-title">Si hablar directo no le funciona, cuéntale otra historia</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🦖</span><span class="step-titles"><span class="step-kicker">5 · Usar lo indirecto</span><span class="step-title">Si hablar directo no le funciona, cuéntale otra historia</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>A veces un personaje, el juego o un dibujo permiten acercarse a una experiencia sin poner al niño directamente en el centro.</p>
-          <div class="banner"><strong>Una precaución importante:</strong> incluye solo preocupaciones que el niño ya haya expresado. Una historia no es para sugerirle nuevos miedos ni para comprobar si está “traumatizado”.</div>
-          <div class="story">“Había una vez un dinosaurio que estaba desayunando con su familia cuando, de repente, sintió que todo alrededor comenzó a moverse. Miró a los adultos y vio que empezaron a hacer cosas muy rápido. Cuando todo terminó volvió a jugar. Más tarde quiso entender mejor lo que había pasado. A veces quería preguntar y a veces no. Su mamá le dijo que podían volver a hablar todas las veces que necesitara.”</div>
+          <div class="banner">⚠️ <strong>Una precaución importante:</strong> incluye solo preocupaciones que el niño ya haya expresado. Una historia no es para sugerirle nuevos miedos ni para comprobar si está “traumatizado”.</div>
+          <div class="story">🦕 “Había una vez un dinosaurio que estaba desayunando con su familia cuando, de repente, sintió que todo alrededor comenzó a moverse. Miró a los adultos y vio que empezaron a hacer cosas muy rápido. Cuando todo terminó volvió a jugar. Más tarde quiso entender mejor lo que había pasado. A veces quería preguntar y a veces no. Su mamá le dijo que podían volver a hablar todas las veces que necesitara.”</div>
           <p>Y ahí puedes parar. No necesita una moraleja. Si quiere seguir, pregunta:</p>
           <ul class="dots">
             <li>¿Qué crees que estaba pensando el dinosaurio?</li>
@@ -394,13 +346,8 @@
         </div></div>
       </div>
 
-      <!-- 6 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">6</span>
-          <span class="step-titles"><span class="step-kicker">Responder a la incertidumbre</span><span class="step-title">¿Y si vuelve a pasar?</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🌀</span><span class="step-titles"><span class="step-kicker">6 · Responder a la incertidumbre</span><span class="step-title">¿Y si vuelve a pasar?</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Puede que una pregunta regrese una, dos o diez veces. A veces no necesita una explicación larga, sino volver a una respuesta sencilla.</p>
           <div class="flow">
@@ -409,49 +356,33 @@
             <div class="flow-item"><span class="flow-n">3</span><div><b>Lleva la seguridad hacia los adultos.</b><p>“Lo que sí sé es que los adultos estamos pendientes, revisamos información confiable y seguimos las indicaciones.”</p></div></div>
             <div class="flow-item"><span class="flow-n">4</span><div><b>Deja la puerta abierta.</b><p>“Si vuelves a pensar en esto, puedes venir a preguntarme.”</p></div></div>
           </div>
-          <div class="say">
-            <div class="say-tag">Un compromiso de cuidado</div>
-            <p><span class="frase">“Mi trabajo es cuidarte, informarme y tomar decisiones de seguridad. Tu trabajo no es vigilar. Si vuelve a pasar, quédate cerca de mí y sigue mi voz.”</span></p>
-          </div>
+          <div class="say"><div class="say-tag">🛡️ Un compromiso de cuidado</div><p><span class="frase">“Mi trabajo es cuidarte, informarme y tomar decisiones de seguridad. Tu trabajo no es vigilar. Si vuelve a pasar, quédate cerca de mí y sigue mi voz.”</span></p></div>
           <p class="closing" style="text-align:left">La seguridad no siempre viene de tener todas las respuestas. A veces viene de saber: “Cuando algo me preocupa, tengo a quién volver.”</p>
         </div></div>
       </div>
 
-      <!-- 7 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">7</span>
-          <span class="step-titles"><span class="step-kicker">Volver al cuerpo</span><span class="step-title">Cuando el miedo reaparece, conecta antes de usar una herramienta</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🌬️</span><span class="step-titles"><span class="step-kicker">7 · Volver al cuerpo</span><span class="step-title">Cuando el miedo reaparece, conecta antes de usar una herramienta</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Una herramienta no debe convertirse en “haz esto para que dejes de sentir”. Primero acércate, observa y ofrece hacer algo juntos.</p>
-          <div class="say">
-            <div class="say-tag">Puedes empezar así</div>
-            <p>“Veo que tu cuerpo volvió a sentirse asustado. Estoy aquí. <span class="frase">¿Quieres que hagamos algo juntos o prefieres que me quede cerquita?</span>”</p>
-          </div>
+          <div class="say"><div class="say-tag">💬 Puedes empezar así</div><p>“Veo que tu cuerpo volvió a sentirse asustado. Estoy aquí. <span class="frase">¿Quieres que hagamos algo juntos o prefieres que me quede cerquita?</span>”</p></div>
           <div class="flow">
             <div class="flow-item"><span class="flow-n">1</span><div><b>Orientarse al ahora.</b><p>Apoyen los pies, miren alrededor y nombren tres cosas que ven: “El movimiento terminó. Estamos en ___. Estamos juntos.”</p></div></div>
             <div class="flow-item"><span class="flow-n">2</span><div><b>Cercanía o movimiento.</b><p>Un abrazo firme, sentarse en tu regazo, empujar una pared, caminar, sacudir brazos, dibujar o tomar agua. No todos los cuerpos se calman igual.</p></div></div>
             <div class="flow-item"><span class="flow-n">3</span><div><b>Respiración S.T.A.R.</b><p>Muéstrala con tu cuerpo: sonríe suavemente, toma aire por la nariz y suéltalo despacio aflojando el cuerpo. Repitan dos o tres veces, solo si le resulta cómodo.</p></div></div>
             <div class="flow-item"><span class="flow-n">4</span><div><b>Volver a la conexión.</b><p>Después no preguntes “¿Ya se te quitó?”. Sigan con un cuento, un juego tranquilo o la rutina del momento.</p></div></div>
           </div>
-          <div class="banner"><strong>Si respirar no le ayuda,</strong> no insistas. Algunos niños necesitan primero movimiento, contacto, silencio o mirar algo conocido. La herramienta adecuada es la que le ayuda a organizarse sin sentirse obligado.</div>
+          <div class="banner">🤲 <strong>Si respirar no le ayuda,</strong> no insistas. Algunos niños necesitan primero movimiento, contacto, silencio o mirar algo conocido. La herramienta adecuada es la que le ayuda a organizarse sin sentirse obligado.</div>
         </div></div>
       </div>
 
-      <!-- 8 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">8</span>
-          <span class="step-titles"><span class="step-kicker">Recuperar predictibilidad</span><span class="step-title">Un lugar para volver a la calma y una vida que sigue</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🛋️</span><span class="step-titles"><span class="step-kicker">8 · Recuperar predictibilidad</span><span class="step-title">Un lugar para volver a la calma y una vida que sigue</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>En casa puede haber un rincón sencillo para acompañar al cuerpo. Nunca un castigo ni un lugar al que se manda al niño solo.</p>
           <div class="duo">
-            <div class="softcard rose">
-              <h3>Pueden prepararlo con</h3>
+            <div class="softcard blue">
+              <h3>🧺 Pueden prepararlo con</h3>
               <ul class="check">
                 <li><span class="box"></span><span class="txt">Una manta o cojín.</span></li>
                 <li><span class="box"></span><span class="txt">Un objeto conocido.</span></li>
@@ -459,29 +390,21 @@
                 <li><span class="box"></span><span class="txt">Papel y colores.</span></li>
               </ul>
             </div>
-            <div class="softcard gold">
-              <h3>Cómo ofrecerlo</h3>
+            <div class="softcard amber">
+              <h3>🤗 Cómo ofrecerlo</h3>
               <p>“¿Quieres sentarte conmigo en el rincón o prefieres mi regazo?”</p>
               <p>El adulto puede quedarse. Si el niño no quiere ir, no pasa nada. No es “vete a calmarte”; es “vamos a encontrar juntos lo que tu cuerpo necesita”.</p>
             </div>
           </div>
-          <div class="banner"><strong>Volver a lo conocido también da seguridad.</strong> Retoma, dentro de lo posible, comida, baño, cuento, sueño, juego y colegio. Anticipa lo que viene (“Ahora desayunamos y después…”) y ofrece decisiones pequeñas (“¿Este cuento o este otro?”). A veces volver a lo conocido le dice al cuerpo: “Seguimos aquí.”</div>
+          <div class="banner">🔄 <strong>Volver a lo conocido también da seguridad.</strong> Retoma, dentro de lo posible, comida, baño, cuento, sueño, juego y colegio. Anticipa lo que viene (“Ahora desayunamos y después…”) y ofrece decisiones pequeñas (“¿Este cuento o este otro?”). A veces volver a lo conocido le dice al cuerpo: “Seguimos aquí.”</div>
         </div></div>
       </div>
 
-      <!-- 9 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">9</span>
-          <span class="step-titles"><span class="step-kicker">Recuperar agencia</span><span class="step-title">De la preocupación a una acción posible</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">🌱</span><span class="step-titles"><span class="step-kicker">9 · Recuperar agencia</span><span class="step-title">De la preocupación a una acción posible</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Tus hijos pueden saber que otras familias viven situaciones más difíciles. Aquí hay una oportunidad de darles un lugar dentro de su comunidad, sin hacerlos responsables de resolver la emergencia.</p>
-          <div class="say">
-            <div class="say-tag">Una reunión familiar muy sencilla</div>
-            <p><span class="frase">“Hay familias en nuestra ciudad que necesitan ayuda. Nosotros no podemos resolver todo, pero sí podemos pensar en algo pequeño y real que podamos hacer juntos.”</span></p>
-          </div>
+          <div class="say"><div class="say-tag">👨‍👩‍👧 Una reunión familiar muy sencilla</div><p><span class="frase">“Hay familias en nuestra ciudad que necesitan ayuda. Nosotros no podemos resolver todo, pero sí podemos pensar en algo pequeño y real que podamos hacer juntos.”</span></p></div>
           <div class="flow">
             <div class="flow-item"><span class="flow-n">1</span><div><b>¿Qué has entendido de lo que está pasando?</b><p>Escucha primero. Así sabrás qué información recibió y qué está imaginando.</p></div></div>
             <div class="flow-item"><span class="flow-n">2</span><div><b>¿Qué crees que pueden necesitar otras familias?</b><p>Deja que proponga. No corrijas de inmediato.</p></div></div>
@@ -491,13 +414,8 @@
         </div></div>
       </div>
 
-      <!-- 10 -->
       <div class="step">
-        <button class="step-head">
-          <span class="step-num">10</span>
-          <span class="step-titles"><span class="step-kicker">Un ritual de conexión</span><span class="step-title">Te deseo lo mejor</span></span>
-          <span class="step-chev">▾</span>
-        </button>
+        <button class="step-head"><span class="step-num">✨</span><span class="step-titles"><span class="step-kicker">10 · Un ritual de conexión</span><span class="step-title">Te deseo lo mejor</span></span><span class="step-chev">▾</span></button>
         <div class="step-body"><div class="step-body-inner">
           <p>Un ritual simple para ayudar a las niñas y niños a sentir conexión cuando alguien atraviesa una situación difícil. No borra el miedo ni reemplaza la ayuda real, pero transforma un poco la sensación de impotencia.</p>
           <div class="flow">
@@ -506,11 +424,8 @@
             <div class="flow-item"><span class="flow-n">3</span><div><b>Tomen aire despacio.</b><p>Imaginen que reúnen cuidado, esperanza y cariño en el corazón.</p></div></div>
             <div class="flow-item"><span class="flow-n">4</span><div><b>Suelten el aire y digan.</b><p>“Te deseo lo mejor. Que recibas ayuda, cuidado y compañía.”</p></div></div>
           </div>
-          <div class="say">
-            <div class="say-tag">Puedes cerrar así</div>
-            <p><span class="frase">“No podemos controlar todo lo que pasa, pero sí podemos acompañarnos y participar en pequeñas acciones de cuidado.”</span></p>
-          </div>
-          <p style="font-size:14px;color:var(--ink-soft)">Si el ritual aumenta la preocupación, páralo. Puede bastar con decirle: “Yo te deseo bienestar y me quedo contigo.”</p>
+          <div class="say"><div class="say-tag">💫 Puedes cerrar así</div><p><span class="frase">“No podemos controlar todo lo que pasa, pero sí podemos acompañarnos y participar en pequeñas acciones de cuidado.”</span></p></div>
+          <p style="font-size:13.5px;color:var(--muted)">Si el ritual aumenta la preocupación, páralo. Puede bastar con decirle: “Yo te deseo bienestar y me quedo contigo.”</p>
         </div></div>
       </div>
 
@@ -519,14 +434,13 @@
 
   <div class="divider"></div>
 
-  <!-- CUÁNDO PEDIR AYUDA -->
   <section id="ayuda">
-    <div class="eyebrow sec-eyebrow">Saber cuándo buscar apoyo</div>
+    <div class="eyebrow">🩺 Saber cuándo buscar apoyo</div>
     <h2 class="sec-title">¿Cuándo pedir más ayuda?</h2>
     <p class="sec-intro">Una experiencia fuerte puede seguir apareciendo un tiempo en preguntas, emociones, el cuerpo o la conducta. Eso no significa por sí solo que exista un diagnóstico. Pero hay señales que sí conviene atender.</p>
     <div class="duo">
-      <div class="softcard gold">
-        <h3>Busca orientación profesional si…</h3>
+      <div class="softcard amber">
+        <h3>🧑‍⚕️ Busca orientación profesional si…</h3>
         <ul class="dots">
           <li>las reacciones son muy intensas, empeoran o no muestran alivio;</li>
           <li>interfieren mucho con sueño, alimentación, colegio, juego o relaciones;</li>
@@ -535,8 +449,8 @@
         </ul>
         <p style="margin-top:10px">Consulta con pediatría, medicina familiar o un profesional en salud mental infantil.</p>
       </div>
-      <div class="softcard rose">
-        <h3>Busca ayuda inmediata si existe…</h3>
+      <div class="softcard blue" style="border-color:rgba(255,92,107,.45)">
+        <h3 style="color:var(--alert)">🚨 Busca ayuda inmediata si existe…</h3>
         <ul class="dots">
           <li>riesgo de que el niño se lastime o lastime a alguien;</li>
           <li>expresiones de querer morir o hacerse daño;</li>
@@ -551,35 +465,18 @@
 
   <div class="divider"></div>
 
-  <!-- RECURSOS -->
   <section id="recursos">
-    <div class="eyebrow sec-eyebrow">Canales confiables</div>
+    <div class="eyebrow">📞 Canales confiables</div>
     <h2 class="sec-title">Líneas de apoyo y protección</h2>
     <p class="sec-intro">Si un enlace cambia, busca el nombre exacto de la entidad y confirma que el dominio sea oficial.</p>
     <div class="res-grid">
-      <div class="res">
-        <div class="res-t">Emergencias</div>
-        <div class="res-n">123</div>
-        <p>Para situaciones inmediatas de seguridad, rescate o urgencia médica.</p>
-      </div>
-      <div class="res">
-        <div class="res-t">Protección de niñas, niños y adolescentes</div>
-        <div class="res-n">ICBF · 141</div>
-        <p>Gratuita y disponible 24 horas.</p>
-      </div>
-      <div class="res">
-        <div class="res-t">Salud mental · teleorientación</div>
-        <div class="res-n">Línea 106</div>
-        <p>Línea nacional de teleorientación en salud mental y directorio territorial del Ministerio de Salud.</p>
-      </div>
-      <div class="res">
-        <div class="res-t">Orientación para familias</div>
-        <div class="res-n">UNICEF</div>
-        <p>Cómo acompañar a los niños después de un terremoto. Busca el recurso oficial de UNICEF.</p>
-      </div>
+      <div class="res"><div class="res-t">🚑 Emergencias</div><div class="res-n">123</div><p>Para situaciones inmediatas de seguridad, rescate o urgencia médica.</p></div>
+      <div class="res"><div class="res-t">🧒 Protección de niñas, niños y adolescentes</div><div class="res-n">ICBF · 141</div><p>Gratuita y disponible 24 horas.</p></div>
+      <div class="res"><div class="res-t">🧠 Salud mental · teleorientación</div><div class="res-n">Línea 106</div><p>Línea nacional de teleorientación en salud mental y directorio territorial del Ministerio de Salud.</p></div>
+      <div class="res"><div class="res-t">👨‍👩‍👧 Orientación para familias</div><div class="res-n">UNICEF</div><p>Cómo acompañar a los niños después de un terremoto. Busca el recurso oficial de UNICEF.</p></div>
     </div>
     <div class="callout" style="margin-top:20px">
-      <div class="serif">¿Quieres apoyar o encontrar ayuda por el terremoto?</div>
+      <div class="big">🤝 ¿Quieres apoyar o encontrar ayuda por el terremoto?</div>
       <p>Puntos de trabajo, albergues, apoyo psicológico voluntario y el directorio de ayuda para damnificados están en la página de coordinación.</p>
       <a class="btn btn-primary" href="index.html" style="margin-top:16px">Ir a la página de ayuda del terremoto →</a>
     </div>
@@ -589,9 +486,9 @@
 
   <section>
     <div class="callout">
-      <div class="serif">Para cerrar</div>
+      <div class="big">🌙 Para cerrar</div>
       <p>No necesitamos conseguir que nuestros hijos reaccionen de una manera específica. Algunos hablarán, otros preguntarán, otros jugarán y otros necesitarán tiempo. Lo importante es que sepan que hay un adulto disponible para escucharlos, acompañarlos y ayudarles a poner un poquito de orden cuando algo se siente demasiado grande o confuso.</p>
-      <p style="margin-top:14px" class="serif" >¿Qué necesita de mí ahora?</p>
+      <p style="margin-top:14px;color:var(--star-light);font-weight:800;font-size:17px">¿Qué necesita de mí ahora? 💙</p>
     </div>
   </section>
 
@@ -599,8 +496,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="brand">Con Sof<span class="dot">i</span></div>
-    <p>Hecho con cariño para las familias de Cali y el Valle.</p>
+    <p style="color:var(--white);font-weight:800;font-size:15px;margin-bottom:8px">Hecho con cariño para las familias de Cali y el Valle 💙</p>
     <p class="disclaimer">Recurso educativo. No reemplaza las indicaciones de emergencia ni la atención profesional individual. Basado en principios de acompañamiento y en herramientas de Conscious Discipline (S.T.A.R., Safe Place, Wish Well). En una emergencia inmediata, llama al 123.</p>
     <p style="margin-top:14px"><a href="index.html">← Volver a la página de ayuda del terremoto</a></p>
   </div>
@@ -609,18 +505,28 @@
 <div class="floating"><a href="#ayuda">💗 ¿Cuándo pedir ayuda?</a></div>
 
 <script>
+  // Campo de estrellas
+  (function(){
+    var s = document.getElementById('stars'); if(!s) return;
+    var html = '';
+    for(var i=0;i<46;i++){
+      var size=(Math.random()*2+1).toFixed(1);
+      var top=(Math.random()*100).toFixed(2);
+      var left=(Math.random()*100).toFixed(2);
+      var delay=(Math.random()*3).toFixed(2);
+      html += '<i style="width:'+size+'px;height:'+size+'px;top:'+top+'%;left:'+left+'%;animation-delay:'+delay+'s"></i>';
+    }
+    s.innerHTML = html;
+  })();
   // Acordeones
   document.querySelectorAll('.step-head').forEach(function(btn){
     btn.addEventListener('click', function(){
       var step = btn.closest('.step');
       var body = step.querySelector('.step-body');
-      var open = step.classList.contains('open');
-      if(open){
-        body.style.maxHeight = null;
-        step.classList.remove('open');
+      if(step.classList.contains('open')){
+        body.style.maxHeight = null; step.classList.remove('open');
       } else {
-        step.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
+        step.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px';
       }
     });
   });
@@ -628,7 +534,6 @@
   document.querySelectorAll('.check li').forEach(function(li){
     li.addEventListener('click', function(){
       li.classList.toggle('on');
-      // recalcular altura del acordeón por si cambia
       var body = li.closest('.step-body');
       if(body && body.style.maxHeight){ body.style.maxHeight = body.scrollHeight + 'px'; }
     });
