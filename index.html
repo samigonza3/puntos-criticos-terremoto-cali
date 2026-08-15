@@ -890,7 +890,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "14 de agosto de 2026, 3:00 p. m.";
+const ACTUALIZADO = "14 de agosto de 2026, 3:30 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1152,7 +1152,7 @@ const NECESIDADES_GENERALES = [
   "Ropa en buen estado"
 ];
 
-const ALERTA = "En todos los puntos donde se están removiendo escombros y hay personas con vida, solo se está dejando pasar a quienes tengan guantes, casco y zapatos de construcción, idealmente con certificación en uso de herramientas. Confirma antes de desplazarte; las condiciones cambian muy rápido.";
+const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
 const CIFRAS_FUENTE = "Cifras oficiales · Cali · Reporte #009 · 14/08/2026, 11:30 a. m.";
@@ -1359,7 +1359,11 @@ const ALTA_PRIORIDAD = [
   { critico:true, fecha:"14 ago · 9:10 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Cada día necesitan hidratación, electrolitos y hielo. Si vas a llevar comida, confirma antes a dónde enviarla." },
   { critico:true, fecha:"14 ago · 8:45 a. m.", punto:"Prioridad: municipios y veredas del Valle", nota:"Riofrío muy golpeado y veredas de baja conectividad que lo perdieron todo. Sumamos a Buga.", link:"#municipios", linkTexto:"Ver municipios" },
   { critico:true, fecha:"14 ago · 12:20 p. m.", punto:"⚠ Caracterización RUFE · cuídate de estafas", nota:"La caracterización de damnificados es en territorio y con formato físico. Nunca por QR, links ni pagos. Verifica en canales oficiales.", link:"https://www.cali.gov.co/boletines/publicaciones/193666/alcaldia-de-cali-inicia-caracterizacion-de-familias-damnificadas-por-el-sismo-mediante-el-registro-unico-de-familias-en-emergencia/", linkTexto:"Boletín RUFE" },
+  { critico:true, fecha:"14 ago · 8:55 a. m.", punto:"🔴 La Alcaldía está por cerrar la mayoría de los puntos de trabajo", nota:"Empezaría a usarse solo maquinaria para la remoción de escombros y de cuerpos sin vida. En el HUV y otros puntos hay plantones de las familias de personas aún bajo los escombros. Atiende las indicaciones de los organismos de socorro." },
 
+  { fecha:"14 ago · 8:55 a. m.", punto:"Estadio Pascual Guerrero · sin daños estructurales", nota:"La Secretaría del Deporte informó que el Pascual Guerrero no tiene daños estructurales con riesgo de colapso; está habilitado parcialmente y requiere adecuaciones (luces y sistema hidrosanitario). La tribuna Occidental tendrá peritaje especializado.", link:"https://www.cali.gov.co/boletines/publicaciones/193690/comunicado-a-la-opinion-publica/", linkTexto:"Comunicado Secretaría del Deporte" },
+  { fecha:"14 ago · 8:55 a. m.", punto:"Respaldo legal · 7 decretos de la emergencia", nota:"Gestión Jurídica expidió 7 decretos: calamidad pública, urgencia manifiesta, toque de queda, pico y placa solidario, suspensión de términos y tres días de duelo distrital.", link:"https://www.cali.gov.co/boletines/publicaciones/193689/respaldo-y-soporte-legal-ante-la-emergencia-gestion-juridica-ha-expedido-siete-decretos-clave-y-mantiene-atencion-continua-tras-el-sismo/", linkTexto:"Boletín Gestión Jurídica" },
+  { fecha:"14 ago · 8:55 a. m.", punto:"Trámites de la Alcaldía por canales virtuales", nota:"Los Centros CALI atienden virtualmente (12 con atención parcial: CALI 3, 4, 6, 8, 9, 11, 12, 13, 17, 20, 21 y 22). Los CALI 5 y 18 son albergues/acopio. Radica en www.cali.gov.co; la ventanilla del edificio Aristi abre el 18 de agosto.", link:"https://www.cali.gov.co/boletines/publicaciones/193679/estamos-de-tu-lado-los-tramites-servicios-y-estrategias-de-participacion-ciudadana-estan-disponibles-por-canales-virtuales/", linkTexto:"Boletín trámites virtuales" },
   { fecha:"14 ago · 11:50 a. m.", punto:"Salud Pública descarta epidemias", nota:"No hay alerta epidemiológica. Limpia con agua (no en seco), usa tapabocas cerca de escombros y consume agua de fuentes seguras.", link:"https://www.cali.gov.co/boletines/publicaciones/193665/salud-publica-descarta-alertas-epidemiologicas-y-aclara-protocolo-de-manejo-de-cuerpos-tras-el-terremoto/", linkTexto:"Boletín Salud Pública" },
   { fecha:"14 ago · 11:30 a. m.", punto:"Misión médica de Antioquia en los albergues", nota:"40+ profesionales atienden en la Unidad Deportiva Jaime Aparicio (albergue de hockey). El Diamante de Béisbol Miguel Chávez funciona como centro de acopio.", link:"https://www.cali.gov.co/boletines/publicaciones/193668/una-mision-medica-de-40-personas-llego-desde-antioquia-a-la-unidad-panamericana-para-apoyar-a-los-damnificados-del-terremoto/", linkTexto:"Boletín misión médica" },
   { fecha:"14 ago · 9:05 a. m.", punto:"Cali ya está cubierto · renovar lo que se gasta rápido", nota:"Renovar guantes industriales, extensiones, linternas, cascos e hidratación." },
@@ -1680,14 +1684,6 @@ function App(){
         </div>
       </header>
 
-      <div className="seccion" id="mapa-valle">
-        <div className="sec-head">
-          <h2>🗺️ Puntos críticos · Norte del Valle</h2>
-          <p className="sec-sub">Municipios del norte y centro del Valle afectados por el sismo. En <span style={{color:"var(--alert)",fontWeight:800}}>rojo</span> los que priorizamos como urgentes; en azul, los demás en seguimiento. Toca un punto para ver qué necesita. Ubicaciones aproximadas: confirma antes de desplazarte.</p>
-        </div>
-        <Mapa puntos={MUNICIPIOS_MAPA} />
-      </div>
-
       {ALTA_PRIORIDAD.length ? (
         <div className="priority">
           <div className="tag">
@@ -1728,6 +1724,48 @@ function App(){
           ) : null}
         </div>
       ) : null}
+
+      <div className="seccion" id="mapa-valle">
+        <div className="sec-head">
+          <h2>🗺️ Puntos críticos · Norte del Valle</h2>
+          <p className="sec-sub">Municipios del norte y centro del Valle afectados por el sismo. En <span style={{color:"var(--alert)",fontWeight:800}}>rojo</span> los que priorizamos como urgentes; en azul, los demás en seguimiento. Toca un punto para ver qué necesita. Ubicaciones aproximadas: confirma antes de desplazarte.</p>
+        </div>
+        <Mapa puntos={MUNICIPIOS_MAPA} />
+      </div>
+
+      <div className="seccion" id="municipios">
+        <div className="sec-head">
+          <h2>Municipios y veredas que piden ayuda</h2>
+          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias. Demos visibilidad a las <strong>veredas de baja conectividad</strong> que casi nadie conoce y que lo perdieron todo.</p>
+          <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
+        </div>
+        <div className="resc-nec" style={{marginBottom:"14px"}}>
+          <div className="rn-tag">Necesidades urgentes para reconstrucción</div>
+          <div className="needs">
+            {MATERIALES_RECONSTRUCCION.map((n,i) => <span className="need" key={i}>{n}</span>)}
+          </div>
+          <p className="rn-nota">Además de agua, alimentos y abrigo, los municipios empiezan a necesitar materiales para reconstruir las viviendas afectadas.</p>
+        </div>
+        <div className="dest-list">
+          {MUNICIPIOS.map((m,i) => (
+            <div className={"dest-item" + (m.estado === "urgente" ? " urg" : "")} key={i}>
+              <div className="dest-top">
+                <span className="dest-nombre">{m.nombre}</span>
+                {m.estado === "urgente"
+                  ? <span className="badge">Urgente</span>
+                  : <span className="dest-region">{m.region}</span>}
+              </div>
+              {m.estado === "urgente" ? <div className="dest-region">{m.region}</div> : null}
+              {m.dano ? <div className="dest-dano">{m.dano}</div> : null}
+              {m.nota ? <div className="dest-nota">{m.nota}</div> : null}
+              {m.necesidades.length
+                ? <div className="cel-need">{m.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
+                : <div className="dest-porconf">Necesidad por confirmar</div>}
+              {m.contacto ? <div className="dest-contacto">Contacto: {m.contacto}</div> : null}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {CIFRAS.length ? (
         <div className="cifras">
@@ -1827,40 +1865,6 @@ function App(){
         <p>Lo ideal es <strong>no saturar las vías del Valle</strong>. Coordinemos las donaciones que se llevan a los municipios para que no todas lleguen al mismo lugar.</p>
         <p>Prioricemos la entrega de <strong>insumos y herramientas en los puntos de acopio oficial</strong>, que están siendo entregados por la Primera Dama y la Presidencia.</p>
         <p className="af-cierre">Coordinar bien la ayuda hace que llegue a más gente. Tu aporte sí hace la diferencia.</p>
-      </div>
-
-      <div className="seccion" id="municipios">
-        <div className="sec-head">
-          <h2>Municipios y veredas que piden ayuda</h2>
-          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias. Demos visibilidad a las <strong>veredas de baja conectividad</strong> que casi nadie conoce y que lo perdieron todo.</p>
-          <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
-        </div>
-        <div className="resc-nec" style={{marginBottom:"14px"}}>
-          <div className="rn-tag">Necesidades urgentes para reconstrucción</div>
-          <div className="needs">
-            {MATERIALES_RECONSTRUCCION.map((n,i) => <span className="need" key={i}>{n}</span>)}
-          </div>
-          <p className="rn-nota">Además de agua, alimentos y abrigo, los municipios empiezan a necesitar materiales para reconstruir las viviendas afectadas.</p>
-        </div>
-        <div className="dest-list">
-          {MUNICIPIOS.map((m,i) => (
-            <div className={"dest-item" + (m.estado === "urgente" ? " urg" : "")} key={i}>
-              <div className="dest-top">
-                <span className="dest-nombre">{m.nombre}</span>
-                {m.estado === "urgente"
-                  ? <span className="badge">Urgente</span>
-                  : <span className="dest-region">{m.region}</span>}
-              </div>
-              {m.estado === "urgente" ? <div className="dest-region">{m.region}</div> : null}
-              {m.dano ? <div className="dest-dano">{m.dano}</div> : null}
-              {m.nota ? <div className="dest-nota">{m.nota}</div> : null}
-              {m.necesidades.length
-                ? <div className="cel-need">{m.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                : <div className="dest-porconf">Necesidad por confirmar</div>}
-              {m.contacto ? <div className="dest-contacto">Contacto: {m.contacto}</div> : null}
-            </div>
-          ))}
-        </div>
       </div>
 
       {LADERAS.length ? (
