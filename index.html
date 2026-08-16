@@ -891,7 +891,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "16 de agosto de 2026, 8:45 a. m.";
+const ACTUALIZADO = "16 de agosto de 2026, 9:00 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1718,6 +1718,16 @@ function App(){
         </div>
       ) : null}
 
+      <a href="guia-ninos.html" className="guia-promo" id="guia-ninos">
+        <div className="gp-ico">🧸</div>
+        <div className="gp-body">
+          <div className="gp-tag">Guía gratuita para familias</div>
+          <div className="gp-title">¿Tus hijos siguen nerviosos o con comportamientos difíciles?</div>
+          <div className="gp-sub">Herramientas suaves y frases concretas para acompañar a niñas y niños después del terremoto: hablar sin presionar, volver al cuerpo y recuperar seguridad.</div>
+        </div>
+        <div className="gp-cta">Abrir guía →</div>
+      </a>
+
       <div className="seccion" id="mapa-valle">
         <div className="sec-head">
           <h2>🗺️ Puntos críticos · Norte del Valle</h2>
@@ -1793,16 +1803,6 @@ function App(){
         </div>
       ) : null}
 
-      <a href="guia-ninos.html" className="guia-promo" id="guia-ninos">
-        <div className="gp-ico">🧸</div>
-        <div className="gp-body">
-          <div className="gp-tag">Guía gratuita para familias</div>
-          <div className="gp-title">¿Tus hijos siguen nerviosos o con comportamientos difíciles?</div>
-          <div className="gp-sub">Herramientas suaves y frases concretas para acompañar a niñas y niños después del terremoto: hablar sin presionar, volver al cuerpo y recuperar seguridad.</div>
-        </div>
-        <div className="gp-cta">Abrir guía →</div>
-      </a>
-
       <div className="muro" id="muro">
         <div className="muro-head">
           <div className="eyebrow">Muro de apoyo</div>
@@ -1857,19 +1857,6 @@ function App(){
         </div>
       ) : null}
 
-      <div className="alerta-fase">
-        <div className="af-tag">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
-            <path d="M12 9v4M12 17h.01"></path>
-            <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
-          </svg>
-          Actualización urgente · Coordinemos la ayuda
-        </div>
-        <p>Lo ideal es <strong>no saturar las vías del Valle</strong>. Coordinemos las donaciones que se llevan a los municipios para que no todas lleguen al mismo lugar.</p>
-        <p>Prioricemos la entrega de <strong>insumos y herramientas en los puntos de acopio oficial</strong>, que están siendo entregados por la Primera Dama y la Presidencia.</p>
-        <p className="af-cierre">Coordinar bien la ayuda hace que llegue a más gente. Tu aporte sí hace la diferencia.</p>
-      </div>
-
       {LADERAS.length ? (
         <div className="seccion" id="laderas">
           <div className="sec-head">
@@ -1893,20 +1880,10 @@ function App(){
         </div>
       ) : null}
 
-      {MEDICAMENTOS_ALBERGUES.length ? (
-        <div className="seccion" id="medicamentos">
-          <div className="sec-head">
-            <h2>Medicamentos para albergues temporales</h2>
-            <p className="sec-sub">A medida que las familias pasan más días en los albergues, empiezan a necesitarse estos medicamentos e insumos básicos. Entrégalos siempre con verificación de un profesional de salud; no se deben administrar medicamentos de prescripción sin acompañamiento médico.</p>
-          </div>
-          <div className="resc-nec">
-            <div className="rn-tag">Empiezan a necesitarse</div>
-            <div className="needs">
-              {MEDICAMENTOS_ALBERGUES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-            </div>
-          </div>
-        </div>
-      ) : null}
+      <div className="sec-head" id="recursos" style={{marginTop:"30px"}}>
+        <h2>📌 Recursos importantes</h2>
+        <p className="sec-sub">Directorio de ayuda, albergues, apoyo psicológico y jurídico gratuitos, y vías cerradas. Toca cada bloque para desplegar la información.</p>
+      </div>
 
       {DIRECTORIO_AYUDA.length ? (
         <div className="albergues directorio" id="directorio">
