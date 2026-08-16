@@ -742,18 +742,19 @@
   .guia-promo{
     display:flex;align-items:center;gap:16px;margin-top:20px;text-decoration:none;
     border-radius:20px;padding:20px 22px;
-    border:1px solid rgba(62,123,255,.45);
-    background:linear-gradient(120deg,rgba(62,123,255,.16),rgba(27,46,102,.28));
-    transition:transform .15s,border-color .15s;
+    border:1px solid rgba(255,176,32,.7);
+    background:linear-gradient(120deg,rgba(255,176,32,.24),rgba(255,92,107,.16));
+    box-shadow:0 8px 30px rgba(255,176,32,.14);
+    transition:transform .15s,border-color .15s,box-shadow .15s;
   }
-  .guia-promo:hover{transform:translateY(-2px);border-color:rgba(62,123,255,.8)}
+  .guia-promo:hover{transform:translateY(-2px);border-color:rgba(255,176,32,1);box-shadow:0 12px 38px rgba(255,176,32,.24)}
   .gp-ico{flex:none;width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;
-    font-size:26px;background:rgba(62,123,255,.16);border:1px solid rgba(127,168,255,.35)}
+    font-size:26px;background:rgba(255,176,32,.22);border:1px solid rgba(255,176,32,.5)}
   .gp-body{flex:1}
-  .gp-tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--star-light)}
+  .gp-tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
   .gp-title{font-size:16px;font-weight:800;color:var(--white);margin:3px 0 4px;line-height:1.25}
   .gp-sub{font-size:13px;color:var(--ice);line-height:1.5}
-  .gp-cta{flex:none;font-size:13.5px;font-weight:800;color:#fff;background:linear-gradient(180deg,var(--star-blue),#2E5FE0);
+  .gp-cta{flex:none;font-size:13.5px;font-weight:800;color:#1A1206;background:linear-gradient(180deg,#FFC94D,#FFB020);
     padding:10px 16px;border-radius:12px;white-space:nowrap}
   @media (max-width:640px){ .guia-promo{flex-wrap:wrap} .gp-cta{width:100%;text-align:center} }
 
@@ -890,7 +891,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "15 de agosto de 2026, 10:05 a. m.";
+const ACTUALIZADO = "16 de agosto de 2026, 8:45 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1155,28 +1156,27 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Balance oficial · Cali · corte 14/08/2026, 5:00 p. m. (repositorio de la Alcaldía de Cali)";
+const CIFRAS_FUENTE = "Reporte Oficial #011 · Alcaldía de Cali · corte 15/08/2026, 4:30 p. m.";
 const CIFRAS = [
-  { n:"111", label:"Fallecidos", tono:"alert" },
-  { n:"77", label:"Desaparecidos", tono:"alert" },
-  { n:"1.416", label:"Lesionados", tono:"" },
+  { n:"122", label:"Fallecidos", tono:"alert" },
+  { n:"111", label:"Desaparecidos", tono:"alert" },
+  { n:"1.485", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
   { n:"46", label:"Edificaciones con colapso total", tono:"" },
-  { n:"1.408", label:"Con daños estructurales", tono:"" },
-  { n:"9", label:"Puntos activos de búsqueda", tono:"" },
+  { n:"1.925", label:"Con daños estructurales", tono:"" },
+  { n:"534", label:"Edificios con orden de evacuación", tono:"alert" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
   { n:"46", label:"Colapso total", tono:"alert" },
   { n:"35", label:"Colapso parcial", tono:"" },
-  { n:"457", label:"Edificios con orden de evacuación", tono:"alert" },
-  { n:"92", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"12.817 t", label:"Escombros removidos", tono:"" },
-  { n:"998", label:"Evaluaciones de daños y necesidades", tono:"" },
-  { n:"1.800", label:"Personal activo", tono:"ok" },
-  { n:"94", label:"Animales rescatados", tono:"ok" },
-  { n:"16", label:"Animales muertos", tono:"alert" },
-  { n:"298", label:"Animales desaparecidos", tono:"" },
+  { n:"111", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"17.811 t", label:"Escombros removidos", tono:"" },
+  { n:"3.256", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
+  { n:"1.913", label:"Personal activo", tono:"ok" },
+  { n:"96", label:"Animales rescatados", tono:"ok" },
+  { n:"28", label:"Animales muertos", tono:"alert" },
+  { n:"339", label:"Animales desaparecidos", tono:"" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
@@ -1354,22 +1354,13 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
+  { critico:true, fecha:"16 ago · 8:45 a. m.", punto:"🔴 Inmuebles evacuados NO pueden ser reocupados", nota:"La Alcaldía reitera que las edificaciones evacuadas por condiciones de riesgo no pueden volver a habitarse, aunque por fuera parezcan estables. Hay 534 edificios con orden de evacuación. No regreses a un inmueble evacuado hasta que un peritaje oficial lo autorice.", link:"https://www.cali.gov.co/boletines/publicaciones/193716/alcaldia-de-cali-reitera-inmuebles-evacuados-por-condiciones-de-riesgo-no-pueden-ser-reocupados/", linkTexto:"Boletín Alcaldía" },
+  { critico:true, fecha:"16 ago · 8:45 a. m.", punto:"🎶 Olla comunitaria en Chiminangos · Federación de Salsa", nota:"Mujeres Sin Miedo Pachamama, Movimiento Rumbero, New Expression y Corposervir invitan a todos los grupos de salsa y a la comunidad a sumarse a una olla comunitaria en Chiminangos, para llevar alimento y esperanza a quienes más lo necesitan. «Bailamos en la pista, servimos fuera de ella.» Si tu grupo quiere participar o coordinar, contáctalos para sumarte." },
   { critico:true, fecha:"15 ago · 9:45 a. m.", punto:"Homecenter de Mall Plaza · suministros para donación", nota:"En el Homecenter de Mall Plaza hay suficientes suministros disponibles para donar. Está abierto; evita ir en carro." },
-  { critico:true, fecha:"15 ago · 8:55 a. m.", punto:"🔴 La Alcaldía está por cerrar la mayoría de los puntos de trabajo", nota:"Empezaría a usarse solo maquinaria para la remoción de escombros y de cuerpos sin vida. En el HUV y otros puntos hay plantones de las familias de personas aún bajo los escombros. Atiende las indicaciones de los organismos de socorro." },
-  { critico:true, fecha:"14 ago · 9:15 a. m.", punto:"🔴 El PMU amplía la ventana de vida 48 horas más · HAZ SILENCIO", nota:"Todavía hay indicios de vida. En los 9 puntos activos de búsqueda, guarda silencio y deja trabajar a los rescatistas.", link:"https://www.cali.gov.co/boletines/publicaciones/193661/palpita-la-esperanza-y-la-busqueda-de-sobrevivientes-se-intensifica-pmu-amplia-la-ventana-de-vida-por-48-horas-mas/", linkTexto:"Boletín Alcaldía" },
-  { critico:true, fecha:"14 ago · 9:10 a. m.", punto:"No dejemos que se desabastezcan los puntos de trabajo", nota:"Cada día necesitan hidratación, electrolitos y hielo. Si vas a llevar comida, confirma antes a dónde enviarla." },
-  { critico:true, fecha:"14 ago · 8:45 a. m.", punto:"Prioridad: municipios y veredas del Valle", nota:"Riofrío muy golpeado y veredas de baja conectividad que lo perdieron todo. Sumamos a Buga.", link:"#municipios", linkTexto:"Ver municipios" },
-  { critico:true, fecha:"14 ago · 12:20 p. m.", punto:"⚠ Caracterización RUFE · cuídate de estafas", nota:"La caracterización de damnificados es en territorio y con formato físico. Nunca por QR, links ni pagos. Verifica en canales oficiales.", link:"https://www.cali.gov.co/boletines/publicaciones/193666/alcaldia-de-cali-inicia-caracterizacion-de-familias-damnificadas-por-el-sismo-mediante-el-registro-unico-de-familias-en-emergencia/", linkTexto:"Boletín RUFE" },
 
   { fecha:"15 ago · 8:55 a. m.", punto:"Estadio Pascual Guerrero · sin daños estructurales", nota:"La Secretaría del Deporte informó que el Pascual Guerrero no tiene daños estructurales con riesgo de colapso; está habilitado parcialmente y requiere adecuaciones (luces y sistema hidrosanitario). La tribuna Occidental tendrá peritaje especializado.", link:"https://www.cali.gov.co/boletines/publicaciones/193690/comunicado-a-la-opinion-publica/", linkTexto:"Comunicado Secretaría del Deporte" },
   { fecha:"15 ago · 8:55 a. m.", punto:"Respaldo legal · 7 decretos de la emergencia", nota:"Gestión Jurídica expidió 7 decretos: calamidad pública, urgencia manifiesta, toque de queda, pico y placa solidario, suspensión de términos y tres días de duelo distrital.", link:"https://www.cali.gov.co/boletines/publicaciones/193689/respaldo-y-soporte-legal-ante-la-emergencia-gestion-juridica-ha-expedido-siete-decretos-clave-y-mantiene-atencion-continua-tras-el-sismo/", linkTexto:"Boletín Gestión Jurídica" },
   { fecha:"15 ago · 8:55 a. m.", punto:"Trámites de la Alcaldía por canales virtuales", nota:"Los Centros CALI atienden virtualmente (12 con atención parcial: CALI 3, 4, 6, 8, 9, 11, 12, 13, 17, 20, 21 y 22). Los CALI 5 y 18 son albergues/acopio. Radica en www.cali.gov.co; la ventanilla del edificio Aristi abre el 18 de agosto.", link:"https://www.cali.gov.co/boletines/publicaciones/193679/estamos-de-tu-lado-los-tramites-servicios-y-estrategias-de-participacion-ciudadana-estan-disponibles-por-canales-virtuales/", linkTexto:"Boletín trámites virtuales" },
-  { fecha:"14 ago · 11:50 a. m.", punto:"Salud Pública descarta epidemias", nota:"No hay alerta epidemiológica. Limpia con agua (no en seco), usa tapabocas cerca de escombros y consume agua de fuentes seguras.", link:"https://www.cali.gov.co/boletines/publicaciones/193665/salud-publica-descarta-alertas-epidemiologicas-y-aclara-protocolo-de-manejo-de-cuerpos-tras-el-terremoto/", linkTexto:"Boletín Salud Pública" },
-  { fecha:"14 ago · 11:30 a. m.", punto:"Misión médica de Antioquia en los albergues", nota:"40+ profesionales atienden en la Unidad Deportiva Jaime Aparicio (albergue de hockey). El Diamante de Béisbol Miguel Chávez funciona como centro de acopio.", link:"https://www.cali.gov.co/boletines/publicaciones/193668/una-mision-medica-de-40-personas-llego-desde-antioquia-a-la-unidad-panamericana-para-apoyar-a-los-damnificados-del-terremoto/", linkTexto:"Boletín misión médica" },
-  { fecha:"14 ago · 9:05 a. m.", punto:"Cali ya está cubierto · renovar lo que se gasta rápido", nota:"Renovar guantes industriales, extensiones, linternas, cascos e hidratación." },
-  { fecha:"14 ago · 9:00 a. m.", punto:"El Ejército se está tomando varios puntos", nota:"Donde entra el Ejército se necesitarán menos voluntarios. Confirma antes de ir." },
-  { fecha:"14 ago · 8:55 a. m.", punto:"Prioricemos la remoción con los rescatistas", nota:"Menor probabilidad de vida y más riesgo de colapsos: deja que los rescatistas hagan la remoción." },
-  { fecha:"14 ago · 8:50 a. m.", punto:"Apoyemos las brigadas de barrio", nota:"Hay brigadas ayudando casa por casa. Mira en tu barrio quién puede necesitar ayuda." },
 ];
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
@@ -1627,9 +1618,9 @@ function App(){
       ) : null}
 
       <div className="alerta-trata">
-        <div className="at-titulo">⏳ Este fin de semana se define la búsqueda de vida</div>
-        <p>Este <strong>domingo 16 de agosto se acaba la ventana de rescate</strong>. Hoy y mañana se estará haciendo <strong>presión ciudadana para que se siga buscando vida</strong> en los puntos críticos. Acompaña con respeto, en silencio, y sigue las indicaciones de los rescatistas.</p>
-        <p style={{marginTop:"8px"}}>Recuerda: la Alcaldía ya <strong>desmintió las cadenas falsas sobre una supuesta epidemia</strong>. No te alarmes ni difundas cadenas; sigue solo los canales oficiales.</p>
+        <div className="at-titulo">⏳ Hoy, domingo 16 de agosto, se cumple la ventana de rescate</div>
+        <p>Hoy termina la <strong>ventana de rescate definida por la Alcaldía</strong>. Donde aún haya indicios de vida, acompaña con respeto y en silencio, y sigue siempre las indicaciones de los rescatistas.</p>
+        <p style={{marginTop:"8px"}}>Seguimos viendo <strong>cadenas de WhatsApp pidiendo voluntarios</strong>, aunque la mayoría de los puntos ya <strong>no están dejando entrar voluntarios</strong>. Antes de moverte o compartir, confirma por canales oficiales.</p>
       </div>
 
       <div className="lastupdate">
@@ -1650,14 +1641,15 @@ function App(){
 
       <header>
         <div className="eyebrow">Coordinación de ayuda · Terremoto en Cali</div>
-        <h1>Sigamos ayudando: <span>hoy no dejemos caer la presión donde hay vida, y llevemos la ayuda al norte del Valle</span></h1>
+        <h1>Sigamos ayudando: <span>hoy la ayuda es para los municipios del Valle, las laderas de Cali y para seguir construyendo comunidad</span></h1>
         <p className="sub">
-          Hoy, quinto día desde el sismo del 10 de agosto, la Alcaldía comienza a <strong>desmantelar varios
-          puntos de trabajo</strong>. Por eso es clave que en los <strong>lugares con vida confirmada no pare la
-          presión ciudadana</strong> para que se siga buscando. También hoy: <strong>no caigas en cadenas
-          falsas de convocatoria de voluntarios</strong> — confirma siempre antes de moverte o compartir. Y
-          muchas <strong>caravanas salen hacia los municipios del norte del Valle</strong>: si puedes sumarte o
-          enviar ayuda, este es el momento. ¡Gracias! Comparte esta página con quien quiera aportar.
+          Hoy, <strong>16 de agosto</strong>, se cumple la <strong>ventana de rescate</strong> definida por la
+          Alcaldía. Seguimos viendo <strong>cadenas de WhatsApp pidiendo voluntarios</strong>, aunque la mayoría
+          de los puntos ya no están dejando entrar gente: confirma siempre antes de moverte o compartir. El
+          enfoque ahora está en <strong>seguir apoyando a los municipios del Valle afectados</strong>, en las
+          <strong> laderas de Cali</strong> —que siempre han tenido dificultades y hoy se profundizan con el
+          terremoto— y en <strong>seguir construyendo comunidad</strong>. ¡Gracias! Comparte esta página con
+          quien quiera aportar.
         </p>
         <div className="meta">
           <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios y zonas pidiendo ayuda</span>
@@ -1801,6 +1793,16 @@ function App(){
         </div>
       ) : null}
 
+      <a href="guia-ninos.html" className="guia-promo" id="guia-ninos">
+        <div className="gp-ico">🧸</div>
+        <div className="gp-body">
+          <div className="gp-tag">Guía gratuita para familias</div>
+          <div className="gp-title">¿Tus hijos siguen nerviosos o con comportamientos difíciles?</div>
+          <div className="gp-sub">Herramientas suaves y frases concretas para acompañar a niñas y niños después del terremoto: hablar sin presionar, volver al cuerpo y recuperar seguridad.</div>
+        </div>
+        <div className="gp-cta">Abrir guía →</div>
+      </a>
+
       <div className="muro" id="muro">
         <div className="muro-head">
           <div className="eyebrow">Muro de apoyo</div>
@@ -1905,16 +1907,6 @@ function App(){
           </div>
         </div>
       ) : null}
-
-      <a href="guia-ninos.html" className="guia-promo" id="guia-ninos">
-        <div className="gp-ico">🧸</div>
-        <div className="gp-body">
-          <div className="gp-tag">Guía gratuita para familias</div>
-          <div className="gp-title">¿Tus hijos siguen nerviosos o con comportamientos difíciles?</div>
-          <div className="gp-sub">Herramientas suaves y frases concretas para acompañar a niñas y niños después del terremoto: hablar sin presionar, volver al cuerpo y recuperar seguridad.</div>
-        </div>
-        <div className="gp-cta">Abrir guía →</div>
-      </a>
 
       {DIRECTORIO_AYUDA.length ? (
         <div className="albergues directorio" id="directorio">
