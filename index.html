@@ -824,6 +824,22 @@
     margin:0;text-align:left;line-height:1.25;
   }
   .seccion > .al-toggle .al-chevron{color:var(--star-light)}
+
+  /* Secciones colapsables tipo tarjeta */
+  .seccion.colapsable{
+    margin-top:16px;padding:16px 20px;border-radius:18px;
+    background:var(--space-800);border:1px solid rgba(127,168,255,.2);
+    transition:border-color .15s,background .15s;
+  }
+  .seccion.colapsable:hover{border-color:rgba(127,168,255,.42)}
+  .seccion.colapsable > .al-toggle{margin-bottom:0;gap:14px}
+  .seccion.colapsable > .al-toggle h2{font-size:clamp(16px,2.2vw,19px)}
+  .seccion.colapsable > .al-toggle .al-chevron{
+    color:var(--star-light);font-size:14px;flex:0 0 auto;
+    width:30px;height:30px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(127,168,255,.16);border:1px solid rgba(127,168,255,.34);
+  }
   .sec-sub{color:var(--ice);font-size:14px;line-height:1.55;max-width:660px}
   .dest-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .dest-item{
@@ -927,7 +943,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "17 de agosto de 2026, 3:54 p. m.";
+const ACTUALIZADO = "17 de agosto de 2026, 3:57 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1803,7 +1819,7 @@ function App(){
         <Mapa puntos={MUNICIPIOS_MAPA} />
       </div>
 
-      <div className="seccion" id="municipios">
+      <div className="seccion colapsable" id="municipios">
         <button type="button" className="al-toggle" onClick={() => setShowMunicipios(v => !v)} aria-expanded={showMunicipios}>
           <h2>Municipios y veredas que piden ayuda ({MUNICIPIOS.length})</h2>
           <span className={"al-chevron" + (showMunicipios ? " open" : "")}>▾</span>
@@ -1902,7 +1918,7 @@ function App(){
       </div>
 
       {FRENTES.length ? (
-        <div className="seccion" id="frentes">
+        <div className="seccion colapsable" id="frentes">
           <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
             <h2>Puntos activos de búsqueda y rescate en Cali ({FRENTES.length})</h2>
             <span className={"al-chevron" + (showFrentes ? " open" : "")}>▾</span>
@@ -1935,7 +1951,7 @@ function App(){
       ) : null}
 
       {LADERAS.length ? (
-        <div className="seccion" id="laderas">
+        <div className="seccion colapsable" id="laderas">
           <button type="button" className="al-toggle" onClick={() => setShowLaderas(v => !v)} aria-expanded={showLaderas}>
             <h2>Laderas de Cali ({LADERAS.length})</h2>
             <span className={"al-chevron" + (showLaderas ? " open" : "")}>▾</span>
