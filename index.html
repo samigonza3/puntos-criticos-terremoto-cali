@@ -922,7 +922,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "17 de agosto de 2026, 3:41 p. m.";
+const ACTUALIZADO = "17 de agosto de 2026, 3:45 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1589,6 +1589,9 @@ function App(){
   const [showCierres, setShowCierres] = useState(false);
   const [showCifras, setShowCifras] = useState(false);
   const [showDirectorio, setShowDirectorio] = useState(false);
+  const [showMunicipios, setShowMunicipios] = useState(false);
+  const [showFrentes, setShowFrentes] = useState(false);
+  const [showLaderas, setShowLaderas] = useState(false);
   const [dirFiltro, setDirFiltro] = useState("Todos");
   const [dirVisible, setDirVisible] = useState(6);
   const [showMenu, setShowMenu] = useState(false);
@@ -1796,37 +1799,42 @@ function App(){
       </div>
 
       <div className="seccion" id="municipios">
-        <div className="sec-head">
-          <h2>Municipios y veredas que piden ayuda</h2>
-          <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias. Demos visibilidad a las <strong>veredas de baja conectividad</strong> que casi nadie conoce y que lo perdieron todo.</p>
-          <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
-        </div>
-        <div className="resc-nec" style={{marginBottom:"14px"}}>
-          <div className="rn-tag">Necesidades urgentes para reconstrucción</div>
-          <div className="needs">
-            {MATERIALES_RECONSTRUCCION.map((n,i) => <span className="need" key={i}>{n}</span>)}
-          </div>
-          <p className="rn-nota">Además de agua, alimentos y abrigo, los municipios empiezan a necesitar materiales para reconstruir las viviendas afectadas.</p>
-        </div>
-        <div className="dest-list">
-          {MUNICIPIOS.map((m,i) => (
-            <div className={"dest-item" + (m.estado === "urgente" ? " urg" : "")} key={i}>
-              <div className="dest-top">
-                <span className="dest-nombre">{m.nombre}</span>
-                {m.estado === "urgente"
-                  ? <span className="badge">Urgente</span>
-                  : <span className="dest-region">{m.region}</span>}
+        <button type="button" className="al-toggle" onClick={() => setShowMunicipios(v => !v)} aria-expanded={showMunicipios}>
+          <h2>Municipios y veredas que piden ayuda ({MUNICIPIOS.length})</h2>
+          <span className={"al-chevron" + (showMunicipios ? " open" : "")}>▾</span>
+        </button>
+        {showMunicipios ? (
+          <>
+            <p className="sec-sub">Dirige tu donación o transporte hacia estos municipios del Valle. Coordina la entrega con los contactos de cada municipio para que la ayuda llegue directamente a las familias. Demos visibilidad a las <strong>veredas de baja conectividad</strong> que casi nadie conoce y que lo perdieron todo.</p>
+            <p className="sec-sub" style={{marginTop:"6px",fontSize:"12.5px",color:"var(--star-light)"}}>{MUNICIPIOS_FUENTE}</p>
+            <div className="resc-nec" style={{margin:"14px 0"}}>
+              <div className="rn-tag">Necesidades urgentes para reconstrucción</div>
+              <div className="needs">
+                {MATERIALES_RECONSTRUCCION.map((n,i) => <span className="need" key={i}>{n}</span>)}
               </div>
-              {m.estado === "urgente" ? <div className="dest-region">{m.region}</div> : null}
-              {m.dano ? <div className="dest-dano">{m.dano}</div> : null}
-              {m.nota ? <div className="dest-nota">{m.nota}</div> : null}
-              {m.necesidades.length
-                ? <div className="cel-need">{m.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                : <div className="dest-porconf">Necesidad por confirmar</div>}
-              {m.contacto ? <div className="dest-contacto">Contacto: {m.contacto}</div> : null}
+              <p className="rn-nota">Además de agua, alimentos y abrigo, los municipios empiezan a necesitar materiales para reconstruir las viviendas afectadas.</p>
             </div>
-          ))}
-        </div>
+            <div className="dest-list">
+              {MUNICIPIOS.map((m,i) => (
+                <div className={"dest-item" + (m.estado === "urgente" ? " urg" : "")} key={i}>
+                  <div className="dest-top">
+                    <span className="dest-nombre">{m.nombre}</span>
+                    {m.estado === "urgente"
+                      ? <span className="badge">Urgente</span>
+                      : <span className="dest-region">{m.region}</span>}
+                  </div>
+                  {m.estado === "urgente" ? <div className="dest-region">{m.region}</div> : null}
+                  {m.dano ? <div className="dest-dano">{m.dano}</div> : null}
+                  {m.nota ? <div className="dest-nota">{m.nota}</div> : null}
+                  {m.necesidades.length
+                    ? <div className="cel-need">{m.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
+                    : <div className="dest-porconf">Necesidad por confirmar</div>}
+                  {m.contacto ? <div className="dest-contacto">Contacto: {m.contacto}</div> : null}
+                </div>
+              ))}
+            </div>
+          </>
+        ) : null}
       </div>
 
       {CIFRAS.length ? (
@@ -1890,52 +1898,62 @@ function App(){
 
       {FRENTES.length ? (
         <div className="seccion" id="frentes">
-          <div className="sec-head">
-            <h2>Puntos activos de búsqueda y rescate en Cali</h2>
-            <p className="sec-sub">{FRENTES_FUENTE}.</p>
-          </div>
-          <div className="resc-nec">
-            <div className="rn-tag">Necesidades que se renuevan constantemente</div>
-            <div className="needs">
-              {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-            </div>
-            <p className="rn-nota">Los alimentos (desayunos, almuerzos y cenas) se coordinan siempre antes de llevarlos. Las linternas y los reflectores nunca sobran.</p>
-          </div>
-          <div className="frentes-grid">
-            {FRENTES.map((f,i) => (
-              <div className={"frente" + (f.alerta ? " alerta" : "")} key={i}>
-                <span className="frente-n">{i + 1}</span>
-                <div>
-                  <div className="frente-dir">{f.dir}</div>
-                  <div className="frente-barrio">{f.barrio}</div>
-                  {f.alerta ? <span className="frente-alerta-badge">⚠ {f.alertaTexto}</span> : null}
+          <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
+            <h2>Puntos activos de búsqueda y rescate en Cali ({FRENTES.length})</h2>
+            <span className={"al-chevron" + (showFrentes ? " open" : "")}>▾</span>
+          </button>
+          {showFrentes ? (
+            <>
+              <p className="sec-sub">{FRENTES_FUENTE}.</p>
+              <div className="resc-nec" style={{marginTop:"14px"}}>
+                <div className="rn-tag">Necesidades que se renuevan constantemente</div>
+                <div className="needs">
+                  {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
                 </div>
+                <p className="rn-nota">Los alimentos (desayunos, almuerzos y cenas) se coordinan siempre antes de llevarlos. Las linternas y los reflectores nunca sobran.</p>
               </div>
-            ))}
-          </div>
+              <div className="frentes-grid">
+                {FRENTES.map((f,i) => (
+                  <div className={"frente" + (f.alerta ? " alerta" : "")} key={i}>
+                    <span className="frente-n">{i + 1}</span>
+                    <div>
+                      <div className="frente-dir">{f.dir}</div>
+                      <div className="frente-barrio">{f.barrio}</div>
+                      {f.alerta ? <span className="frente-alerta-badge">⚠ {f.alertaTexto}</span> : null}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : null}
         </div>
       ) : null}
 
       {LADERAS.length ? (
         <div className="seccion" id="laderas">
-          <div className="sec-head">
-            <h2>Laderas de Cali</h2>
-            <p className="sec-sub">Zonas de ladera con familias afectadas que están recibiendo apoyo en el sitio.</p>
-          </div>
-          <div className="dest-list">
-            {LADERAS.map((l,i) => (
-              <div className="dest-item" key={i}>
-                <div className="dest-top">
-                  <span className="dest-nombre">{l.nombre}</span>
-                  <span className="dest-region">Ladera de Cali</span>
-                </div>
-                {l.nota ? <div className="dest-nota">{l.nota}</div> : null}
-                {l.necesidades.length
-                  ? <div className="cel-need">{l.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
-                  : null}
+          <button type="button" className="al-toggle" onClick={() => setShowLaderas(v => !v)} aria-expanded={showLaderas}>
+            <h2>Laderas de Cali ({LADERAS.length})</h2>
+            <span className={"al-chevron" + (showLaderas ? " open" : "")}>▾</span>
+          </button>
+          {showLaderas ? (
+            <>
+              <p className="sec-sub">Zonas de ladera con familias afectadas que están recibiendo apoyo en el sitio.</p>
+              <div className="dest-list" style={{marginTop:"14px"}}>
+                {LADERAS.map((l,i) => (
+                  <div className="dest-item" key={i}>
+                    <div className="dest-top">
+                      <span className="dest-nombre">{l.nombre}</span>
+                      <span className="dest-region">Ladera de Cali</span>
+                    </div>
+                    {l.nota ? <div className="dest-nota">{l.nota}</div> : null}
+                    {l.necesidades.length
+                      ? <div className="cel-need">{l.necesidades.map((n,j) => <span className="need" key={j}>{n}</span>)}</div>
+                      : null}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          ) : null}
         </div>
       ) : null}
 
