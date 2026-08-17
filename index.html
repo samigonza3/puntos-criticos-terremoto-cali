@@ -773,6 +773,22 @@
     background:linear-gradient(180deg,var(--star-blue),#2E5FE0);padding:8px 14px;border-radius:10px;text-decoration:none}
   .rb-link:hover{filter:brightness(1.08)}
 
+  /* Pico y placa */
+  .pico-placa{margin-top:14px;border-radius:18px;padding:16px 18px;
+    border:1px solid rgba(255,176,32,.4);
+    background:linear-gradient(120deg,rgba(255,176,32,.12),rgba(11,21,51,.5));}
+  .pp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:12px}
+  .pp-titulo{font-size:15px;font-weight:800;color:var(--white)}
+  .pp-vigencia{font-size:12.5px;font-weight:700;color:var(--warn)}
+  .pp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .pp-dia{background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.28);
+    border-radius:12px;padding:10px 8px;text-align:center}
+  .pp-dia-nombre{font-size:12px;font-weight:800;color:var(--white)}
+  .pp-dia-fecha{font-size:11px;color:var(--muted);margin:2px 0 6px}
+  .pp-digitos{font-size:14px;font-weight:800;color:var(--warn);letter-spacing:.02em}
+  .pp-nota{font-size:12.5px;color:var(--ice);line-height:1.5;margin-top:10px}
+  @media (max-width:640px){ .pp-grid{grid-template-columns:repeat(2,1fr)} }
+
   /* ===== Frentes de trabajo (Alcaldía) ===== */
   .frentes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .frente{
@@ -906,7 +922,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "17 de agosto de 2026, 10:39 a. m.";
+const ACTUALIZADO = "17 de agosto de 2026, 3:22 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1171,27 +1187,25 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #011 · Alcaldía de Cali · corte 15/08/2026, 4:30 p. m.";
+const CIFRAS_FUENTE = "Reporte Oficial #013 · Alcaldía de Cali · corte 16/08/2026, 5:00 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
 const CIFRAS = [
-  { n:"122", label:"Fallecidos", tono:"alert" },
-  { n:"111", label:"Desaparecidos", tono:"alert" },
+  { n:"130", label:"Fallecidos", tono:"alert" },
+  { n:"94", label:"Desaparecidos", tono:"alert" },
   { n:"1.485", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"46", label:"Edificaciones con colapso total", tono:"" },
-  { n:"1.925", label:"Con daños estructurales", tono:"" },
-  { n:"534", label:"Edificios con orden de evacuación", tono:"alert" },
+  { n:"123", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"4.164", label:"Reportes ciudadanos procesados", tono:"" },
+  { n:"763", label:"Edificaciones verificadas", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
-  { n:"46", label:"Colapso total", tono:"alert" },
-  { n:"35", label:"Colapso parcial", tono:"" },
-  { n:"111", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"17.811 t", label:"Escombros removidos", tono:"" },
-  { n:"3.256", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
+  { n:"15", label:"Colapso total verificado (de 46 reportadas)", tono:"alert" },
+  { n:"113", label:"Colapso parcial verificado", tono:"" },
+  { n:"177", label:"Daño estructural verificado", tono:"" },
+  { n:"21.204 t", label:"Escombros removidos", tono:"" },
+  { n:"6.709", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
   { n:"1.913", label:"Personal activo", tono:"ok" },
-  { n:"96", label:"Animales rescatados", tono:"ok" },
-  { n:"28", label:"Animales muertos", tono:"alert" },
-  { n:"339", label:"Animales desaparecidos", tono:"" },
+  { n:"123", label:"Animales rescatados", tono:"ok" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
@@ -1300,6 +1314,16 @@ const CIERRES_VIALES = [
   "Calle 10 con Carrera 72","Roosevelt con Carrera 39","Carrera 28D con Calle 72W",
 ];
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
+
+/* PICO Y PLACA · vigencia del 18 al 22 de agosto, 6:00 a. m. – 7:00 p. m. */
+const PICO_PLACA_VIGENCIA = "Del 18 al 22 de agosto · 6:00 a. m. – 7:00 p. m.";
+const PICO_PLACA = [
+  { dia:"Martes", fecha:"18 ago", digitos:"0 · 2 · 4 · 6 · 8" },
+  { dia:"Miércoles", fecha:"19 ago", digitos:"1 · 3 · 5 · 7 · 9" },
+  { dia:"Jueves", fecha:"20 ago", digitos:"0 · 2 · 4 · 6 · 8" },
+  { dia:"Viernes", fecha:"21 ago", digitos:"1 · 3 · 5 · 7 · 9" },
+  { dia:"Sábado", fecha:"22 ago", digitos:"0 · 2 · 4 · 6 · 8" },
+];
 
 /* ============================================================
    DIRECTORIO DE AYUDA — DAMNIFICADOS · consolidado por Fundación Concretar
@@ -1917,7 +1941,24 @@ function App(){
 
       <div className="sec-head" id="recursos" style={{marginTop:"30px"}}>
         <h2>📌 Recursos importantes</h2>
-        <p className="sec-sub">Directorio de ayuda, albergues, apoyo psicológico y jurídico gratuitos, y vías cerradas. Toca cada bloque para desplegar la información.</p>
+        <p className="sec-sub">Directorio de ayuda, albergues, apoyo psicológico y jurídico gratuitos, pico y placa y vías cerradas. Toca cada bloque para desplegar la información.</p>
+      </div>
+
+      <div className="pico-placa" id="pico-placa">
+        <div className="pp-head">
+          <div className="pp-titulo">🚗 Pico y placa</div>
+          <div className="pp-vigencia">{PICO_PLACA_VIGENCIA}</div>
+        </div>
+        <div className="pp-grid">
+          {PICO_PLACA.map((d,i) => (
+            <div className="pp-dia" key={i}>
+              <div className="pp-dia-nombre">{d.dia}</div>
+              <div className="pp-dia-fecha">{d.fecha}</div>
+              <div className="pp-digitos">{d.digitos}</div>
+            </div>
+          ))}
+        </div>
+        <p className="pp-nota">Aplica según el último dígito de la placa. No circulan en el horario indicado.</p>
       </div>
 
       {DIRECTORIO_AYUDA.length ? (
