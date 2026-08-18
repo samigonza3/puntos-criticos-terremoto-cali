@@ -197,21 +197,21 @@
   /* Marco de alta prioridad */
   .priority{
     margin-top:20px;padding:22px 24px;border-radius:20px;
-    background:linear-gradient(180deg, rgba(255,92,107,.16), rgba(255,92,107,.07));
-    border:1px solid rgba(255,92,107,.55);
-    box-shadow:0 0 0 1px rgba(255,92,107,.15), 0 10px 30px rgba(255,92,107,.12);
+    background:var(--space-800);
+    border:1px solid rgba(127,168,255,.28);
+    box-shadow:0 10px 30px rgba(4,8,23,.35);
   }
   .priority .tag{
     font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--alert);margin-bottom:14px;display:flex;align-items:center;gap:9px;
+    color:var(--star-light);margin-bottom:14px;display:flex;align-items:center;gap:9px;
   }
   .priority .tag svg{flex:none}
   .priority .pr-item{
-    display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,92,107,.16);
+    display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(127,168,255,.14);
   }
   .priority .pr-item:last-child{border-bottom:none;padding-bottom:0}
   .priority .pr-item:first-of-type{padding-top:0}
-  .priority .pr-dot{flex:none;width:9px;height:9px;border-radius:999px;background:var(--alert);margin-top:6px}
+  .priority .pr-dot{flex:none;width:9px;height:9px;border-radius:999px;background:var(--star-light);margin-top:6px}
   .priority .pr-name{font-size:15.5px;font-weight:800;color:var(--white);margin-bottom:2px}
   .priority .pr-fecha{font-size:11.5px;font-weight:700;color:var(--star-light);letter-spacing:.01em;margin-bottom:4px}
   .priority .pr-nota{font-size:13.5px;line-height:1.5;color:var(--ice)}
@@ -943,7 +943,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "17 de agosto de 2026, 3:57 p. m.";
+const ACTUALIZADO = "18 de agosto de 2026, 8:06 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1208,21 +1208,21 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #013 · Alcaldía de Cali · corte 16/08/2026, 5:00 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
+const CIFRAS_FUENTE = "Reporte Oficial #014 · Alcaldía de Cali · corte 17/08/2026, 5:00 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
 const CIFRAS = [
-  { n:"130", label:"Fallecidos", tono:"alert" },
-  { n:"94", label:"Desaparecidos", tono:"alert" },
+  { n:"132", label:"Fallecidos", tono:"alert" },
+  { n:"56", label:"Desaparecidos", tono:"alert" },
   { n:"1.485", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"123", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"4.164", label:"Reportes ciudadanos procesados", tono:"" },
-  { n:"763", label:"Edificaciones verificadas", tono:"" },
+  { n:"124", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"4.373", label:"Reportes ciudadanos procesados", tono:"" },
+  { n:"835", label:"Edificaciones verificadas", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
-  { n:"15", label:"Colapso total verificado (de 46 reportadas)", tono:"alert" },
-  { n:"113", label:"Colapso parcial verificado", tono:"" },
-  { n:"177", label:"Daño estructural verificado", tono:"" },
+  { n:"24", label:"Colapso total verificado", tono:"alert" },
+  { n:"126", label:"Colapso parcial verificado", tono:"" },
+  { n:"182", label:"Daño estructural grave verificado", tono:"" },
   { n:"21.204 t", label:"Escombros removidos", tono:"" },
   { n:"6.709", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
   { n:"1.913", label:"Personal activo", tono:"ok" },
@@ -1687,9 +1687,9 @@ function App(){
       ) : null}
 
       <div className="alerta-trata">
-        <div className="at-titulo">🕯️ Nueva semana · la prioridad son los municipios y quienes aún buscan a sus seres queridos</div>
-        <p>Esta semana el foco es <strong>seguir atentos a los municipios y veredas del Valle</strong> y llevar allá el <strong>material necesario para la reconstrucción</strong>. También debemos asegurar que <strong>las labores de rescate se mantengan donde aún se reportan personas desaparecidas</strong>.</p>
-        <p style={{marginTop:"8px"}}>Ten en cuenta que <strong>la mayoría de los puntos ya no están recibiendo voluntarios</strong>. Antes de moverte o compartir una convocatoria, confirma por canales oficiales. <strong>¡Fuerza, Cali!</strong></p>
+        <div className="at-titulo">🕯️ Varios puntos ya fueron cerrados · ahora la búsqueda de cuerpos y la reconstrucción</div>
+        <p>Al <strong>18 de agosto</strong>, ya <strong>varios puntos han sido cerrados totalmente</strong>. Sigue una fase de <strong>búsqueda de cuerpos entre los escombros</strong>: aún hay <strong>más de 50 personas desaparecidas</strong> en Cali. En paralelo, la prioridad es la <strong>reconstrucción de los municipios</strong>: apoya con <strong>material de construcción</strong>.</p>
+        <p style={{marginTop:"8px"}}>Las <strong>necesidades de alimentos por ahora están cubiertas</strong>, pero sigamos atentos. Y no olvidemos las <strong>veredas</strong>, adonde la ayuda tarda más en llegar. La mayoría de los puntos ya no reciben voluntarios: confirma por canales oficiales antes de moverte. <strong>¡Fuerza, Cali!</strong></p>
       </div>
 
       <div className="rutas-banner">
@@ -1724,15 +1724,15 @@ function App(){
 
       <header>
         <div className="eyebrow">Coordinación de ayuda · Terremoto en Cali</div>
-        <h1>Sigamos ayudando: <span>esta semana la prioridad son los municipios y veredas, la reconstrucción y sostener el rescate donde aún hay desaparecidos</span></h1>
+        <h1>Sigamos ayudando: <span>búsqueda de cuerpos en los puntos que continúan, reconstrucción de los municipios y no olvidar las veredas</span></h1>
         <p className="sub">
-          Arrancamos una <strong>nueva semana</strong> (hoy, <strong>lunes 17 de agosto, es festivo</strong>). La
-          prioridad ahora es <strong>seguir atentos a lo que pasa en los municipios y veredas del Valle</strong> y
-          continuar llevando allá el <strong>material necesario para la reconstrucción</strong>. Al mismo tiempo,
-          debemos <strong>asegurar que las labores de rescate se mantengan</strong> en los lugares donde todavía se
-          reportan personas desaparecidas. Seguimos viendo cadenas de WhatsApp pidiendo voluntarios: confirma
-          siempre por canales oficiales antes de moverte o compartir. <strong>¡Fuerza, Cali!</strong> Comparte esta
-          página con quien quiera aportar.
+          Al <strong>18 de agosto</strong>, ya <strong>varios puntos han sido cerrados totalmente</strong>. Ahora
+          sigue la fase de <strong>buscar cuerpos entre los escombros</strong>, con más de <strong>50 personas
+          aún desaparecidas</strong> en Cali. En segundo lugar, la <strong>reconstrucción de los municipios</strong>:
+          la mejor forma de ayudar es <strong>aportar material de construcción</strong>. Las necesidades de
+          <strong> alimentos por ahora están cubiertas</strong>, pero sigamos atentos, y <strong>no olvidemos las
+          veredas</strong>, adonde la ayuda se demora más en llegar. La mayoría de los puntos ya no reciben
+          voluntarios: confirma por canales oficiales antes de moverte. <strong>¡Fuerza, Cali!</strong>
         </p>
         <div className="meta">
           <span className="chip urgente"><span className="dot"></span>{MUNICIPIOS.length} municipios y zonas pidiendo ayuda</span>
@@ -1763,11 +1763,11 @@ function App(){
       {ALTA_PRIORIDAD.length ? (
         <div className="priority">
           <div className="tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5C6B" strokeWidth="2.2">
-              <path d="M12 9v4M12 17h.01"></path>
-              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FA8FF" strokeWidth="2.2">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 8h.01M11 12h1v4h1"></path>
             </svg>
-            Últimas actualizaciones importantes
+            Últimas actualizaciones
           </div>
           {ALTA_PRIORIDAD.slice(0, PRIORIDAD_VISIBLES).map((p,i) => (
             <div className="pr-item" key={i}>
