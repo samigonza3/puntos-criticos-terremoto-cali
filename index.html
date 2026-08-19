@@ -773,6 +773,22 @@
     background:linear-gradient(180deg,var(--star-blue),#2E5FE0);padding:8px 14px;border-radius:10px;text-decoration:none}
   .rb-link:hover{filter:brightness(1.08)}
 
+  /* Banner reconstrucción → webapp de fundraising */
+  .recon-promo{display:flex;align-items:center;gap:16px;margin-top:16px;text-decoration:none;border-radius:20px;padding:20px 22px;
+    border:1px solid rgba(62,224,142,.45);
+    background:linear-gradient(120deg,rgba(62,224,142,.16),rgba(62,123,255,.14));
+    box-shadow:0 8px 30px rgba(62,224,142,.12);transition:transform .15s,border-color .15s}
+  .recon-promo:hover{transform:translateY(-2px);border-color:rgba(62,224,142,.85)}
+  .rp-ico{flex:none;width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;
+    background:rgba(62,224,142,.16);border:1px solid rgba(62,224,142,.4)}
+  .rp-body{flex:1}
+  .rp-tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+  .rp-title{font-size:16px;font-weight:800;color:var(--white);margin:3px 0 4px;line-height:1.25}
+  .rp-sub{font-size:13px;color:var(--ice);line-height:1.5}
+  .rp-cta{flex:none;font-size:13.5px;font-weight:800;color:#04240F;background:linear-gradient(180deg,#5EEAA0,#2FBE76);
+    padding:10px 16px;border-radius:12px;white-space:nowrap}
+  @media (max-width:640px){ .recon-promo{flex-wrap:wrap} .rp-cta{width:100%;text-align:center} }
+
   /* Pico y placa */
   .pico-placa{margin-top:14px;border-radius:18px;padding:16px 18px;
     border:1px solid rgba(255,176,32,.4);
@@ -943,7 +959,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "19 de agosto de 2026, 8:15 a. m.";
+const ACTUALIZADO = "19 de agosto de 2026, 2:27 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1705,6 +1721,16 @@ function App(){
         <p className="rb-nota"><strong>Reporta afectaciones y RUFE por WhatsApp oficial:</strong> 310 229 9708. El RUFE no tiene costo: no llenes formularios ni escanees QR y espera la visita oficial en tu sector.</p>
         <a className="rb-link" href="https://www.cali.gov.co/gobierno/publicaciones/193729/rutas-de-atencion-damnificados-terremoto/" target="_blank" rel="noopener">Ver todas las rutas de atención oficial →</a>
       </div>
+
+      <a className="recon-promo" href="reconstruyamos.html">
+        <div className="rp-ico">🏗️</div>
+        <div className="rp-body">
+          <div className="rp-tag">Reconstrucción · Fuerza Cali</div>
+          <div className="rp-title">Reconstruyamos Montebello, ladrillo a ladrillo</div>
+          <div className="rp-sub">Empieza la fase de reconstrucción. Dona materiales o aporta a la meta y sigue en qué se invierte cada peso, con total transparencia.</div>
+        </div>
+        <div className="rp-cta">Donar ahora →</div>
+      </a>
 
       <div className="lastupdate" style={{marginTop:"18px"}}>
         <span className="lu-label"><span className="live"></span>Última actualización</span>
