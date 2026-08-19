@@ -200,16 +200,20 @@
 <script>
   const CAMPANA = {
     frente: "Montebello",
-    meta: 30000000,        // meta de recaudación (COP)
-    recaudado: 4200000,    // total donado hasta ahora (COP)  ← ACTUALIZAR
-    gastado: 1850000,      // total ya invertido en materiales (COP) ← ACTUALIZAR
+    meta: 60000000,        // meta de recaudación (COP)
+    recaudado: 10000000,   // total donado desde el inicio de la contingencia (COP)
+    gastado: 7200000,      // total ya invertido desde el primer día de la crisis (COP)
     donantes: 38,          // número de aportes recibidos ← ACTUALIZAR
     familias: 6,           // familias beneficiadas hasta ahora ← ACTUALIZAR
-    // Detalle de en qué se ha gastado (barra de gastos)
+    // En qué se ha invertido desde el primer día (barra de gastos)
     gastos: [
-      { concepto: "Cemento y arena (primeras 3 casas)", valor: 780000 },
-      { concepto: "Tejas de zinc y estructura", valor: 640000 },
-      { concepto: "Transporte de materiales a Montebello", valor: 430000 },
+      "Herramientas de rescate",
+      "Elementos de protección (cascos, gafas, zapatos con placa)",
+      "Hidratación",
+      "Mercados no perecederos",
+      "Tejas UPVC",
+      "Guantes",
+      "Bultos de cemento enviados a El Cairo (Valle)",
     ],
     // Materiales necesarios agrupados por tipo (cada grupo es un colapsable)
     materiales: [
@@ -237,13 +241,13 @@
         { nombre: "Almohada", detalle: "Descanso básico", unidad: "por unidad", precio: 15000 },
       ]},
     ],
-    // Métodos de donación (reemplaza XXXX por los datos reales)
+    // Métodos de donación (agrega "link" a los que sean un enlace)
     pagos: [
-      { medio: "Nequi", detalle: "A nombre de Fuerza Cali", valor: "300 000 0000" },
-      { medio: "Daviplata", detalle: "A nombre de Fuerza Cali", valor: "300 000 0000" },
-      { medio: "Bancolombia Ahorros", detalle: "A nombre de Fuerza Cali", valor: "000-000000-00" },
+      { medio: "Llave (Bre-B)", detalle: "A nombre de Samuel G.", valor: "1144069115" },
+      { medio: "Bold", detalle: "Pago con tarjeta débito o crédito", valor: "Abrir link", link: "#BOLD_LINK" }, // ← PEGA aquí tu link de Bold
+      { medio: "Venmo", detalle: "Para donaciones desde el exterior", valor: "Disponible pronto" },
     ],
-    whatsapp: "573000000000" // número con indicativo, sin + ni espacios ← REEMPLAZAR
+    whatsapp: "573152017605" // número con indicativo, sin + ni espacios
   };
 </script>
 
@@ -493,7 +497,7 @@
       document.getElementById("bar-meta").style.width = pct + "%";
       document.getElementById("bar-gasto").style.width = gastoPct + "%";
     });
-    document.getElementById("gasto-detalle").textContent = c.gastos.map(g => g.concepto + " (" + money(g.valor) + ")").join(" · ");
+    document.getElementById("gasto-detalle").textContent = c.gastos.join(" · ");
 
     // materiales agrupados en colapsables
     const ICONS = {
@@ -533,7 +537,10 @@
     c.pagos.forEach(p => {
       const it = document.createElement("div");
       it.className = "pay-item";
-      it.innerHTML = '<span class="m">'+p.medio+'<small>'+p.detalle+'</small></span><span class="v">'+p.valor+'</span>';
+      const val = p.link
+        ? '<a class="v" href="'+p.link+'" target="_blank" rel="noopener" style="text-decoration:underline">'+p.valor+'</a>'
+        : '<span class="v">'+p.valor+'</span>';
+      it.innerHTML = '<span class="m">'+p.medio+'<small>'+p.detalle+'</small></span>'+val;
       pl.appendChild(it);
     });
 
