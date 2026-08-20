@@ -959,7 +959,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "20 de agosto de 2026, 8:49 a. m.";
+const ACTUALIZADO = "20 de agosto de 2026, 9:04 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1246,15 +1246,9 @@ const CIFRAS_MAS = [
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
-const FRENTES_FUENTE = "9 puntos activos de búsqueda especializada del PMU, donde el PMU amplió la ventana de vida por 48 horas más · boletín oficial de la Alcaldía de Cali del 13/08/2026. En estos puntos, HAZ SILENCIO: los rescatistas trabajan con sensores de sonido y temperatura y perros entrenados";
+const FRENTES_FUENTE = "La ventana de búsqueda de vida ya terminó: ningún punto de Cali está en búsqueda activa de sobrevivientes. Las labores que continúan son de recuperación de cuerpos y remoción, bajo coordinación del PMU. Son zonas restringidas por riesgo estructural y biológico: no ingreses si no tienes función asignada ni equipo, guarda silencio y respeta el trabajo de los equipos y el dolor de las familias";
 const FRENTES = [
-  { dir:"Hospital Universitario del Valle (HUV)", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Cuarto de Legua", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Capri", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Calle 5 con Carrera 39", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Calle 5 con Carrera 56", barrio:"Punto activo de búsqueda especializada", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · punto activo de búsqueda", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
-  { dir:"Frente a la Clínica de Colores", barrio:"Tequendama · punto activo de búsqueda", alerta:true, alertaTexto:"Búsqueda de vida activa · haz silencio" },
+  { dir:"Edificio Vanessa · Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · único punto con operación activa 24 horas", alerta:true, alertaTexto:"Operación activa · recuperación de cuerpos · zona restringida" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1947,7 +1941,7 @@ function App(){
       {FRENTES.length ? (
         <div className="seccion colapsable" id="frentes">
           <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
-            <h2>Puntos activos de búsqueda y rescate en Cali ({FRENTES.length})</h2>
+            <h2>Puntos en recuperación en Cali ({FRENTES.length})</h2>
             <span className={"al-chevron" + (showFrentes ? " open" : "")}>▾</span>
           </button>
           {showFrentes ? (
