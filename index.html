@@ -928,18 +928,6 @@
   <textarea name="mensaje"></textarea>
 </form>
 
-<!-- Formulario oculto: ofrecimiento de casa como refugio temporal -->
-<form name="refugios" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field" hidden>
-  <input type="text" name="fecha_hora" />
-  <input type="text" name="nombre" />
-  <input type="text" name="telefono" />
-  <input type="text" name="zona" />
-  <input type="text" name="cupos" />
-  <input type="text" name="dias_disponible" />
-  <textarea name="condiciones"></textarea>
-  <div data-netlify-recaptcha="true"></div>
-</form>
-
 <div id="root"></div>
 
 <script type="text/babel">
@@ -959,7 +947,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "20 de agosto de 2026, 9:21 a. m.";
+const ACTUALIZADO = "21 de agosto de 2026, 12:34 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1224,31 +1212,31 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #016 · Alcaldía de Cali · corte 18/08/2026, 6:30 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
+const CIFRAS_FUENTE = "Reporte Oficial #019 · Alcaldía de Cali · corte 20/08/2026, 5:30 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
 const CIFRAS = [
-  { n:"141", label:"Fallecidos", tono:"alert" },
-  { n:"47", label:"Desaparecidos", tono:"alert" },
-  { n:"1.569", label:"Heridos", tono:"" },
+  { n:"150", label:"Fallecidos", tono:"alert" },
+  { n:"41", label:"Desaparecidos", tono:"alert" },
+  { n:"1.657", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"132", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"7.797", label:"Reportes ciudadanos procesados", tono:"" },
-  { n:"920", label:"Edificaciones verificadas", tono:"" },
+  { n:"140", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"8.680", label:"Reportes ciudadanos procesados", tono:"" },
+  { n:"1.122", label:"Edificaciones verificadas", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
   { n:"24", label:"Colapso total verificado", tono:"alert" },
-  { n:"177", label:"Colapso parcial verificado", tono:"" },
-  { n:"197", label:"Daño estructural grave verificado", tono:"" },
-  { n:"28.535 t", label:"Escombros removidos", tono:"" },
-  { n:"11.224", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
-  { n:"1.365", label:"Personal activo", tono:"ok" },
-  { n:"158", label:"Animales rescatados", tono:"ok" },
+  { n:"246", label:"Colapso parcial verificado", tono:"" },
+  { n:"231", label:"Daño estructural grave verificado", tono:"" },
+  { n:"36.273 t", label:"Escombros removidos", tono:"" },
+  { n:"17.630", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
+  { n:"1.234", label:"Personal activo", tono:"ok" },
+  { n:"186", label:"Animales rescatados", tono:"ok" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
-const FRENTES_FUENTE = "La ventana de búsqueda de vida ya terminó: ningún punto de Cali está en búsqueda activa de sobrevivientes. Las labores que continúan son de recuperación de cuerpos y remoción, bajo coordinación del PMU. Son zonas restringidas por riesgo estructural y biológico: no ingreses si no tienes función asignada ni equipo, guarda silencio y respeta el trabajo de los equipos y el dolor de las familias";
+const FRENTES_FUENTE = "Ya se levantaron casi todos los puntos de la ciudad. Solo queda un frente activo, en el edificio Ana del Pilar, donde probablemente falten por recuperar 2 cuerpos. Es una zona restringida por riesgo estructural y biológico, bajo coordinación del PMU: no ingreses si no tienes función asignada ni equipo, guarda silencio y respeta el trabajo de los equipos y el dolor de las familias";
 const FRENTES = [
-  { dir:"Edificio Vanessa · Calle 9 con Carrera 44", barrio:"Los Cámbulos · Comuna 19 · único punto con operación activa 24 horas", alerta:true, alertaTexto:"Operación activa · recuperación de cuerpos · zona restringida" },
+  { dir:"Edificio Ana del Pilar", barrio:"Único frente activo · coordinación del PMU (Bomberos, Ejército, Policía y Armada)", alerta:true, alertaTexto:"Recuperación de cuerpos · faltarían 2 · zona restringida" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1347,13 +1335,13 @@ const CIERRES_VIALES = [
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PICO Y PLACA · vigencia del 18 al 22 de agosto, 6:00 a. m. – 7:00 p. m. */
-const PICO_PLACA_VIGENCIA = "Del 18 al 22 de agosto · 6:00 a. m. – 7:00 p. m.";
+const PICO_PLACA_VIGENCIA = "Ordinario restablecido en toda la ciudad · desde el 21 de agosto";
 const PICO_PLACA = [
-  { dia:"Martes", fecha:"18 ago", digitos:"0 · 2 · 4 · 6 · 8" },
-  { dia:"Miércoles", fecha:"19 ago", digitos:"1 · 3 · 5 · 7 · 9" },
-  { dia:"Jueves", fecha:"20 ago", digitos:"0 · 2 · 4 · 6 · 8" },
-  { dia:"Viernes", fecha:"21 ago", digitos:"1 · 3 · 5 · 7 · 9" },
-  { dia:"Sábado", fecha:"22 ago", digitos:"0 · 2 · 4 · 6 · 8" },
+  { dia:"Lunes", fecha:"+ 3 y 4 en zona afectada", digitos:"9 · 0" },
+  { dia:"Martes", fecha:"+ 5 y 6 en zona afectada", digitos:"1 · 2" },
+  { dia:"Miércoles", fecha:"+ 7 y 8 en zona afectada", digitos:"3 · 4" },
+  { dia:"Jueves", fecha:"+ 9 y 0 en zona afectada", digitos:"5 · 6" },
+  { dia:"Viernes", fecha:"+ 1 y 2 en zona afectada", digitos:"7 · 8" },
 ];
 
 /* ============================================================
@@ -1424,6 +1412,10 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
+  { fecha:"21 ago · 9:00 a. m.", punto:"Termina la búsqueda en el edificio Vanessa", nota:"Diez días después del sismo concluyó la operación en el edificio Vanessa: se recuperaron y entregaron a sus familias los cuerpos de las 22 personas que estaban bajo los escombros (13 mujeres, 7 hombres y 2 menores). El último fue extraído a las 4:32 a. m. Con el levantamiento del PMU, la zona queda con perímetros de seguridad mientras se evalúan las estructuras vecinas.", link:"https://www.cali.gov.co/boletines/publicaciones/193810/finaliza-la-busqueda-y-rescate-en-el-edificio-vanessa-este-es-el-balance-entregado-por-el-puesto-de-mando-unificado-de-la-zona/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"21 ago · 8:30 a. m.", punto:"Se restablece el Pico y Placa ordinario", nota:"Desde el viernes 21 de agosto vuelve el Pico y Placa ordinario en toda la ciudad (Lun 9-0, Mar 1-2, Mié 3-4, Jue 5-6, Vie 7-8). Además, dentro del polígono de mayor afectación rige un Pico y Placa Solidario focalizado con 2 dígitos adicionales por día, hasta el 5 de septiembre. Consulta el polígono y las excepciones en canales oficiales.", link:"https://www.cali.gov.co/boletines/publicaciones/193804/abc-cali-restablece-el-pico-y-placa-ordinario-y-adopta-una-medida-focalizada-en-la-zona-de-mayor-afectacion/", linkTexto:"Boletín Movilidad" },
+  { fecha:"21 ago · 8:00 a. m.", punto:"Más de 363 toneladas de ayuda humanitaria entregadas", nota:"La Alcaldía reporta la entrega de 363,6 toneladas (363.602 kg) de ayudas humanitarias desde el terremoto del 10 de agosto. La solidaridad de la ciudad y del país sigue llegando a las familias afectadas.", link:"https://www.cali.gov.co/boletines/publicaciones/193812/mas-de-363-toneladas-de-ayudas-humanitarias-se-han-entregado-tras-el-terremoto-del-10-de-agosto/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"21 ago · 7:30 a. m.", punto:"Cali se recupera · cuadrillas de Infraestructura", nota:"La Secretaría de Infraestructura desplegó hasta 46 equipos y 14 cuadrillas, con presencia diurna y nocturna, para atender los puntos afectados por la emergencia y avanzar en la recuperación de la ciudad.", link:"https://www.cali.gov.co/boletines/publicaciones/193811/cali-se-recupera-asi-trabajan-las-cuadrillas-de-infraestructura-para-atender-las-zonas-afectadas-por-la-emergencia/", linkTexto:"Boletín Infraestructura" },
   { fecha:"19 ago · 12:00 m.", punto:"Un techo digno · reubicación de familias en albergues", nota:"La Alcaldía activó un censo masivo en todos los albergues para pasar a las familias de las carpas a habitaciones de hotel mientras avanza la reconstrucción. La reubicación temporal empieza a aplicarse en más de 10 albergues. Clave registrarse en el RUFE / Registro Único de Damnificados para no quedar por fuera de la ruta de ayuda.", link:"https://www.cali.gov.co/boletines/publicaciones/193783/un-techo-digno-para-renacer-tras-el-terremoto-en-cali/", linkTexto:"Boletín Alcaldía" },
   { fecha:"19 ago · 11:00 a. m.", punto:"Edificio Vanessa · búsqueda activa las 24 horas", nota:"La operación en el edificio Vanessa (Cra. 44 con Calle 9) sigue las 24 horas, con relevos y coordinación del PMU (Bomberos, Policía, Ejército y equipos especializados con caninos y escucha técnica). Se mantiene el perímetro por riesgo estructural y biológico: no ingreses a la zona sin función asignada ni equipo. Las familias reciben información directa del PMU.", link:"https://www.cali.gov.co/boletines/publicaciones/193778/la-busqueda-no-se-detiene-alcaldia-de-cali-mantiene-operacion-las-24-horas-en-el-edificio-vanessa/", linkTexto:"Boletín Alcaldía" },
   { fecha:"19 ago · 10:00 a. m.", punto:"Red de salud · cerca de 200 IPS afectadas", nota:"La Secretaría de Salud reporta cerca de 200 IPS (públicas y privadas) con algún daño. En el HUV el 40% de la capacidad está deshabilitada; del Hospital Carlos Holmes Trujillo se reubicaron ~3.000 consultas externas diarias al oriente de la ciudad, y el Puesto de Salud Mariano Ramos sigue cerrado. Cuatro clínicas privadas ya inician recuperación. Verifica dónde te atienden antes de desplazarte.", link:"https://www.cali.gov.co/boletines/publicaciones/193782/el-terremoto-afecto-a-cerca-de-200-ips-y-obliga-a-reorganizar-parte-de-la-red-de-salud-de-cali/", linkTexto:"Boletín Salud Pública" },
@@ -1445,7 +1437,7 @@ const ALTA_PRIORIDAD = [
   { fecha:"15 ago · 8:55 a. m.", punto:"Trámites de la Alcaldía por canales virtuales", nota:"Los Centros CALI atienden virtualmente (12 con atención parcial: CALI 3, 4, 6, 8, 9, 11, 12, 13, 17, 20, 21 y 22). Los CALI 5 y 18 son albergues/acopio. Radica en www.cali.gov.co; la ventanilla del edificio Aristi abre el 18 de agosto.", link:"https://www.cali.gov.co/boletines/publicaciones/193679/estamos-de-tu-lado-los-tramites-servicios-y-estrategias-de-participacion-ciudadana-estan-disponibles-por-canales-virtuales/", linkTexto:"Boletín trámites virtuales" },
 ];
 /* Cuántas actualizaciones se muestran siempre (las más recientes por fecha); el resto va en "Ver más". */
-const PRIORIDAD_VISIBLES = 6;
+const PRIORIDAD_VISIBLES = 5;
 
 /* CLINICAS AFECTADAS QUE REQUIEREN EVACUACION */
 const CLINICAS = [
@@ -1687,11 +1679,8 @@ function App(){
             <a href="index.html">Inicio</a>
             <a href="#directorio" className="menu-link-highlight" onClick={() => setShowMenu(false)}>🧭 Directorio de ayuda</a>
             <a href="#mapa-valle" onClick={() => setShowMenu(false)}>🗺️ Mapa · Norte del Valle</a>
-            <a href="#muro" onClick={() => setShowMenu(false)}>💙 Muro de apoyo</a>
             <a href="#municipios" onClick={() => setShowMenu(false)}>Municipios y veredas que piden ayuda</a>
             <a href="#laderas" onClick={() => setShowMenu(false)}>Laderas de Cali</a>
-            <a href="#medicamentos" onClick={() => setShowMenu(false)}>Medicamentos para albergues</a>
-            <a href="ofrece-tu-techo.html" className="menu-link-highlight">🏠 Ofrece tu techo</a>
             <a href="guia-ninos.html" className="menu-link-highlight">🧸 Guía: acompañar a tus hijos</a>
             <a href="recursos.html">📁 Recursos oficiales</a>
             <a href="#reportar" onClick={() => setShowMenu(false)}>Deja tu actualización</a>
@@ -1737,10 +1726,6 @@ function App(){
         <a className="cta-reportar cta-sm" href="#reportar">
           <span className="cta-ico">＋</span>
           Deja aquí tu actualización
-        </a>
-        <a className="cta-reportar cta-refugio cta-sm" href="#refugio">
-          <span className="cta-ico">🏠</span>
-          Ofrece tu casa como refugio
         </a>
       </div>
 
@@ -1912,32 +1897,6 @@ function App(){
         </div>
       ) : null}
 
-      <div className="muro" id="muro">
-        <div className="muro-head">
-          <div className="eyebrow">Muro de apoyo</div>
-          <h2>Déjale un mensaje de aliento a quienes hoy la están pasando muy mal</h2>
-          <p className="muro-sub">Una palabra puede sostener a alguien en su peor día. Escribe un mensaje de apoyo para las familias, los rescatistas y todos los afectados. Entre todos vamos a construir un gran muro de apoyo por Cali y el Valle.</p>
-        </div>
-        <form className="muro-form" onSubmit={enviarApoyo}>
-          <input type="text" className="muro-nombre" name="nombre" value={muroNombre} onChange={e => setMuroNombre(e.target.value)} placeholder="Tu nombre (opcional)" maxLength={40} />
-          <input type="text" className="muro-mensaje" name="mensaje" value={muroMensaje} onChange={e => setMuroMensaje(e.target.value)} placeholder="Escribe tu mensaje de apoyo…" maxLength={240} required />
-          <button type="submit" className="muro-btn">Publicar 💙</button>
-        </form>
-        {muroEnviado ? <div className="muro-gracias">¡Gracias! Tu mensaje ya es parte del muro. 💙</div> : null}
-        {muroExtra.concat(MENSAJES_APOYO).length ? (
-          <div className="muro-grid">
-            {muroExtra.concat(MENSAJES_APOYO).map((m,i) => (
-              <div className="muro-card" key={i}>
-                <p className="muro-texto">“{m.mensaje}”</p>
-                <span className="muro-firma">— {m.nombre}</span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="muro-vacio">Sé la primera persona en dejar un mensaje. 💙</div>
-        )}
-      </div>
-
       {FRENTES.length ? (
         <div className="seccion colapsable" id="frentes">
           <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
@@ -2018,7 +1977,7 @@ function App(){
             </div>
           ))}
         </div>
-        <p className="pp-nota">Aplica según el último dígito de la placa. No circulan en el horario indicado.</p>
+        <p className="pp-nota">Aplica según el último dígito de la placa. La columna muestra el Pico y Placa ordinario de la ciudad; dentro del polígono de mayor afectación rige además el Pico y Placa Solidario focalizado (2 dígitos adicionales por día) hasta el 5 de septiembre. Sábados en la zona: 22 ago pares, 29 ago impares, 5 sep pares. Consulta el polígono y las excepciones en canales oficiales.</p>
       </div>
 
       {DIRECTORIO_AYUDA.length ? (
@@ -2260,56 +2219,6 @@ function App(){
           </div>
           <div className="field full" data-netlify-recaptcha="true"></div>
           <button className="btn-enviar" type="submit">Enviar actualización</button>
-        </div>
-      </form>
-
-      <form
-        id="refugio"
-        className="form-card"
-        name="refugios"
-        method="POST"
-        data-netlify="true"
-        data-netlify-recaptcha="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="refugios" />
-        <input type="hidden" name="fecha_hora" value={nowISO} />
-        <p className="hp">
-          <label>No llenar: <input name="bot-field" /></label>
-        </p>
-        <div className="eyebrow">Ofrece tu casa</div>
-        <h2>Ofrece tu casa como refugio temporal</h2>
-        <p className="form-sub">
-          Si tienes espacio seguro en tu casa o apartamento y quieres recibir temporalmente a personas que se quedaron sin dónde dormir, cuéntanos aquí. Vamos a verificar y coordinar contigo antes de enviar a alguien.
-        </p>
-        <div className="form-grid">
-          <div className="field">
-            <label htmlFor="r-nom">Nombre completo</label>
-            <input id="r-nom" type="text" name="nombre" required placeholder="Tu nombre" />
-          </div>
-          <div className="field">
-            <label htmlFor="r-tel">Teléfono / WhatsApp</label>
-            <input id="r-tel" type="tel" name="telefono" required placeholder="Ej: 300 123 4567" />
-          </div>
-          <div className="field">
-            <label htmlFor="r-zona">Barrio o zona</label>
-            <input id="r-zona" type="text" name="zona" required placeholder="Ej: Barrio San Fernando, Cali" />
-          </div>
-          <div className="field">
-            <label htmlFor="r-cupos">¿Cuántas personas puedes recibir?</label>
-            <input id="r-cupos" type="number" min="1" name="cupos" required placeholder="Ej: 2" />
-          </div>
-          <div className="field">
-            <label htmlFor="r-dias">¿Por cuánto tiempo?</label>
-            <input id="r-dias" type="text" name="dias_disponible" placeholder="Ej: Unos días, una semana, indefinido" />
-          </div>
-          <div className="field full">
-            <label htmlFor="r-cond">Condiciones o notas (opcional)</label>
-            <textarea id="r-cond" name="condiciones"
-              placeholder="Ej: Recibo mascotas, tengo espacio para una familia, sin costo, etc."></textarea>
-          </div>
-          <div className="field full" data-netlify-recaptcha="true"></div>
-          <button className="btn-enviar" type="submit">Ofrecer mi casa</button>
         </div>
       </form>
 
