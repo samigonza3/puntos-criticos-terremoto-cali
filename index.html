@@ -947,7 +947,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "21 de agosto de 2026, 12:34 p. m.";
+const ACTUALIZADO = "22 de agosto de 2026, 12:54 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1212,31 +1212,31 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #019 · Alcaldía de Cali · corte 20/08/2026, 5:30 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
+const CIFRAS_FUENTE = "Reporte Oficial #020 · Alcaldía de Cali · corte 21/08/2026, 2:00 p. m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
 const CIFRAS = [
-  { n:"150", label:"Fallecidos", tono:"alert" },
-  { n:"41", label:"Desaparecidos", tono:"alert" },
+  { n:"153", label:"Fallecidos", tono:"alert" },
+  { n:"40", label:"Desaparecidos", tono:"alert" },
   { n:"1.657", label:"Heridos", tono:"" },
   { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"140", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"8.680", label:"Reportes ciudadanos procesados", tono:"" },
-  { n:"1.122", label:"Edificaciones verificadas", tono:"" },
+  { n:"142", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"9.090", label:"Reportes ciudadanos procesados", tono:"" },
+  { n:"1.215", label:"Edificaciones verificadas", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
   { n:"24", label:"Colapso total verificado", tono:"alert" },
-  { n:"246", label:"Colapso parcial verificado", tono:"" },
-  { n:"231", label:"Daño estructural grave verificado", tono:"" },
-  { n:"36.273 t", label:"Escombros removidos", tono:"" },
-  { n:"17.630", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
+  { n:"263", label:"Colapso parcial verificado", tono:"" },
+  { n:"245", label:"Daño estructural grave verificado", tono:"" },
+  { n:"36.673 t", label:"Escombros removidos", tono:"" },
+  { n:"20.243", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
   { n:"1.234", label:"Personal activo", tono:"ok" },
   { n:"186", label:"Animales rescatados", tono:"ok" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
-const FRENTES_FUENTE = "Ya se levantaron casi todos los puntos de la ciudad. Solo queda un frente activo, en el edificio Ana del Pilar, donde probablemente falten por recuperar 2 cuerpos. Es una zona restringida por riesgo estructural y biológico, bajo coordinación del PMU: no ingreses si no tienes función asignada ni equipo, guarda silencio y respeta el trabajo de los equipos y el dolor de las familias";
+const FRENTES_FUENTE = "La etapa de recuperación de víctimas terminó. El 21 de agosto, con la extracción del último cuerpo en el edificio Ana Pilar, se levantó el último Puesto de Mando y ya no hay puntos de búsqueda o recuperación activos en la ciudad. Las zonas afectadas siguen con perímetros de seguridad mientras se evalúan las estructuras. Cali entra de lleno en la fase de reconstrucción";
 const FRENTES = [
-  { dir:"Edificio Ana del Pilar", barrio:"Único frente activo · coordinación del PMU (Bomberos, Ejército, Policía y Armada)", alerta:true, alertaTexto:"Recuperación de cuerpos · faltarían 2 · zona restringida" },
+  { dir:"Edificio Ana Pilar · último punto", barrio:"Recuperación finalizada el 21 de agosto · zona con perímetro de seguridad", alerta:false, alertaTexto:"Fase de recuperación cerrada" },
 ];
 
 /* LÍNEAS OFICIALES — BÚSQUEDA DE PERSONAS 24/7 */
@@ -1412,6 +1412,11 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
+  { fecha:"21 ago · 6:00 p. m.", punto:"Culmina la recuperación de cuerpos en Cali", nota:"Con la extracción del último cuerpo en el edificio Ana Pilar se cerró la etapa de recuperación de víctimas, tras 12 días de trabajo articulado de organismos de socorro, Fuerza Pública y entidades distritales. La Alcaldía cierra la primera etapa de «un camino muy largo» y entra en la fase de reconstrucción, acompañando a las familias.", link:"https://www.cali.gov.co/boletines/publicaciones/193826/culmina-la-recuperacion-de-cuerpos-en-cali-y-la-administracion-distrital-cierra-la-primera-etapa-de-un-camino-largo/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"21 ago · 5:00 p. m.", punto:"Cali avanza en su reactivación", nota:"A 11 días del terremoto, la ciudad avanza en la recuperación y reactivación: restablecimiento de servicios, movilidad y actividad económica, con el llamado a que la Cali no afectada siga produciendo para sostener la reconstrucción.", link:"https://www.cali.gov.co/boletines/publicaciones/193825/cali-se-recupera-y-avanza-en-su-reactivacion/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"21 ago · 4:00 p. m.", punto:"Adultos mayores trasladados de albergues a hoteles", nota:"En articulación con Cotelco, la Alcaldía prioriza el traslado de adultos mayores desde los albergues hacia hoteles de la ciudad, para garantizar mejores condiciones de alojamiento y atención mientras avanza la respuesta a la emergencia.", link:"https://www.cali.gov.co/boletines/publicaciones/193851/alcaldia-de-cali-prioriza-traslado-de-adultos-mayores-de-los-albergues-habilitados-tras-el-terremoto-a-hoteles-de-la-ciudad/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"21 ago · 3:00 p. m.", punto:"Deporte · hoja de ruta para 53 ligas", nota:"La Secretaría del Deporte se reunió con 53 ligas deportivas y definió una hoja de ruta para recuperar los escenarios deportivos afectados por el sismo, con información clara y diálogo directo.", link:"https://www.cali.gov.co/boletines/publicaciones/193853/cali-pone-en-marcha-la-recuperacion-de-sus-escenarios-deportivos-53-ligas-ya-tienen-una-hoja-de-ruta/", linkTexto:"Boletín Deporte" },
+  { fecha:"21 ago · 2:00 p. m.", punto:"Un espacio especial para los bebés en los albergues", nota:"El albergue del Coliseo Miguel Calero habilitó un espacio especial para los bebés y las familias que tuvieron que dejar sus casas, cuidando el bienestar de los más pequeños durante la emergencia.", link:"https://www.cali.gov.co/boletines/publicaciones/193861/los-bebes-tienen-un-espacio-muy-especial-en-el-albergue-del-coliseo-miguel-calero/", linkTexto:"Boletín Alcaldía" },
   { fecha:"21 ago · 9:00 a. m.", punto:"Termina la búsqueda en el edificio Vanessa", nota:"Diez días después del sismo concluyó la operación en el edificio Vanessa: se recuperaron y entregaron a sus familias los cuerpos de las 22 personas que estaban bajo los escombros (13 mujeres, 7 hombres y 2 menores). El último fue extraído a las 4:32 a. m. Con el levantamiento del PMU, la zona queda con perímetros de seguridad mientras se evalúan las estructuras vecinas.", link:"https://www.cali.gov.co/boletines/publicaciones/193810/finaliza-la-busqueda-y-rescate-en-el-edificio-vanessa-este-es-el-balance-entregado-por-el-puesto-de-mando-unificado-de-la-zona/", linkTexto:"Boletín Alcaldía" },
   { fecha:"21 ago · 8:30 a. m.", punto:"Se restablece el Pico y Placa ordinario", nota:"Desde el viernes 21 de agosto vuelve el Pico y Placa ordinario en toda la ciudad (Lun 9-0, Mar 1-2, Mié 3-4, Jue 5-6, Vie 7-8). Además, dentro del polígono de mayor afectación rige un Pico y Placa Solidario focalizado con 2 dígitos adicionales por día, hasta el 5 de septiembre. Consulta el polígono y las excepciones en canales oficiales.", link:"https://www.cali.gov.co/boletines/publicaciones/193804/abc-cali-restablece-el-pico-y-placa-ordinario-y-adopta-una-medida-focalizada-en-la-zona-de-mayor-afectacion/", linkTexto:"Boletín Movilidad" },
   { fecha:"21 ago · 8:00 a. m.", punto:"Más de 363 toneladas de ayuda humanitaria entregadas", nota:"La Alcaldía reporta la entrega de 363,6 toneladas (363.602 kg) de ayudas humanitarias desde el terremoto del 10 de agosto. La solidaridad de la ciudad y del país sigue llegando a las familias afectadas.", link:"https://www.cali.gov.co/boletines/publicaciones/193812/mas-de-363-toneladas-de-ayudas-humanitarias-se-han-entregado-tras-el-terremoto-del-10-de-agosto/", linkTexto:"Boletín Alcaldía" },
@@ -1900,7 +1905,7 @@ function App(){
       {FRENTES.length ? (
         <div className="seccion colapsable" id="frentes">
           <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
-            <h2>Puntos en recuperación en Cali ({FRENTES.length})</h2>
+            <h2>Recuperación de víctimas en Cali · fase cerrada</h2>
             <span className={"al-chevron" + (showFrentes ? " open" : "")}>▾</span>
           </button>
           {showFrentes ? (
