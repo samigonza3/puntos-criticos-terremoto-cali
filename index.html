@@ -947,7 +947,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "22 de agosto de 2026, 12:54 p. m.";
+const ACTUALIZADO = "22 de agosto de 2026, 1:05 p. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1335,13 +1335,16 @@ const CIERRES_VIALES = [
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PICO Y PLACA · vigencia del 18 al 22 de agosto, 6:00 a. m. – 7:00 p. m. */
-const PICO_PLACA_VIGENCIA = "Ordinario restablecido en toda la ciudad · desde el 21 de agosto";
+const PICO_PLACA_VIGENCIA = "Zona de emergencia · 21 de agosto al 5 de septiembre";
 const PICO_PLACA = [
-  { dia:"Lunes", fecha:"+ 3 y 4 en zona afectada", digitos:"9 · 0" },
-  { dia:"Martes", fecha:"+ 5 y 6 en zona afectada", digitos:"1 · 2" },
-  { dia:"Miércoles", fecha:"+ 7 y 8 en zona afectada", digitos:"3 · 4" },
-  { dia:"Jueves", fecha:"+ 9 y 0 en zona afectada", digitos:"5 · 6" },
-  { dia:"Viernes", fecha:"+ 1 y 2 en zona afectada", digitos:"7 · 8" },
+  { dia:"Lunes", fecha:"", digitos:"9 · 0 · 3 · 4" },
+  { dia:"Martes", fecha:"", digitos:"1 · 2 · 5 · 6" },
+  { dia:"Miércoles", fecha:"", digitos:"3 · 4 · 7 · 8" },
+  { dia:"Jueves", fecha:"", digitos:"5 · 6 · 9 · 0" },
+  { dia:"Viernes", fecha:"", digitos:"7 · 8 · 1 · 2" },
+  { dia:"Sáb 22 ago", fecha:"", digitos:"Pares" },
+  { dia:"Sáb 29 ago", fecha:"", digitos:"Impares" },
+  { dia:"Sáb 5 sep", fecha:"", digitos:"Pares" },
 ];
 
 /* ============================================================
@@ -1982,7 +1985,7 @@ function App(){
             </div>
           ))}
         </div>
-        <p className="pp-nota">Aplica según el último dígito de la placa. La columna muestra el Pico y Placa ordinario de la ciudad; dentro del polígono de mayor afectación rige además el Pico y Placa Solidario focalizado (2 dígitos adicionales por día) hasta el 5 de septiembre. Sábados en la zona: 22 ago pares, 29 ago impares, 5 sep pares. Consulta el polígono y las excepciones en canales oficiales.</p>
+        <p className="pp-nota">Restricción según el último dígito de la placa, <strong>únicamente dentro de la zona de emergencia</strong>, comprendida entre las <strong>carreras 36 y 66</strong> y las <strong>calles 5 y 10</strong>. Fuera de esa zona rige el pico y placa ordinario de la ciudad (los dos primeros dígitos de cada día). Consulta las excepciones en canales oficiales.</p>
       </div>
 
       {DIRECTORIO_AYUDA.length ? (
