@@ -952,7 +952,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "23 de agosto de 2026, 9:30 a. m.";
+const ACTUALIZADO = "23 de agosto de 2026, 9:45 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1771,25 +1771,6 @@ function App(){
           <span className="chip"><span className="dot"></span>Fase de reconstrucción en marcha</span>
         </div>
 
-        <div className="grid-info">
-          <div className="card">
-            <h2>Necesidades generales</h2>
-            <p className="card-sub">Para municipios y laderas — apoyar a quienes se quedaron sin su casa y que puedan dormir con dignidad:</p>
-            <div className="needs">
-              {NECESIDADES_GENERALES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-            </div>
-            <p className="card-sub" style={{marginTop:"14px"}}>Para los puntos de trabajo en Cali — ya cubiertos en su mayoría; hay que renovar a diario lo que se gasta rápido:</p>
-            <div className="needs">
-              {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-            </div>
-          </div>
-          {ALERTA ? (
-            <div className="card alert-card">
-              <div className="tag">Importante</div>
-              <p>{ALERTA}</p>
-            </div>
-          ) : null}
-        </div>
       </header>
 
       {ALTA_PRIORIDAD.length ? (
