@@ -799,11 +799,16 @@
   .pp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
   .pp-dia{background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.28);
     border-radius:12px;padding:10px 8px;text-align:center}
-  .pp-dia-nombre{font-size:12px;font-weight:800;color:var(--white)}
-  .pp-dia-fecha{font-size:11px;color:var(--muted);margin:2px 0 6px}
+  .pp-dia.zona{background:rgba(255,92,107,.1);border-color:rgba(255,92,107,.32)}
+  .pp-dia-nombre{font-size:12px;font-weight:800;color:var(--white);margin-bottom:6px}
   .pp-digitos{font-size:14px;font-weight:800;color:var(--warn);letter-spacing:.02em}
-  .pp-nota{font-size:12.5px;color:var(--ice);line-height:1.5;margin-top:10px}
-  @media (max-width:640px){ .pp-grid{grid-template-columns:repeat(2,1fr)} }
+  .pp-dia.zona .pp-digitos{color:#FF8A97}
+  .pp-sub-tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--star-light);margin:4px 0 8px}
+  .pp-sab{grid-template-columns:repeat(3,1fr);margin-top:8px}
+  .pp-nota{font-size:12.5px;color:var(--ice);line-height:1.5;margin-top:12px}
+  .pp-mapa{width:100%;max-width:100%;border-radius:12px;margin-top:12px;border:1px solid rgba(127,168,255,.24);display:block}
+  .pp-mapa-cap{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}
+  @media (max-width:640px){ .pp-grid{grid-template-columns:repeat(2,1fr)} .pp-sab{grid-template-columns:repeat(3,1fr)} }
 
   /* ===== Frentes de trabajo (Alcaldía) ===== */
   .frentes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -947,7 +952,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "23 de agosto de 2026, 8:30 a. m.";
+const ACTUALIZADO = "23 de agosto de 2026, 9:30 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1335,16 +1340,27 @@ const CIERRES_VIALES = [
 const NOTA_NO_DESPLAZARSE = "En algunos puntos solo dejan entrar con casco de seguridad. Las condiciones cambian rápido: confirma que el punto sigue necesitando apoyo antes de movilizarte, y no difundas información falsa.";
 
 /* PICO Y PLACA · vigencia del 18 al 22 de agosto, 6:00 a. m. – 7:00 p. m. */
-const PICO_PLACA_VIGENCIA = "Zona de emergencia · 21 de agosto al 5 de septiembre";
-const PICO_PLACA = [
-  { dia:"Lunes", fecha:"", digitos:"9 · 0 · 3 · 4" },
-  { dia:"Martes", fecha:"", digitos:"1 · 2 · 5 · 6" },
-  { dia:"Miércoles", fecha:"", digitos:"3 · 4 · 7 · 8" },
-  { dia:"Jueves", fecha:"", digitos:"5 · 6 · 9 · 0" },
-  { dia:"Viernes", fecha:"", digitos:"7 · 8 · 1 · 2" },
-  { dia:"Sáb 22 ago", fecha:"", digitos:"Pares" },
-  { dia:"Sáb 29 ago", fecha:"", digitos:"Impares" },
-  { dia:"Sáb 5 sep", fecha:"", digitos:"Pares" },
+const PICO_PLACA_VIGENCIA = "Nueva medida · lunes a viernes, 6:00 a. m. – 7:00 p. m.";
+/* Pico y placa ordinario en toda la ciudad */
+const PICO_PLACA_CIUDAD = [
+  { dia:"Lunes", digitos:"9 · 0" },
+  { dia:"Martes", digitos:"1 · 2" },
+  { dia:"Miércoles", digitos:"3 · 4" },
+  { dia:"Jueves", digitos:"5 · 6" },
+  { dia:"Viernes", digitos:"7 · 8" },
+];
+/* Zona de emergencia (21 ago – 5 sep): 4 dígitos por día */
+const PICO_PLACA_ZONA = [
+  { dia:"Lunes", digitos:"9 · 0 · 3 · 4" },
+  { dia:"Martes", digitos:"1 · 2 · 5 · 6" },
+  { dia:"Miércoles", digitos:"3 · 4 · 7 · 8" },
+  { dia:"Jueves", digitos:"5 · 6 · 9 · 0" },
+  { dia:"Viernes", digitos:"7 · 8 · 1 · 2" },
+];
+const PICO_PLACA_SABADOS = [
+  { dia:"Sáb 22 ago", digitos:"Pares" },
+  { dia:"Sáb 29 ago", digitos:"Impares" },
+  { dia:"Sáb 5 sep", digitos:"Pares" },
 ];
 
 /* ============================================================
@@ -1699,7 +1715,7 @@ function App(){
             <a href="#psicologia" onClick={() => setShowMenu(false)}>Apoyo psicológico gratuito</a>
             <a href="#juridica" onClick={() => setShowMenu(false)}>Asesoría jurídica gratuita</a>
             <a href="#cierres" onClick={() => setShowMenu(false)}>Vías cerradas en Cali</a>
-            <a href="#frentes" onClick={() => setShowMenu(false)}>Puntos de búsqueda y rescate en Cali</a>
+            <a href="#pico-placa" onClick={() => setShowMenu(false)}>Pico y placa</a>
           </nav>
         </>
       ) : null}
@@ -1817,6 +1833,44 @@ function App(){
         </div>
       ) : null}
 
+      <div className="pico-placa" id="pico-placa">
+        <div className="pp-head">
+          <div className="pp-titulo">🚗 Pico y placa</div>
+          <div className="pp-vigencia">{PICO_PLACA_VIGENCIA}</div>
+        </div>
+
+        <div className="pp-sub-tag">En toda la ciudad</div>
+        <div className="pp-grid">
+          {PICO_PLACA_CIUDAD.map((d,i) => (
+            <div className="pp-dia" key={i}>
+              <div className="pp-dia-nombre">{d.dia}</div>
+              <div className="pp-digitos">{d.digitos}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="pp-sub-tag" style={{marginTop:"16px"}}>Zona de emergencia · 21 de agosto al 5 de septiembre</div>
+        <div className="pp-grid">
+          {PICO_PLACA_ZONA.map((d,i) => (
+            <div className="pp-dia zona" key={i}>
+              <div className="pp-dia-nombre">{d.dia}</div>
+              <div className="pp-digitos">{d.digitos}</div>
+            </div>
+          ))}
+        </div>
+        <div className="pp-grid pp-sab">
+          {PICO_PLACA_SABADOS.map((d,i) => (
+            <div className="pp-dia zona" key={i}>
+              <div className="pp-dia-nombre">{d.dia}</div>
+              <div className="pp-digitos">{d.digitos}</div>
+            </div>
+          ))}
+        </div>
+        <p className="pp-nota">La restricción de la zona de emergencia aplica <strong>únicamente</strong> dentro del polígono comprendido entre las <strong>carreras 36 y 66</strong> y las <strong>calles 5 y 10</strong>. Fuera de esa zona rige el pico y placa ordinario de la ciudad.</p>
+        <img className="pp-mapa" src="zona-emergencia-pico-placa.png" alt="Mapa de la zona de emergencia donde aplica el pico y placa, entre carreras 36 y 66 y calles 5 y 10" loading="lazy" />
+        <div className="pp-mapa-cap">Zona de emergencia donde aplica la restricción (en rojo).</div>
+      </div>
+
       <a href="guia-ninos.html" className="guia-promo" id="guia-ninos">
         <div className="gp-ico">🧸</div>
         <div className="gp-body">
@@ -1907,39 +1961,6 @@ function App(){
         </div>
       ) : null}
 
-      {FRENTES.length ? (
-        <div className="seccion colapsable" id="frentes">
-          <button type="button" className="al-toggle" onClick={() => setShowFrentes(v => !v)} aria-expanded={showFrentes}>
-            <h2>Recuperación de víctimas en Cali · fase cerrada</h2>
-            <span className={"al-chevron" + (showFrentes ? " open" : "")}>▾</span>
-          </button>
-          {showFrentes ? (
-            <>
-              <p className="sec-sub">{FRENTES_FUENTE}.</p>
-              <div className="resc-nec" style={{marginTop:"14px"}}>
-                <div className="rn-tag">Necesidades que se renuevan constantemente</div>
-                <div className="needs">
-                  {RESCATE_NECESIDADES.map((n,i) => <span className="need" key={i}>{n}</span>)}
-                </div>
-                <p className="rn-nota">Los alimentos (desayunos, almuerzos y cenas) se coordinan siempre antes de llevarlos. Las linternas y los reflectores nunca sobran.</p>
-              </div>
-              <div className="frentes-grid">
-                {FRENTES.map((f,i) => (
-                  <div className={"frente" + (f.alerta ? " alerta" : "")} key={i}>
-                    <span className="frente-n">{i + 1}</span>
-                    <div>
-                      <div className="frente-dir">{f.dir}</div>
-                      <div className="frente-barrio">{f.barrio}</div>
-                      {f.alerta ? <span className="frente-alerta-badge">⚠ {f.alertaTexto}</span> : null}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : null}
-        </div>
-      ) : null}
-
       {LADERAS.length ? (
         <div className="seccion colapsable" id="laderas">
           <button type="button" className="al-toggle" onClick={() => setShowLaderas(v => !v)} aria-expanded={showLaderas}>
@@ -1970,24 +1991,7 @@ function App(){
 
       <div className="sec-head" id="recursos" style={{marginTop:"30px"}}>
         <h2>📌 Recursos importantes</h2>
-        <p className="sec-sub">Directorio de ayuda, albergues, apoyo psicológico y jurídico gratuitos, pico y placa y vías cerradas. Toca cada bloque para desplegar la información.</p>
-      </div>
-
-      <div className="pico-placa" id="pico-placa">
-        <div className="pp-head">
-          <div className="pp-titulo">🚗 Pico y placa</div>
-          <div className="pp-vigencia">{PICO_PLACA_VIGENCIA}</div>
-        </div>
-        <div className="pp-grid">
-          {PICO_PLACA.map((d,i) => (
-            <div className="pp-dia" key={i}>
-              <div className="pp-dia-nombre">{d.dia}</div>
-              <div className="pp-dia-fecha">{d.fecha}</div>
-              <div className="pp-digitos">{d.digitos}</div>
-            </div>
-          ))}
-        </div>
-        <p className="pp-nota">Restricción según el último dígito de la placa, <strong>únicamente dentro de la zona de emergencia</strong>, comprendida entre las <strong>carreras 36 y 66</strong> y las <strong>calles 5 y 10</strong>. Fuera de esa zona rige el pico y placa ordinario de la ciudad (los dos primeros dígitos de cada día). Consulta las excepciones en canales oficiales.</p>
+        <p className="sec-sub">Directorio de ayuda, albergues, apoyo psicológico y jurídico gratuitos, y vías cerradas. Toca cada bloque para desplegar la información.</p>
       </div>
 
       {DIRECTORIO_AYUDA.length ? (
