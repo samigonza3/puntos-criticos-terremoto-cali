@@ -760,6 +760,20 @@
     padding:10px 16px;border-radius:12px;white-space:nowrap}
   @media (max-width:640px){ .guia-promo{flex-wrap:wrap} .gp-cta{width:100%;text-align:center} }
 
+  /* Cabecera · Logo Fuerza Cali */
+  .fc-header{display:flex;flex-direction:column;align-items:center;gap:8px;
+    margin:2px 0 18px;padding:22px 18px 20px;border-radius:22px;text-align:center;
+    border:1px solid rgba(127,168,255,.28);
+    background:radial-gradient(120% 140% at 50% 0%,rgba(62,123,255,.20),rgba(7,13,34,.35) 60%,rgba(4,8,23,0));}
+  .fc-cristo{width:64px;height:64px;display:block;filter:drop-shadow(0 4px 14px rgba(62,123,255,.5))}
+  .fc-cristo path,.fc-cristo circle{fill:var(--white)}
+  .fc-brand{font-size:26px;font-weight:900;letter-spacing:.04em;line-height:1;
+    color:var(--white);margin-top:2px}
+  .fc-brand .fc-dot{color:var(--star-blue)}
+  .fc-tagline{font-size:11px;font-weight:800;letter-spacing:.32em;
+    color:var(--star-light);text-transform:uppercase}
+  @media (max-width:640px){ .fc-brand{font-size:22px} .fc-cristo{width:54px;height:54px} .fc-tagline{letter-spacing:.24em;font-size:10px} }
+
   /* Banner alto · Rutas de atención */
   .rutas-banner{margin-top:14px;border-radius:18px;padding:16px 18px;
     border:1px solid rgba(62,123,255,.4);
@@ -954,7 +968,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "24 de agosto de 2026, 9:10 a. m.";
+const ACTUALIZADO = "26 de agosto de 2026, 11:41 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1219,26 +1233,26 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #023 · Alcaldía de Cali · corte 23/08/2026, 12:00 m. · las cifras de infraestructura corresponden a edificaciones ya verificadas en territorio";
-const CIFRAS_RESUMEN = "Qué cambió frente al reporte #022 (22 ago): las cifras de personas se mantienen estables —sin nuevos fallecidos, desaparecidos ni heridos—, señal de que la emergencia dio paso a la recuperación. Lo que sigue avanzando es la verificación y el censo: +255 reportes ciudadanos procesados (9.456), +17 edificaciones con colapso parcial verificadas (301), +1.022 toneladas de escombros retiradas (42.537 t) y un fuerte avance del RUFE, de 22.634 a 25.067 familias caracterizadas.";
+const CIFRAS_FUENTE = "Reporte Oficial #025 · Alcaldía de Cali · corte 25/08/2026, 4:00 p. m. · las cifras de infraestructura corresponden a edificaciones con inspección detallada en territorio";
+const CIFRAS_RESUMEN = "Qué cambió frente al reporte #023 (23 ago): las cifras de personas siguen prácticamente estables —154 fallecidos (+1) y 150 cuerpos ya entregados a sus familias—, y los reportes de personas desaparecidas bajan de 34 a 22 a medida que se confirman reencuentros. El trabajo se concentra ahora en el censo y el diagnóstico estructural: el RUFE sube de 25.067 a 28.310 familias caracterizadas, las edificaciones con inspección detallada llegan a 1.147 (306 habitables, 543 no habitables, 298 de uso restringido) y se han retirado 47.939 t de escombros (+5.402). Hay 377 personas en alojamientos temporales. El reporte adopta el nuevo formato oficial, que ya no incluye 'rescatados con vida' y mide los heridos como atendidos en la red de salud.";
 const CIFRAS = [
-  { n:"153", label:"Fallecidos", tono:"alert" },
-  { n:"34", label:"Desaparecidos", tono:"alert" },
-  { n:"1.657", label:"Heridos", tono:"" },
-  { n:"88", label:"Rescatados con vida", tono:"ok" },
-  { n:"148", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"9.456", label:"Reportes ciudadanos procesados", tono:"" },
-  { n:"1.412", label:"Edificaciones verificadas", tono:"" },
+  { n:"154", label:"Fallecidos", tono:"alert" },
+  { n:"22", label:"Reportes de personas desaparecidas", tono:"alert" },
+  { n:"149", label:"Heridos atendidos en la red de salud", tono:"" },
+  { n:"150", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"377", label:"Personas en alojamientos temporales", tono:"" },
+  { n:"28.310", label:"Familias caracterizadas (RUFE)", tono:"" },
+  { n:"1.147", label:"Edificaciones con inspección detallada", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
   { n:"24", label:"Colapso total verificado", tono:"alert" },
-  { n:"301", label:"Colapso parcial verificado", tono:"" },
-  { n:"370", label:"Daño estructural grave verificado", tono:"" },
-  { n:"42.537 t", label:"Escombros removidos", tono:"" },
-  { n:"25.067", label:"Evaluaciones de daños y necesidades (RUFE)", tono:"" },
+  { n:"365", label:"Colapso parcial verificado", tono:"" },
+  { n:"543", label:"Edificaciones no habitables", tono:"" },
+  { n:"306", label:"Edificaciones habitables", tono:"ok" },
+  { n:"47.939 t", label:"Escombros removidos", tono:"" },
   { n:"1.100", label:"Personal activo", tono:"ok" },
-  { n:"205", label:"Animales rescatados", tono:"ok" },
+  { n:"227", label:"Animales rescatados", tono:"ok" },
 ];
 
 /* 8 FRENTES DE TRABAJO — ALCALDÍA DE CALI (UAESP) */
@@ -1434,6 +1448,11 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
+  { fecha:"26 ago · 9:00 a. m.", punto:"Llegan las primeras ayudas al barrio La Flora", nota:"En el conjunto Balcón de las Flores (av. 5B norte #64N-80, Comuna 2), evacuado tras el sismo, la Alcaldía entregó 84 mercados y 84 kits de aseo a las familias damnificadas. Mientras esperan volver a sus viviendas, los residentes están donde familiares o pagando arriendo; piden que no especulen con los cánones. Las ayudas se entregan según el registro en el RUFE y seguirán llegando a otros sectores del norte. El Centro de Acopio sigue activo en la Ciudadela Petronio, junto al Coliseo El Pueblo.", link:"https://www.cali.gov.co/boletines/publicaciones/193972/la-ayuda-comienza-a-llegar-al-barrio-la-flora-un-respiro-para-los-afectados-por-el-sismo/", linkTexto:"Boletín Gestión del Riesgo" },
+  { fecha:"25 ago · 5:00 p. m.", punto:"Qué significan los ‘stickers’ de colores en las fachadas", nota:"Gestión del Riesgo explica la marcación con la norma internacional ATC-20 (más de 270 inspecciones ya realizadas): rojo = edificación en condición restringida, no hay condiciones seguras para ingresar; amarillo = acceso o uso condicionado, con áreas limitadas; verde = inspeccionada y habitable en el corto plazo (no exime de revisiones posteriores). Verifica que la etiqueta de tu inmueble tenga el logo de la UNGRD y la firma del profesional; los evaluadores válidos se acreditan en el Coliseo El Pueblo. Los stickers son preventivos y no reemplazan un estudio técnico detallado.", link:"https://www.cali.gov.co/boletines/publicaciones/193965/que-significan-los-stickers-en-las-fachadas-gestion-del-riesgo-explica-la-clasificacion-de-inmuebles-tras-el-sismo/", linkTexto:"Boletín Gestión del Riesgo" },
+  { fecha:"25 ago · 3:00 p. m.", punto:"Dos proyectos ante el Concejo para acelerar la reconstrucción", nota:"La Alcaldía radicó ante el Concejo (sesiones extraordinarias del 24 ago al 4 sep) dos proyectos de acuerdo: el primero da al alcalde facultades presupuestales excepcionales y pro tempore para adiciones y traslados de recursos ágiles hacia damnificados, limpieza de sectores críticos y recuperación de infraestructura; el segundo crea alivios tributarios y no tributarios (incentivos, descuentos, plazos y facilidades de pago, incluido el predial) para las familias y comerciantes afectados y para reactivar la economía.", link:"https://www.cali.gov.co/boletines/publicaciones/193957/es-oficial-gobierno-de-cali-formalizo-ante-el-concejo-dos-proyectos-para-acelerar-la-reconstruccion-y-aliviar-a-los-afectados/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"25 ago · 1:00 p. m.", punto:"395 damnificados ya pasaron de albergues a hoteles", nota:"En articulación con Cotelco Valle, Propacífico y ACNUR, 395 personas hicieron check-in en hoteles de primer nivel (Boulevard del Río, Marriott City Express, Hilton Garden Inn, entre otros) y solo 12 están pendientes. El censo de afectados va en 85%. La Alcaldía insiste en que los albergues son protección transitoria —no más de una semana— y que la atención humanitaria podría extenderse hasta un año mientras avanza el diagnóstico estructural de las viviendas.", link:"https://www.cali.gov.co/boletines/publicaciones/193962/alcaldia-de-cali-avanza-en-el-traslado-de-damnificados-de-albergues-a-la-red-hotelera-para-garantizar-una-atencion-digna-tras-el-terremoto/", linkTexto:"Boletín Alcaldía" },
+  { fecha:"25 ago · 11:00 a. m.", punto:"COTELCO: solo el 3,5 % de la capacidad hotelera quedó afectada", nota:"El gremio hotelero informa que 36 hoteles presentan daños (algunos severos, otros medianos o estéticos), el 3,5 % de los establecimientos de la ciudad y el Valle. Los hoteles se unieron para alojar a los damnificados: cerca de 380 personas ubicadas y proyección de superar 500; antes ya habían albergado gratis a más de 1.400. La recuperación de los hoteles afectados tomaría entre dos y seis meses. «Cali sufrió un terremoto, pero no se cayó, sigue en pie».", link:"https://www.cali.gov.co/boletines/publicaciones/193967/solo-el-35-de-la-capacidad-hotelera-de-cali-quedo-afectada-tras-el-terremoto-advierte-cotelco/", linkTexto:"Boletín Alcaldía" },
   { fecha:"22 ago · 6:00 p. m.", punto:"Cali avanza hacia una reconstrucción segura", nota:"El alcalde encabezó un nuevo PMU con expertos, universidades (Universidad del Valle), la Sociedad Colombiana de Ingenieros y entidades nacionales para planear una reconstrucción segura: análisis de puntos críticos, un censo preciso de afectados (con UNGRD, DANE y el Centro Nacional de Consultoría) y decisiones de ordenamiento territorial y sismorresistencia para reducir el riesgo futuro.", link:"https://www.cali.gov.co/boletines/publicaciones/193872/cali-avanza-hacia-una-reconstruccion-segura-y-con-vision-de-futuro-tras-el-sismo/", linkTexto:"Boletín Alcaldía" },
   { fecha:"22 ago · 3:00 p. m.", punto:"Topógrafos apoyan el monitoreo técnico de zonas afectadas", nota:"El equipo de Topografía de la Unidad de Gestión de Bienes y Servicios acompaña las labores de monitoreo técnico en las zonas afectadas, aportando información precisa para la gestión del riesgo y la toma de decisiones sobre las estructuras.", link:"https://www.cali.gov.co/boletines/publicaciones/193878/topografos-especializados-de-bienes-y-servicios-acompanan-labores-de-monitoreo-tecnico-en-zonas-afectadas-por-el-terremoto/", linkTexto:"Boletín Alcaldía" },
   { fecha:"22 ago · 11:00 a. m.", punto:"Docentes en jornadas de sanación y bienestar emocional", nota:"Más de 100 docentes participaron en jornadas de sanación, restauración y orientación emocional como respuesta a las afectaciones del terremoto, cuidando también a quienes acompañan a niñas, niños y jóvenes.", link:"https://www.cali.gov.co/boletines/publicaciones/193884/mas-de-100-docentes-participan-en-jornadas-de-sanacion-y-bienestar-emocional/", linkTexto:"Boletín Alcaldía" },
@@ -1723,6 +1742,15 @@ function App(){
         </>
       ) : null}
 
+      <header className="fc-header">
+        <svg className="fc-cristo" viewBox="0 0 100 100" role="img" aria-label="Cristo Redentor">
+          <circle cx="50" cy="16" r="7"/>
+          <path d="M47 24 h6 v20 l24 4 v6 l-24 -3 v6 l6 34 h-7 l-5 -30 -5 30 h-7 l6 -34 v-6 l-24 3 v-6 l24 -4 z"/>
+        </svg>
+        <div className="fc-brand">FUERZA CALI<span className="fc-dot">.CO</span></div>
+        <div className="fc-tagline">Unidos por nuestra tierra</div>
+      </header>
+
       <div className="rutas-banner">
         <div className="rb-titulo">📞 Rutas de atención · Damnificados</div>
         <div className="rb-lineas">
@@ -1743,15 +1771,6 @@ function App(){
         <a className="rb-link" href="https://atencionsismo.cali.gov.co/" target="_blank" rel="noopener">Registrar una afectación por el sismo →</a>
       </div>
 
-      <a className="recon-promo" href="reconstruyamos.html">
-        <div className="rp-ico">🏗️</div>
-        <div className="rp-body">
-          <div className="rp-tag">Reconstrucción · Fuerza Cali</div>
-          <div className="rp-title">Reconstruyamos Montebello, ladrillo a ladrillo</div>
-          <div className="rp-sub">Empieza la fase de reconstrucción. Dona materiales o aporta a la meta y sigue en qué se invierte cada peso, con total transparencia.</div>
-        </div>
-        <div className="rp-cta">Donar ahora →</div>
-      </a>
 
       <div className="lastupdate" style={{marginTop:"18px"}}>
         <span className="lu-label"><span className="live"></span>Última actualización</span>
