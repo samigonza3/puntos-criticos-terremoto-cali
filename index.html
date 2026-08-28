@@ -968,7 +968,7 @@
    Guarda el archivo y vuelve a arrastrarlo a Netlify.
    ============================================================ */
 
-const ACTUALIZADO = "27 de agosto de 2026, 11:41 a. m.";
+const ACTUALIZADO = "28 de agosto de 2026, 9:59 a. m.";
 
 /* ULTIMAS ACTUALIZACIONES
    Agrega arriba la más reciente. Formato de fecha libre. */
@@ -1233,24 +1233,25 @@ const NECESIDADES_GENERALES = [
 const ALERTA = "";
 
 /* CIFRAS OFICIALES (solo Cali) */
-const CIFRAS_FUENTE = "Reporte Oficial #025 · Alcaldía de Cali · corte 25/08/2026, 4:00 p. m. · las cifras de infraestructura corresponden a edificaciones con inspección detallada en territorio";
-const CIFRAS_RESUMEN = "Qué cambió frente al reporte #023 (23 ago): las cifras de personas siguen prácticamente estables —154 fallecidos (+1) y 150 cuerpos ya entregados a sus familias—, y los reportes de personas desaparecidas bajan de 34 a 22 a medida que se confirman reencuentros. El trabajo se concentra ahora en el censo y el diagnóstico estructural: el RUFE sube de 25.067 a 28.310 familias caracterizadas, las edificaciones con inspección detallada llegan a 1.147 (306 habitables, 543 no habitables, 298 de uso restringido) y se han retirado 47.939 t de escombros (+5.402). Hay 377 personas en alojamientos temporales. El reporte adopta el nuevo formato oficial, que ya no incluye 'rescatados con vida' y mide los heridos como atendidos en la red de salud.";
+const CIFRAS_FUENTE = "Reporte Oficial #027 · Alcaldía de Cali · corte 27/08/2026, 2:00 p. m. · las cifras de infraestructura corresponden a edificaciones con visita detallada (diagnóstico especializado)";
+const CIFRAS_RESUMEN = "Qué cambió frente al reporte #025 (25 ago): Medicina Legal confirmó la entrega a sus familias de la totalidad de los cuerpos de las víctimas —154 de 154—, y los reportes de personas desaparecidas bajan de 22 a 21 al depurar el registro. El trabajo se concentra en el censo y el diagnóstico: el RUFE sube de 28.310 a 35.280 familias caracterizadas (23.785 ya reportadas como damnificadas / RUD), las edificaciones con visita detallada llegan a 1.216 (315 habitables, 548 no habitables, 321 de uso restringido) y se han retirado 53.573 t de escombros (+5.634). Hay 460 personas en alojamientos temporales gestionados. Los heridos se reportan ahora como los que siguen en atención en la red de salud (148 de 1.504 atendidos en total).";
 const CIFRAS = [
   { n:"154", label:"Fallecidos", tono:"alert" },
-  { n:"22", label:"Reportes de personas desaparecidas", tono:"alert" },
-  { n:"149", label:"Heridos atendidos en la red de salud", tono:"" },
-  { n:"150", label:"Cuerpos entregados a familias", tono:"" },
-  { n:"377", label:"Personas en alojamientos temporales", tono:"" },
-  { n:"28.310", label:"Familias caracterizadas (RUFE)", tono:"" },
-  { n:"1.147", label:"Edificaciones con inspección detallada", tono:"" },
+  { n:"21", label:"Reportes de personas desaparecidas", tono:"alert" },
+  { n:"148", label:"Heridos en atención en la red de salud", tono:"" },
+  { n:"154", label:"Cuerpos entregados a familias", tono:"" },
+  { n:"460", label:"Personas en alojamientos temporales", tono:"" },
+  { n:"35.280", label:"Familias caracterizadas (RUFE)", tono:"" },
+  { n:"1.216", label:"Edificaciones con visita detallada", tono:"" },
 ];
 /* Cifras adicionales — se muestran al abrir "Ver más cifras". */
 const CIFRAS_MAS = [
+  { n:"23.785", label:"Familias reportadas como damnificadas (RUD)", tono:"" },
   { n:"24", label:"Colapso total verificado", tono:"alert" },
   { n:"365", label:"Colapso parcial verificado", tono:"" },
-  { n:"543", label:"Edificaciones no habitables", tono:"" },
-  { n:"306", label:"Edificaciones habitables", tono:"ok" },
-  { n:"47.939 t", label:"Escombros removidos", tono:"" },
+  { n:"548", label:"Edificaciones no habitables", tono:"" },
+  { n:"315", label:"Edificaciones habitables", tono:"ok" },
+  { n:"53.573 t", label:"Escombros removidos", tono:"" },
   { n:"1.100", label:"Personal activo", tono:"ok" },
   { n:"227", label:"Animales rescatados", tono:"ok" },
 ];
@@ -1448,6 +1449,11 @@ const DIRECTORIO_AYUDA = [
 const RESCATE_NECESIDADES = ["Hidratación","Electrolitos","Hielo (todos los días)","Guantes industriales","Extensiones","Linternas","Cascos","Alimentación (confirmar antes)"];
 
 const ALTA_PRIORIDAD = [
+  { fecha:"27 ago · 4:00 p. m.", punto:"Predial 2026: plazo ampliado hasta el 31 de diciembre sin intereses", nota:"Como alivio tras el sismo, la Alcaldía traslada del 30 de septiembre al 31 de diciembre de 2026 el plazo para pagar el Impuesto Predial Unificado sin intereses de mora (Resolución 4131.010.21.1.0785 de 2026); los intereses solo correrían desde el 1 de enero de 2027. Para comerciantes, el ICA y ReteICA del bimestre julio–agosto se corren a octubre según el último dígito del NIT, y también se ajustan plazos de estampillas y tasas distritales de julio y agosto.", link:"https://www.cali.gov.co/boletines/publicaciones/194002/cali-amplia-hasta-el-31-de-diciembre-el-plazo-para-pagar-el-predial-2026-sin-intereses-de-mora/", linkTexto:"Boletín Hacienda" },
+  { fecha:"27 ago · 12:00 m.", punto:"Vivienda abre ventanilla provisional en la Plazoleta Jairo Varela", nota:"Como su sede (Edificio Fuente Versalles) quedó inhabilitada por el sismo, la Secretaría de Vivienda Social y Hábitat atiende desde el 27 de agosto en una ventanilla provisional en la Plazoleta Jairo Varela y en los CALI 3 (Cra. 9 #2-91, San Antonio) y CALI 17 (Cll. 13B #64-00, Bosques del Limonar), de lunes a viernes 8:00–12:00 m. y 2:00–5:00 p. m. Ojo: estos puntos son para trámites regulares; NO hacen censos, caracterización ni subsidios de arriendo de la emergencia, que van por las rutas oficiales del sismo.", link:"https://www.cali.gov.co/boletines/publicaciones/194012/secretaria-de-vivienda-habilita-ventanilla-unica-provisional-en-la-plazoleta-jairo-varela-amplian-puntos-de-atencion-a-la-ciudadania/", linkTexto:"Boletín Vivienda" },
+  { fecha:"27 ago · 10:00 a. m.", punto:"PAE llevará canasta a casa a colegios sin presencialidad", nota:"Desde el viernes 28 de agosto, la Secretaría de Educación entrega la canasta del Programa de Alimentación Escolar (PAE) a los estudiantes de las sedes oficiales afectadas por el sismo que aún no tienen clases presenciales; se benefician 26 sedes, empezando por Jardín Nacional No.1, República de Costa Rica y Nuevo Latir. Las entregas son por periodos de 15 y 30 días; cada rector, con el operador del PAE, coordina y avisa a las familias los horarios.", link:"https://www.cali.gov.co/boletines/publicaciones/194013/programa-de-alimentacion-escolar-de-cali-entregara-canasta-en-casa-a-la-comunidad-educativa-afectada-por-el-terremoto/", linkTexto:"Boletín Educación" },
+  { fecha:"26 ago · 3:00 p. m.", punto:"Nuevo WhatsApp oficial (324 6900888) para entregar ayudas a damnificados", nota:"La Alcaldía habilitó un WhatsApp (324 6900888) para que las familias con registro RUFE verifiquen su información y avancen en la entrega de ayudas. Quienes estén registrados recibirán un SMS de la Alcaldía con el enlace al asistente; hay que dar el número de documento y esperar el mensaje con fecha, hora y punto de entrega, presentando la cédula. Puntos: Coliseo Celestino Mutis (Terrón Colorado), U.R. El Avión (Prados del Norte), Coliseo El Sena, Centro Múltiple Comuneros 2, U.R. Cañaveralejo, U.R. Santiago de Cali (Tequendama) y U.R. Horizontes (Comuna 18).", link:"https://www.cali.gov.co/boletines/publicaciones/193991/alcaldia-de-cali-dispone-canal-de-whatsapp-para-continuar-atendiendo-a-familias-damnificadas-por-el-terremoto/", linkTexto:"Boletín Gestión del Riesgo" },
+  { fecha:"26 ago · 11:00 a. m.", punto:"Carpas contra abusos en arriendos y materiales de construcción", nota:"Ante las denuncias por alzas injustificadas tras el sismo, la Secretaría de Seguridad y Justicia instaló seis carpas azules cerca de las zonas más afectadas para orientar a la ciudadanía y recibir reportes de especulación en arrendamientos y materiales de construcción, con asesoría en protección al consumidor y propiedad horizontal. También se atiende presencialmente en la Casa de Justicia Centro (Av. 2Nt #8N, 2.º piso) y virtualmente por la opción PQRSD de la página de la Alcaldía.", link:"https://www.cali.gov.co/boletines/publicaciones/193989/alcaldia-de-cali-instala-carpas-para-orientar-a-ciudadanos-frente-a-posibles-abusos-en-arrendamientos-y-materiales-de-construccion/", linkTexto:"Boletín Seguridad y Justicia" },
   { fecha:"26 ago · 9:00 a. m.", punto:"Llegan las primeras ayudas al barrio La Flora", nota:"En el conjunto Balcón de las Flores (av. 5B norte #64N-80, Comuna 2), evacuado tras el sismo, la Alcaldía entregó 84 mercados y 84 kits de aseo a las familias damnificadas. Mientras esperan volver a sus viviendas, los residentes están donde familiares o pagando arriendo; piden que no especulen con los cánones. Las ayudas se entregan según el registro en el RUFE y seguirán llegando a otros sectores del norte. El Centro de Acopio sigue activo en la Ciudadela Petronio, junto al Coliseo El Pueblo.", link:"https://www.cali.gov.co/boletines/publicaciones/193972/la-ayuda-comienza-a-llegar-al-barrio-la-flora-un-respiro-para-los-afectados-por-el-sismo/", linkTexto:"Boletín Gestión del Riesgo" },
   { fecha:"25 ago · 5:00 p. m.", punto:"Qué significan los ‘stickers’ de colores en las fachadas", nota:"Gestión del Riesgo explica la marcación con la norma internacional ATC-20 (más de 270 inspecciones ya realizadas): rojo = edificación en condición restringida, no hay condiciones seguras para ingresar; amarillo = acceso o uso condicionado, con áreas limitadas; verde = inspeccionada y habitable en el corto plazo (no exime de revisiones posteriores). Verifica que la etiqueta de tu inmueble tenga el logo de la UNGRD y la firma del profesional; los evaluadores válidos se acreditan en el Coliseo El Pueblo. Los stickers son preventivos y no reemplazan un estudio técnico detallado.", link:"https://www.cali.gov.co/boletines/publicaciones/193965/que-significan-los-stickers-en-las-fachadas-gestion-del-riesgo-explica-la-clasificacion-de-inmuebles-tras-el-sismo/", linkTexto:"Boletín Gestión del Riesgo" },
   { fecha:"25 ago · 3:00 p. m.", punto:"Dos proyectos ante el Concejo para acelerar la reconstrucción", nota:"La Alcaldía radicó ante el Concejo (sesiones extraordinarias del 24 ago al 4 sep) dos proyectos de acuerdo: el primero da al alcalde facultades presupuestales excepcionales y pro tempore para adiciones y traslados de recursos ágiles hacia damnificados, limpieza de sectores críticos y recuperación de infraestructura; el segundo crea alivios tributarios y no tributarios (incentivos, descuentos, plazos y facilidades de pago, incluido el predial) para las familias y comerciantes afectados y para reactivar la economía.", link:"https://www.cali.gov.co/boletines/publicaciones/193957/es-oficial-gobierno-de-cali-formalizo-ante-el-concejo-dos-proyectos-para-acelerar-la-reconstruccion-y-aliviar-a-los-afectados/", linkTexto:"Boletín Alcaldía" },
