@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FuerzaCali.co · Reconstruimos lo que el terremoto se llevó</title>
-<meta name="description" content="FuerzaCali.co es una fundación en creación que reconstruye viviendas rurales del Valle del Cauca destruidas por el terremoto del 10 de agosto. Conoce nuestros frentes de acción, dona y sigue en qué se invierte cada peso." />
+<meta name="description" content="FuerzaCali.co es un colectivo ciudadano que reconstruye viviendas rurales del Valle del Cauca destruidas por el terremoto del 10 de agosto. Conoce nuestros frentes de acción, dona y sigue en qué se invierte cada peso." />
 <meta name="keywords" content="Fuerza Cali, reconstrucción terremoto Cali, donar Valle del Cauca, Golondrinas La María, Yotoco, Bajo Darién, reconstruir viviendas" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="FuerzaCali.co · Unidos por nuestra tierra" />
@@ -102,7 +102,35 @@ header.nav{position:sticky;top:0;z-index:50;padding:10px 0}
 .btn-block{width:100%}
 
 /* ===== Hero ===== */
-.hero{padding-top:26px;text-align:center}
+.hero{padding-top:26px;text-align:center;position:relative}
+/* Velatón / homenaje */
+.vigil{position:absolute;left:50%;top:-30px;transform:translateX(-50%);
+  width:min(680px,108%);height:520px;pointer-events:none;z-index:0}
+.hero>*:not(.vigil){position:relative;z-index:1}
+.memorial{display:inline-flex;align-items:center;gap:14px;text-align:left;
+  padding:12px 18px;border-radius:18px;margin-bottom:22px;max-width:92%;
+  opacity:0;transform:translateY(8px);animation:memIn 1.2s ease .3s forwards}
+@keyframes memIn{to{opacity:1;transform:translateY(0)}}
+.memorial .mem-date{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
+.memorial .mem-msg{font-size:13px;color:var(--ice);margin-top:2px;line-height:1.4}
+.flame{position:relative;width:22px;height:30px;flex-shrink:0}
+.flame .glow{position:absolute;left:50%;top:6px;transform:translateX(-50%);width:26px;height:26px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,178,94,.7),transparent 68%);
+  filter:blur(3px);animation:flicker 2.4s ease-in-out infinite}
+.flame .fire{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  width:10px;height:18px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:linear-gradient(to top,#ffd27a,#ff9d3c 55%,#ffe9c2);
+  box-shadow:0 0 12px rgba(255,178,94,.8);transform-origin:bottom center;
+  animation:sway 2.4s ease-in-out infinite}
+.flame::after{content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);
+  width:14px;height:5px;border-radius:50%;background:rgba(122,168,255,.35);filter:blur(2px)}
+@keyframes flicker{0%,100%{opacity:.85;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.12)}}
+@keyframes sway{0%,100%{transform:translateX(-50%) rotate(-3deg) scaleY(1)}50%{transform:translateX(-50%) rotate(3deg) scaleY(1.08)}}
+@media (prefers-reduced-motion:reduce){
+  .vigil{display:none}
+  .memorial{opacity:1;transform:none;animation:none}
+  .flame .glow,.flame .fire{animation:none}
+}
 .hero h1{font-size:clamp(30px,8.5vw,58px);font-weight:900;margin:8px 0 16px}
 .hero h1 .grad{background:linear-gradient(120deg,#7aa8ff,#37e0c8);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:640px;margin:0 auto 26px;color:var(--muted);font-size:clamp(15px,4vw,18px)}
@@ -265,9 +293,20 @@ footer a{color:var(--muted);text-decoration:none}
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <span class="eyebrow">Fundación en creación · Valle del Cauca</span>
+    <canvas class="vigil" id="vigil" aria-hidden="true"></canvas>
+
+    <!-- Homenaje · 1 mes del terremoto -->
+    <div class="memorial glass" id="memorial">
+      <div class="flame" aria-hidden="true"><span class="glow"></span><span class="fire"></span></div>
+      <div class="mem-body">
+        <div class="mem-date">10 ago · 10 sep 2026 — un mes</div>
+        <div class="mem-msg">En memoria de las víctimas y en honor a quienes no dejaron de ayudar.</div>
+      </div>
+    </div>
+
+    <span class="eyebrow">Colectivo ciudadano · Valle del Cauca</span>
     <h1>Reconstruimos lo que el <span class="grad">terremoto se llevó</span></h1>
-    <p>El sismo del 10 de agosto derrumbó cientos de casas en las veredas y corregimientos del Valle. Desde <b>FuerzaCali.co</b> trabajamos, de la mano con dos fundaciones aliadas, para volver a levantarlas — ladrillo a ladrillo, con transparencia total.</p>
+    <p>El sismo del 10 de agosto derrumbó cientos de casas en las veredas y corregimientos del Valle. Desde <b>FuerzaCali.co</b> trabajamos, de la mano con <b>Impulso Verde</b> y la <b>Fundación Amigos y Hermanos</b>, para volver a levantarlas ladrillo a ladrillo, con transparencia total.</p>
     <div class="hero-cta">
       <a href="#donar" class="btn btn-primary">Quiero donar</a>
       <a href="#nosotros" class="btn btn-ghost">Conoce el proyecto</a>
@@ -283,11 +322,11 @@ footer a{color:var(--muted);text-decoration:none}
   <section id="nosotros">
     <div class="about glass">
       <span class="eyebrow">Quiénes somos</span>
-      <h2>Una fundación que nace desde la emergencia</h2>
+      <h2>Un colectivo que nace desde la emergencia</h2>
       <div class="about-grid">
         <div>
-          <p class="lead">FuerzaCali.co surgió en los días más difíciles tras el terremoto, cuando vimos que la ayuda llegaba a la ciudad pero no siempre a las veredas y corregimientos rurales del Valle, donde familias enteras quedaron sin techo. Somos una <b>fundación en creación</b>: un grupo de personas y aliados que decidió no esperar.</p>
-          <p class="lead" style="margin-top:14px">Nos unimos con dos fundaciones que ya trabajan en territorio para concentrar los esfuerzos en algo concreto y medible: <b>reconstruir viviendas dignas</b> para quienes lo perdieron todo. Cada peso donado se registra y se convierte en materiales, mano de obra y un nuevo comienzo.</p>
+          <p class="lead">FuerzaCali.co surgió en los días más difíciles tras el terremoto, cuando vimos que la ayuda llegaba a la ciudad pero no siempre a las veredas y corregimientos rurales del Valle, donde familias enteras quedaron sin techo. Somos un <b>colectivo ciudadano</b>: un grupo de personas y aliados que decidió no esperar.</p>
+          <p class="lead" style="margin-top:14px">Nos unimos con <b>Impulso Verde</b> y la <b>Fundación Amigos y Hermanos</b>, que ya trabajan en territorio, para concentrar los esfuerzos en algo concreto y medible: <b>reconstruir viviendas dignas</b> para quienes lo perdieron todo. Cada peso donado se registra y se convierte en materiales, mano de obra y un nuevo comienzo.</p>
           <div class="pill-row">
             <span class="hero-badge">Unidos por nuestra tierra</span>
             <span class="hero-badge">Ayuda directa al campo</span>
@@ -420,10 +459,6 @@ footer a{color:var(--muted);text-decoration:none}
             </div>
           </div>
           <div class="pay">
-            <div class="p-l"><b>Bold</b><span>Tarjeta débito o crédito</span></div>
-            <a class="btn btn-ghost" style="padding:10px 16px" href="#BOLD_LINK" target="_blank" rel="noopener">Abrir link →</a>
-          </div>
-          <div class="pay">
             <div class="p-l"><b>Venmo</b><span>Donaciones desde el exterior</span></div>
             <span class="p-val">Disponible pronto</span>
           </div>
@@ -446,14 +481,14 @@ footer a{color:var(--muted);text-decoration:none}
           <div class="mat-item"><div class="mi-l"><b>Guadua</b><span>Estructura y refuerzo</span></div><div class="mi-p">$18.000 / und</div></div>
           <div class="mat-item"><div class="mi-l"><b>Tabla / madera</b><span>Encofrado y pisos</span></div><div class="mi-p">$25.000 / und</div></div>
         </details>
-        <details class="mats">
+        <details class="mats" open>
           <summary>Ferretería <span class="chev">▾</span></summary>
           <div class="mat-item"><div class="mi-l"><b>Puntillas</b><span>Surtido de medidas</span></div><div class="mi-p">$6.000 / lb</div></div>
           <div class="mat-item"><div class="mi-l"><b>Alambre negro</b><span>Amarre de estructura</span></div><div class="mi-p">$8.000 / kg</div></div>
           <div class="mat-item"><div class="mi-l"><b>Herramientas básicas</b><span>Palas, martillos, baldes</span></div><div class="mi-p">$120.000 / set</div></div>
           <div class="mat-item"><div class="mi-l"><b>Elementos de seguridad</b><span>Guantes, cascos, gafas</span></div><div class="mi-p">$30.000 / kit</div></div>
         </details>
-        <details class="mats">
+        <details class="mats" open>
           <summary>Ayuda temporal <span class="chev">▾</span></summary>
           <div class="mat-item"><div class="mi-l"><b>Colchoneta</b><span>Mientras se reconstruye</span></div><div class="mi-p">$35.000 / und</div></div>
           <div class="mat-item"><div class="mi-l"><b>Cobija</b><span>Abrigo para las noches</span></div><div class="mi-p">$25.000 / und</div></div>
@@ -535,7 +570,7 @@ footer a{color:var(--muted);text-decoration:none}
 <footer>
   <div class="wrap">
     <div class="brand" style="color:#fff;margin-bottom:8px">FUERZACALI<span style="color:var(--brand)">.CO</span></div>
-    <p>Unidos por nuestra tierra · Fundación en creación</p>
+    <p>Unidos por nuestra tierra · Colectivo ciudadano</p>
     <p style="margin-top:8px">Reconstrucción de vivienda rural tras el terremoto del 10 de agosto de 2026 · Valle del Cauca, Colombia</p>
   </div>
 </footer>
@@ -546,6 +581,55 @@ footer a{color:var(--muted);text-decoration:none}
   var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
   burger.addEventListener('click',function(){mm.classList.toggle('open')});
   mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
+
+  // ===== Velatón / homenaje: luces que ascienden =====
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cv = document.getElementById('vigil');
+    if(!cv || reduce) return;
+    var ctx = cv.getContext('2d'), DPR = Math.min(2, window.devicePixelRatio||1);
+    var W, H, lights = [], born = 0, TOTAL = 154; // una luz por cada vida
+    function size(){ var r = cv.getBoundingClientRect(); W = cv.width = r.width*DPR; H = cv.height = r.height*DPR; }
+    size(); window.addEventListener('resize', size);
+    function spawn(){
+      lights.push({
+        x: (0.12 + Math.random()*0.76) * W,
+        y: H + Math.random()*40*DPR,
+        r: (1.2 + Math.random()*2.2) * DPR,
+        v: (0.25 + Math.random()*0.55) * DPR,
+        sway: Math.random()*Math.PI*2,
+        sw: 0.4 + Math.random()*0.8,
+        amp: (6 + Math.random()*16) * DPR,
+        life: 0, max: 260 + Math.random()*180,
+        warm: Math.random() < 0.7
+      });
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      // sembrar gradualmente hasta 154, luego mantener un flujo suave
+      if(born < TOTAL && Math.random() < 0.6){ spawn(); born++; }
+      else if(lights.length < 46 && Math.random() < 0.14){ spawn(); }
+      for(var i=lights.length-1;i>=0;i--){
+        var p = lights[i]; p.life++; p.y -= p.v; p.sway += 0.02*p.sw;
+        var x = p.x + Math.sin(p.sway)*p.amp;
+        var t = p.life/p.max;
+        var alpha = t<0.15 ? t/0.15 : (1 - Math.max(0,(t-0.55)/0.45));
+        alpha = Math.max(0, Math.min(1, alpha)) * (0.65 + 0.35*Math.sin(p.life*0.12));
+        var col = p.warm ? '255,196,120' : '127,168,255';
+        var g = ctx.createRadialGradient(x,p.y,0,x,p.y,p.r*6);
+        g.addColorStop(0,'rgba('+col+','+(0.9*alpha)+')');
+        g.addColorStop(0.4,'rgba('+col+','+(0.35*alpha)+')');
+        g.addColorStop(1,'rgba('+col+',0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x,p.y,p.r*6,0,6.2832); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,'+(0.85*alpha)+')';
+        ctx.beginPath(); ctx.arc(x,p.y,p.r*0.9,0,6.2832); ctx.fill();
+        if(p.y < -20*DPR || t >= 1) lights.splice(i,1);
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 
   // Datos de campaña
   var META=600000000, RECAUDADO=3100000, COSTO_CASA=15000000, CASAS=40, WHATSAPP='573152017605';
