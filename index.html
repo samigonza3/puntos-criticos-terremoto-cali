@@ -101,14 +101,15 @@ header.nav{position:sticky;top:0;z-index:1000;padding:10px 0}
 .mini b{display:block;font-size:22px;font-weight:800;color:#fff}
 .mini span{font-size:12.5px;color:var(--muted)}
 
-/* Acciones / galería */
-.gallery{columns:2;column-gap:14px}
-.gitem{break-inside:avoid;margin-bottom:14px;position:relative;border-radius:16px;overflow:hidden;
-  border:1px solid var(--glass-brd);cursor:pointer;background:#0a1120}
-.gitem img{display:block;width:100%;height:auto;transition:transform .5s ease}
-.gitem:hover img{transform:scale(1.05)}
-.gitem figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;font-size:11.5px;font-weight:600;color:#fff;
-  background:linear-gradient(to top,rgba(5,8,16,.92),transparent)}
+/* Acciones / collage */
+.collage{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:8px;gap:10px}
+.gitem{break-inside:avoid;position:relative;border-radius:14px;overflow:hidden;
+  border:1px solid var(--glass-brd);cursor:pointer;background:#0a1120;grid-row-end:span 30}
+.gitem.feat{grid-column:span 2}
+.gitem .gimg{display:block;width:100%;height:auto;transition:transform .5s ease}
+.gitem:hover .gimg{transform:scale(1.05)}
+.gitem figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 10px;font-size:11.5px;font-weight:600;color:#fff;
+  background:linear-gradient(to top,rgba(5,8,16,.92),transparent);pointer-events:none}
 .stat-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
 .sfig{padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
 .sfig b{font-size:26px;font-weight:800;color:#fff;display:block;line-height:1}
@@ -200,7 +201,7 @@ footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(12
   .burger{display:none}
   .mobile-menu{display:none}
   .about-grid{grid-template-columns:1.4fr 1fr}
-  .gallery{columns:3}
+  .collage{grid-template-columns:repeat(4,1fr)}
   .stat-strip{grid-template-columns:repeat(4,1fr)}
   .zonas-grid{grid-template-columns:1.15fr .85fr;align-items:start}
   #map{height:440px}
@@ -208,7 +209,7 @@ footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(12
   .goal-stats{grid-template-columns:repeat(3,1fr)}
   .cifras-grid{grid-template-columns:repeat(4,1fr)}
 }
-@media(min-width:1200px){ .gallery{columns:4} }
+@media(min-width:1200px){ .collage{grid-template-columns:repeat(4,1fr)} }
 </style>
 </head>
 <body>
@@ -301,21 +302,21 @@ footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(12
       <div class="sfig"><b>3</b><span>Veredas acompañadas</span></div>
       <div class="sfig"><b>+40</b><span>Casas por reconstruir</span></div>
     </div>
-    <div class="gallery" id="gallery">
-      <figure class="gitem"><img src="fotos/accion-01.jpg" loading="lazy" alt="Punto crítico en Cali en las primeras horas"><figcaption>Punto crítico en Cali, primeras horas</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-02.jpg" loading="lazy" alt="Centro de acopio clasificando ayudas"><figcaption>Centro de acopio, clasificando ayudas</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-03.jpg" loading="lazy" alt="Alistamiento de entregas"><figcaption>Alistamiento de entregas</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-04.jpg" loading="lazy" alt="Dotación para los equipos de rescate"><figcaption>Dotación para los equipos de rescate</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-05.jpg" loading="lazy" alt="Mercados listos para salir a ruta"><figcaption>Mercados listos para salir a ruta</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-06.jpg" loading="lazy" alt="Ayuda humanitaria en camino"><figcaption>Ayuda humanitaria en camino</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-07.jpg" loading="lazy" alt="Insumos donados por la comunidad"><figcaption>Insumos donados por la comunidad</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-08.jpg" loading="lazy" alt="Entrega casa a casa"><figcaption>Entrega casa a casa</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-09.jpg" loading="lazy" alt="Entrega directa a una familia"><figcaption>Entrega directa a una familia</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-10.jpg" loading="lazy" alt="Voluntarios en punto de entrega"><figcaption>Voluntarios en punto de entrega</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-11.jpg" loading="lazy" alt="Mercados y elementos de aseo"><figcaption>Mercados y elementos de aseo</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-12.jpg" loading="lazy" alt="Jornada en zona rural"><figcaption>Jornada en zona rural</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-13.jpg" loading="lazy" alt="Entrega en vereda"><figcaption>Entrega en vereda</figcaption></figure>
-      <figure class="gitem"><img src="fotos/accion-14.jpg" loading="lazy" alt="Acompañamiento en vereda"><figcaption>Acompañamiento en vereda</figcaption></figure>
+    <div class="collage" id="gallery">
+      <figure class="gitem feat"><img class="gimg" src="fotos/accion-01.jpg" loading="lazy" alt="Punto crítico en Cali en las primeras horas"><figcaption>Punto crítico en Cali, primeras horas</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-04.jpg" loading="lazy" alt="Entrega casa a casa"><figcaption>Entrega casa a casa</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-03.jpg" loading="lazy" alt="Insumos donados por la comunidad"><figcaption>Insumos donados por la comunidad</figcaption></figure>
+      <figure class="gitem feat"><img class="gimg" src="fotos/accion-02.jpg" loading="lazy" alt="Jornada en una vereda del Valle"><figcaption>Jornada en una vereda del Valle</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-05.jpg" loading="lazy" alt="Ayuda humanitaria en camino"><figcaption>Ayuda humanitaria en camino</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-09.jpg" loading="lazy" alt="Dotación para los equipos de rescate"><figcaption>Dotación para los equipos de rescate</figcaption></figure>
+      <figure class="gitem feat"><img class="gimg" src="fotos/accion-06.jpg" loading="lazy" alt="Entrega directa a una familia"><figcaption>Entrega directa a una familia</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-07.jpg" loading="lazy" alt="Centro de acopio de noche"><figcaption>Centro de acopio, de noche</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-11.jpg" loading="lazy" alt="Mercados listos para salir a ruta"><figcaption>Mercados listos para salir a ruta</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-10.jpg" loading="lazy" alt="Voluntarios en punto de entrega"><figcaption>Voluntarios en punto de entrega</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-12.jpg" loading="lazy" alt="Mercados y elementos de aseo"><figcaption>Mercados y elementos de aseo</figcaption></figure>
+      <figure class="gitem feat"><img class="gimg" src="fotos/accion-08.jpg" loading="lazy" alt="Entrega puerta a puerta en zona rural"><figcaption>Entrega puerta a puerta en zona rural</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-13.jpg" loading="lazy" alt="Alistamiento de entregas"><figcaption>Alistamiento de entregas</figcaption></figure>
+      <figure class="gitem"><img class="gimg" src="fotos/accion-14.jpg" loading="lazy" alt="Acompañamiento en vereda"><figcaption>Acompañamiento en vereda</figcaption></figure>
     </div>
   </section>
 
@@ -521,6 +522,25 @@ footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(12
   document.getElementById('lbClose').addEventListener('click',closeLb);
   lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+
+  // Collage masonry: cada tesela ocupa filas según el alto real de su imagen
+  (function(){
+    var grid=document.getElementById('gallery');
+    var ROW=8, GAP=10;
+    function resize(it){
+      var img=it.querySelector('img'); if(!img)return;
+      var h=img.getBoundingClientRect().height;
+      if(!h)return;
+      it.style.gridRowEnd='span '+Math.max(10,Math.ceil((h+GAP)/(ROW+GAP)));
+    }
+    function layout(){grid.querySelectorAll('.gitem').forEach(resize);}
+    grid.querySelectorAll('img').forEach(function(img){
+      if(img.complete) resize(img.closest('.gitem'));
+      else img.addEventListener('load',function(){resize(img.closest('.gitem'));});
+    });
+    window.addEventListener('resize',layout);
+    setTimeout(layout,300); setTimeout(layout,900);
+  })();
 
   var form=document.getElementById('contactForm'), status=document.getElementById('formStatus');
   form.addEventListener('submit',function(e){
