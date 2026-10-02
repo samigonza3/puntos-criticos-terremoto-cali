@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alianzas · FuerzaCali.co</title>
+<meta name="description" content="Las organizaciones aliadas que unen esfuerzos con el colectivo FuerzaCali.co para llevar ayuda y reconstruir vivienda rural en el Valle del Cauca." />
+<meta name="theme-color" content="#050b1f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg-950:#050b1f;--ink:#eaf1ff;--muted:#9fb0d9;--faint:#6d80b0;
+  --brand:#4d8bff;--brand-2:#7aa8ff;--brand-3:#37e0c8;
+  --glass-bg:rgba(255,255,255,.07);--glass-brd:rgba(255,255,255,.14);--glass-hi:rgba(255,255,255,.5);
+  --radius:26px;--shadow:0 20px 50px -20px rgba(2,7,22,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--bg-950);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(120% 90% at 50% -10%,#0e1c44 0%,#070f28 45%,#050b1f 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
+.blob.b1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,#2f6bff,transparent 60%)}
+.blob.b2{width:55vw;height:55vw;right:-18vw;top:30vh;background:radial-gradient(circle,#1fd6c0,transparent 60%);opacity:.3}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;background-image:radial-gradient(rgba(255,255,255,.9) 1px,transparent 1px);background-size:3px 3px}
+.glass{background:var(--glass-bg);border:1px solid var(--glass-brd);border-radius:var(--radius);
+  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi);position:relative}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+header.nav{position:sticky;top:0;z-index:50;padding:10px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:20px}
+.brand{font-weight:900;font-size:19px;color:#fff;text-decoration:none}
+.brand .dot{color:var(--brand)}
+.back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600}
+.back:hover{color:#fff}
+.eyebrow{display:inline-flex;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-2);
+  padding:7px 14px;border-radius:999px;background:rgba(77,139,255,.12);border:1px solid rgba(122,168,255,.28);margin-bottom:16px}
+.hero{text-align:center;padding:48px 0 20px}
+h1{font-weight:900;font-size:clamp(30px,8.5vw,52px);line-height:1.12;letter-spacing:-.01em}
+h1 .grad{background:linear-gradient(120deg,#7aa8ff,#37e0c8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);max-width:60ch;margin:16px auto 0;font-size:16px}
+.allies{display:grid;gap:18px;padding:20px 0 40px}
+.ally{padding:26px}
+.ally h2{font-weight:800;font-size:22px;margin-bottom:6px}
+.ally .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-2);margin-bottom:14px;display:block}
+.ally p{color:var(--muted);font-size:15px}
+.ally .logo{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#031024;margin-bottom:16px}
+.ally .l1{background:linear-gradient(135deg,#8ff0b0,#37e0a0)}
+.ally .l2{background:linear-gradient(135deg,#7aa8ff,#4d8bff)}
+.cta{text-align:center;padding:10px 0 60px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;text-decoration:none;padding:14px 24px;border-radius:16px;
+  color:#031024;background:linear-gradient(135deg,#7aa8ff,#4d8bff);box-shadow:0 12px 30px -10px rgba(77,139,255,.7)}
+footer{padding:30px 0 60px;text-align:center;color:var(--faint);font-size:12.5px}
+@media(min-width:760px){ .allies{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div></div>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-inner glass">
+      <a href="index.html" class="brand">FUERZACALI<span class="dot">.CO</span></a>
+      <a href="index.html" class="back">← Volver al inicio</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Alianzas</span>
+    <h1>Unimos fuerzas con <span class="grad">quienes ya están en el terreno</span></h1>
+    <p class="sub">FuerzaCali.co es un colectivo de voluntarios. Para llegar más lejos, sumamos esfuerzos con organizaciones aliadas que trabajan en las comunidades afectadas.</p>
+  </section>
+
+  <section class="allies">
+    <div class="ally glass">
+      <div class="logo l1">IV</div>
+      <span class="tag">Organización aliada</span>
+      <h2>Impulso Verde</h2>
+      <p>Aliada en terreno para la gestión y entrega de ayudas y el trabajo con comunidades rurales afectadas por el terremoto.</p>
+    </div>
+    <div class="ally glass">
+      <div class="logo l2">AH</div>
+      <span class="tag">Organización aliada</span>
+      <h2>Fundación Amigos y Hermanos</h2>
+      <p>Aliada en el acompañamiento a las familias damnificadas y en los esfuerzos de reconstrucción de vivienda rural.</p>
+    </div>
+  </section>
+
+  <div class="cta"><a class="btn" href="index.html#donar">Quiero sumarme</a></div>
+</div>
+</main>
+
+<footer><div class="wrap">Unidos por nuestra tierra · Colectivo de voluntarios · FuerzaCali.co</div></footer>
+</body>
+</html>
