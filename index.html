@@ -1,586 +1,404 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FuerzaCali.co · Un colectivo que une esfuerzos de voluntarios</title>
-<meta name="description" content="FuerzaCali.co es un colectivo que une esfuerzos de voluntarios para llevar ayuda y reconstruir vivienda rural en el Valle del Cauca tras el terremoto del 10 de agosto. Conoce lo que hemos hecho, dónde trabajamos y cómo donar." />
-<meta name="keywords" content="Fuerza Cali, colectivo voluntarios, ayuda terremoto Valle, Golondrinas, El Dovío, Santa Teresa, reconstrucción Cali, donar" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="FuerzaCali.co · Unidos por nuestra tierra" />
-<meta property="og:description" content="Un colectivo de voluntarios que lleva ayuda y reconstruye vivienda rural en el Valle tras el terremoto." />
-<meta property="og:url" content="https://fuerzacali.co" />
-<meta name="theme-color" content="#050b1f" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fuerza Cali | Colectivo autónomo en Cali</title>
+<meta name="description" content="Colectivo autónomo en Cali por la emancipación política, la libertad, la educación y la juntanza. Nacimos del apoyo mutuo durante el terremoto de agosto de 2026.">
+<meta name="theme-color" content="#040817">
+<link rel="canonical" href="https://fuerzacali.co/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fuerza Cali | Colectivo autónomo en Cali">
+<meta property="og:description" content="Nacimos del apoyo mutuo durante el terremoto. Hoy nos organizamos entre iguales por la libertad, la educación y la juntanza.">
+<meta property="og:url" content="https://fuerzacali.co/">
+<meta property="og:image" content="https://fuerzacali.co/fotos/accion-01.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg-950:#050b1f; --bg-900:#081026; --bg-800:#0c1734;
-  --ink:#eaf1ff; --muted:#9fb0d9; --faint:#6d80b0;
-  --brand:#4d8bff; --brand-2:#7aa8ff; --brand-3:#37e0c8;
-  --ok:#37e08e; --alert:#ff6b7d; --warn:#ffc24d;
-  --glass-bg:rgba(255,255,255,.07);
-  --glass-brd:rgba(255,255,255,.14);
-  --glass-hi:rgba(255,255,255,.5);
-  --radius:26px;
-  --shadow:0 20px 50px -20px rgba(2,7,22,.8);
-}
-*{box-sizing:border-box;margin:0;padding:0}
+:root{--space-950:#040817;--space-900:#070D22;--space-800:#0B1533;--nebula:#1B2E66;--star-blue:#3E7BFF;--star-light:#7FA8FF;--ice:#C9D9FF;--white:#F4F7FF;--muted:#8B9BC7}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--bg-950);
-  line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:
-  radial-gradient(120% 90% at 50% -10%,#0e1c44 0%,#070f28 45%,#050b1f 100%)}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:float 18s ease-in-out infinite}
-.blob.b1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,#2f6bff,transparent 60%)}
-.blob.b2{width:55vw;height:55vw;right:-18vw;top:20vh;background:radial-gradient(circle,#1fd6c0,transparent 60%);opacity:.32;animation-delay:-6s}
-.blob.b3{width:50vw;height:50vw;left:10vw;bottom:-15vw;background:radial-gradient(circle,#6a4dff,transparent 60%);opacity:.35;animation-delay:-11s}
-@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,3vh) scale(1.08)}66%{transform:translate(-3vw,-2vh) scale(.96)}}
-.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;
-  background-image:radial-gradient(rgba(255,255,255,.9) 1px,transparent 1px);background-size:3px 3px}
-
-.glass{background:var(--glass-bg);border:1px solid var(--glass-brd);border-radius:var(--radius);
-  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
-  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi), inset 0 0 30px rgba(122,168,255,.05);position:relative}
-.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:linear-gradient(160deg,rgba(255,255,255,.10),transparent 35%)}
-
-.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
-section{padding:56px 0}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--brand-2);padding:7px 14px;border-radius:999px;
-  background:rgba(77,139,255,.12);border:1px solid rgba(122,168,255,.28);margin-bottom:16px}
-h1,h2,h3{line-height:1.12;letter-spacing:-.01em}
-h2{font-size:clamp(24px,6vw,34px);font-weight:800;margin-bottom:12px}
-.lead{color:var(--muted);font-size:16px;max-width:65ch}
-.sec-head{margin-bottom:26px}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:700;
-  font-size:14.5px;text-decoration:none;cursor:pointer;padding:14px 22px;border-radius:16px;border:1px solid transparent;
-  transition:transform .18s, box-shadow .2s;white-space:nowrap}
-.btn:active{transform:scale(.97)}
-.btn-primary{color:#031024;background:linear-gradient(135deg,#7aa8ff,#4d8bff);
-  box-shadow:0 12px 30px -10px rgba(77,139,255,.7), inset 0 1px 0 rgba(255,255,255,.5)}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-ghost{color:#fff;background:var(--glass-bg);border-color:var(--glass-brd)}
-.btn-ghost:hover{border-color:var(--brand-2)}
-.btn-block{width:100%}
-
-header.nav{position:sticky;top:0;z-index:1000;padding:10px 0}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:20px}
-.brand{font-weight:900;font-size:19px;letter-spacing:.02em;color:#fff;text-decoration:none;white-space:nowrap}
-.brand .dot{color:var(--brand)}
-.nav-links{display:none;gap:2px;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:600;white-space:nowrap;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
-.nav-links a:hover{background:rgba(255,255,255,.07)}
-.nav-links a:hover{color:#fff}
-.nav-cta{display:none}
-.burger{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
-.burger span{width:22px;height:2px;background:#fff;border-radius:2px}
-.mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s ease;margin:0 18px}
-.mobile-menu.open{max-height:380px}
-.mobile-menu .mm-inner{padding:10px 6px 16px;display:flex;flex-direction:column;gap:4px;margin-top:8px;border-radius:20px}
-.mobile-menu a{color:var(--ink);text-decoration:none;font-weight:600;padding:12px 14px;border-radius:12px}
-.mobile-menu a:hover{background:rgba(255,255,255,.06)}
-
-.hero{padding-top:26px;text-align:center}
-.hero h1{font-size:clamp(30px,8.5vw,58px);font-weight:900;margin:8px 0 16px}
-.hero h1 .grad{background:linear-gradient(120deg,#7aa8ff,#37e0c8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{max-width:640px;margin:0 auto 26px;color:var(--muted);font-size:clamp(15px,4vw,18px)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.hero-badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
-.hero-badge{font-size:12.5px;color:var(--muted);padding:8px 14px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-brd)}
-.hero-badge b{color:#fff}
-
-.about{padding:30px 26px}
-.about .eyebrow{background:rgba(55,224,200,.12);border-color:rgba(55,224,200,.3);color:var(--brand-3)}
-.about-grid{display:grid;gap:18px;margin-top:22px}
-.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.mini{padding:16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.mini b{display:block;font-size:22px;font-weight:800;color:#fff}
-.mini span{font-size:12.5px;color:var(--muted)}
-
-/* Acciones / collage */
-.collage{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:8px;gap:10px}
-.gitem{break-inside:avoid;position:relative;border-radius:14px;overflow:hidden;
-  border:1px solid var(--glass-brd);cursor:pointer;background:#0a1120;grid-row-end:span 30}
-.gitem.feat{grid-column:span 2}
-.gitem .gimg{display:block;width:100%;height:auto;transition:transform .5s ease}
-.gitem:hover .gimg{transform:scale(1.05)}
-.gitem figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 10px;font-size:11.5px;font-weight:600;color:#fff;
-  background:linear-gradient(to top,rgba(5,8,16,.92),transparent);pointer-events:none}
-.stat-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
-.sfig{padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.sfig b{font-size:26px;font-weight:800;color:#fff;display:block;line-height:1}
-.sfig span{font-size:12px;color:var(--muted)}
-
-.lightbox{position:fixed;inset:0;z-index:2000;background:rgba(4,7,18,.94);display:none;align-items:center;justify-content:center;padding:20px}
-.lightbox.open{display:flex}
-.lightbox img{max-width:96vw;max-height:88vh;border-radius:12px;box-shadow:0 30px 80px -20px #000}
-.lightbox .lb-close{position:absolute;top:18px;right:22px;font-size:30px;color:#fff;background:none;border:0;cursor:pointer;line-height:1}
-
-/* Mapa */
-.zonas-grid{display:grid;gap:20px}
-#map{width:100%;height:340px;border-radius:16px;border:1px solid var(--glass-brd);background:#0a1732;z-index:0}
-.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92) saturate(.75)}
-.leaflet-container{background:#0a1732;font-family:'Montserrat',sans-serif}
-.fc-pin{width:16px;height:16px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--brand);
-  border:2px solid #fff;box-shadow:0 0 0 3px rgba(77,139,255,.25),0 4px 10px rgba(0,0,0,.5)}
-.fc-pin.cali{background:var(--brand-3);box-shadow:0 0 0 3px rgba(55,224,200,.25),0 4px 10px rgba(0,0,0,.5)}
-.zona-list{display:grid;gap:12px}
-.zona{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.zona .z-dot{width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--brand);box-shadow:0 0 12px var(--brand)}
-.zona.cali .z-dot{background:var(--brand-3);box-shadow:0 0 12px var(--brand-3)}
-.zona h4{font-size:15.5px;font-weight:800;margin-bottom:3px}
-.zona p{font-size:13px;color:var(--muted)}
-
-.meta-card{padding:26px}
-.goal-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px}
-.goal-raised{font-size:clamp(30px,9vw,44px);font-weight:900;color:#fff;line-height:1}
-.goal-of{color:var(--muted);font-size:14px}
-.bar{height:16px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--glass-brd)}
-.bar span{display:block;height:100%;border-radius:999px;min-width:8px;background:linear-gradient(90deg,#37e0c8,#4d8bff);
-  box-shadow:0 0 18px rgba(77,139,255,.6);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
-.goal-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
-.gstat{padding:16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.gstat b{display:block;font-size:19px;font-weight:800;color:#fff}
-.gstat span{font-size:12px;color:var(--muted)}
-.house-note{margin-top:18px;font-size:13px;color:var(--muted);padding:14px 16px;border-radius:14px;background:rgba(77,139,255,.08);border:1px solid rgba(122,168,255,.22)}
-
-.donar-grid{display:grid;gap:18px}
-.pay{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.pay .p-l b{display:block;font-size:15px;font-weight:800}
-.pay .p-l span{font-size:12.5px;color:var(--muted)}
-.pay .p-val{font-weight:800;color:var(--brand-2);font-size:14px;text-align:right;word-break:break-word}
-.copy-btn{background:none;border:1px solid var(--glass-brd);color:var(--brand-2);border-radius:10px;padding:8px 12px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;transition:.2s}
-.copy-btn:hover{border-color:var(--brand-2);color:#fff}
-details.mats{border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd);overflow:hidden}
-details.mats+details.mats{margin-top:10px}
-details.mats summary{list-style:none;cursor:pointer;padding:15px 18px;font-weight:700;font-size:14.5px;display:flex;justify-content:space-between;align-items:center}
-details.mats summary::-webkit-details-marker{display:none}
-details.mats summary .chev{transition:transform .25s;color:var(--muted)}
-details.mats[open] summary .chev{transform:rotate(180deg)}
-.mat-item{display:flex;justify-content:space-between;gap:10px;padding:11px 18px;border-top:1px solid rgba(255,255,255,.07)}
-.mat-item .mi-l b{font-size:13.5px;font-weight:700}
-.mat-item .mi-l span{font-size:11.5px;color:var(--muted);display:block}
-.mat-item .mi-p{font-size:13px;font-weight:700;color:var(--brand-2);white-space:nowrap;text-align:right}
-.gastos{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.gastos span{font-size:12px;color:var(--ink);padding:7px 12px;border-radius:999px;background:rgba(55,224,142,.1);border:1px solid rgba(55,224,142,.25)}
-
-details.cifras summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center}
-details.cifras summary::-webkit-details-marker{display:none}
-details.cifras summary small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
-details.cifras .chev{color:var(--muted);transition:transform .25s}
-details.cifras[open] .chev{transform:rotate(180deg)}
-.cifras-body{padding:6px 20px 20px}
-.cifras-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.cifra{padding:14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
-.cifra b{display:block;font-size:22px;font-weight:800;color:#fff}
-.cifra.alert b{color:var(--alert)} .cifra.ok b{color:var(--ok)}
-.cifra span{font-size:11.5px;color:var(--muted)}
-#donar{padding-bottom:28px}
-#cifras{padding:0 0 12px}
-#contacto{padding-top:36px}
-.cifras-fuente{font-size:11.5px;color:var(--faint);margin-top:14px;line-height:1.5}
-
-.form-card{padding:26px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
-.field input,.field textarea{width:100%;font-family:inherit;font-size:15px;color:#fff;background:rgba(255,255,255,.06);
-  border:1px solid var(--glass-brd);border-radius:14px;padding:14px 16px;transition:.2s}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--brand-2);background:rgba(255,255,255,.09)}
-.field textarea{resize:vertical;min-height:110px}
-.form-status{font-size:13px;margin-top:10px;color:var(--brand-3)}
-
-footer{padding:40px 0 60px;text-align:center;color:var(--faint);font-size:12.5px}
-footer .brand{font-size:16px;margin-bottom:8px;display:inline-block}
-footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid rgba(122,168,255,.4)}
-
-@media(min-width:820px){
-  section{padding:72px 0}
-  .about-grid{grid-template-columns:1.4fr 1fr}
-  .collage{grid-template-columns:repeat(4,1fr)}
-  .stat-strip{grid-template-columns:repeat(4,1fr)}
-  .zonas-grid{grid-template-columns:1.15fr .85fr;align-items:start}
-  #map{height:440px}
-  .donar-grid{grid-template-columns:1fr 1fr}
-  .goal-stats{grid-template-columns:repeat(3,1fr)}
-  .cifras-grid{grid-template-columns:repeat(4,1fr)}
-}
-@media(min-width:1080px){ .nav-links{display:flex} .nav-cta{display:inline-flex} .burger{display:none} .mobile-menu{display:none} .nav-inner{gap:16px} }
-@media(min-width:1200px){ .collage{grid-template-columns:repeat(4,1fr)} }
+body{margin:0;background:var(--space-950);color:var(--white);font-family:'Montserrat',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--star-light)}
+:focus-visible{outline:2px solid var(--star-light);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+.sec{padding:clamp(64px,9vw,112px) clamp(20px,5vw,64px)}
+.wrap{max-width:1180px;margin:0 auto}
+.bg9{background:var(--space-900)}.bg95{background:var(--space-950)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--star-light)}
+h2{margin-top:18px;font-size:clamp(30px,4.2vw,42px);line-height:1.12;font-weight:800}
+.lead{margin-top:12px;max-width:760px;font-size:18px;line-height:1.7;color:var(--ice)}
+.mb48{margin-bottom:48px}
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:24px clamp(20px,5vw,64px);background:var(--space-950)}
+.logo{font-weight:800;font-size:18px;letter-spacing:.16em;text-transform:uppercase}
+.nav ul{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:0;list-style:none;font-size:14px;font-weight:500}
+.nav a{color:var(--ice);text-decoration:none}.nav a:hover{color:var(--white)}
+/* botones */
+.btn{display:inline-block;padding:18px 40px;border:0;border-radius:999px;background:linear-gradient(135deg,var(--star-blue),#2E5FE0);box-shadow:0 12px 40px rgba(62,123,255,.45);color:var(--white);font:700 16px 'Montserrat',sans-serif;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{color:var(--white);filter:brightness(1.08)}
+.btn-sm{padding:14px 28px;font-size:15px;box-shadow:0 10px 30px rgba(62,123,255,.4)}
+.btn-ghost{background:transparent;box-shadow:none;border:1px solid rgba(127,168,255,.45);color:var(--ice);font-weight:600}
+.btn[disabled]{opacity:.7;cursor:wait}
+/* hero */
+.hero{position:relative;overflow:hidden;text-align:center;padding:clamp(72px,11vw,120px) clamp(20px,5vw,64px) clamp(80px,12vw,128px);background:radial-gradient(ellipse 80% 70% at 50% 0%,var(--nebula) 0%,var(--space-900) 55%,var(--space-950) 100%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-in{position:relative;max-width:980px;margin:0 auto}
+.pill{display:inline-block;padding:8px 18px;border-radius:999px;border:1px solid rgba(127,168,255,.35)}
+.hero h1{margin-top:28px;font-size:clamp(44px,8vw,68px);line-height:1.05;font-weight:800;letter-spacing:-.02em;text-shadow:0 0 40px rgba(62,123,255,.35)}
+.hero p{margin:28px auto 0;max-width:720px;font-size:clamp(17px,2.2vw,20px);line-height:1.6;color:var(--ice)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:44px}
+/* origen */
+.origen{display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-start}
+.origen>div:first-child{flex:1 1 420px;min-width:0}
+.origen>div:last-child{flex:1.3 1 480px;min-width:0;font-size:18px;line-height:1.75;color:var(--ice)}
+.origen p+p{margin-top:22px}
+.origen .strong{color:var(--white);font-weight:600}
+/* fotos */
+.fotos-h{border-top:1px solid rgba(127,168,255,.14);padding-top:64px;display:flex;flex-wrap:wrap;gap:24px 64px;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.fotos-h>div{flex:1 1 420px;min-width:0}
+.fotos-h h3{margin-top:16px;font-size:clamp(26px,3.4vw,34px);line-height:1.15;font-weight:800}
+.fotos-h p{flex:1 1 380px;min-width:0;font-size:17px;line-height:1.7;color:var(--ice)}
+.gallery{column-width:250px;column-gap:16px}
+.ph{position:relative;margin:0 0 16px;break-inside:avoid;border-radius:18px;overflow:hidden;border:1px solid rgba(127,168,255,.14);background:var(--space-800)}
+.ph img{display:block;width:100%;height:auto}
+.ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 14px;background:linear-gradient(180deg,rgba(4,8,23,0),rgba(4,8,23,.88));font-size:13px;font-weight:600}
+/* tarjetas */
+.card{background:var(--space-800);border:1px solid rgba(127,168,255,.14);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:rgba(127,168,255,.45);transform:translateY(-4px)}
+.col{display:flex;flex-direction:column}
+.grow{flex:1}
+.ct{margin-top:14px;font-size:18px;font-weight:700;line-height:1.25}
+.big2{font-size:22px;font-weight:800}
+.cp{margin-top:10px;font-size:15px;line-height:1.65;color:var(--muted)}
+.col .btn{margin-top:28px;align-self:flex-start}
+.big{font-size:clamp(36px,4.4vw,44px);font-weight:800;color:var(--star-light);text-shadow:0 0 24px rgba(62,123,255,.45)}
+.num{width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,var(--star-blue),#2E5FE0);box-shadow:0 0 28px rgba(62,123,255,.55);display:flex;align-items:center;justify-content:center;font-weight:800}
+.g2,.g3,.g4{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g4 .ct{margin-top:22px;font-size:20px;font-weight:800}
+/* principios */
+.princ{display:flex;flex-wrap:wrap;gap:40px 64px}
+.princ>div:first-child{flex:1 1 380px;min-width:0}
+.princ>div:first-child p{margin-top:18px;font-size:17px;line-height:1.7;color:var(--ice)}
+.princ>div:last-child{flex:1.4 1 520px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:20px;align-items:flex-start;padding:24px 28px}
+.row .ct{margin-top:0;font-weight:800}
+.row .cp{margin-top:6px;line-height:1.6}
+.dot{flex:0 0 auto;width:10px;height:10px;margin-top:9px;border-radius:999px;background:var(--star-light);box-shadow:0 0 14px rgba(62,123,255,.8)}
+/* sumate */
+.sumate{padding:clamp(64px,9vw,112px) clamp(20px,5vw,64px);text-align:center;background:radial-gradient(ellipse 70% 80% at 50% 100%,var(--nebula) 0%,var(--space-900) 60%,var(--space-950) 100%)}
+.sumate .in{max-width:720px;margin:0 auto}
+.sumate .lead{margin:0 auto 40px;max-width:none}
+.small{margin-top:20px;font-size:12px;color:var(--muted)}
+footer{padding:36px clamp(20px,5vw,64px);border-top:1px solid rgba(127,168,255,.14);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:13px;color:var(--muted)}
+/* popup */
+dialog{padding:0;border:1px solid rgba(127,168,255,.35);border-radius:18px;background:var(--space-800);color:var(--white);width:min(520px,calc(100% - 32px));max-height:90vh;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:auto}
+dialog::backdrop{background:rgba(4,8,23,.84)}
+.dlg{position:relative;padding:36px}
+.x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(127,168,255,.3);background:transparent;color:var(--ice);font-size:22px;cursor:pointer}
+.dt{margin:12px 40px 8px 0;font-size:26px;line-height:1.2;font-weight:800}
+.ds{margin-bottom:24px;font-size:15px;line-height:1.6;color:var(--ice)}
+form{display:flex;flex-direction:column;gap:14px}
+form label{font-size:13px;font-weight:600;color:var(--ice)}
+input,textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(127,168,255,.3);background:var(--space-900);color:var(--white);font:400 15px 'Montserrat',sans-serif}
+textarea{resize:vertical}
+form .btn{margin-top:8px;padding:16px 24px;width:100%}
+.form-status{min-height:20px;font-size:14px;font-weight:600;text-align:center}
+.form-status.error{color:#FF8A8A}
+.priv{font-size:12px;color:var(--muted);text-align:center}
+.thanks{padding:24px 0;text-align:center}
+.thanks h3{margin:14px 0 10px;font-size:28px;font-weight:800}
+.thanks p{margin-bottom:24px;font-size:16px;line-height:1.6;color:var(--ice)}
+[hidden]{display:none!important}
+@media (max-width:960px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.g2,.g3,.g4{grid-template-columns:1fr}.btn{padding:16px 28px}.dlg{padding:28px 22px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
 </style>
 </head>
 <body>
-<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
-<div class="grain"></div>
 
 <header class="nav">
-  <div class="wrap">
-    <div class="nav-inner glass">
-      <a href="#top" class="brand">FUERZACALI<span class="dot">.CO</span></a>
-      <nav class="nav-links">
-        <a href="#nosotros">Quiénes somos</a>
-        <a href="#acciones">Lo que hemos hecho</a>
-        <a href="#zonas">Dónde trabajamos</a>
-        <a href="#meta">La meta</a>
-        <a href="recursos.html">Recursos</a>
-        <a href="alianzas.html">Alianzas</a>
-      </nav>
-      <a href="#donar" class="btn btn-primary nav-cta">Donar</a>
-      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mm-inner glass">
-        <a href="#nosotros">Quiénes somos</a>
-        <a href="#acciones">Lo que hemos hecho</a>
-        <a href="#zonas">Dónde trabajamos</a>
-        <a href="#meta">La meta</a>
-        <a href="#donar">Cómo donar</a>
-        <a href="recursos.html">Recursos</a>
-        <a href="alianzas.html">Alianzas</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-    </div>
-  </div>
+<div class="logo">Fuerza Cali</div>
+<nav aria-label="Principal"><ul>
+<li><a href="#origen">Origen</a></li>
+<li><a href="#hecho">Lo hecho</a></li>
+<li><a href="#somos">Lo que somos</a></li>
+<li><a href="#recursos">Recursos</a></li>
+<li><a href="#sumate">Súmate</a></li>
+</ul></nav>
 </header>
 
-<main id="top">
-<div class="wrap">
-
-  <!-- HERO -->
-  <section class="hero">
-    <span class="eyebrow">Colectivo de voluntarios · Valle del Cauca</span>
-    <h1>Unimos esfuerzos para <span class="grad">no dejar a nadie atrás</span></h1>
-    <p>FuerzaCali.co es un colectivo que reúne a voluntarios para llevar ayuda a los puntos más golpeados y reconstruir vivienda rural tras el terremoto del 10 de agosto. Lo hacemos con trabajo en terreno y transparencia total.</p>
-    <div class="hero-cta">
-      <a href="#donar" class="btn btn-primary">Quiero donar</a>
-      <a href="#acciones" class="btn btn-ghost">Lo que hemos hecho</a>
-    </div>
-    <div class="hero-badges">
-      <div class="hero-badge"><b>4</b> puntos de trabajo</div>
-      <div class="hero-badge"><b>+40</b> casas por reconstruir</div>
-      <div class="hero-badge"><b>100%</b> transparencia</div>
-    </div>
-  </section>
-
-  <!-- QUIÉNES SOMOS -->
-  <section id="nosotros">
-    <div class="about glass">
-      <span class="eyebrow">Quiénes somos</span>
-      <h2>Un colectivo que une voluntarios</h2>
-      <div class="about-grid">
-        <div>
-          <p class="lead">FuerzaCali.co nació en los días más difíciles tras el terremoto, cuando vimos que la ayuda llegaba a la ciudad pero no siempre al campo. No somos una estructura: somos un colectivo que une los esfuerzos de voluntarios, vecinos y aliados que decidieron no quedarse quietos.</p>
-          <p class="lead" style="margin-top:14px">Cada persona aporta lo que puede, tiempo, manos, transporte o recursos, y juntos convertimos esa energía en ayuda concreta: mercados, dotación, materiales y, ahora, vivienda digna para quienes lo perdieron todo. Cada peso que entra se registra y se convierte en algo que se puede ver.</p>
-          <div class="pill-row">
-            <span class="hero-badge">Unidos por nuestra tierra</span>
-            <span class="hero-badge">Voluntariado en terreno</span>
-            <span class="hero-badge">Cuentas claras</span>
-          </div>
-        </div>
-        <div class="about-grid" style="gap:12px;grid-template-columns:1fr 1fr">
-          <div class="mini"><b>10 ago</b><span>El día que nos puso a trabajar</span></div>
-          <div class="mini"><b>Campo</b><span>Foco en veredas y zonas rurales</span></div>
-          <div class="mini"><b>Voluntarios</b><span>La fuerza que mueve el colectivo</span></div>
-          <div class="mini"><b>45 m²</b><span>Vivienda tipo que reconstruimos</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACCIONES / GALERÍA -->
-  <section id="acciones">
-    <div class="sec-head">
-      <span class="eyebrow">Lo que hemos hecho</span>
-      <h2>Ayuda que ya llegó</h2>
-      <p class="lead">Desde las primeras horas llevamos ayuda a los puntos críticos de Cali y, luego, a las veredas. Esto es parte de lo que hemos entregado gracias a cada voluntario y cada donante.</p>
-    </div>
-    <div class="stat-strip">
-      <div class="sfig"><b>4</b><span>Puntos de trabajo</span></div>
-      <div class="sfig"><b>Cali</b><span>Puntos críticos atendidos</span></div>
-      <div class="sfig"><b>3</b><span>Veredas acompañadas</span></div>
-      <div class="sfig"><b>+100</b><span>Familias beneficiadas</span></div>
-    </div>
-    <div class="collage" id="gallery">
-      <figure class="gitem feat"><img class="gimg" src="fotos/accion-01.jpg" loading="lazy" alt="Punto crítico en Cali en las primeras horas"><figcaption>Punto crítico en Cali, primeras horas</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-04.jpg" loading="lazy" alt="Entrega casa a casa"><figcaption>Entrega casa a casa</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-03.jpg" loading="lazy" alt="Insumos donados por la comunidad"><figcaption>Insumos donados por la comunidad</figcaption></figure>
-      <figure class="gitem feat"><img class="gimg" src="fotos/accion-02.jpg" loading="lazy" alt="Jornada en una vereda del Valle"><figcaption>Jornada en una vereda del Valle</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-05.jpg" loading="lazy" alt="Ayuda humanitaria en camino"><figcaption>Ayuda humanitaria en camino</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-09.jpg" loading="lazy" alt="Dotación para los equipos de rescate"><figcaption>Dotación para los equipos de rescate</figcaption></figure>
-      <figure class="gitem feat"><img class="gimg" src="fotos/accion-06.jpg" loading="lazy" alt="Entrega directa a una familia"><figcaption>Entrega directa a una familia</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-07.jpg" loading="lazy" alt="Centro de acopio de noche"><figcaption>Centro de acopio, de noche</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-11.jpg" loading="lazy" alt="Mercados listos para salir a ruta"><figcaption>Mercados listos para salir a ruta</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-10.jpg" loading="lazy" alt="Voluntarios en punto de entrega"><figcaption>Voluntarios en punto de entrega</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-12.jpg" loading="lazy" alt="Mercados y elementos de aseo"><figcaption>Mercados y elementos de aseo</figcaption></figure>
-      <figure class="gitem feat"><img class="gimg" src="fotos/accion-08.jpg" loading="lazy" alt="Entrega puerta a puerta en zona rural"><figcaption>Entrega puerta a puerta en zona rural</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-13.jpg" loading="lazy" alt="Alistamiento de entregas"><figcaption>Alistamiento de entregas</figcaption></figure>
-      <figure class="gitem"><img class="gimg" src="fotos/accion-14.jpg" loading="lazy" alt="Acompañamiento en vereda"><figcaption>Acompañamiento en vereda</figcaption></figure>
-    </div>
-  </section>
-
-  <!-- ZONAS / MAPA -->
-  <section id="zonas">
-    <div class="sec-head">
-      <span class="eyebrow">Dónde trabajamos</span>
-      <h2>Nuestros puntos de trabajo</h2>
-      <p class="lead">Priorizamos las zonas rurales más golpeadas y con menos ayuda institucional, además de los puntos críticos de Cali.</p>
-    </div>
-    <div class="zonas-grid">
-      <div class="glass" style="padding:14px"><div id="map"></div></div>
-      <div class="zona-list">
-        <div class="zona"><div class="z-dot"></div><div><h4>Vereda Las Golondrinas</h4><p>Corregimiento rural de Cali con viviendas campesinas destruidas y acceso difícil. Frente prioritario de reconstrucción.</p></div></div>
-        <div class="zona"><div class="z-dot"></div><div><h4>El Dovío, Valle</h4><p>Municipio del norte del Valle afectado por el sismo, donde llevamos donaciones a familias rurales.</p></div></div>
-        <div class="zona"><div class="z-dot"></div><div><h4>Vereda Santa Teresa</h4><p>Comunidad rural acompañada con entrega de mercados y ayudas para las familias damnificadas.</p></div></div>
-        <div class="zona cali"><div class="z-dot"></div><div><h4>Cali</h4><p>Epicentro de la emergencia. Atendimos puntos críticos de la ciudad desde las primeras horas.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- META -->
-  <section id="meta">
-    <div class="sec-head">
-      <span class="eyebrow">La meta</span>
-      <h2>Más de 40 casas por volver a levantar</h2>
-      <p class="lead">Reconstruir una vivienda digna de 45 m² cuesta cerca de $15.000.000 con precios de donantes. Esta es la meta para las más de 40 familias que perdieron su casa.</p>
-    </div>
-    <div class="meta-card glass">
-      <div class="goal-top">
-        <span class="goal-raised" id="raised">$0</span>
-        <span class="goal-of">recaudados de <span id="goalMeta">$0</span></span>
-      </div>
-      <div class="bar"><span id="barMeta"></span></div>
-      <div class="goal-stats">
-        <div class="gstat"><b id="sFalta">$0</b><span>Falta para la meta</span></div>
-        <div class="gstat"><b id="sCasas">0</b><span>Casas por reconstruir</span></div>
-        <div class="gstat"><b id="sPct">0%</b><span>Avance de la campaña</span></div>
-      </div>
-      <div class="house-note">Cada casa cuesta $15.000.000, una vivienda de 45 m² con precios de donantes. La meta total es de $600.000.000. Vamos empezando, y cada aporte acerca la primera entrega.</div>
-    </div>
-  </section>
-
-  <!-- DONAR -->
-  <section id="donar">
-    <div class="sec-head">
-      <span class="eyebrow">Cómo donar</span>
-      <h2>Tu aporte se convierte en un techo</h2>
-      <p class="lead">Puedes donar dinero para la meta o aportar directamente materiales de construcción. Los precios son referenciales del mercado y pueden variar.</p>
-    </div>
-    <div class="donar-grid">
-      <div class="glass" style="padding:22px">
-        <h3 style="font-size:17px;margin-bottom:14px">Donar dinero</h3>
-        <div style="display:grid;gap:10px">
-          <div class="pay">
-            <div class="p-l"><b>Llave · Bre-B</b><span>A nombre de Samuel G.</span></div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <span class="p-val" id="llave">1144069115</span>
-              <button class="copy-btn" data-copy="1144069115">Copiar</button>
-            </div>
-          </div>
-          <div class="pay">
-            <div class="p-l"><b>Venmo</b><span>Donaciones desde el exterior</span></div>
-            <span class="p-val">Disponible pronto</span>
-          </div>
-        </div>
-        <a class="btn btn-primary btn-block" id="waBtn" style="margin-top:16px" target="_blank" rel="noopener">Coordinar donación por WhatsApp</a>
-      </div>
-      <div class="glass" style="padding:22px">
-        <h3 style="font-size:17px;margin-bottom:14px">Donar materiales</h3>
-        <details class="mats" open>
-          <summary>Construcción <span class="chev">▾</span></summary>
-          <div class="mat-item"><div class="mi-l"><b>Cemento gris</b><span>Bulto de 50 kg</span></div><div class="mi-p">$34.000 / bulto</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Arena de río</b><span>Para pega y repello</span></div><div class="mi-p">$70.000 / m³</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Grava / triturado</b><span>Para concreto</span></div><div class="mi-p">$85.000 / m³</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Ladrillo tolete</b><span>Muros y divisiones</span></div><div class="mi-p">$1.200 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Bloque de concreto</b><span>Muros de carga</span></div><div class="mi-p">$3.500 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Teja de zinc</b><span>Calibre 30 · 3,05 m</span></div><div class="mi-p">$38.000 / teja</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Varilla de hierro ½"</b><span>Barra de 6 m</span></div><div class="mi-p">$38.000 / varilla</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Guadua</b><span>Estructura y refuerzo</span></div><div class="mi-p">$18.000 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Tabla / madera</b><span>Encofrado y pisos</span></div><div class="mi-p">$25.000 / und</div></div>
-        </details>
-        <details class="mats" open>
-          <summary>Ferretería <span class="chev">▾</span></summary>
-          <div class="mat-item"><div class="mi-l"><b>Puntillas</b><span>Surtido de medidas</span></div><div class="mi-p">$6.000 / lb</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Alambre negro</b><span>Amarre de estructura</span></div><div class="mi-p">$8.000 / kg</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Herramientas básicas</b><span>Palas, martillos, baldes</span></div><div class="mi-p">$120.000 / set</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Elementos de seguridad</b><span>Guantes, cascos, gafas</span></div><div class="mi-p">$30.000 / kit</div></div>
-        </details>
-        <details class="mats" open>
-          <summary>Ayuda temporal <span class="chev">▾</span></summary>
-          <div class="mat-item"><div class="mi-l"><b>Colchoneta</b><span>Mientras se reconstruye</span></div><div class="mi-p">$35.000 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Cobija</b><span>Abrigo para las noches</span></div><div class="mi-p">$25.000 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Carpa familiar</b><span>Refugio temporal</span></div><div class="mi-p">$180.000 / und</div></div>
-          <div class="mat-item"><div class="mi-l"><b>Almohada</b><span>Descanso básico</span></div><div class="mi-p">$15.000 / und</div></div>
-        </details>
-      </div>
-    </div>
-    <div class="glass" style="padding:22px;margin-top:18px">
-      <h3 style="font-size:15px;margin-bottom:10px">En qué se ha invertido desde el primer día</h3>
-      <div class="gastos">
-        <span>Herramientas de rescate</span>
-        <span>Protección (cascos, gafas, botas con placa)</span>
-        <span>Hidratación</span>
-        <span>Mercados no perecederos</span>
-        <span>Tejas UPVC</span>
-        <span>Guantes</span>
-        <span>Cemento enviado a El Cairo (Valle)</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CIFRAS -->
-  <section id="cifras">
-    <details class="cifras glass">
-      <summary>
-        <span>Cifras del terremoto en Cali<small>Reporte Oficial #050 · corte 16/10/2026</small></span>
-        <span class="chev">▾</span>
-      </summary>
-      <div class="cifras-body">
-        <div class="cifras-grid">
-          <div class="cifra alert"><b>45.138</b><span>Familias reportadas como damnificadas (RUD)</span></div>
-          <div class="cifra"><b>139</b><span>Personas en alojamientos temporales</span></div>
-          <div class="cifra"><b>9.025</b><span>Familias atendidas con apoyo económico</span></div>
-          <div class="cifra"><b>682,4 t</b><span>Ayudas alimentarias entregadas</span></div>
-          <div class="cifra"><b>16</b><span>Familias con materiales de construcción</span></div>
-          <div class="cifra"><b>6.043</b><span>Edificaciones caracterizadas</span></div>
-          <div class="cifra alert"><b>1.651</b><span>Sticker rojo (inseguro)</span></div>
-          <div class="cifra"><b>2.288</b><span>Sticker amarillo (uso restringido)</span></div>
-          <div class="cifra"><b>2.104</b><span>Sticker verde (sin restricción)</span></div>
-          <div class="cifra"><b>69</b><span>Edificaciones con concepto de demolición aprobado</span></div>
-          <div class="cifra"><b>5</b><span>Edificaciones demolidas</span></div>
-          <div class="cifra"><b>1.516</b><span>Heridos atendidos en la red hospitalaria</span></div>
-        </div>
-        <p class="cifras-fuente">Fuente: Reporte Oficial #050 · Alcaldía de Santiago de Cali · corte 16 de octubre de 2026, 3:00 p. m. Desde la fase 2 de atención el reporte usa una nueva metodología (infraestructura, atención humanitaria y hospitalaria), por eso algunos indicadores anteriores ya no se publican. Hospitalizados actuales: 4, en UCI: 1. Las cifras se actualizan conforme avanza la verificación oficial.</p>
-      </div>
-    </details>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <div class="sec-head">
-      <span class="eyebrow">Contacto</span>
-      <h2>Súmate al colectivo</h2>
-      <p class="lead">¿Quieres donar, ser voluntario o proponer un frente de trabajo? Déjanos tus datos y te contactamos.</p>
-    </div>
-    <div class="form-card glass">
-      <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
-        <input type="hidden" name="form-name" value="contacto" />
-        <p style="display:none"><label>No llenar: <input name="bot-field" /></label></p>
-        <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" type="text" placeholder="Tu nombre" required /></div>
-        <div class="field"><label for="c-contacto">WhatsApp o correo</label><input id="c-contacto" name="contacto" type="text" placeholder="Para poder responderte" required /></div>
-        <div class="field"><label for="c-mensaje">Mensaje</label><textarea id="c-mensaje" name="mensaje" placeholder="Cuéntanos cómo quieres sumarte" required></textarea></div>
-        <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
-        <p class="form-status" id="formStatus"></p>
-      </form>
-    </div>
-  </section>
-
+<main>
+<section class="hero">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="hero-in">
+<div class="pill eyebrow">Colectivo autónomo</div>
+<h1>FuerzaCali.co</h1>
+<p>Somos un colectivo que busca la emancipación política, la libertad, la educación y la juntanza. Nadie vendrá a salvarnos, así que nos organizamos entre nosotros.</p>
+<div class="cta">
+<button type="button" class="btn" data-open="voluntariado">Hazte Voluntario</button>
+<a class="btn btn-ghost" href="#origen">Cómo nos formamos</a>
 </div>
+</div>
+</section>
+
+<section id="origen" class="sec bg9" style="padding-bottom:64px">
+<div class="wrap origen">
+<div>
+<div class="eyebrow">Origen · 10 de agosto de 2026</div>
+<h2>Cómo nos formamos durante el terremoto que sacudió a Cali</h2>
+</div>
+<div>
+<p>10 de agosto de 2026, 7:43 am, un terremoto destruyó la vida de cientos de familias en pocos minutos. Las primeras manos que llegaron fueron las de vecinos, voluntarios y desconocidos. Nadie pidió permiso. Se abrieron puntos de acopio, se levantaron listas de familias, se movieron camiones y se compartió lo que había.</p>
+<p>De ahí salió Fuerza Cali: de gente que descubrió que se organiza mejor cuando decide entre iguales. Nacimos del apoyo mutuo como un factor de supervivencia.</p>
+<p class="strong">Ese día, nos juntamos conocidos, amigos, familiares, extranjeros, y un sinfín de personas que se movilizaron a ayudar. Gracias a esa confianza, logramos entregar más de $20 millones de pesos en ayuda humanitaria, focalizada, priorizada y con transparencia.</p>
+</div>
+</div>
+</section>
+
+<section class="bg9" style="padding:0 clamp(20px,5vw,64px) clamp(64px,9vw,112px)" aria-labelledby="fotos-t">
+<div class="wrap">
+<div class="fotos-h">
+<div>
+<div class="eyebrow">Ayuda que ya llegó</div>
+<h3 id="fotos-t">Así se vio la ayuda, casa a casa</h3>
+</div>
+<p>Llegó primero a los puntos críticos de Cali y después a las veredas. Estas son imágenes reales de esos días.</p>
+</div>
+<div class="gallery">
+<figure class="ph"><img src="fotos/accion-01.jpg" width="750" height="1000" loading="lazy" alt="Punto crítico en Cali, primeras horas"><figcaption>Punto crítico en Cali, primeras horas</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-04.jpg" width="562" height="1000" loading="lazy" alt="Entrega casa a casa"><figcaption>Entrega casa a casa</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-03.jpg" width="750" height="1000" loading="lazy" alt="Insumos donados por la comunidad"><figcaption>Insumos donados por la comunidad</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-02.jpg" width="596" height="1000" loading="lazy" alt="Jornada en una vereda del Valle"><figcaption>Jornada en una vereda del Valle</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-05.jpg" width="750" height="1000" loading="lazy" alt="Ayuda humanitaria en camino"><figcaption>Ayuda humanitaria en camino</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-09.jpg" width="750" height="1000" loading="lazy" alt="Dotación para los equipos de rescate"><figcaption>Dotación para los equipos de rescate</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-06.jpg" width="750" height="1000" loading="lazy" alt="Entrega directa a una familia"><figcaption>Entrega directa a una familia</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-07.jpg" width="750" height="1000" loading="lazy" alt="Centro de acopio, de noche"><figcaption>Centro de acopio, de noche</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-11.jpg" width="750" height="1000" loading="lazy" alt="Mercados listos para salir a ruta"><figcaption>Mercados listos para salir a ruta</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-10.jpg" width="750" height="1000" loading="lazy" alt="Voluntarios en punto de entrega"><figcaption>Voluntarios en punto de entrega</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-12.jpg" width="563" height="1000" loading="lazy" alt="Mercados y elementos de aseo"><figcaption>Mercados y elementos de aseo</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-08.jpg" width="750" height="1000" loading="lazy" alt="Entrega puerta a puerta en zona rural"><figcaption>Entrega puerta a puerta en zona rural</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-13.jpg" width="750" height="1000" loading="lazy" alt="Alistamiento de entregas"><figcaption>Alistamiento de entregas</figcaption></figure>
+<figure class="ph"><img src="fotos/accion-14.jpg" width="581" height="1000" loading="lazy" alt="Acompañamiento en vereda"><figcaption>Acompañamiento en vereda</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section id="hecho" class="sec bg95">
+<div class="wrap">
+<div class="eyebrow">Rendición de cuentas</div>
+<h2 style="max-width:760px">Lo que se hizo, dicho con honestidad</h2>
+<p class="lead mb48">A quienes confiaron en nosotros les debemos cuentas claras. Esto fue lo que logramos, lo que no, y por qué el proyecto de reconstrucción terminó.</p>
+<div class="g3">
+<div class="card"><div class="big">+20</div><h3 class="ct">Familias acompañadas</h3><p class="cp">de diferentes barrios y corregimientos cercanos, donde la ayuda no llegaba, con mercados, tejas, material de construcción, cemento y material educativo.</p></div>
+<div class="card"><div class="big">+8</div><h3 class="ct">Puntos asistidos</h3><p class="cp">con herramientas, luz y material de protección para quienes atendían la emergencia.</p></div>
+<div class="card"><div class="big">+$20 M</div><h3 class="ct">Pesos en ayudas entregadas y logística</h3><p class="cp">Ayuda humanitaria focalizada, priorizada y con transparencia.</p></div>
+</div>
+</div>
+</section>
+
+<section id="somos" class="sec bg9">
+<div class="wrap">
+<div class="eyebrow">Lo que somos ahora</div>
+<h2 style="max-width:820px">Un colectivo autónomo, listo para más</h2>
+<p class="lead mb48">El terremoto pasó, pero la necesidad de organizarnos no. Seguimos por cuatro ideas que ya pusimos a prueba, con Kropotkin como brújula.</p>
+<div class="g4">
+<div class="card"><div class="num">1</div><h3 class="ct">Emancipación política</h3><p class="cp">Decidimos entre iguales. Sin jefes ni intermediarios, en colectivo y aliados con otros grupos.</p></div>
+<div class="card"><div class="num">2</div><h3 class="ct">Libertad</h3><p class="cp">Libres con otros, no contra otros. Aquí tu voz pesa igual que la de cualquiera y nadie te manda.</p></div>
+<div class="card"><div class="num">3</div><h3 class="ct">Educación</h3><p class="cp">Aprendemos haciendo. Cabeza y manos juntas, sin títulos de por medio, para que nadie se quede sin saber ni sin oficio.</p></div>
+<div class="card"><div class="num">4</div><h3 class="ct">Juntanza</h3><p class="cp">Primero que todos coman. Lo vivimos en el terremoto: cuando nos juntamos, llegamos a donde nadie llegaba.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec bg95">
+<div class="wrap princ">
+<div>
+<div class="eyebrow">Cómo nos organizamos</div>
+<h2>Tenemos unos fundamentos políticos donde todo el espectro es bienvenido</h2>
+<p>Nuestra base es la teoría kropotkiniana, que está fuera de cualquier concepción de izquierda/derecha. Sus 4 fundamentos son compartidos por cualquier ser humano: apoyo mutuo, autogestión, acción directa y educación libre.</p>
+</div>
+<div>
+<div class="card row"><span class="dot" aria-hidden="true"></span><div><h3 class="ct">Apoyo mutuo</h3><p class="cp">La cooperación entre iguales como forma de vivir y de resistir, no como caridad.</p></div></div>
+<div class="card row"><span class="dot" aria-hidden="true"></span><div><h3 class="ct">Autogestión</h3><p class="cp">Resolvemos con nuestros propios recursos y decisiones, y mostramos las cuentas.</p></div></div>
+<div class="card row"><span class="dot" aria-hidden="true"></span><div><h3 class="ct">Acción directa</h3><p class="cp">Hacer nosotros lo que necesitamos, sin esperar que otros lo concedan.</p></div></div>
+<div class="card row"><span class="dot" aria-hidden="true"></span><div><h3 class="ct">Educación libertaria</h3><p class="cp">Círculos de estudio donde nadie es el maestro y todos aprendemos.</p></div></div>
+</div>
+</div>
+</section>
+
+<section id="haciendo" class="sec bg9">
+<div class="wrap">
+<div class="eyebrow">Lo que estamos haciendo ahora</div>
+<h2 class="mb48" style="max-width:760px">Del apoyo mutuo en la emergencia a la organización de todos los días</h2>
+<div class="g3">
+<div class="card col"><div class="eyebrow">En marcha</div><h3 class="ct big2">Club de lectura política</h3><p class="cp grow">Leemos y discutimos textos de la teoría libertaria para entender lo que pasa en Cali y en el país.</p><button type="button" class="btn btn-sm" data-open="lectura">Inscribirme al club</button></div>
+<div class="card col"><div class="eyebrow">Abierto</div><h3 class="ct big2">Voluntariado</h3><p class="cp grow">Pon tus manos, tu oficio o tu tiempo en lo que hacemos. Nadie sobra y todos aprenden.</p><button type="button" class="btn btn-sm" data-open="voluntariado">Quiero ser voluntario</button></div>
+<div class="card col"><div class="eyebrow">Siempre abierto</div><h3 class="ct big2">Proyectos de barrio</h3><p class="cp grow">Ferias, jornadas educativas, jornadas de salud y lo que tu barrio necesite. Si tienes una idea, la armamos juntos.</p><button type="button" class="btn btn-sm" data-open="proyecto">Proponer algo</button></div>
+</div>
+</div>
+</section>
+
+<section id="recursos" class="sec bg95">
+<div class="wrap">
+<div class="eyebrow">Recursos</div>
+<h2>Para leer, compartir y usar</h2>
+<p class="lead mb48">Material hecho por el colectivo para la comunidad. Es libre: léelo, compártelo y úsalo. <a href="/recursos">Ver todos los recursos</a>.</p>
+<div class="g2">
+<div class="card col"><div class="eyebrow">Guía 19N</div><h3 class="ct big2">Cómo ir a la marcha del 19N y volver bien</h3><p class="cp grow">Guía de autocuidado del colectivo para quien va a la marcha: qué llevar, cómo cuidarse y cómo volver a casa.</p><a class="btn btn-sm" href="/recursos-19n">Leer la guía</a></div>
+<div class="card col"><div class="eyebrow">Guía</div><h3 class="ct big2">Cómo acompañar a los niños con sus miedos después del terremoto</h3><p class="cp grow">Una guía práctica del colectivo, lista para compartir con quien la necesite.</p><a class="btn btn-sm" href="/guia-ninos">Ver la guía</a></div>
+</div>
+</div>
+</section>
+
+<section id="sumate" class="sumate">
+<div class="in">
+<div class="eyebrow">Súmate</div>
+<h2>La juntanza se hace con gente</h2>
+<p class="lead">Deja tu nombre y tu WhatsApp, y te escribimos para empezar.</p>
+<div class="cta" style="margin-top:0">
+<button type="button" class="btn" data-open="voluntariado">Quiero ser voluntario</button>
+<button type="button" class="btn btn-ghost" data-open="lectura">Unirme al club de lectura</button>
+</div>
+<p class="small">Tus datos se usan solo para convocarte. No se comparten.</p>
+</div>
+</section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="brand" style="color:#fff">FUERZACALI<span style="color:var(--brand)">.CO</span></div>
-    <p>Unidos por nuestra tierra · Colectivo de voluntarios</p>
-    <p style="margin-top:8px">Ayuda y reconstrucción de vivienda rural tras el terremoto del 10 de agosto de 2026 · Valle del Cauca, Colombia · <a href="alianzas.html">Nuestras alianzas</a></p>
-  </div>
+<div>Fuerza Cali · Cali, Colombia</div>
+<div>Un colectivo autogestionado. Sin jefes, con cuentas claras.</div>
 </footer>
 
-<div class="lightbox" id="lightbox"><button class="lb-close" id="lbClose" aria-label="Cerrar">✕</button><img id="lbImg" src="" alt=""></div>
+<dialog id="modal" aria-label="Formulario de Fuerza Cali">
+<div class="dlg">
+<button type="button" class="x" aria-label="Cerrar" data-close>&times;</button>
+<section data-panel="lectura" hidden>
+<div class="eyebrow">Fuerza Cali</div>
+<h3 class="dt">Inscríbete al club de lectura política</h3>
+<p class="ds">Leemos y discutimos juntos. Déjanos tus datos y te avisamos de la próxima sesión.</p>
+<form name="club-lectura" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="club-lectura">
+<p hidden><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label for="lectura-nombre">Nombre completo</label>
+<input id="lectura-nombre" name="nombre" type="text" autocomplete="name" required>
+<label for="lectura-wa">WhatsApp</label>
+<input id="lectura-wa" name="whatsapp" type="tel" autocomplete="tel" required>
+<label for="lectura-correo">Correo electrónico</label>
+<input id="lectura-correo" name="correo" type="email" autocomplete="email">
+<label for="lectura-extra">Qué te gustaría leer o discutir (opcional)</label>
+<textarea id="lectura-extra" name="interes" rows="3"></textarea>
+<button type="submit" class="btn">Inscribirme</button>
+<div class="form-status" role="status"></div>
+<p class="priv">Tus datos se usan solo para convocarte. No se comparten.</p>
+</form>
+</section>
+<section data-panel="voluntariado" hidden>
+<div class="eyebrow">Fuerza Cali</div>
+<h3 class="dt">Hazte voluntario</h3>
+<p class="ds">Cuéntanos con qué puedes ayudar y te escribimos para empezar.</p>
+<form name="voluntariado" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="voluntariado">
+<p hidden><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label for="voluntariado-nombre">Nombre completo</label>
+<input id="voluntariado-nombre" name="nombre" type="text" autocomplete="name" required>
+<label for="voluntariado-wa">WhatsApp</label>
+<input id="voluntariado-wa" name="whatsapp" type="tel" autocomplete="tel" required>
+<label for="voluntariado-correo">Correo electrónico</label>
+<input id="voluntariado-correo" name="correo" type="email" autocomplete="email">
+<label for="voluntariado-extra">En qué puedes ayudar (tiempo, oficio, transporte, salud, educación)</label>
+<textarea id="voluntariado-extra" name="aporte" rows="3"></textarea>
+<button type="submit" class="btn">Quiero ser voluntario</button>
+<div class="form-status" role="status"></div>
+<p class="priv">Tus datos se usan solo para convocarte. No se comparten.</p>
+</form>
+</section>
+<section data-panel="proyecto" hidden>
+<div class="eyebrow">Fuerza Cali</div>
+<h3 class="dt">Propón algo para tu barrio</h3>
+<p class="ds">Ferias, jornadas educativas, jornadas de salud o lo que tu barrio necesite.</p>
+<form name="propuesta-proyecto" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="propuesta-proyecto">
+<p hidden><label>No llenar: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label for="proyecto-nombre">Nombre completo</label>
+<input id="proyecto-nombre" name="nombre" type="text" autocomplete="name" required>
+<label for="proyecto-wa">WhatsApp</label>
+<input id="proyecto-wa" name="whatsapp" type="tel" autocomplete="tel" required>
+<label for="proyecto-correo">Correo electrónico</label>
+<input id="proyecto-correo" name="correo" type="email" autocomplete="email">
+<label for="proyecto-extra">Cuéntanos tu idea y dónde la harías</label>
+<textarea id="proyecto-extra" name="idea" rows="3"></textarea>
+<button type="submit" class="btn">Enviar propuesta</button>
+<div class="form-status" role="status"></div>
+<p class="priv">Tus datos se usan solo para convocarte. No se comparten.</p>
+</form>
+</section>
+<section data-panel="gracias" hidden>
+<div class="thanks">
+<div class="eyebrow">Recibido</div>
+<h3>Gracias por sumarte</h3>
+<p>Te escribimos pronto por WhatsApp.</p>
+<button type="button" class="btn btn-ghost btn-sm" data-close>Cerrar</button>
+</div>
+</section>
+</div>
+</dialog>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 (function(){
-  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
-  burger.addEventListener('click',function(){mm.classList.toggle('open')});
-  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
-
-  var META=600000000, RECAUDADO=3100000, CASAS=40, WHATSAPP='573152017605';
-  var money=function(n){return '$'+(n||0).toLocaleString('es-CO')};
-  document.getElementById('raised').textContent=money(RECAUDADO);
-  document.getElementById('goalMeta').textContent=money(META);
-  document.getElementById('sFalta').textContent=money(Math.max(0,META-RECAUDADO));
-  document.getElementById('sCasas').textContent='+'+CASAS;
-  var pct=RECAUDADO/META*100;
-  document.getElementById('sPct').textContent=pct<1?pct.toFixed(1)+'%':Math.round(pct)+'%';
-  setTimeout(function(){document.getElementById('barMeta').style.width=Math.max(2,pct)+'%';},250);
-
-  var waMsg=encodeURIComponent('Hola FuerzaCali, quiero apoyar al colectivo. ¿Cómo puedo donar o ser voluntario?');
-  document.getElementById('waBtn').href='https://wa.me/'+WHATSAPP+'?text='+waMsg;
-
-  document.querySelectorAll('.copy-btn').forEach(function(b){
-    b.addEventListener('click',function(){
-      var t=b.getAttribute('data-copy');
-      navigator.clipboard&&navigator.clipboard.writeText(t);
-      var o=b.textContent;b.textContent='¡Copiado!';setTimeout(function(){b.textContent=o},1500);
-    });
-  });
-
-  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg');
-  document.getElementById('gallery').addEventListener('click',function(e){
-    var fig=e.target.closest('.gitem'); var img=fig&&fig.querySelector('img');
-    if(img){lbImg.src=img.src;lb.classList.add('open');}
-  });
-  function closeLb(){lb.classList.remove('open');lbImg.src='';}
-  document.getElementById('lbClose').addEventListener('click',closeLb);
-  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
-
-  // Collage masonry: cada tesela ocupa filas según el alto real de su imagen
-  (function(){
-    var grid=document.getElementById('gallery');
-    var ROW=8, GAP=10;
-    function resize(it){
-      var img=it.querySelector('img'); if(!img)return;
-      var h=img.getBoundingClientRect().height;
-      if(!h)return;
-      it.style.gridRowEnd='span '+Math.max(10,Math.ceil((h+GAP)/(ROW+GAP)));
-    }
-    function layout(){grid.querySelectorAll('.gitem').forEach(resize);}
-    grid.querySelectorAll('img').forEach(function(img){
-      if(img.complete) resize(img.closest('.gitem'));
-      else img.addEventListener('load',function(){resize(img.closest('.gitem'));});
-    });
-    window.addEventListener('resize',layout);
-    setTimeout(layout,300); setTimeout(layout,900);
-  })();
-
-  var form=document.getElementById('contactForm'), status=document.getElementById('formStatus');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var data=new FormData(form);
-    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
-      .then(function(){status.textContent='¡Gracias! Recibimos tu mensaje y te contactaremos pronto.';form.reset();})
-      .catch(function(){status.textContent='No se pudo enviar. Escríbenos por WhatsApp y con gusto te ayudamos.';});
-  });
-
-  function initMap(){
-    if(typeof L==='undefined')return;
-    var puntos=[
-      {n:'Vereda Las Golondrinas',d:'Corregimiento rural de Cali',ll:[3.5300,-76.6050],rural:true},
-      {n:'El Dovío, Valle',d:'Norte del Valle del Cauca',ll:[4.5103,-76.2378],rural:true},
-      {n:'Vereda Santa Teresa',d:'Comunidad rural acompañada',ll:[3.6500,-76.5650],rural:true},
-      {n:'Cali',d:'Puntos críticos atendidos',ll:[3.4516,-76.5320],rural:false}
-    ];
-    var map=L.map('map',{scrollWheelZoom:false});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
-    var group=[];
-    puntos.forEach(function(p){
-      var icon=L.divIcon({className:'',html:'<div class="fc-pin '+(p.rural?'rural':'cali')+'"></div>',iconSize:[16,16],iconAnchor:[8,16]});
-      L.marker(p.ll,{icon:icon}).addTo(map).bindPopup('<b>'+p.n+'</b><br>'+p.d);
-      group.push(p.ll);
-    });
-    map.fitBounds(group,{padding:[40,40]});
-    setTimeout(function(){map.invalidateSize();},200);
-  }
-  if(document.readyState!=='loading')initMap(); else document.addEventListener('DOMContentLoaded',initMap);
+var c=document.getElementById('stars');
+if(c){
+var ctx=c.getContext('2d'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,stars=[],w,h,raf;
+function draw(t){
+ctx.clearRect(0,0,w,h);
+for(var i=0;i<stars.length;i++){var s=stars[i];ctx.globalAlpha=reduce?.7:.35+.65*Math.abs(Math.sin(s.p+t*s.s*.06));ctx.fillStyle='#C9D9FF';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fill();}
+if(!reduce)raf=requestAnimationFrame(draw);
+}
+function size(){
+var r=c.parentElement.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);
+w=r.width;h=r.height;c.width=w*d;c.height=h*d;ctx.setTransform(d,0,0,d,0,0);
+var n=Math.round(w*h/9000);stars=[];
+for(var i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.3,p:Math.random()*6.28,s:Math.random()*.02+.005});
+draw(0);
+}
+window.addEventListener('resize',function(){cancelAnimationFrame(raf);size();});
+size();
+if(!reduce)raf=requestAnimationFrame(draw);
+}
+var dlg=document.getElementById('modal');
+function mostrar(k){
+var ps=dlg.querySelectorAll('[data-panel]');
+for(var i=0;i<ps.length;i++)ps[i].hidden=ps[i].getAttribute('data-panel')!==k;
+}
+function abrir(k){
+mostrar(k);
+if(!dlg.open)dlg.showModal();
+var f=dlg.querySelector('[data-panel="'+k+'"] input[type="text"]');
+if(f)f.focus();
+}
+var bs=document.querySelectorAll('[data-open]');
+for(var i=0;i<bs.length;i++)bs[i].addEventListener('click',function(e){abrir(e.currentTarget.getAttribute('data-open'));});
+var cs=dlg.querySelectorAll('[data-close]');
+for(var j=0;j<cs.length;j++)cs[j].addEventListener('click',function(){dlg.close();});
+dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
+var fs=dlg.querySelectorAll('form');
+for(var k=0;k<fs.length;k++)fs[k].addEventListener('submit',function(e){
+e.preventDefault();
+var form=e.currentTarget,btn=form.querySelector('button[type="submit"]'),st=form.querySelector('.form-status'),txt=btn.textContent;
+btn.disabled=true;btn.textContent='Enviando...';st.textContent='';st.className='form-status';
+fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+.then(function(r){if(!r.ok)throw new Error(r.status);form.reset();mostrar('gracias');})
+.catch(function(){st.textContent='No pudimos enviar tus datos. Intenta de nuevo en un momento.';st.className='form-status error';})
+.then(function(){btn.disabled=false;btn.textContent=txt;});
+});
 })();
 </script>
 </body>
