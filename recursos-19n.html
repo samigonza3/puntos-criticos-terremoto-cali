@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cómo ir a la marcha y volver bien · 19N · Recursos · FuerzaCali.co</title>
+<meta name="description" content="Guía de bolsillo de autocuidado para la marcha del 19N: preparar, acompañar y volver a casa. Recomendaciones básicas de reducción de daños para marchar en paz." />
+<meta name="theme-color" content="#050b1f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg-950:#050b1f;--ink:#eaf1ff;--muted:#9fb0d9;--faint:#6d80b0;
+  --brand:#4d8bff;--brand-2:#7aa8ff;--brand-3:#37e0c8;--alert:#ff6b7d;
+  --glass-bg:rgba(255,255,255,.07);--glass-brd:rgba(255,255,255,.14);--glass-hi:rgba(255,255,255,.5);
+  --radius:26px;--shadow:0 20px 50px -20px rgba(2,7,22,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--bg-950);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(120% 90% at 50% -10%,#0e1c44 0%,#070f28 45%,#050b1f 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
+.blob.b1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,#2f6bff,transparent 60%)}
+.blob.b2{width:55vw;height:55vw;right:-18vw;top:30vh;background:radial-gradient(circle,#1fd6c0,transparent 60%);opacity:.3}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;background-image:radial-gradient(rgba(255,255,255,.9) 1px,transparent 1px);background-size:3px 3px}
+.glass{background:var(--glass-bg);border:1px solid var(--glass-brd);border-radius:var(--radius);
+  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi);position:relative}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+header.nav{position:sticky;top:0;z-index:50;padding:10px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:20px}
+.brand{font-weight:900;font-size:19px;color:#fff;text-decoration:none}
+.brand .dot{color:var(--brand)}
+.back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600}
+.back:hover{color:#fff}
+main{padding:34px 0 60px}
+
+/* ===== Contenido brutalista (solo dentro del post) ===== */
+.zine{padding:0;overflow:hidden}
+.zine .z-pad{padding:26px 22px}
+.z-kicker{display:inline-block;background:var(--alert);color:#1a0608;font-weight:800;font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;margin-bottom:16px}
+.z-head h1{font-size:clamp(30px,8vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.98;color:#fff}
+.z-head h1 u{text-decoration:none;box-shadow:inset 0 -.32em 0 rgba(77,139,255,.55)}
+.z-sub{margin-top:14px;color:var(--muted);font-size:15px;max-width:52ch}
+.z-meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint)}
+.z-meta span{border:1px solid var(--glass-brd);padding:5px 10px;border-radius:2px}
+.z-lede{border-top:2px solid rgba(255,255,255,.14);border-bottom:2px solid rgba(255,255,255,.14);
+  padding:18px 22px;font-size:15px;color:var(--ink)}
+.z-lede b{background:#fff;color:#0a1120;padding:0 4px;font-weight:800}
+.z-grid{padding:6px 22px 8px}
+.z-blk{padding:20px 0;border-bottom:1.5px dashed rgba(159,176,217,.35)}
+.z-blk:last-child{border-bottom:0}
+.z-bh{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+.z-no{font-weight:900;font-size:14px;color:#031024;background:var(--brand);width:34px;height:34px;
+  display:inline-flex;align-items:center;justify-content:center;border-radius:3px;flex-shrink:0}
+.z-bh h2{font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:1;color:#fff}
+.z-blk p{font-size:14px;color:var(--muted)}
+.hl{background:var(--brand);color:#031024;padding:0 4px;font-weight:800}
+.hl.red{background:var(--alert);color:#1a0608}
+.tick{color:var(--brand-2);font-weight:800}
+.z-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.z-tags span{border:1.5px solid var(--glass-brd);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;padding:4px 9px;border-radius:2px;color:var(--ice,#c9d9ff)}
+.z-src{padding:20px 22px;border-top:2px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03)}
+.z-src h3{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--alert);margin-bottom:8px}
+.z-src p{font-size:12px;color:var(--faint);line-height:1.6}
+.z-src a{color:var(--muted)}
+.postnav{display:flex;justify-content:space-between;margin-top:22px;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;text-decoration:none;padding:13px 20px;border-radius:14px}
+.btn-ghost{color:#fff;background:var(--glass-bg);border:1px solid var(--glass-brd)}
+.btn-ghost:hover{border-color:var(--brand-2)}
+.btn-primary{color:#031024;background:linear-gradient(135deg,#7aa8ff,#4d8bff);box-shadow:0 12px 30px -10px rgba(77,139,255,.7)}
+footer{padding:30px 0 60px;text-align:center;color:var(--faint);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div></div>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-inner glass">
+      <a href="index.html" class="brand">FUERZACALI<span class="dot">.CO</span></a>
+      <a href="recursos.html" class="back">← Recursos</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="zine glass">
+      <div class="z-pad z-head">
+        <span class="z-kicker">Recursos · N.º 01</span>
+        <h1>Cómo ir a la <u>marcha</u> y volver bien</h1>
+        <p class="z-sub">Lo mínimo que conviene saber antes de salir el 19 de noviembre. Pensado para cuidarte y cuidar a quien marcha contigo.</p>
+        <div class="z-meta"><span>19N</span><span>Autocuidado</span><span>Nov 2026</span><span>Lectura 4 min</span></div>
+      </div>
+
+      <div class="z-lede">La calle es de todos, pero se camina mejor en grupo. Esto no es un manual de héroes: es una lista para <b>preparar, acompañar y regresar</b>. Léela, guárdala, pásala.</div>
+
+      <div class="z-grid">
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">01</span><h2>Antes de salir</h2></div>
+          <p>Avisa a alguien de confianza por dónde vas y a qué hora piensas volver. Carga el celular al 100% y lleva batería de respaldo. Escribe un <span class="hl">contacto de emergencia</span> en tu brazo con marcador. Ropa cómoda, zapatos cerrados y gorra.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">02</span><h2>Qué llevar</h2></div>
+          <p>Agua, un pañuelo o bandana, suero fisiológico para los ojos, un snack, algo de efectivo y tu documento. Lleva <span class="tick">solo lo necesario</span>: entre menos cargues, mejor te mueves.</p>
+          <div class="z-tags"><span>Agua</span><span>Suero</span><span>Pañuelo</span><span>Snack</span><span>Batería</span></div>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">03</span><h2>Nunca sola, nunca solo</h2></div>
+          <p>Ve en grupo pequeño de gente que se conozca, de 3 a 10 personas. Acuerden un <span class="hl">punto de encuentro</span> visible por si alguien se separa, y un sistema de parejas: cada quien cuida a uno. Quien queda aislado del grupo es más vulnerable.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">04</span><h2>Ubícate</h2></div>
+          <p>Mira el mapa antes. Identifica por dónde entras, las calles principales y <span class="tick">varias salidas</span>. Fíjate en las esquinas que se pueden congestionar y acuerden rutas alternas y un segundo punto de encuentro.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">05</span><h2>Gases y multitud</h2></div>
+          <p>Si hay gases, no te frotes los ojos: enjuaga con agua o suero. Respira por la nariz con la bandana húmeda, muévete con calma hacia aire limpio y, si puedes, contra el viento. <span class="hl red">No corras en estampida</span>: caminar rápido y juntos evita caídas y aplastamientos.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">06</span><h2>Comunicación</h2></div>
+          <p>Define el plan antes: grupo de chat, qué hacer si se cae la señal y a qué hora se reagrupan. En la calle, menos pantalla y más ojos arriba. <span class="tick">No difundas rumores</span>: verifica antes de compartir.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">07</span><h2>Tus derechos</h2></div>
+          <p>La protesta pacífica es un derecho. Ubica a las <span class="hl">brigadas de salud</span> y a los defensores de derechos humanos presentes. Si ves un abuso, documéntalo con cuidado y sin exponer a otras personas.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">08</span><h2>Cuida tu rastro</h2></div>
+          <p>No cargues información sensible ni papeles con planes escritos. Antes de publicar fotos o videos, piensa a quién estás mostrando: una imagen puede identificar a alguien sin querer.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">09</span><h2>Solidaridad</h2></div>
+          <p>Lleva agua de más y compártela, también con quien no es de tu grupo. Si alguien entra en pánico, acompáñalo a un lugar tranquilo. Saber primeros auxilios básicos salva la jornada.</p>
+        </div>
+        <div class="z-blk">
+          <div class="z-bh"><span class="z-no">10</span><h2>Si algo pasa</h2></div>
+          <p>Mantén la calma, busca una brigada médica y ve al punto de encuentro. Ten a mano las líneas de emergencia. <span class="hl red">Nadie se queda atrás</span>.</p>
+        </div>
+      </div>
+
+      <div class="z-src">
+        <h3>De dónde sale esto</h3>
+        <p>Recomendaciones básicas de marcha más principios de autocuidado y organización en grupo adaptados, en clave de reducción de daños, de un texto sobre tácticas de calle (Green Mountain Anarchist Collective, <em>Black Bloc Tactics Communique</em>, theanarchistlibrary.org). Tomamos solo lo relativo a cuidarse, acompañarse y volver a casa. Esta guía no promueve ni describe confrontación, daños ni violencia: es para marchar en paz y seguro.</p>
+      </div>
+    </article>
+
+    <div class="postnav">
+      <a href="recursos.html" class="btn btn-ghost">← Todos los recursos</a>
+      <a href="index.html#donar" class="btn btn-primary">Apoya al colectivo</a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">Unidos por nuestra tierra · Colectivo de voluntarios · FuerzaCali.co</div></footer>
+</body>
+</html>
