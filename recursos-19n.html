@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TM2934RK');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -170,6 +173,9 @@ footer{margin-top:56px;padding:36px clamp(20px,5vw,64px);border-top:1px solid rg
 </head>
 <body>
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TM2934RK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <header class="nav">
 <a class="logo" href="/">Fuerza Cali</a>
 <nav aria-label="Principal"><ul>
@@ -482,6 +488,9 @@ document.getElementById('abrir').addEventListener('click',function(){todo(true);
 document.getElementById('cerrar').addEventListener('click',function(){todo(false);});
 document.getElementById('imprimir').addEventListener('click',function(){todo(true);window.print();});
 window.addEventListener('beforeprint',function(){todo(true);});
+window.dataLayer=window.dataLayer||[];
+for(var k=0;k<ds.length;k++)ds[k].addEventListener('toggle',function(e){if(e.target.open)dataLayer.push({event:'guia_punto_abierto',punto:e.target.parentNode.id});});
+document.getElementById('imprimir').addEventListener('click',function(){dataLayer.push({event:'guia_imprimir'});});
 function abrirHash(){
 var id=location.hash.slice(1);
 if(!id)return;
