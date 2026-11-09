@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Claude%20outputs/
+
+Sitemap: https://fuerzacali.co/sitemap.xml
