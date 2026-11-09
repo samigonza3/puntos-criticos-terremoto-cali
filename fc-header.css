@@ -1,0 +1,12 @@
+/* Cabecera compartida de FuerzaCali.co: misma en todas las paginas */
+.fcn{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:24px clamp(20px,5vw,64px);background:#040817;font-family:'Montserrat',system-ui,sans-serif;line-height:1.5;position:relative;z-index:60}
+.fcn *{box-sizing:border-box}
+.fcn-logo{font-weight:900;font-size:19px;letter-spacing:.04em;text-transform:uppercase;color:#F4F7FF;text-decoration:none}
+.fcn-logo span{color:#FFB703}
+.fcn ul{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:0;list-style:none;font-size:14px;font-weight:500}
+.fcn ul a{color:#C9D9FF;text-decoration:none}
+.fcn ul a:hover,.fcn ul a[aria-current]{color:#F4F7FF}
+.fcn ul a[aria-current]{font-weight:700}
+.fcn a:focus-visible{outline:2px solid #7FA8FF;outline-offset:3px}
+/* Evita que reglas globales de cada pagina (p. ej. "nav{position:sticky...}") deformen la cabecera */
+.fcn nav{position:static;top:auto;z-index:auto;background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;height:auto;padding:0;margin:0}

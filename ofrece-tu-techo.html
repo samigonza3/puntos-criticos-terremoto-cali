@@ -204,6 +204,7 @@
     .lista-grid{grid-template-columns:1fr}
   }
 </style>
+<link rel="stylesheet" href="/fc-header.css">
 </head>
 <body>
 
@@ -222,20 +223,10 @@
   <div data-netlify-recaptcha="true"></div>
 </form>
 
-<button class="burger-btn" id="burgerBtn" aria-label="Abrir menú">
-  <span></span><span></span><span></span>
-</button>
-<div class="menu-overlay" id="menuOverlay" style="display:none"></div>
-<nav class="menu-panel" id="menuPanel">
-  <div class="menu-top">
-    <span class="menu-title">Menú</span>
-    <button class="menu-close" id="menuClose" aria-label="Cerrar menú">✕</button>
-  </div>
-  <a href="index.html">Inicio · Puntos críticos</a>
-  <a href="recursos.html">📁 Recursos oficiales</a>
-  <a href="#formulario" class="menu-link-highlight" id="menuLinkForm">🏠 Ofrece tu techo (formulario)</a>
-</nav>
-
+<header class="fcn">
+<a class="fcn-logo" href="/">FUERZACALI<span>.CO</span></a>
+<nav aria-label="Principal"><ul><li><a href="/#origen">Origen</a></li><li><a href="/#hecho">Lo hecho</a></li><li><a href="/#somos">Lo que somos</a></li><li><a href="/recursos">Recursos</a></li><li><a href="/#sumate">Súmate</a></li></ul></nav>
+</header>
 <div class="wrap">
 
   <div class="eyebrow">Terremoto en Cali · 10 de agosto de 2026</div>
@@ -381,27 +372,6 @@
   </footer>
 
 </div>
-
-<script>
-  const burgerBtn = document.getElementById('burgerBtn');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const menuPanel = document.getElementById('menuPanel');
-  const menuClose = document.getElementById('menuClose');
-  const menuLinkForm = document.getElementById('menuLinkForm');
-
-  function openMenu(){
-    menuOverlay.style.display = 'block';
-    menuPanel.classList.add('open');
-  }
-  function closeMenu(){
-    menuPanel.classList.remove('open');
-    setTimeout(() => { menuOverlay.style.display = 'none'; }, 200);
-  }
-  burgerBtn.addEventListener('click', openMenu);
-  menuClose.addEventListener('click', closeMenu);
-  menuOverlay.addEventListener('click', closeMenu);
-  menuLinkForm.addEventListener('click', closeMenu);
-</script>
 
 </body>
 </html>

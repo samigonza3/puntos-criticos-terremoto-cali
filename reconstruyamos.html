@@ -197,6 +197,7 @@
   :focus-visible{outline:2px solid var(--star-light);outline-offset:3px}
   @media(prefers-reduced-motion:reduce){ *{scroll-behavior:auto} }
 </style>
+<link rel="stylesheet" href="/fc-header.css">
 </head>
 <body>
 
@@ -261,22 +262,10 @@
   };
 </script>
 
-<nav>
-  <div class="wrap nav-in">
-    <a class="brand" href="#inicio">
-      <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg></span>
-      <span>Fuerza Cali<small>Reconstruyamos</small></span>
-    </a>
-    <div class="nav-links">
-      <a href="#meta">Meta</a>
-      <a href="#materiales">Materiales</a>
-      <a href="#transparencia">Transparencia</a>
-      <a href="#voluntariado">Voluntariado</a>
-      <a class="nav-cta" href="#donar">Donar</a>
-    </div>
-  </div>
-</nav>
-
+<header class="fcn">
+<a class="fcn-logo" href="/">FUERZACALI<span>.CO</span></a>
+<nav aria-label="Principal"><ul><li><a href="/#origen">Origen</a></li><li><a href="/#hecho">Lo hecho</a></li><li><a href="/#somos">Lo que somos</a></li><li><a href="/recursos">Recursos</a></li><li><a href="/#sumate">Súmate</a></li></ul></nav>
+</header>
 <!-- HERO -->
 <header class="hero" id="inicio">
   <canvas id="stars"></canvas>
