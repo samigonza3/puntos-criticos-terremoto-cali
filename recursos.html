@@ -95,118 +95,133 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
-:root{
-  --bg-950:#050b1f;--ink:#eaf1ff;--muted:#9fb0d9;--faint:#6d80b0;
-  --brand:#4d8bff;--brand-2:#7aa8ff;--brand-3:#37e0c8;--alert:#ff6b7d;
-  --glass-bg:rgba(255,255,255,.07);--glass-brd:rgba(255,255,255,.14);--glass-hi:rgba(255,255,255,.5);
-  --radius:26px;--shadow:0 20px 50px -20px rgba(2,7,22,.8);
-}
-*{box-sizing:border-box;margin:0;padding:0}
+:root{--space-950:#040817;--space-900:#070D22;--space-800:#0B1533;--nebula:#1B2E66;--star-blue:#3E7BFF;--star-light:#7FA8FF;--ice:#C9D9FF;--white:#F4F7FF;--muted:#8B9BC7;--amber:#FFB703}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:var(--bg-950);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(120% 90% at 50% -10%,#0e1c44 0%,#070f28 45%,#050b1f 100%)}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
-.blob.b1{width:60vw;height:60vw;left:-15vw;top:-10vw;background:radial-gradient(circle,#2f6bff,transparent 60%)}
-.blob.b2{width:55vw;height:55vw;right:-18vw;top:30vh;background:radial-gradient(circle,#1fd6c0,transparent 60%);opacity:.3}
-.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;background-image:radial-gradient(rgba(255,255,255,.9) 1px,transparent 1px);background-size:3px 3px}
-.glass{background:var(--glass-bg);border:1px solid var(--glass-brd);border-radius:var(--radius);
-  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
-  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi);position:relative}
-.wrap{max-width:900px;margin:0 auto;padding:0 18px}
-header.nav{position:sticky;top:0;z-index:50;padding:10px 0}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-radius:20px}
-.brand{font-weight:900;font-size:19px;color:#fff;text-decoration:none}
-.brand .dot{color:var(--brand)}
-.back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600}
-.back:hover{color:#fff}
-.hero{padding:56px 0 8px}
-h1{font-weight:900;font-size:clamp(40px,10vw,72px);line-height:1;letter-spacing:-.025em;
-  background:linear-gradient(120deg,#fff 30%,#7aa8ff 70%,#37e0c8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--muted);margin-top:14px;font-size:17px;font-weight:500}
-.hero-line{height:1px;margin-top:30px;background:linear-gradient(90deg,rgba(122,168,255,.5),transparent)}
-.posts{display:grid;gap:18px;padding:30px 0 48px}
-.post{padding:24px;display:flex;flex-direction:column;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s}
-.post:hover,.post:focus-within{transform:translateY(-4px);border-color:rgba(122,168,255,.45);
-  box-shadow:0 30px 60px -25px rgba(77,139,255,.55), inset 0 1px 0 var(--glass-hi)}
-.post .stretch{position:absolute;inset:0;border-radius:inherit;z-index:1}
-.post .stretch:focus-visible{outline:2px solid var(--brand-2);outline-offset:3px}
-.ptop{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.no{font-weight:900;font-size:13px;color:#031024;background:var(--brand);width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}
-.cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-2)}
-.tag{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1a0608;background:var(--alert);padding:5px 9px;border-radius:999px}
-.post h2{font-weight:900;font-size:clamp(21px,4.6vw,28px);letter-spacing:-.01em;line-height:1.1;color:#fff}
-.post p{color:var(--muted);font-size:14.5px;margin-top:10px}
-.pfoot{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:20px;flex-wrap:wrap}
-.read{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--brand-2)}
-.read .arr{transition:transform .25s}
-.post:hover .read .arr{transform:translateX(5px)}
-.meta{font-size:12px;color:var(--faint);font-weight:600}
-.share{position:relative;z-index:2;margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:12.5px;font-weight:700;
-  color:#fff;background:rgba(255,255,255,.06);border:1px solid var(--glass-brd);padding:9px 14px;border-radius:999px;cursor:pointer;transition:background .2s,border-color .2s}
-.share:hover{background:rgba(55,224,200,.14);border-color:rgba(55,224,200,.5)}
+body{margin:0;background:var(--space-950);color:var(--white);font-family:'Montserrat',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--star-light)}
+:focus-visible{outline:2px solid var(--star-light);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+.sec{padding:clamp(48px,7vw,80px) clamp(20px,5vw,64px)}
+.wrap{max-width:1180px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--star-light)}
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:24px clamp(20px,5vw,64px);background:var(--space-950)}
+.logo{font-weight:900;font-size:19px;letter-spacing:.04em;text-transform:uppercase;color:var(--white);text-decoration:none}
+.logo .dot{color:var(--amber)}
+.nav ul{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:0;list-style:none;font-size:14px;font-weight:500}
+.nav ul a{color:var(--ice);text-decoration:none}.nav ul a:hover,.nav ul a[aria-current]{color:var(--white)}
+.nav ul a[aria-current]{font-weight:700}
+/* botones */
+.btn{display:inline-block;padding:18px 40px;border:0;border-radius:999px;background:linear-gradient(135deg,var(--star-blue),#2E5FE0);box-shadow:0 12px 40px rgba(62,123,255,.45);color:var(--white);font:700 16px 'Montserrat',sans-serif;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{color:var(--white);filter:brightness(1.08)}
+.btn-sm{padding:14px 28px;font-size:15px;box-shadow:0 10px 30px rgba(62,123,255,.4)}
+.btn-ghost{background:transparent;box-shadow:none;border:1px solid rgba(127,168,255,.45);color:var(--ice);font-weight:600}
+/* hero */
+.hero{position:relative;overflow:hidden;text-align:center;padding:clamp(56px,9vw,96px) clamp(20px,5vw,64px) clamp(56px,9vw,88px);background:radial-gradient(ellipse 80% 70% at 50% 0%,var(--nebula) 0%,var(--space-900) 55%,var(--space-950) 100%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-in{position:relative;max-width:820px;margin:0 auto}
+.pill{display:inline-block;padding:8px 18px;border-radius:999px;border:1px solid rgba(127,168,255,.35)}
+.hero h1{margin-top:26px;font-size:clamp(44px,8vw,68px);line-height:1.05;font-weight:800;letter-spacing:-.02em;text-shadow:0 0 40px rgba(62,123,255,.35)}
+.hero p{margin:22px auto 0;max-width:640px;font-size:clamp(17px,2.2vw,20px);line-height:1.6;color:var(--ice)}
+/* tarjetas */
+.posts{display:grid;gap:24px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{position:relative;display:flex;flex-direction:column;background:var(--space-800);border:1px solid rgba(127,168,255,.14);border-radius:18px;padding:32px;transition:border-color .2s,transform .2s}
+.card:hover,.card:focus-within{border-color:rgba(127,168,255,.45);transform:translateY(-4px)}
+.card .stretch{position:absolute;inset:0;border-radius:inherit;z-index:1}
+.card.feat{grid-column:1 / -1;padding:clamp(32px,4vw,44px)}
+.ptop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.no{width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,var(--star-blue),#2E5FE0);box-shadow:0 0 28px rgba(62,123,255,.55);display:flex;align-items:center;justify-content:center;font-weight:800}
+.tag{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1a1200;background:var(--amber);padding:6px 12px;border-radius:999px}
+.card h2{font-size:clamp(22px,3.2vw,28px);line-height:1.2;font-weight:800}
+.card.feat h2{font-size:clamp(26px,4vw,38px)}
+.card p{margin-top:12px;font-size:16px;line-height:1.65;color:var(--ice)}
+.pfoot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:auto;padding-top:26px}
+.read{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--star-light)}
+.read .arr{transition:transform .2s}
+.card:hover .read .arr{transform:translateX(5px)}
+.meta{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted)}
+.share{position:relative;z-index:2;margin-left:auto;display:inline-flex;align-items:center;gap:8px;font:600 13px 'Montserrat',sans-serif;color:var(--ice);background:transparent;border:1px solid rgba(127,168,255,.45);padding:10px 18px;border-radius:999px;cursor:pointer}
+.share:hover{color:var(--white);border-color:var(--star-light)}
 .share svg{width:15px;height:15px}
-.post.feat{padding:30px}
-.post.feat h2{font-size:clamp(24px,5.4vw,36px)}
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.3s;
-  background:#0e1c44;border:1px solid var(--glass-brd);color:#fff;font-size:13px;font-weight:600;padding:11px 18px;border-radius:999px;z-index:99}
+/* cierre */
+.sumate{padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px);text-align:center;background:radial-gradient(ellipse 70% 80% at 50% 100%,var(--nebula) 0%,var(--space-900) 60%,var(--space-950) 100%)}
+.sumate .in{max-width:720px;margin:0 auto}
+.sumate h2{margin-top:18px;font-size:clamp(28px,4vw,40px);line-height:1.15;font-weight:800}
+.sumate .lead{margin:14px auto 32px;font-size:18px;line-height:1.7;color:var(--ice)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+footer{padding:36px clamp(20px,5vw,64px);border-top:1px solid rgba(127,168,255,.14);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:13px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:.3s;background:var(--space-800);border:1px solid rgba(127,168,255,.35);color:var(--white);font-size:13px;font-weight:600;padding:12px 20px;border-radius:999px;z-index:99}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.cta-share{text-align:center;padding:26px;margin-bottom:20px}
-.cta-share p{color:var(--muted);font-size:14.5px}
-.cta-share .share{margin:14px auto 0}
-footer{padding:30px 0 60px;text-align:center;color:var(--faint);font-size:12.5px}
-@media(min-width:760px){ .posts{grid-template-columns:1fr 1fr} .post.feat{grid-column:1 / -1} }
-@media(prefers-reduced-motion:reduce){ .post,.read .arr{transition:none} .post:hover{transform:none} }
+@media (max-width:720px){.posts{grid-template-columns:1fr}.btn{padding:16px 28px}.card{padding:26px}.share{margin-left:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.read .arr{transition:none}.card:hover{transform:none}}
 </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TM2934RK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div></div>
-<div class="grain"></div>
 
 <header class="nav">
-  <div class="wrap">
-    <div class="nav-inner glass">
-      <a href="/" class="brand">FUERZACALI<span class="dot">.CO</span></a>
-      <a href="/" class="back">← Volver al inicio</a>
-    </div>
-  </div>
+<a class="logo" href="/">FUERZACALI<span class="dot">.CO</span></a>
+<nav aria-label="Principal"><ul>
+<li><a href="/#origen">Origen</a></li>
+<li><a href="/#hecho">Lo hecho</a></li>
+<li><a href="/#somos">Lo que somos</a></li>
+<li><a href="/recursos" aria-current="page">Recursos</a></li>
+<li><a href="/#sumate">Súmate</a></li>
+</ul></nav>
 </header>
 
 <main>
-<div class="wrap">
-  <section class="hero">
-    <h1>Recursos</h1>
-    <p class="sub">Información relevante que debe ser compartida.</p>
-    <div class="hero-line"></div>
-  </section>
+<section class="hero">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="hero-in">
+<div class="pill eyebrow">Colectivo autónomo</div>
+<h1>Recursos</h1>
+<p>Información relevante que debe ser compartida. Material hecho por el colectivo para la comunidad, libre para leer, compartir y usar.</p>
+</div>
+</section>
 
-  <section class="posts">
-    <article class="post glass feat">
+<section class="sec">
+<div class="wrap posts">
+<article class="card feat">
       <a href="/recursos-19n" class="stretch" aria-label="Cómo ir a la marcha y volver bien"></a>
-      <div class="ptop"><span class="no">01</span><span class="cat">Autocuidado · 19N</span><span class="tag">Nuevo</span></div>
+      <div class="ptop"><span class="no">01</span><span class="eyebrow">Autocuidado · 19N</span><span class="tag">Nuevo</span></div>
       <h2>Cómo ir a la marcha y volver bien</h2>
       <p>Guía de bolsillo ampliable para el 19 de noviembre: grupos de afinidad, organización en la calle, entrenamiento, derechos de marcha y huelga, infiltración y cómo regresar a casa.</p>
       <div class="pfoot"><span class="read">Leer <span class="arr">→</span></span><span class="meta">13 puntos · 3 a 12 min</span>
         <button class="share" data-url="/recursos-19n" data-title="Cómo ir a la marcha y volver bien"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir</button></div>
     </article>
-    <article class="post glass">
+<article class="card">
       <a href="/guia-ninos" class="stretch" aria-label="¿Tu hijo sigue nervioso tras el terremoto?"></a>
-      <div class="ptop"><span class="no">02</span><span class="cat">Salud emocional</span></div>
+      <div class="ptop"><span class="no">02</span><span class="eyebrow">Salud emocional</span></div>
       <h2>¿Tu hijo sigue nervioso tras el terremoto?</h2>
       <p>Cómo acompañar a niñas y niños con miedo o comportamientos difíciles después del sismo: frases, pasos y herramientas suaves.</p>
       <div class="pfoot"><span class="read">Leer <span class="arr">→</span></span><span class="meta">Guía para familias</span>
         <button class="share" data-url="/guia-ninos" data-title="¿Tu hijo sigue nervioso tras el terremoto?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir</button></div>
     </article>
-  </section>
-
-  <section class="cta-share glass">
-    <p>Un recurso compartido a tiempo puede cuidar a alguien. Envía esta página a tus grupos.</p>
-    <button class="share" data-url="/recursos" data-title="Recursos · FuerzaCali.co"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir Recursos</button>
-  </section>
 </div>
+</section>
+
+<section class="sumate">
+<div class="in">
+<div class="eyebrow">Compártelo</div>
+<h2>Un recurso compartido a tiempo puede cuidar a alguien</h2>
+<p class="lead">Envía esta página a tus grupos, o súmate al colectivo para hacer parte de lo que viene.</p>
+<div class="cta">
+<button class="btn share-main share" data-url="/recursos" data-title="Recursos · FuerzaCali.co" style="margin-left:0;font-size:16px;padding:18px 40px;color:#F4F7FF;background:linear-gradient(135deg,#3E7BFF,#2E5FE0);border:0;box-shadow:0 12px 40px rgba(62,123,255,.45)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir esta página</button>
+<a class="btn btn-ghost" href="/#sumate">Quiero ser voluntario</a>
+</div>
+</div>
+</section>
 </main>
+
+<footer>
+<div>Fuerza Cali · Cali, Colombia</div>
+<div>Un colectivo autogestionado. Sin jefes, con cuentas claras.</div>
+</footer>
+
 <div class="toast" id="toast">Enlace copiado</div>
 <script>
 document.querySelectorAll('.share').forEach(function(b){b.addEventListener('click',function(e){
@@ -216,8 +231,27 @@ document.querySelectorAll('.share').forEach(function(b){b.addEventListener('clic
   var done=function(){var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)};
   if(navigator.clipboard){navigator.clipboard.writeText(url).then(done,wa)}else wa();
 });});
-</script>
 
-<footer><div class="wrap">Unidos por nuestra tierra · Colectivo de voluntarios · FuerzaCali.co</div></footer>
+(function(){
+var c=document.getElementById('stars');
+if(!c)return;
+var ctx=c.getContext('2d'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,stars=[],w,h,raf;
+function draw(t){
+ctx.clearRect(0,0,w,h);
+for(var i=0;i<stars.length;i++){var s=stars[i];ctx.globalAlpha=reduce?.7:.35+.65*Math.abs(Math.sin(s.p+t*s.s*.06));ctx.fillStyle='#C9D9FF';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fill();}
+if(!reduce)raf=requestAnimationFrame(draw);
+}
+function size(){
+var r=c.parentElement.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);
+w=r.width;h=r.height;c.width=w*d;c.height=h*d;ctx.setTransform(d,0,0,d,0,0);
+var n=Math.round(w*h/9000);stars=[];
+for(var i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.3,p:Math.random()*6.28,s:Math.random()*.02+.005});
+draw(0);
+}
+window.addEventListener('resize',function(){cancelAnimationFrame(raf);size();});
+size();
+if(!reduce)raf=requestAnimationFrame(draw);
+})();
+</script>
 </body>
 </html>
